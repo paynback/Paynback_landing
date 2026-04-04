@@ -8,37 +8,37 @@ import { Star, Info, Download } from 'lucide-react'
 
 // --- Orbital icon data ---
 const ORBITAL_ICONS = [
-  { id: 'security',  emoji: "/Icons/blue_lock.png",       angle: 20,  orbitRadius: 220, duration: 14, size: 72 },
-  { id: 'gift_red',  emoji: "/Icons/Gift_red.png",        angle: 100, orbitRadius: 260, duration: 18, size: 60 },
-  { id: 'coin_gold', emoji: "/Icons/gold_coin.png",       angle: 190, orbitRadius: 200, duration: 16, size: 56 },
-  { id: 'shopping',  emoji: "/Icons/Green_shop_bag.png",  angle: 285, orbitRadius: 240, duration: 20, size: 64 },
-  { id: 'location',  emoji: "/Icons/lcoaiton_red.png",    angle: 145, orbitRadius: 230, duration: 22, size: 52 },
-  { id: 'share',     emoji: "/Icons/share_clip_blue.png", angle: 340, orbitRadius: 260, duration: 15, size: 50 },
+  { id: 'security', emoji: "/Icons/blue_lock.png", angle: 20, orbitRadius: 220, duration: 14, size: 72 },
+  { id: 'gift_red', emoji: "/Icons/Gift_red.png", angle: 100, orbitRadius: 260, duration: 18, size: 60 },
+  { id: 'coin_gold', emoji: "/Icons/gold_coin.png", angle: 190, orbitRadius: 200, duration: 16, size: 56 },
+  { id: 'shopping', emoji: "/Icons/Green_shop_bag.png", angle: 285, orbitRadius: 240, duration: 20, size: 64 },
+  { id: 'location', emoji: "/Icons/lcoaiton_red.png", angle: 145, orbitRadius: 230, duration: 22, size: 52 },
+  { id: 'share', emoji: "/Icons/share_clip_blue.png", angle: 340, orbitRadius: 260, duration: 15, size: 50 },
 ]
 
 // Floating hollow rectangles config — mimics your reference image
 const FLOATING_RECTS = [
   // Top-left cluster
-  { x: -18,  y: 55,  w: 100, h: 72,  rx: 10, opacity: 0.22, strokeW: 1.2 },
-  { x: -6,   y: 67,  w: 76,  h: 50,  rx: 7,  opacity: 0.12, strokeW: 0.8 },
+  { x: -18, y: 55, w: 100, h: 72, rx: 10, opacity: 0.22, strokeW: 1.2 },
+  { x: -6, y: 67, w: 76, h: 50, rx: 7, opacity: 0.12, strokeW: 0.8 },
   // Mid-left
-  { x: -22,  y: 185, w: 92,  h: 66,  rx: 9,  opacity: 0.20, strokeW: 1.1 },
-  { x: -10,  y: 197, w: 68,  h: 44,  rx: 6,  opacity: 0.10, strokeW: 0.7 },
+  { x: -22, y: 185, w: 92, h: 66, rx: 9, opacity: 0.20, strokeW: 1.1 },
+  { x: -10, y: 197, w: 68, h: 44, rx: 6, opacity: 0.10, strokeW: 0.7 },
   // Lower-left
-  { x: 24,   y: 310, w: 82,  h: 60,  rx: 9,  opacity: 0.17, strokeW: 1.0 },
-  { x: 35,   y: 320, w: 60,  h: 40,  rx: 6,  opacity: 0.09, strokeW: 0.6 },
+  { x: 24, y: 310, w: 82, h: 60, rx: 9, opacity: 0.17, strokeW: 1.0 },
+  { x: 35, y: 320, w: 60, h: 40, rx: 6, opacity: 0.09, strokeW: 0.6 },
   // Top-right cluster
-  { x: 'calc(100% - 88px)',  y: 50,  w: 100, h: 72,  rx: 10, opacity: 0.22, strokeW: 1.2 },
-  { x: 'calc(100% - 76px)',  y: 62,  w: 76,  h: 50,  rx: 7,  opacity: 0.12, strokeW: 0.8 },
+  { x: 'calc(100% - 88px)', y: 50, w: 100, h: 72, rx: 10, opacity: 0.22, strokeW: 1.2 },
+  { x: 'calc(100% - 76px)', y: 62, w: 76, h: 50, rx: 7, opacity: 0.12, strokeW: 0.8 },
   // Mid-right
-  { x: 'calc(100% - 80px)',  y: 188, w: 92,  h: 66,  rx: 9,  opacity: 0.20, strokeW: 1.1 },
-  { x: 'calc(100% - 68px)',  y: 200, w: 68,  h: 44,  rx: 6,  opacity: 0.10, strokeW: 0.7 },
+  { x: 'calc(100% - 80px)', y: 188, w: 92, h: 66, rx: 9, opacity: 0.20, strokeW: 1.1 },
+  { x: 'calc(100% - 68px)', y: 200, w: 68, h: 44, rx: 6, opacity: 0.10, strokeW: 0.7 },
   // Lower-right
-  { x: 'calc(100% - 92px)',  y: 315, w: 82,  h: 60,  rx: 9,  opacity: 0.17, strokeW: 1.0 },
-  { x: 'calc(100% - 80px)',  y: 327, w: 60,  h: 40,  rx: 6,  opacity: 0.09, strokeW: 0.6 },
+  { x: 'calc(100% - 92px)', y: 315, w: 82, h: 60, rx: 9, opacity: 0.17, strokeW: 1.0 },
+  { x: 'calc(100% - 80px)', y: 327, w: 60, h: 40, rx: 6, opacity: 0.09, strokeW: 0.6 },
   // Top-center subtle pair
-  { x: 'calc(50% - 160px)', y: 10,  w: 60,  h: 44,  rx: 7,  opacity: 0.11, strokeW: 0.8 },
-  { x: 'calc(50% + 100px)', y: 16,  w: 55,  h: 38,  rx: 6,  opacity: 0.09, strokeW: 0.7 },
+  { x: 'calc(50% - 160px)', y: 10, w: 60, h: 44, rx: 7, opacity: 0.11, strokeW: 0.8 },
+  { x: 'calc(50% + 100px)', y: 16, w: 55, h: 38, rx: 6, opacity: 0.09, strokeW: 0.7 },
 ]
 
 export function Hero() {
@@ -56,7 +56,7 @@ export function Hero() {
         overflow: 'hidden',
         position: 'relative',
         padding: '2rem 1rem 0',
-        fontFamily: "'DM Sans', sans-serif",
+        fontFamily: "'Poppins', sans-serif",
       }}
     >
 
@@ -296,8 +296,8 @@ function OrbitalIcon({ icon, reduced }) {
         height: icon.size,
         marginLeft: -icon.size / 2,
         marginTop: -icon.size / 2,
-        ['--start-angle' ]: `${startAngleDeg}deg`,
-        ['--radius' ]: `${icon.orbitRadius}px`,
+        ['--start-angle']: `${startAngleDeg}deg`,
+        ['--radius']: `${icon.orbitRadius}px`,
         animation: reduced ? 'none' : `orbit ${icon.duration}s linear infinite`,
         zIndex: 20,
       }}
@@ -332,6 +332,10 @@ function OrbitalIcon({ icon, reduced }) {
         ) : (
           <span style={{ fontSize: icon.size * 0.4 }}>{icon.emoji}</span>
         )}
+      </motion.div>
+
+      <motion.div>
+
       </motion.div>
     </motion.div>
   )
