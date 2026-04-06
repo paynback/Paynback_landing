@@ -1,60 +1,22 @@
 "use client";
 
 import Image from "next/image";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { Info, Phone } from "lucide-react";
+import { Info } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import Header from "@/components/layout/Header";
 
 export default function HomeHero() {
-  const pathname = usePathname();
   const reduceMotion = useReducedMotion();
 
   // Kept inside the component to avoid TS/JS language-service
   // global-scope collisions when the editor opens the file
   // with different casing or treats it as a script.
-  const IMG_BUBBLE =
-    "/images/e9eaa1ec2bb31dedd4c5ca5b5780dc6bb78f2b36.png";
-  const IMG_COIN_SWIRL =
-    "/images/33b06127ad13c66d1ea9ad4918ed9018d0d01e8a.png";
+  const IMG_BUBBLE = "/images/e9eaa1ec2bb31dedd4c5ca5b5780dc6bb78f2b36.png";
+  const IMG_COIN_SWIRL = "/images/33b06127ad13c66d1ea9ad4918ed9018d0d01e8a.png";
 
   /** Public/Icons — `&` encoded for valid URL parsing */
-  const LOGO_SRC = "/Icons/Paynback_logo.png";
   const STORE_BADGES_SRC = "/Icons/app%26play_store_icons_hero.png";
-
-  const NAV = [
-    { href: "/home", label: "Home" },
-    { href: "/about", label: "About Us" },
-    { href: "/msme", label: "MSME" },
-    { href: "/blogs", label: "Blogs" },
-    { href: "/careers", label: "Careers" },
-  ];
-
-  function navActive(href) {
-    if (href === "/home")
-      return pathname === "/home" || pathname.startsWith("/home/");
-    return pathname === href || pathname.startsWith(`${href}/`);
-  }
-
-  function LogoMark() {
-    return (
-      <Link
-        href="/home"
-        className="relative block h-11 w-[190px] shrink-0 sm:h-12 sm:w-[220px] lg:h-18 lg:w-[250px]"
-        aria-label="PayNBack home"
-      >
-        <Image
-          src={LOGO_SRC}
-          alt="PayNBack"
-          fill
-          className="object-contain object-left"
-          sizes="250px"
-          priority
-        />
-      </Link>
-    );
-  }
 
   function AppStoreBadges() {
     return (
@@ -111,65 +73,7 @@ export default function HomeHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <header className="flex flex-col gap-3 pt-5 pb-2 sm:pt-6 lg:pt-8">
-          <div className="flex items-center justify-between gap-4">
-            <LogoMark />
-
-            <nav
-              className="hidden items-center gap-8 text-sm font-medium text-white/90 lg:flex lg:gap-14 xl:gap-24"
-              aria-label="Primary"
-            >
-              {NAV.map(({ href, label }) => {
-                const active = navActive(href);
-                return (
-                  <Link
-                    key={href}
-                    href={href}
-                    className={cn(
-                      "transition-colors hover:text-white",
-                      active ? "font-semibold text-white" : "text-white/80",
-                    )}
-                  >
-                    {label}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            <Link
-              href="/contact"
-              className={cn(
-                "flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-2.5",
-                "text-sm font-semibold text-slate-900 shadow-lg shadow-cyan-500/10",
-                "transition hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
-              )}
-            >
-              <Phone className="h-4 w-4 text-sky-500" strokeWidth={2.25} />
-              Contact
-            </Link>
-          </div>
-
-          <nav
-            className="-mx-1 flex gap-5 overflow-x-auto px-1 pb-1 text-md font-medium text-white/90 sm:gap-6 lg:hidden"
-            aria-label="Primary mobile"
-          >
-            {NAV.map(({ href, label }) => {
-              const active = navActive(href);
-              return (
-                <Link
-                  key={href}
-                  href={href}
-                  className={cn(
-                    "shrink-0 whitespace-nowrap transition-colors hover:text-white",
-                    active ? "font-semibold text-white" : "text-white/80",
-                  )}
-                >
-                  {label}
-                </Link>
-              );
-            })}
-          </nav>
-        </header>
+        <Header />
 
         <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-6 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
           <div className="order-2 flex max-w-xl flex-col gap-y-4 lg:order-1 lg:pl-14 xl:pl-20">
@@ -193,7 +97,7 @@ export default function HomeHero() {
             <h1 className="text-balance text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
               Finances that work for you
             </h1>
-            <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-lg lg:text-xl">
+            <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-lg lg:text-[14px]">
               Sign up and become a member today to get exclusive offers in your
               area and other benefits.
             </p>
@@ -207,7 +111,7 @@ export default function HomeHero() {
             >
               <Image
                 src={IMG_BUBBLE}
-                alt=""
+                alt="PayNBack Bubble"
                 width={600}
                 height={600}
                 className="h-auto w-full drop-shadow-[0_25px_55px_rgba(56,189,248,0.45)]"
@@ -226,7 +130,7 @@ export default function HomeHero() {
             >
               <Image
                 src={IMG_COIN_SWIRL}
-                alt=""
+                alt="PayNBack Coin Swirl"
                 width={800}
                 height={800}
                 className="h-auto w-full object-contain drop-shadow-[0_30px_70px_rgba(14,165,233,0.35)]"

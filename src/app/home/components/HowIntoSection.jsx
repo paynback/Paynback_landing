@@ -7,19 +7,19 @@ const STATS = [
     value: "1M",
     caption:
       "Intelligent capabilities that prioritize usability, speed, and security.",
-      symbol: "+",
+    symbol: "+",
   },
   {
     value: "70",
     caption:
       "Intelligent capabilities that prioritize usability, speed, and security.",
-      symbol: "%",
+    symbol: "%",
   },
   {
     value: "30",
     caption:
       "Intelligent capabilities that prioritize usability, speed, and security.",
-      symbol: "sec",
+    symbol: "sec",
   },
 ];
 
@@ -29,7 +29,7 @@ export default function HowIntoSection() {
       className="w-full bg-white"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-4 pb-16 pt-10 sm:px-6 lg:px-30 lg:pb-20 lg:pt-30">
+      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-30 lg:py-30">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-10 lg:grid-cols-2 lg:gap-26">
           {/* Left heading */}
           <div className="max-w-xl leading-tight">
@@ -64,7 +64,7 @@ export default function HowIntoSection() {
               className={cn(
                 "relative pt-2",
                 idx !== 0 &&
-                  "sm:pl-16 sm:before:absolute sm:before:left-0 sm:before:top-1/2 sm:before:h-20 sm:before:w-[2px] sm:before:-translate-y-1/2 sm:before:bg-slate-400",
+                "sm:pl-16 sm:before:absolute sm:before:left-0 sm:before:top-1/2 sm:before:h-20 sm:before:w-[2px] sm:before:-translate-y-1/2 sm:before:bg-slate-400",
               )}
             >
               <div className="text-7xl font-semibold leading-none tracking-tight text-(--brand-primary) sm:text-7xl">
