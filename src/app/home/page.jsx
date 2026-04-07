@@ -8,10 +8,11 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import DownloadCTASection from "./components/DownloadCTASection";
 import BlogsSection from "./components/BlogsSection";
 import FAQSection from "./components/FAQSection";
+import Footer from "@/components/layout/Footer";
 
 export default function HomePage() {
   return (
-    <>
+    <main className="min-h-screen">
       <HomeHero />
       <HowIntoSection />
       <DiscoverDealsSection />
@@ -22,6 +23,7 @@ export default function HomePage() {
       <DownloadCTASection />
       <BlogsSection />
       <FAQSection />
-    </>
+      <Footer />
+    </main>
   );
 }

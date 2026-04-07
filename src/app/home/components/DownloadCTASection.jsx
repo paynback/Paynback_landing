@@ -55,7 +55,7 @@ export default function DownloadCTASection() {
             </div>
 
             {/* Heading */}
-            <h2 className="whitespace-nowrap text-3xl font-normal leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+            <h2 className="text-2xl font-normal leading-tight tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
               <span className="font-semibold" style={{ color: "var(--brand-accent)" }}>
                 Download
               </span>{" "}
@@ -72,7 +72,7 @@ export default function DownloadCTASection() {
           <div className="flex items-center gap-4">
 
             {/* Coin swirl — sits to the left of the QR card */}
-            <div style={{ width: "clamp(120px, 16vw, 250px)", transform: "translateY(-24px) translateX(12px)" }}>
+            <div className="hidden sm:block" style={{ width: "clamp(120px, 16vw, 250px)", transform: "translateY(-24px) translateX(12px)" }}>
               <Image
                 src={COIN_SWIRL_IMG}
                 alt="PayNBack Coin Swirl"
@@ -112,7 +112,7 @@ export default function DownloadCTASection() {
               {/* Bubble coin — moved up, larger */}
               <div
                 className="pointer-events-none absolute z-30"
-                style={{ bottom: "8px", right: "-46px", width: "82px" }}
+                style={{ bottom: "8px", right: "-46px", width: "82px", display: "var(--bubble-display, block)" }}
               >
                 <Image
                   src={BUBBLE_IMG}

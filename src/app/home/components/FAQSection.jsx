@@ -87,7 +87,7 @@ export default function FAQSection() {
       <div className="mx-auto max-w-7xl px-4 pb-40 pt-12 sm:px-6 lg:px-20 lg:pb-56 lg:pt-20">
 
         {/* Heading */}
-        <h2 className="mb-8 text-3xl font-normal leading-tight tracking-tight text-slate-900 sm:text-4xl lg:mb-10 lg:text-[2.4rem]">
+        <h2 className="mb-8 text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.4rem]">
           <span className="text-(--brand-primary)">Frequently</span>{" "}
           Asked{" "}
           <span className="text-(--brand-primary)">Questions</span>

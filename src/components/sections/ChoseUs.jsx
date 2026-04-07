@@ -10,7 +10,7 @@ const FEATURES = [
     title: 'Exclusive Discounts',
     description:
       'payNback rewards every purchase with points that can be redeemed for cashback, gift cards, and exclusive benefits — adding more value to every transaction.',
-    image: '/images/trophy.png', // replace with your actual image
+    image: '/images/trophy.png',
     imageAlt: 'Exclusive discounts trophy',
     tag: 'Discounts',
   },
@@ -57,67 +57,24 @@ export function WhyChoose() {
   const current = FEATURES[active]
 
   return (
-    <section style={{
-      background: '#f1f5f9',
-      padding: '5rem 1.5rem',
-      fontFamily: "'Poppins', sans-serif",
-    }}>
+    <section className="why-section">
       {/* Heading */}
-      <h2 style={{
-        textAlign: 'center',
-        fontSize: '2.25rem',
-        fontWeight: 500,
-        color: '#1e293b',
-        marginBottom: '3rem',
-        letterSpacing: '-0.025em',
-        lineHeight: 1.15,
-      }}>
+      <h2 className="why-heading">
         Why Choose{' '}
         <span style={{ color: '#1d70b8' }}>payNback?</span>
       </h2>
 
       {/* 3-column grid */}
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
-        gap: '1.25rem',
-        maxWidth: '1200px',
-        margin: '0 auto',
-        alignItems: 'stretch',
-      }}>
+      <div className="why-grid">
 
         {/* --- Col 1: Feature list --- */}
-        <div style={{
-          background: '#fff',
-          borderRadius: '20px',
-          padding: '0',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '0',
-          boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
-          overflow: 'hidden',
-          height: '480px',
-        }}>
+        <div className="why-feature-list">
           {FEATURES.map((f, i) => (
             <button
               key={f.id}
               onMouseEnter={() => setActive(i)}
               onClick={() => setActive(i)}
-              style={{
-                width: '100%',
-                textAlign: 'left',
-                padding: '1.25rem 2rem',
-                border: 'none',
-                cursor: 'pointer',
-                fontFamily: 'inherit',
-                fontSize: '1.05rem',
-                fontWeight: active === i ? 600 : 500,
-                color: active === i ? '#fff' : '#1e293b',
-                background: active === i
-                  ? '#1d70b8'
-                  : 'transparent',
-                transition: 'all 0.2s ease',
-              }}
+              className={`why-feature-btn ${active === i ? 'why-feature-btn--active' : ''}`}
             >
               {f.id}.&nbsp;&nbsp;{f.title}
             </button>
@@ -125,60 +82,26 @@ export function WhyChoose() {
         </div>
 
         {/* --- Col 2: Description card --- */}
-        <div style={{
-          background: '#fff',
-          borderRadius: '20px',
-          padding: '2rem 1.75rem',
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'space-between',
-          boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
-          height: '480px',
-        }}>
+        <div className="why-desc-card">
           <div>
             {/* Animated tag */}
             <span
               key={current.tag}
-              style={{
-                display: 'inline-block',
-                background: '#eff6ff',
-                color: '#2563eb',
-                fontSize: '0.75rem',
-                fontWeight: 700,
-                padding: '0.3rem 0.85rem',
-                borderRadius: '999px',
-                marginBottom: '1rem',
-                letterSpacing: '0.5px',
-                textTransform: 'uppercase',
-                animation: 'fadeSlideIn 0.3s ease',
-              }}
+              className="why-tag"
             >
               {current.tag}
             </span>
 
             <p
               key={current.id}
-              style={{
-                fontSize: '1.125rem',
-                lineHeight: 1.65,
-                color: '#64748b',
-                fontWeight: 400,
-                animation: 'fadeSlideIn 0.3s ease',
-              }}
+              className="why-desc-text"
             >
               {current.description}
             </p>
           </div>
 
           {/* Bottom label */}
-          <div style={{
-            marginTop: '1.5rem',
-            paddingTop: '1rem',
-            borderTop: '1px solid #e2e8f0',
-            display: 'flex',
-            alignItems: 'center',
-            gap: '0.75rem',
-          }}>
+          <div className="why-dots-row">
             <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: 500 }}>
               Services
             </span>
@@ -202,47 +125,19 @@ export function WhyChoose() {
         </div>
 
         {/* --- Col 3: Image card --- */}
-        <div style={{
-          borderRadius: '20px',
-          overflow: 'hidden',
-          background: '#cbd5e1',
-          boxShadow: '0 2px 16px rgba(0,0,0,0.06)',
-          height: '480px',
-          position: 'relative',
-        }}>
-          {/* Swap image based on active — use next/image in real project */}
+        <div className="why-image-card">
           <div
             key={current.id}
-            style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              fontSize: '6rem',
-              animation: 'fadeSlideIn 0.35s ease',
-              background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-            }}
+            className="why-image-inner"
           >
-            {/* Replace with: <Image src={current.image} alt={current.imageAlt} fill style={{ objectFit: 'cover' }} /> */}
             {['🏆', '⭐', '📱', '🔒', '🤖'][active]}
           </div>
 
           {/* Overlay label bottom */}
-          <div style={{
-            position: 'absolute',
-            bottom: 0, left: 0, right: 0,
-            padding: '1rem 1.25rem',
-            background: 'linear-gradient(to top, rgba(0,0,0,0.4), transparent)',
-          }}>
+          <div className="why-image-overlay">
             <span
               key={current.title}
-              style={{
-                color: '#fff',
-                fontWeight: 700,
-                fontSize: '0.9rem',
-                animation: 'fadeSlideIn 0.3s ease',
-              }}
+              className="why-image-label"
             >
               {current.title}
             </span>
@@ -250,17 +145,195 @@ export function WhyChoose() {
         </div>
       </div>
 
-      {/* Keyframes */}
+      {/* Keyframes & Responsive */}
       <style>{`
         @keyframes fadeSlideIn {
           from { opacity: 0; transform: translateY(10px); }
           to   { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 768px) {
+        .why-section {
+          background: #f1f5f9;
+          padding: 5rem 1.5rem;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .why-heading {
+          text-align: center;
+          font-size: 2.25rem;
+          font-weight: 500;
+          color: #1e293b;
+          margin-bottom: 3rem;
+          letter-spacing: -0.025em;
+          line-height: 1.15;
+        }
+
+        .why-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 1.25rem;
+          max-width: 1200px;
+          margin: 0 auto;
+          align-items: stretch;
+        }
+
+        .why-feature-list {
+          background: #fff;
+          border-radius: 20px;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          overflow: hidden;
+          min-height: 480px;
+        }
+
+        .why-feature-btn {
+          width: 100%;
+          text-align: left;
+          padding: 1.25rem 2rem;
+          border: none;
+          cursor: pointer;
+          font-family: inherit;
+          font-size: 1.05rem;
+          font-weight: 500;
+          color: #1e293b;
+          background: transparent;
+          transition: all 0.2s ease;
+        }
+        .why-feature-btn--active {
+          font-weight: 600;
+          color: #fff;
+          background: #1d70b8;
+        }
+
+        .why-desc-card {
+          background: #fff;
+          border-radius: 20px;
+          padding: 2rem 1.75rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          min-height: 480px;
+        }
+
+        .why-tag {
+          display: inline-block;
+          background: #eff6ff;
+          color: #2563eb;
+          font-size: 0.75rem;
+          font-weight: 700;
+          padding: 0.3rem 0.85rem;
+          border-radius: 999px;
+          margin-bottom: 1rem;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          animation: fadeSlideIn 0.3s ease;
+        }
+
+        .why-desc-text {
+          font-size: 1.125rem;
+          line-height: 1.65;
+          color: #64748b;
+          font-weight: 400;
+          animation: fadeSlideIn 0.3s ease;
+        }
+
+        .why-dots-row {
+          margin-top: 1.5rem;
+          padding-top: 1rem;
+          border-top: 1px solid #e2e8f0;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .why-image-card {
+          border-radius: 20px;
+          overflow: hidden;
+          background: #cbd5e1;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          min-height: 480px;
+          position: relative;
+        }
+
+        .why-image-inner {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 6rem;
+          animation: fadeSlideIn 0.35s ease;
+          background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+        }
+
+        .why-image-overlay {
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          padding: 1rem 1.25rem;
+          background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+        }
+
+        .why-image-label {
+          color: #fff;
+          font-weight: 700;
+          font-size: 0.9rem;
+          animation: fadeSlideIn 0.3s ease;
+        }
+
+        /* ── Tablet (max-width: 1024px) ── */
+        @media (max-width: 1024px) {
+          .why-section { padding: 3.5rem 1rem; }
+          .why-heading { font-size: 1.75rem; margin-bottom: 2rem; }
           .why-grid {
-            grid-template-columns: 1fr !important;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
           }
+          .why-feature-list { min-height: auto; }
+          .why-desc-card { min-height: auto; }
+          .why-image-card {
+            min-height: 360px;
+            grid-column: 1 / -1;
+          }
+          .why-feature-btn { padding: 1rem 1.5rem; font-size: 0.95rem; }
+          .why-desc-text { font-size: 1rem; }
+        }
+
+        /* ── Mobile (max-width: 640px) ── */
+        @media (max-width: 640px) {
+          .why-section { padding: 2.5rem 0.75rem; }
+          .why-heading { font-size: 1.5rem; margin-bottom: 1.5rem; }
+          .why-grid {
+            grid-template-columns: 1fr;
+            gap: 1rem;
+          }
+          .why-feature-list {
+            min-height: auto;
+            flex-direction: row;
+            flex-wrap: wrap;
+            border-radius: 14px;
+          }
+          .why-feature-btn {
+            padding: 0.75rem 1rem;
+            font-size: 0.85rem;
+            flex: 1 1 auto;
+            text-align: center;
+            min-width: 0;
+          }
+          .why-desc-card {
+            min-height: auto;
+            padding: 1.5rem 1.25rem;
+            border-radius: 14px;
+          }
+          .why-desc-text { font-size: 0.95rem; }
+          .why-image-card {
+            min-height: 260px;
+            border-radius: 14px;
+          }
+          .why-image-inner { font-size: 4rem; }
         }
       `}</style>
     </section>

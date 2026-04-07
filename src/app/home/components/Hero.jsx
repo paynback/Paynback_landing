@@ -32,7 +32,7 @@ export default function HomeHero() {
   }
 
   const floatTransition = {
-    duration: reduceMotion ? 0 : 5,
+    duration: reduceMotion ? 0 : 3.5,
     repeat: reduceMotion ? 0 : Infinity,
     ease: "easeInOut",
   };
@@ -122,10 +122,10 @@ export default function HomeHero() {
 
             <motion.div
               className="absolute bottom-[-12%] right-[-18%] z-10 w-[96%] max-w-[460px] sm:bottom-[-14%] sm:right-[-14%] sm:w-[92%] sm:max-w-[520px] md:bottom-[-12%] md:right-[-14%] md:w-[78%] md:max-w-[560px] lg:bottom-[-18%] lg:right-[-12%] lg:w-[64%] lg:max-w-[420px]"
-              animate={reduceMotion ? undefined : { y: [0, 24, 0] }}
+              animate={reduceMotion ? undefined : { y: [0, 44, 0] }}
               transition={{
                 ...floatTransition,
-                duration: reduceMotion ? 0 : 6.5,
+                duration: reduceMotion ? 0 : 3.4,
               }}
             >
               <Image
