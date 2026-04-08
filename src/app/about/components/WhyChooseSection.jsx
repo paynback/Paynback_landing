@@ -45,7 +45,7 @@ export default function WhyChooseSection() {
       <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20">
 
         {/* ── Heading ── */}
-        <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem]">
+        <h2 className="mb-8 text-3xl font-normal tracking-tight text-slate-900 sm:text-4xl lg:mb-10 lg:text-[2.5rem]">
           <span className="text-(--brand-primary)">Why</span>{" "}
           Choose{" "}
           <span className="text-(--brand-primary)">payNback?</span>
@@ -101,7 +101,7 @@ export default function WhyChooseSection() {
           {/* Col 3 — Image card */}
           <div
             className="relative overflow-hidden rounded-2xl"
-            style={{ minHeight: "clamp(220px, 40vw, 340px)", background: "#1565D8" }}
+            style={{ minHeight: "340px", background: "#1565D8" }}
           >
             <Image
               src={SALE_IMG}

@@ -14,21 +14,21 @@ const STAT_CARDS = [
 ]
 
 export default function Activities() {
-  const rotationDuration = 40 // Smooth, steady rotation
+  const rotationDuration = 40
 
   return (
-    <section className="relative w-full py-24 bg-white overflow-hidden flex flex-col items-center justify-center font-['Poppins',sans-serif]">
+    <section className="activities-section">
       {/* Container for the Orbital System */}
-      <div className="relative w-full max-w-4xl aspect-square flex items-center justify-center">
+      <div className="activities-orbit-container">
         
-        {/* Orbit Rotating Container - Ring and Cards rotate together */}
+        {/* Orbit Rotating Container */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: rotationDuration, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[75%] h-[75%] z-20 pointer-events-none"
+          className="activities-orbit-spinner"
         >
-          {/* Outer Ring Image - Now inside the rotating container */}
-          <div className="absolute inset-0 z-0 opacity-40">
+          {/* Outer Ring Image */}
+          <div className="activities-outer-ring">
             <Image
               src="/Icons/outer_cirlce_only.png"
               alt="Outer Orbital Circle Line"
@@ -37,9 +37,8 @@ export default function Activities() {
             />
           </div>
 
-          {/* Placing Stat Cards along the outer ring */}
+          {/* Stat Cards */}
           {STAT_CARDS.map((stat) => {
-            // Radius 40% ensures cards are perfectly centered on the line
             const radius = 40; 
             const x = 50 + radius * Math.cos((stat.angle * Math.PI) / 180);
             const y = 50 + radius * Math.sin((stat.angle * Math.PI) / 180);
@@ -54,16 +53,15 @@ export default function Activities() {
                   transform: 'translate(-50%, -50%)',
                 }}
               >
-                {/* Counter-rotating card - SMALLER and PERFECT ROUND */}
                 <motion.div
                   animate={{ rotate: -360 }}
                   transition={{ duration: rotationDuration, repeat: Infinity, ease: "linear" }}
-                  className="bg-white rounded-full w-24 h-24 md:w-28 md:h-28 shadow-2xl flex flex-col items-center justify-center border border-gray-100 pointer-events-auto p-2 text-center"
+                  className="activities-stat-card"
                 >
-                  <span style={{ color: stat.color }} className="text-xl md:text-2xl font-extrabold block leading-none">
+                  <span style={{ color: stat.color }} className="activities-stat-value">
                     {stat.value}
                   </span>
-                  <span className="text-gray-500 text-[8px] md:text-[10px] font-semibold uppercase tracking-tighter mt-1 px-1">
+                  <span className="activities-stat-label">
                     {stat.label}
                   </span>
                 </motion.div>
@@ -72,11 +70,11 @@ export default function Activities() {
           })}
         </motion.div>
 
-        {/* Inner Circle - Anti-clockwise Rotation */}
+        {/* Inner Circle */}
         <motion.div
           animate={{ rotate: -360 }}
           transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
-          className="absolute w-[50%] h-[50%] z-10 pointer-events-none"
+          className="activities-inner-circle"
         >
           <Image
             src="/Icons/inner_circle.png"
@@ -86,9 +84,9 @@ export default function Activities() {
           />
         </motion.div>
 
-        {/* Center Character (Jaami) - Static */}
-        <div className="relative w-[15%] h-[15%] z-30 flex items-center justify-center">
-          <div className="relative w-full h-full rounded-full overflow-hidden border-4 border-white shadow-2xl bg-blue-50">
+        {/* Center Character (Jaami) */}
+        <div className="activities-center">
+          <div className="activities-mascot">
              <Image
                 src="/Icons/jaami.png"
                 alt="Jaami character"
@@ -96,13 +94,12 @@ export default function Activities() {
                 className="object-cover"
               />
           </div>
-          {/* Glow effect behind mascot */}
-          <div className="absolute w-[180%] h-[180%] bg-blue-50 rounded-full blur-3xl -z-10 opacity-70" />
+          <div className="activities-mascot-glow" />
         </div>
 
-        {/* Static Branding Image - Positioned ON TOP of the outer circle at the bottom */}
-        <div className="absolute bottom-[5%] left-1/2 -translate-x-1/2 z-50 pointer-events-none w-full max-w-[320px] md:max-w-[420px]">
-          <div className="relative aspect-[4/1] w-full">
+        {/* Static Branding Image */}
+        <div className="activities-branding">
+          <div className="activities-branding-img">
             <Image
               src="/Icons/enhanced_activity_status.png"
               alt="Enhanced activity status"
@@ -113,6 +110,161 @@ export default function Activities() {
         </div>
 
       </div>
+
+      <style>{`
+        .activities-section {
+          position: relative;
+          width: 100%;
+          padding: 6rem 0;
+          background: #fff;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          font-family: 'Poppins', sans-serif;
+        }
+
+        .activities-orbit-container {
+          position: relative;
+          width: 100%;
+          max-width: 56rem;
+          aspect-ratio: 1;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .activities-orbit-spinner {
+          position: absolute;
+          width: 75%;
+          height: 75%;
+          z-index: 20;
+          pointer-events: none;
+        }
+
+        .activities-outer-ring {
+          position: absolute;
+          inset: 0;
+          z-index: 0;
+          opacity: 0.4;
+        }
+
+        .activities-stat-card {
+          background: #fff;
+          border-radius: 9999px;
+          width: 7rem;
+          height: 7rem;
+          box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          border: 1px solid #f3f4f6;
+          pointer-events: auto;
+          padding: 0.5rem;
+          text-align: center;
+        }
+
+        .activities-stat-value {
+          font-size: 1.5rem;
+          font-weight: 800;
+          display: block;
+          line-height: 1;
+        }
+
+        .activities-stat-label {
+          color: #6b7280;
+          font-size: 0.5rem;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: -0.025em;
+          margin-top: 0.25rem;
+          padding: 0 0.25rem;
+        }
+
+        .activities-inner-circle {
+          position: absolute;
+          width: 50%;
+          height: 50%;
+          z-index: 10;
+          pointer-events: none;
+        }
+
+        .activities-center {
+          position: relative;
+          width: 15%;
+          height: 15%;
+          z-index: 30;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .activities-mascot {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          border-radius: 9999px;
+          overflow: hidden;
+          border: 4px solid #fff;
+          box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+          background: #eff6ff;
+        }
+
+        .activities-mascot-glow {
+          position: absolute;
+          width: 180%;
+          height: 180%;
+          background: #eff6ff;
+          border-radius: 9999px;
+          filter: blur(48px);
+          z-index: -10;
+          opacity: 0.7;
+        }
+
+        .activities-branding {
+          position: absolute;
+          bottom: 5%;
+          left: 50%;
+          transform: translateX(-50%);
+          z-index: 50;
+          pointer-events: none;
+          width: 100%;
+          max-width: 420px;
+        }
+
+        .activities-branding-img {
+          position: relative;
+          aspect-ratio: 4 / 1;
+          width: 100%;
+        }
+
+        /* ── Tablet (max-width: 1024px) ── */
+        @media (max-width: 1024px) {
+          .activities-section { padding: 4rem 0; }
+          .activities-orbit-container { max-width: 42rem; }
+          .activities-stat-card { width: 5.5rem; height: 5.5rem; }
+          .activities-stat-value { font-size: 1.15rem; }
+          .activities-stat-label { font-size: 0.45rem; }
+          .activities-branding { max-width: 320px; }
+        }
+
+        /* ── Mobile (max-width: 640px) ── */
+        @media (max-width: 640px) {
+          .activities-section { padding: 2.5rem 0; }
+          .activities-orbit-container { max-width: 22rem; }
+          .activities-stat-card {
+            width: 3.5rem;
+            height: 3.5rem;
+            box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
+          }
+          .activities-stat-value { font-size: 0.75rem; }
+          .activities-stat-label { font-size: 0.3rem; letter-spacing: -0.04em; }
+          .activities-branding { max-width: 200px; }
+          .activities-mascot { border-width: 2px; }
+        }
+      `}</style>
     </section>
   )
 }

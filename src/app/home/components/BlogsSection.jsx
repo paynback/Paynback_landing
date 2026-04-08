@@ -104,7 +104,7 @@ export default function BlogsSection() {
         <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
 
           {/* Heading */}
-          <h2 className="text-3xl font-normal leading-tight tracking-tight text-slate-900 sm:text-4xl lg:text-[2.4rem]">
+          <h2 className="text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:text-[2.4rem]">
             <span className="text-(--brand-primary)">Meet</span>{" "}
             the fresh{" "}
             <span className="text-(--brand-primary)">Blogs.</span>

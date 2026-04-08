@@ -1,9 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const LOGO_SRC = "/Icons/Paynback_logo.png";
@@ -11,9 +12,7 @@ const LOGO_SRC = "/Icons/Paynback_logo.png";
 export const headerNavItems = [
   { href: "/home", label: "Home" },
   { href: "/about", label: "About Us" },
-  { href: "/msme", label: "MSME" },
-  { href: "/blogs", label: "Blogs" },
-  { href: "/careers", label: "Careers" },
+  { href: "/blog", label: "Blogs" },
 ];
 
 function navActive(pathname, href) {
@@ -25,7 +24,7 @@ function navActive(pathname, href) {
 function LogoMark() {
   return (
     <Link
-      href="/home"
+      href="/"
       className="relative block h-11 w-[190px] shrink-0 sm:h-12 sm:w-[220px] lg:h-18 lg:w-[250px]"
       aria-label="PayNBack home"
     >
@@ -42,8 +41,7 @@ function LogoMark() {
 }
 
 /**
- * Site header: logo, primary nav, contact CTA, mobile nav row.
- * @param {{ className?: string; navItems?: { href: string; label: string }[]; contactHref?: string }}=} props
+ * Site header: logo, primary nav, contact CTA, mobile hamburger menu.
  */
 export default function Header({
   className,
@@ -51,6 +49,7 @@ export default function Header({
   contactHref = "/contact",
 }) {
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
     <header
@@ -62,6 +61,7 @@ export default function Header({
       <div className="flex items-center justify-between gap-4">
         <LogoMark />
 
+        {/* Desktop nav */}
         <nav
           className="hidden items-center gap-8 text-sm font-medium text-white/90 lg:flex lg:gap-14 xl:gap-24"
           aria-label="Primary"
@@ -83,22 +83,69 @@ export default function Header({
           })}
         </nav>
 
-        <Link
-          href={contactHref}
-          className={cn(
-            "flex shrink-0 items-center gap-2 rounded-full bg-white px-4 py-2.5",
-            "text-sm font-semibold text-slate-900 shadow-lg shadow-cyan-500/10",
-            "transition hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
-          )}
-        >
-          <Phone className="h-4 w-4 text-sky-500" strokeWidth={2.25} />
-          Contact
-        </Link>
+        <div className="flex items-center gap-3">
+          {/* Contact CTA */}
+          <Link
+            href={contactHref}
+            className={cn(
+              "flex shrink-0 items-center gap-2 rounded-full bg-white px-3 py-2 sm:px-4 sm:py-2.5",
+              "text-xs sm:text-sm font-semibold text-slate-900 shadow-lg shadow-cyan-500/10",
+              "transition hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
+            )}
+          >
+            <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-sky-500" strokeWidth={2.25} />
+            Contact
+          </Link>
+
+          {/* Mobile hamburger */}
+          <button
+            className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white backdrop-blur-sm lg:hidden"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
+          >
+            {mobileMenuOpen ? (
+              <X className="h-5 w-5" strokeWidth={2} />
+            ) : (
+              <Menu className="h-5 w-5" strokeWidth={2} />
+            )}
+          </button>
+        </div>
       </div>
 
+      {/* Mobile nav dropdown */}
+      {mobileMenuOpen && (
+        <nav
+          className="flex flex-col gap-1 rounded-xl bg-white/10 p-3 backdrop-blur-md lg:hidden"
+          aria-label="Primary mobile"
+        >
+          {navItems.map(({ href, label }) => {
+            const active = navActive(pathname, href);
+            return (
+              <Link
+                key={href}
+                href={href}
+                onClick={() => setMobileMenuOpen(false)}
+                className={cn(
+                  "rounded-lg px-4 py-2.5 text-sm transition-colors hover:bg-white/10",
+                  active
+                    ? "font-semibold text-white bg-white/15"
+                    : "text-white/80",
+                )}
+              >
+                {label}
+              </Link>
+            );
+          })}
+        </nav>
+      )}
+
+      {/* Scrollable mobile nav — fallback for quick access */}
       <nav
-        className="-mx-1 flex gap-5 overflow-x-auto px-1 pb-1 text-md font-medium text-white/90 sm:gap-6 lg:hidden"
-        aria-label="Primary mobile"
+        className={cn(
+          "-mx-1 flex gap-5 overflow-x-auto px-1 pb-1 text-sm font-medium text-white/90 sm:gap-6 lg:hidden",
+          mobileMenuOpen && "hidden",
+        )}
+        aria-label="Primary mobile scroll"
       >
         {navItems.map(({ href, label }) => {
           const active = navActive(pathname, href);
