@@ -4,6 +4,8 @@
 import { useState } from 'react'
 import Image from 'next/image'
 
+// import trophy from '../public/images/trophy.png'
+
 const FEATURES = [
   {
     id: 1,
@@ -212,20 +214,25 @@ export function WhyChoose() {
         }}>
           {/* Swap image based on active — use next/image in real project */}
           <div
-            key={current.id}
             style={{
               position: 'absolute',
               inset: 0,
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',
-              fontSize: '6rem',
-              animation: 'fadeSlideIn 0.35s ease',
               background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
             }}
           >
-            {/* Replace with: <Image src={current.image} alt={current.imageAlt} fill style={{ objectFit: 'cover' }} /> */}
-            {['🏆', '⭐', '📱', '🔒', '🤖'][active]}
+            <Image 
+              src="/Icons/trophy.png" 
+              alt="Why Choose payNback Trophy"
+              width={280}
+              height={280}
+              style={{ 
+                objectFit: 'contain',
+                filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))'
+              }} 
+            />
           </div>
 
           {/* Overlay label bottom */}

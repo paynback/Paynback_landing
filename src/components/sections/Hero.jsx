@@ -1,20 +1,47 @@
 // src/components/sections/Hero/Hero.jsx
 'use client'
 
-import { useEffect, useRef } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import { Star, Info, Download } from 'lucide-react'
 
 // --- Orbital icon data ---
-const ORBITAL_ICONS = [
-  { id: 'security', emoji: "/Icons/blue_lock.png", angle: 20, orbitRadius: 220, duration: 14, size: 72 },
-  { id: 'gift_red', emoji: "/Icons/Gift_red.png", angle: 100, orbitRadius: 260, duration: 18, size: 60 },
-  { id: 'coin_gold', emoji: "/Icons/gold_coin.png", angle: 190, orbitRadius: 200, duration: 16, size: 56 },
-  { id: 'shopping', emoji: "/Icons/Green_shop_bag.png", angle: 285, orbitRadius: 240, duration: 20, size: 64 },
-  { id: 'location', emoji: "/Icons/lcoaiton_red.png", angle: 145, orbitRadius: 230, duration: 22, size: 52 },
-  { id: 'share', emoji: "/Icons/share_clip_blue.png", angle: 340, orbitRadius: 260, duration: 15, size: 50 },
+// Repeat the icon set around the orbit so it feels continuous
+const ORBIT_RADIUS = 400
+const ORBIT_DURATION = 24
+const ICON_SIZE = 44
+const BASE_ICONS = [
+  { id: 'security',  emoji: "/Icons/blue_lock.png" },
+  { id: 'gift_red',  emoji: "/Icons/Gift_red.png" },
+  { id: 'location',  emoji: "/Icons/lcoaiton_red.png" },
+  { id: 'coin_gold', emoji: "/Icons/gold_coin.png" },
+  { id: 'shopping',  emoji: "/Icons/Green_shop_bag.png" },
+  { id: 'share',     emoji: "/Icons/share_clip_blue.png" },
 ]
+
+// 12 icons total, evenly spaced but clustered more tightly in the visible arc
+const ORBITAL_ICONS = (() => {
+  const startAngle = 180
+  const step = 30 // 12 * 30deg = full 360deg loop with even spacing
+  const repeats = 2
+
+  const icons = []
+  for (let r = 0; r < repeats; r++) {
+    for (let i = 0; i < BASE_ICONS.length; i++) {
+      const base = BASE_ICONS[i]
+      const index = r * BASE_ICONS.length + i
+      icons.push({
+        id: `${base.id}_${r}`,
+        emoji: base.emoji,
+        angle: startAngle + index * step,
+        orbitRadius: ORBIT_RADIUS,
+        duration: ORBIT_DURATION,
+        size: ICON_SIZE,
+      })
+    }
+  }
+  return icons
+})()
 
 // Floating hollow rectangles config — mimics your reference image
 const FLOATING_RECTS = [
@@ -218,23 +245,60 @@ export function Hero() {
         display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
         flexShrink: 0,
       }}>
-        {/* Orbital rings */}
-        {[200, 240, 265].map((r, i) => (
-          <div key={i} style={{
+        {/* Orbit (clipped so it never appears above the phone) */}
+        <div
+          style={{
             position: 'absolute',
-            top: '50%', left: '50%',
-            width: r * 2, height: r * 2,
-            marginLeft: -r, marginTop: -r,
-            borderRadius: '50%',
-            border: '1px dashed rgba(255,255,255,0.18)',
+            left: '50%',
+            top: '0%',
+            width: '900px',
+            height: '560px',
+            transform: 'translateX(-50%)',
+            overflow: 'hidden',
             pointerEvents: 'none',
-          }} />
-        ))}
+            zIndex: 8,
+          }}
+        >
+          {/* Elliptical orbit ring */}
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '46%',
+              width: '800px',
+              height: '800px',
+              transform: 'translate(-50%, -50%) scaleY(0.55)',
+              transformOrigin: 'center',
+              borderRadius: '9999px',
+              border: '1px solid rgba(255,255,255,0.22)',
+              boxShadow: '0 10px 30px rgba(255,255,255,0.04)',
+              zIndex: 1,
+            }}
+          />
 
-        {/* Orbiting icons */}
-        {ORBITAL_ICONS.map((icon) => (
-          <OrbitalIcon key={icon.id} icon={icon} reduced={!!prefersReduced} />
-        ))}
+          {/* Orbiting icons (same ellipse as the ring) */}
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '46%',
+              width: 0,
+              height: 0,
+              transform: 'translate(-50%, -50%) scaleY(0.55)',
+              transformOrigin: 'center',
+              zIndex: 2,
+            }}
+          >
+            {ORBITAL_ICONS.map((icon) => (
+              <OrbitalIcon
+                key={icon.id}
+                icon={icon}
+                reduced={!!prefersReduced}
+                ellipseY={0.55}
+              />
+            ))}
+          </div>
+        </div>
 
         {/* Phone */}
         <motion.div
@@ -246,7 +310,7 @@ export function Hero() {
             width: '550px',
             height: '550px',
             flexShrink: 0,
-            zIndex: 10,
+            zIndex: 10, // Phone behind bottom fade overlay
           }}
         >
           <Image
@@ -262,13 +326,13 @@ export function Hero() {
 
       {/* Keyframes */}
       <style>{`
-        @keyframes orbit {
-          from { transform: rotate(var(--start-angle)) translateX(var(--radius)) rotate(calc(-1 * var(--start-angle))); }
-          to   { transform: rotate(calc(var(--start-angle) + 360deg)) translateX(var(--radius)) rotate(calc(-1 * (var(--start-angle) + 360deg))); }
-        }
-        @keyframes iconFloat {
-          0%, 100% { transform: translateY(0px) scale(1); }
-          50%       { transform: translateY(-6px) scale(1.05); }
+        @keyframes orbit-glide {
+          0% { 
+            transform: rotate(var(--start-angle)) translateX(var(--radius)) rotate(calc(-1 * var(--start-angle)));
+          }
+          100% { 
+            transform: rotate(calc(var(--start-angle) + 360deg)) translateX(var(--radius)) rotate(calc(-1 * (var(--start-angle) + 360deg)));
+          }
         }
         @media (prefers-reduced-motion: reduce) {
           .orbital-icon { animation: none !important; }
@@ -279,7 +343,7 @@ export function Hero() {
 }
 
 // Orbital icon component
-function OrbitalIcon({ icon, reduced }) {
+function OrbitalIcon({ icon, reduced, ellipseY = 1 }) {
   const startAngleDeg = icon.angle
 
   return (
@@ -290,16 +354,16 @@ function OrbitalIcon({ icon, reduced }) {
       className="orbital-icon"
       style={{
         position: 'absolute',
-        top: '50%',
-        left: '50%',
+        top: 0,
+        left: 0,
         width: icon.size,
         height: icon.size,
         marginLeft: -icon.size / 2,
         marginTop: -icon.size / 2,
         ['--start-angle']: `${startAngleDeg}deg`,
         ['--radius']: `${icon.orbitRadius}px`,
-        animation: reduced ? 'none' : `orbit ${icon.duration}s linear infinite`,
-        zIndex: 20,
+        animation: reduced ? 'none' : `orbit-glide ${icon.duration}s linear infinite`,
+        zIndex: 5, // Icons behind phone
       }}
     >
       <motion.div
@@ -316,8 +380,8 @@ function OrbitalIcon({ icon, reduced }) {
           fontWeight: 600,
           color: '#1e293b',
           whiteSpace: 'nowrap',
-          animation: `iconFloat ${2 + (icon.id.length % 3)}s ease-in-out infinite`,
-          animationDelay: `${(icon.id.length % 4) * 0.5}s`,
+          transform: `scaleY(${1 / ellipseY})`,
+          transformOrigin: 'center',
         }}
       >
         {typeof icon.emoji === 'string' && icon.emoji.startsWith('/') ? (

@@ -14,10 +14,11 @@ const DownloadApp = () => {
   return (
     <section style={{
       background: 'radial-gradient(circle at 50% 0%, #3086cf 0%, #175ba3 100%)',
-      padding: '3rem 1rem 0', // Reduced from 4rem
+      padding: '2.25rem 1rem 0.75rem',
       fontFamily: "'Poppins', sans-serif",
       position: 'relative',
-      overflow: 'hidden',
+      overflowX: 'hidden',
+      overflowY: 'visible',
       textAlign: 'center',
       display: 'flex',
       flexDirection: 'column',
@@ -44,9 +45,9 @@ const DownloadApp = () => {
           color: 'rgba(255,255,255,0.9)',
           fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
           fontWeight: 400,
-          marginBottom: '2.5rem',
+          marginBottom: '1.75rem',
           maxWidth: '600px',
-          margin: '0 auto 2.5rem',
+          margin: '0 auto 1.75rem',
         }}>
           Experience seamless online payment only on payNback app
         </p>
@@ -57,7 +58,8 @@ const DownloadApp = () => {
           alignItems: 'center',
           justifyContent: 'center',
           gap: '1rem',
-          flexWrap: 'wrap'
+          flexWrap: 'wrap',
+          marginBottom: '0.25rem',
         }}>
           <StoreButton 
             src="/Icons/get_iton_playstore.png" 
@@ -74,8 +76,8 @@ const DownloadApp = () => {
       <div style={{
         position: 'relative',
         width: '100%',
-        height: '500px', // Increased for full view
-        marginTop: '3rem',
+        height: '430px',
+        marginTop: '1.5rem',
         display: 'flex',
         alignItems: 'flex-end',
         justifyContent: 'center',
@@ -94,10 +96,10 @@ const DownloadApp = () => {
             }}
             style={{
               position: 'absolute',
-              width: '260px',
-              height: '450px', // Match container height
+              width: '230px',
+              height: '390px',
               left: '50%',
-              marginLeft: '-130px',
+              marginLeft: '-115px',
               zIndex: phone.zIndex || 5,
               bottom: 0, // Force to bottom
               filter: 'drop-shadow(0 20px 40px rgba(0,0,0,0.15))'
@@ -108,7 +110,7 @@ const DownloadApp = () => {
               position: 'relative', 
               width: '100%', 
               height: '100%',
-              transform: `scale(1.1) translate(0, 0)` // Scale up and reset translate
+              transform: `scale(1) translate(0, 0)`
             }}>
               <Image 
                 src={phone.src} 
@@ -140,15 +142,15 @@ const DownloadApp = () => {
 const StoreButton = ({ src, alt }) => (
   <motion.a
     href="#"
-    whileHover={{ scale: 1.05 }}
+    whileHover={{ scale: 1.06, y: -2 }}
     whileTap={{ scale: 0.95 }}
     style={{
       display: 'block',
-      width: '180px',
-      height: '60px',
+      width: '150px',
+      height: '48px',
       position: 'relative',
       cursor: 'pointer',
-      transition: 'transform 0.2s ease',
+      filter: 'drop-shadow(0 8px 18px rgba(0,0,0,0.18))',
     }}
   >
     <Image 
@@ -160,4 +162,4 @@ const StoreButton = ({ src, alt }) => (
   </motion.a>
 );
 
-export default DownloadApp;
+export default DownloadApp;
