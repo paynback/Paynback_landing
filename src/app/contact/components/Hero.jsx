@@ -4,7 +4,7 @@ import Image from "next/image";
 import Header from "@/components/layout/Header";
 import { motion } from "framer-motion";
 
-export default function BlogHero() {
+export default function ContactHero() {
   const IMG_APP_HAND = "/images/app-with-two-hand.png";
   const IMG_BIG_LOGO = "/images/big-logo.png";
 
@@ -70,12 +70,12 @@ export default function BlogHero() {
         <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
 
           <div className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12">
-            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md">Blogs</span>
-            <h1 className="text-balance text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
-              Stories Behind the Screens
+            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md">Contact Us</span>
+            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
+              We’d Love to Hear From You
             </h1>
             <p className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md">
-              Where design meets strategy and real-world impact
+              Reach out to our team and we’ll respond as quickly as possible.
             </p>
           </div>
 
@@ -84,7 +84,7 @@ export default function BlogHero() {
           {/* Right Images Container - absolute to overlap */}
           <div className="absolute right-0 bottom-[-3%] top-10 w-full lg:w-[65%] xl:w-[60%] pointer-events-none z-20 flex justify-end items-end overflow-hidden sm:overflow-visible">
             {/* Big Logo in background */}
-            <div className="absolute right-[2%] bottom-[-20%] w-[110%] h-[110%] opacity-20 z-0">
+            <div className="absolute right-[2%] bottom-[-20%] w-[110%] h-[110%] z-0 opacity-20">
               <Image
                 src={IMG_BIG_LOGO}
                 alt="Big PayNBack Logo"

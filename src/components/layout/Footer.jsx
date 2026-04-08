@@ -110,7 +110,7 @@ function NewsletterBanner() {
           className="w-full max-w-sm rounded-full border border-white/15 bg-white/8 px-5 py-2.5 text-sm text-white placeholder-white/40 outline-none focus:border-white/30 sm:w-72"
         />
         <button
-          className="bg-white rounded-full px-6 py-2.5 text-sm font-semibold text-[#0964BC] transition hover:opacity-90"
+          className="bg-white rounded-full px-6 py-2.5 text-sm font-semibold text-brand-primary transition hover:opacity-90"
         >
           Subscribe
         </button>

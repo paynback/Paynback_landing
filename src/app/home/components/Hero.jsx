@@ -38,7 +38,7 @@ export default function HomeHero() {
   };
 
   return (
-    <section className="relative isolate min-h-screen w-full overflow-hidden bg-black font-sans text-white">
+    <section className="relative isolate z-100 min-h-screen w-full overflow-hidden bg-black font-sans text-white">
       {/* Atmospheric gradient base (blob lights) */}
       <div
         className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-80"

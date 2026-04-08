@@ -5,7 +5,7 @@ import Footer from "../components/layout/Footer";
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600", "700", "800"],
 });
 
 export const metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${poppins.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">
+      <body className='flex min-h-full flex-col'>
         {children}
       </body>
     </html>

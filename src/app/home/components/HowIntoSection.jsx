@@ -27,7 +27,6 @@ export default function HowIntoSection() {
   return (
     <section
       className="w-full bg-white"
-      style={{ "--brand-primary": "#0964BC" }}
     >
       <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-30 lg:py-30">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-26">

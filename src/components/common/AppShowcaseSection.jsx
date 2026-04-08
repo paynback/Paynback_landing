@@ -92,18 +92,18 @@ export default function AppShowcaseSection() {
 
         {/* Heading */}
         <div className="max-w-5xl">
-          <h2 className="text-3xl font-medium leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl xl:text-[56px]">
+          <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px]">
             Where <span className="font-semibold text-[#1468C5]">financial</span> data
           </h2>
-          
-          <div className="mt-4 flex flex-col md:flex-row md:items-start gap-6 md:gap-14">
+
+          <div className="mt-4 flex flex-col md:flex-row md:items-start gap-10 md:gap-14">
             <p className="max-w-[320px] text-[13px] leading-[1.7] text-white/70">
               PayNback is India&apos;s first in-store shopping
               support app that connects users with nearby
               merchants offering exclusive discounts
             </p>
-            
-            <h2 className="whitespace-nowrap text-3xl font-medium leading-[1.1] tracking-tight sm:text-4xl lg:text-5xl xl:text-[56px]">
+
+            <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px] whitespace-nowrap">
               <span className="font-semibold text-[#1468C5]">becomes</span> understanding
             </h2>
           </div>
@@ -117,11 +117,11 @@ export default function AppShowcaseSection() {
         */}
         <div
           className="relative mt-6 flex items-end justify-center lg:mt-8"
-          style={{ minHeight: "460px" }}
+          style={{ minHeight: "clamp(300px, 50vw, 460px)" }}
         >
           {/* Referral link — mid-left — glass card */}
           <div
-            className="absolute bottom-[28%] left-0 flex items-center gap-2 lg:left-[3%]"
+            className="absolute bottom-[28%] left-0 hidden items-center gap-2 md:flex lg:left-[3%]"
           >
             <div
               className="rounded-xl px-3 py-2.5"
@@ -160,7 +160,7 @@ export default function AppShowcaseSection() {
 
 
           {/* Download — upper-right near arc — glass card */}
-          <div className="absolute top-[12%] right-[26%] flex items-center gap-2">
+          <div className="absolute top-[12%] right-[26%] hidden items-center gap-2 md:flex">
             <Connector side="right" />
             <div
               className="rounded-xl px-3 py-2.5"
@@ -176,7 +176,7 @@ export default function AppShowcaseSection() {
           </div>
 
           {/* Sign up — mid-right — glass card */}
-          <div className="absolute bottom-[28%] right-0 flex items-center gap-2 lg:right-[3%]">
+          <div className="absolute bottom-[28%] right-0 hidden items-center gap-2 md:flex lg:right-[3%]">
             <Connector side="right" />
             <div
               className="rounded-xl px-3 py-2.5"
