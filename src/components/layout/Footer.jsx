@@ -12,6 +12,7 @@ import {
   Mail,
   Info,
 } from "lucide-react";
+import { StoreBadges } from "../ui/StoreBadges";
 
 /* ── Asset paths ─────────────────────────────────────────── */
 const LOGO = "/Icons/Paynback_logo.png";
@@ -110,7 +111,7 @@ function NewsletterBanner() {
           className="w-full max-w-sm rounded-full border border-white/15 bg-white/8 px-5 py-2.5 text-sm text-white placeholder-white/40 outline-none focus:border-white/30 sm:w-72"
         />
         <button
-          className="bg-white rounded-full px-6 py-2.5 text-sm font-semibold text-[#0964BC] transition hover:opacity-90"
+          className="bg-white rounded-full px-6 py-2.5 text-sm font-semibold text-brand-primary transition hover:opacity-90"
         >
           Subscribe
         </button>
@@ -189,17 +190,7 @@ export default function Footer() {
                   <Info className="h-3 w-3 text-white/60" strokeWidth={2.5} />
                 </span>
                 <span className="text-xs text-white/60">App Available For</span>
-                <div
-                  className="flex items-center rounded-full px-3 py-1"
-                >
-                  <Image
-                    src={STORE_BADGES}
-                    alt="Google Play and App Store"
-                    width={120}
-                    height={38}
-                    className="h-9 w-auto object-contain"
-                  />
-                </div>
+                <StoreBadges />
               </div>
             </div>
 

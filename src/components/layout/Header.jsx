@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Phone, Menu, X } from "lucide-react";
+import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const LOGO_SRC = "/Icons/Paynback_logo.png";
@@ -21,11 +22,16 @@ function navActive(pathname, href) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function LogoMark() {
+function LogoMark({ isScrolled }) {
   return (
     <Link
       href="/"
-      className="relative block h-11 w-[190px] shrink-0 sm:h-12 sm:w-[220px] lg:h-18 lg:w-[250px]"
+      className={cn(
+        "relative block shrink-0 transition-all duration-500",
+        isScrolled
+          ? "h-8 w-[140px] sm:h-9 sm:w-[160px] lg:h-10 lg:w-[180px]"
+          : "h-11 w-[190px] sm:h-12 sm:w-[220px] lg:h-18 lg:w-[250px]"
+      )}
       aria-label="PayNBack home"
     >
       <Image
@@ -50,119 +56,163 @@ export default function Header({
 }) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  const { scrollY } = useScroll();
+
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    setIsScrolled(latest > 30);
+  });
 
   return (
-    <header
-      className={cn(
-        "flex flex-col gap-3 pt-5 pb-2 sm:pt-6 lg:pt-8",
-        className,
-      )}
-    >
-      <div className="flex items-center justify-between gap-4">
-        <LogoMark />
+    <>
+      {/* Invisible spacer to prevent layout jumping when Header becomes deeply detached */}
+      <div className="w-full shrink-0 h-[88px] sm:h-[96px] lg:h-[128px]" aria-hidden />
 
-        {/* Desktop nav */}
-        <nav
-          className="hidden items-center gap-8 text-sm font-medium text-white/90 lg:flex lg:gap-14 xl:gap-24"
-          aria-label="Primary"
-        >
-          {navItems.map(({ href, label }) => {
-            const active = navActive(pathname, href);
-            return (
-              <Link
-                key={href}
-                href={href}
-                className={cn(
-                  "transition-colors hover:text-white",
-                  active ? "font-semibold text-white" : "text-white/80",
-                )}
-              >
-                {label}
-              </Link>
-            );
-          })}
-        </nav>
-
-        <div className="flex items-center gap-3">
-          {/* Contact CTA */}
-          <Link
-            href={contactHref}
-            className={cn(
-              "flex shrink-0 items-center gap-2 rounded-full bg-white px-3 py-2 sm:px-4 sm:py-2.5",
-              "text-xs sm:text-sm font-semibold text-slate-900 shadow-lg shadow-cyan-500/10",
-              "transition hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
-            )}
-          >
-            <Phone className="h-3.5 w-3.5 sm:h-4 sm:w-4 text-sky-500" strokeWidth={2.25} />
-            Contact
-          </Link>
-
-          {/* Mobile hamburger */}
-          <button
-            className="flex h-10 w-10 items-center justify-center rounded-lg bg-white/10 text-white backdrop-blur-sm lg:hidden"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? (
-              <X className="h-5 w-5" strokeWidth={2} />
-            ) : (
-              <Menu className="h-5 w-5" strokeWidth={2} />
-            )}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile nav dropdown */}
-      {mobileMenuOpen && (
-        <nav
-          className="flex flex-col gap-1 rounded-xl bg-white/10 p-3 backdrop-blur-md lg:hidden"
-          aria-label="Primary mobile"
-        >
-          {navItems.map(({ href, label }) => {
-            const active = navActive(pathname, href);
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={() => setMobileMenuOpen(false)}
-                className={cn(
-                  "rounded-lg px-4 py-2.5 text-sm transition-colors hover:bg-white/10",
-                  active
-                    ? "font-semibold text-white bg-white/15"
-                    : "text-white/80",
-                )}
-              >
-                {label}
-              </Link>
-            );
-          })}
-        </nav>
-      )}
-
-      {/* Scrollable mobile nav — fallback for quick access */}
-      <nav
+      {/* Wrapping fixed container so animation only affects the floating bar, not the centering axis */}
+      <div
         className={cn(
-          "-mx-1 flex gap-5 overflow-x-auto px-1 pb-1 text-sm font-medium text-white/90 sm:gap-6 lg:hidden",
-          mobileMenuOpen && "hidden",
+          "fixed left-0 right-0 top-0 z-50 flex justify-center w-full transition-all duration-500 ease-in-out",
+          isScrolled ? "pt-4 sm:pt-6" : "pt-0"
         )}
-        aria-label="Primary mobile scroll"
       >
-        {navItems.map(({ href, label }) => {
-          const active = navActive(pathname, href);
-          return (
-            <Link
-              key={href}
-              href={href}
+        <motion.header
+          layout
+          initial={{ y: -100, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{
+            y: { type: "spring", stiffness: 300, damping: 30 },
+            opacity: { duration: 0.4 },
+            layout: { type: "spring", stiffness: 400, damping: 30 }
+          }}
+          className={cn(
+            "flex flex-col gap-3 transition-all duration-500",
+            isScrolled
+              ? "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl bg-black/65 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/20 py-2 sm:py-2.5 px-4 sm:px-6 rounded-full"
+              : "w-full max-w-7xl pt-5 pb-2 sm:pt-6 lg:pt-8 px-4 sm:px-6 lg:px-8 bg-transparent rounded-none border-transparent",
+            className
+          )}
+        >
+          <div className="flex items-center justify-between gap-4">
+            <LogoMark isScrolled={isScrolled} />
+
+            {/* Desktop nav */}
+            <nav
               className={cn(
-                "shrink-0 whitespace-nowrap transition-colors hover:text-white",
-                active ? "font-semibold text-white" : "text-white/80",
+                "hidden items-center font-medium text-white/90 lg:flex transition-all duration-500",
+                isScrolled 
+                  ? "gap-6 text-xs lg:gap-10 xl:gap-16" 
+                  : "gap-8 text-sm lg:gap-14 xl:gap-24"
               )}
+              aria-label="Primary"
             >
-              {label}
-            </Link>
-          );
-        })}
-      </nav>
-    </header>
+              {navItems.map(({ href, label }) => {
+                const active = navActive(pathname, href);
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={cn(
+                      "transition-colors hover:text-white",
+                      active ? "font-semibold text-white" : "text-white/80",
+                    )}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+
+            <div className="flex items-center gap-3">
+              {/* Contact CTA */}
+              <Link
+                href={contactHref}
+                className={cn(
+                  "flex shrink-0 items-center justify-center gap-1.5 bg-white font-semibold text-slate-900 shadow-lg shadow-cyan-500/10 transition-all duration-500 hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
+                  isScrolled
+                    ? "rounded-full px-2 py-1.5 sm:px-2 sm:py-1.5 text-[11px] sm:text-xs"
+                    : "rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm"
+                )}
+              >
+                <Phone className={cn("text-sky-500 transition-all duration-500", isScrolled ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5 sm:h-4 sm:w-4")} strokeWidth={2.25} />
+                Contact
+              </Link>
+
+              {/* Mobile hamburger */}
+              <button
+                className={cn(
+                  "flex items-center justify-center bg-white/10 text-white backdrop-blur-sm lg:hidden transition-all duration-500 hover:bg-white/20",
+                  isScrolled ? "h-8 w-8 rounded-lg" : "h-10 w-10 rounded-lg"
+                )}
+                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                aria-label="Toggle navigation menu"
+              >
+                {mobileMenuOpen ? (
+                  <X className={isScrolled ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2} />
+                ) : (
+                  <Menu className={isScrolled ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2} />
+                )}
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile nav dropdown */}
+          {mobileMenuOpen && (
+            <nav
+              className={cn(
+                "flex flex-col gap-1 rounded-xl bg-white/10 p-3 backdrop-blur-md lg:hidden mt-2",
+                isScrolled ? "bg-black/40 border border-white/5 shadow-inner" : ""
+              )}
+              aria-label="Primary mobile"
+            >
+              {navItems.map(({ href, label }) => {
+                const active = navActive(pathname, href);
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className={cn(
+                      "rounded-lg px-4 py-2.5 text-sm transition-colors hover:bg-white/10",
+                      active
+                        ? "font-semibold text-white bg-white/15"
+                        : "text-white/80",
+                    )}
+                  >
+                    {label}
+                  </Link>
+                );
+              })}
+            </nav>
+          )}
+
+          {/* Scrollable mobile nav — fallback for quick access */}
+          <nav
+            className={cn(
+              "-mx-1 flex overflow-x-auto px-1 pb-1 font-medium text-white/90 lg:hidden mt-1 transition-all duration-500",
+              isScrolled ? "gap-4 sm:gap-5 text-xs" : "gap-5 sm:gap-6 text-sm",
+              mobileMenuOpen && "hidden",
+            )}
+            aria-label="Primary mobile scroll"
+          >
+            {navItems.map(({ href, label }) => {
+              const active = navActive(pathname, href);
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  className={cn(
+                    "shrink-0 whitespace-nowrap transition-colors hover:text-white",
+                    active ? "font-semibold text-white" : "text-white/80",
+                  )}
+                >
+                  {label}
+                </Link>
+              );
+            })}
+          </nav>
+        </motion.header>
+      </div>
+    </>
   );
 }
