@@ -39,7 +39,7 @@ export default function Activities() {
 
           {/* Stat Cards */}
           {STAT_CARDS.map((stat) => {
-            const radius = 40; 
+            const radius = 42; 
             const x = 50 + radius * Math.cos((stat.angle * Math.PI) / 180);
             const y = 50 + radius * Math.sin((stat.angle * Math.PI) / 180);
 
@@ -68,6 +68,7 @@ export default function Activities() {
               </div>
             );
           })}
+
         </motion.div>
 
         {/* Inner Circle */}
@@ -128,7 +129,7 @@ export default function Activities() {
         .activities-orbit-container {
           position: relative;
           width: 100%;
-          max-width: 56rem;
+          max-width: 64rem;
           aspect-ratio: 1;
           display: flex;
           align-items: center;
@@ -137,8 +138,8 @@ export default function Activities() {
 
         .activities-orbit-spinner {
           position: absolute;
-          width: 75%;
-          height: 75%;
+          width: 82%;
+          height: 82%;
           z-index: 20;
           pointer-events: none;
         }
@@ -153,8 +154,8 @@ export default function Activities() {
         .activities-stat-card {
           background: #fff;
           border-radius: 9999px;
-          width: 7rem;
-          height: 7rem;
+          width: 8.25rem;
+          height: 8.25rem;
           box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
           display: flex;
           flex-direction: column;
@@ -167,7 +168,7 @@ export default function Activities() {
         }
 
         .activities-stat-value {
-          font-size: 1.5rem;
+          font-size: 1.75rem;
           font-weight: 800;
           display: block;
           line-height: 1;
@@ -175,7 +176,7 @@ export default function Activities() {
 
         .activities-stat-label {
           color: #6b7280;
-          font-size: 0.5rem;
+          font-size: 0.56rem;
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: -0.025em;
@@ -183,10 +184,11 @@ export default function Activities() {
           padding: 0 0.25rem;
         }
 
+
         .activities-inner-circle {
           position: absolute;
-          width: 50%;
-          height: 50%;
+          width: 54%;
+          height: 54%;
           z-index: 10;
           pointer-events: none;
         }
@@ -225,13 +227,13 @@ export default function Activities() {
 
         .activities-branding {
           position: absolute;
-          bottom: 5%;
+          bottom: 3%;
           left: 50%;
           transform: translateX(-50%);
           z-index: 50;
           pointer-events: none;
           width: 100%;
-          max-width: 420px;
+          max-width: 1020px;
         }
 
         .activities-branding-img {
@@ -243,25 +245,33 @@ export default function Activities() {
         /* ── Tablet (max-width: 1024px) ── */
         @media (max-width: 1024px) {
           .activities-section { padding: 4rem 0; }
-          .activities-orbit-container { max-width: 42rem; }
-          .activities-stat-card { width: 5.5rem; height: 5.5rem; }
-          .activities-stat-value { font-size: 1.15rem; }
-          .activities-stat-label { font-size: 0.45rem; }
-          .activities-branding { max-width: 320px; }
+          .activities-orbit-container { max-width: 50rem; }
+          .activities-orbit-spinner { width: 80%; height: 80%; }
+          .activities-stat-card { width: 6.4rem; height: 6.4rem; }
+          .activities-stat-value { font-size: 1.35rem; }
+          .activities-stat-label { font-size: 0.48rem; }
+          .activities-branding {
+            bottom: 12%;
+            max-width: 470px;
+          }
         }
 
         /* ── Mobile (max-width: 640px) ── */
         @media (max-width: 640px) {
           .activities-section { padding: 2.5rem 0; }
-          .activities-orbit-container { max-width: 22rem; }
+          .activities-orbit-container { max-width: 26rem; }
+          .activities-orbit-spinner { width: 78%; height: 78%; }
           .activities-stat-card {
-            width: 3.5rem;
-            height: 3.5rem;
+            width: 4.5rem;
+            height: 4.5rem;
             box-shadow: 0 4px 20px rgb(0 0 0 / 0.15);
           }
-          .activities-stat-value { font-size: 0.75rem; }
-          .activities-stat-label { font-size: 0.3rem; letter-spacing: -0.04em; }
-          .activities-branding { max-width: 200px; }
+          .activities-stat-value { font-size: 0.95rem; }
+          .activities-stat-label { font-size: 0.34rem; letter-spacing: -0.04em; }
+          .activities-branding {
+            bottom: 10%;
+            max-width: 310px;
+          }
           .activities-mascot { border-width: 2px; }
         }
       `}</style>

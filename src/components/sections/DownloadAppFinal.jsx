@@ -1,17 +1,18 @@
 'use client'
 
-import { motion } from 'framer-motion'
 import Image from 'next/image'
+import { motion } from 'framer-motion'
 
 const DownloadAppFinal = () => {
   return (
     <section style={{
       background: 'radial-gradient(circle at 50% 0%, #3086cf 0%, #175ba3 100%)',
-      padding: '1.75rem 1rem 0.5rem',
+      padding: '1.75rem 1rem 0',
       fontFamily: "'Poppins', sans-serif",
       position: 'relative',
       overflowX: 'hidden',
-      overflowY: 'visible',
+      // Prevent phone images from overflowing and creating a scroll area.
+      overflowY: 'hidden',
       textAlign: 'center',
       display: 'flex',
       flexDirection: 'column',
@@ -19,19 +20,35 @@ const DownloadAppFinal = () => {
     }}>
       {/* --- Text Content --- */}
       <div className="dl-text">
-        <h2 className="dl-title">
+        <motion.h2
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true, amount: 0.35 }}
+          className="dl-title"
+        >
           Download the app now!
-        </h2>
-        <p style={{
+        </motion.h2>
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.12 }}
+          viewport={{ once: true, amount: 0.35 }}
+          style={{
           color: 'rgba(255,255,255,0.9)',
           fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
           maxWidth: '600px',
           margin: '0 auto 1.75rem',
         }}>
           Experience seamless online payment only on payNback app
-        </p>
+        </motion.p>
 
-        <div style={{
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true, amount: 0.35 }}
+          style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
@@ -47,13 +64,13 @@ const DownloadAppFinal = () => {
             src="/Icons/get_iton_appstore.png" 
             alt="Get it on App Store" 
           />
-        </div>
+        </motion.div>
       </div>
 
       <div style={{
         position: 'relative',
         width: '100%',
-        height: '360px',
+        height: '400px',
         marginTop: '1.1rem',
         display: 'flex',
         alignItems: 'flex-end',
@@ -61,21 +78,78 @@ const DownloadAppFinal = () => {
         zIndex: 10
       }}>
         {/* Phone 1 */}
-        <div id="phone-1" style={{ position: 'absolute', width: '210px', height: '350px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% - 220px)) rotate(0deg)', zIndex: 5 }}>
-          <Image src="/Icons/phone_history.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+        <div
+          id="phone-1"
+          className="dl-phone-frame"
+          style={{ position: 'absolute', width: '310px', height: '700px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% - 275px)) rotate(0deg)', zIndex: 5 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 110, scale: 0.96 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            whileHover={{ scale: 1.03, y: -4 }}
+            transition={{ duration: 0.65, delay: 0.05, ease: [0.2, 0.8, 0.2, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ position: 'relative', width: '100%', height: '100%' }}
+          >
+            <Image src="/Icons/phone_history.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+          </motion.div>
         </div>
         {/* Phone 2 */}
-        <div id="phone-2" style={{ position: 'absolute', width: '210px', height: '350px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% - 75px)) rotate(0deg)', zIndex: 10 }}>
-          <Image src="/Icons/phone_home_page.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+        <div
+          id="phone-2"
+          className="dl-phone-frame"
+          style={{ position: 'absolute', width: '265px', height: '430px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% - 105px)) rotate(0deg)', zIndex: 10 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 110, scale: 0.96 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            whileHover={{ scale: 1.03, y: -4 }}
+            transition={{ duration: 0.65, delay: 0.15, ease: [0.2, 0.8, 0.2, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ position: 'relative', width: '100%', height: '100%' }}
+          >
+            <Image src="/Icons/phone_home_page.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom'  }} priority />
+          </motion.div>
         </div>
         {/* Phone 3 */}
-        <div id="phone-3" style={{ position: 'absolute', width: '210px', height: '350px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% + 75px)) rotate(0deg)', zIndex: 10 }}>
-        <div className="dl-phone dl-phone--3">
-          <Image src="/Icons/phone_profile_page.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+        <div
+          id="phone-3"
+          className="dl-phone-frame"
+          style={{ position: 'absolute', width: '265px', height: '430px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% + 105px)) rotate(0deg)', zIndex: 10 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 110, scale: 0.96 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            whileHover={{ scale: 1.03, y: -4 }}
+            transition={{ duration: 0.65, delay: 0.25, ease: [0.2, 0.8, 0.2, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ position: 'relative', width: '100%', height: '100%' }}
+          >
+            <Image
+              src="/Icons/phone_profile_page.png"
+              alt="Phone"
+              fill
+              style={{ objectFit: 'contain', objectPosition: 'bottom' }}
+              priority
+            />
+          </motion.div>
         </div>
         {/* Phone 4 */}
-        <div id="phone-4" style={{ position: 'absolute', width: '210px', height: '350px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% + 220px)) rotate(0deg)', zIndex: 5 }}>
-          <Image src="/Icons/phone_cashback.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+        <div
+          id="phone-4"
+          className="dl-phone-frame"
+          style={{ position: 'absolute', width: '265px', height: '430px', left: '50%', bottom: 0, transform: 'translateX(calc(-50% + 275px)) rotate(0deg)', zIndex: 5 }}
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 110, scale: 0.96 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            whileHover={{ scale: 1.03, y: -4 }}
+            transition={{ duration: 0.65, delay: 0.35, ease: [0.2, 0.8, 0.2, 1] }}
+            viewport={{ once: true, amount: 0.2 }}
+            style={{ position: 'relative', width: '100%', height: '100%' }}
+          >
+            <Image src="/Icons/phone_cashback.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+          </motion.div>
         </div>
       </div>
 
@@ -126,6 +200,16 @@ const DownloadAppFinal = () => {
           align-items: flex-end;
           justify-content: center;
           z-index: 10;
+        }
+
+        .dl-phone-frame {
+          cursor: pointer;
+          transition: transform 180ms ease;
+          will-change: transform;
+        }
+
+        .dl-phone-frame:hover {
+          transform: translateY(-3px) scale(1.03);
         }
 
         .dl-phone {

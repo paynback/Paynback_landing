@@ -5,18 +5,33 @@ import { HowItWorks } from "@/components/sections/StepsJoin";
 import DownloadApp from "@/components/sections/DownloadAppFinal";
 import Activities from "@/components/sections/Activities";
 import Footer from "@/components/layout/Footer";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 
 /** Marketing landing at `/` — distinct from `/home`. */
 export default function LandingPage() {
   return (
     <>
-      <Hero />
-      <SmarterShopping />
-      <WhyChoose />
-      <HowItWorks />
-      <DownloadApp />
-      <Activities />
-      <Footer />
+      <ScrollReveal>
+        <Hero />
+      </ScrollReveal>
+      <ScrollReveal delay={80}>
+        <SmarterShopping />
+      </ScrollReveal>
+      <ScrollReveal delay={120}>
+        <WhyChoose />
+      </ScrollReveal>
+      <ScrollReveal delay={160}>
+        <HowItWorks />
+      </ScrollReveal>
+      <ScrollReveal delay={200}>
+        <DownloadApp />
+      </ScrollReveal>
+      <ScrollReveal delay={240}>
+        <Activities />
+      </ScrollReveal>
+      <ScrollReveal delay={280}>
+        <Footer />
+      </ScrollReveal>
     </>
   );
 }

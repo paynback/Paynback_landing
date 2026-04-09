@@ -3,6 +3,7 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import trophyImage from '../../../public/Icons/trophy.png'
 
 // import trophy from '../public/images/trophy.png'
 
@@ -12,7 +13,7 @@ const FEATURES = [
     title: 'Exclusive Discounts',
     description:
       'payNback rewards every purchase with points that can be redeemed for cashback, gift cards, and exclusive benefits — adding more value to every transaction.',
-    image: '/images/trophy.png',
+    image: '/Icons/trophy.png',
     imageAlt: 'Exclusive discounts trophy',
     tag: 'Discounts',
   },
@@ -21,7 +22,7 @@ const FEATURES = [
     title: 'Rewarding Points System',
     description:
       'Earn points on every rupee you spend. Watch your rewards grow and redeem them instantly for cashback or vouchers at your favourite brands.',
-    image: '/images/rewards.png',
+    image: '/Icons/trophy.png',
     imageAlt: 'Rewards points',
     tag: 'Rewards',
   },
@@ -30,7 +31,7 @@ const FEATURES = [
     title: 'Modern and User-Friendly Experience',
     description:
       'A clean, intuitive interface designed for everyone. Manage payments, track spending, and access all features with just a few taps.',
-    image: '/images/ux.png',
+    image: '/Icons/trophy.png',
     imageAlt: 'User experience',
     tag: 'Experience',
   },
@@ -39,7 +40,7 @@ const FEATURES = [
     title: 'Secure and Reliable Transactions',
     description:
       'Bank-grade encryption and real-time fraud monitoring keep every transaction safe. Your money and data are always protected.',
-    image: '/images/secure.png',
+    image: '/Icons/trophy.png',
     imageAlt: 'Security shield',
     tag: 'Security',
   },
@@ -48,7 +49,7 @@ const FEATURES = [
     title: 'Personalized Recommendations',
     description:
       'Smart AI analyses your spending habits to surface offers and deals tailored specifically to you — saving you money without the search.',
-    image: '/images/ai.png',
+    image: '/Icons/trophy.png',
     imageAlt: 'Personalized AI',
     tag: 'Smart',
   },
@@ -128,24 +129,15 @@ export function WhyChoose() {
 
         {/* --- Col 3: Image card --- */}
         <div className="why-image-card">
-          <div
-            style={{
-              position: 'absolute',
-              inset: 0,
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              background: 'linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%)',
-            }}
-          >
+          <div className="why-image-inner">
             <Image 
-              src="/Icons/trophy.png" 
+              src={trophyImage} 
               alt="Why Choose payNback Trophy"
-              width={280}
-              height={280}
+              fill
               style={{ 
-                objectFit: 'contain',
-                filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))'
+                objectFit: 'cover',
+                filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
+                zIndex: 0
               }} 
             />
           </div>
@@ -197,10 +189,10 @@ export function WhyChoose() {
         .why-feature-list {
           background: #fff;
           border-radius: 20px;
-          padding: 0;
+          padding: 0.4rem;
           display: flex;
           flex-direction: column;
-          gap: 0;
+          gap: 0.35rem;
           box-shadow: 0 2px 16px rgba(0,0,0,0.06);
           overflow: hidden;
           min-height: 480px;
@@ -211,6 +203,7 @@ export function WhyChoose() {
           text-align: left;
           padding: 1.25rem 2rem;
           border: none;
+          border-radius: 12px;
           cursor: pointer;
           font-family: inherit;
           font-size: 1.05rem;
@@ -290,15 +283,17 @@ export function WhyChoose() {
         .why-image-overlay {
           position: absolute;
           bottom: 0; left: 0; right: 0;
-          padding: 1rem 1.25rem;
-          background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+          padding: 2rem 1.25rem 1.25rem;
+          background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+          z-index: 10;
         }
 
         .why-image-label {
           color: #fff;
           font-weight: 700;
-          font-size: 0.9rem;
+          font-size: 1.1rem;
           animation: fadeSlideIn 0.3s ease;
+          display: block;
         }
 
         /* ── Tablet (max-width: 1024px) ── */

@@ -6,20 +6,22 @@ import { useEffect, useRef, useState } from 'react'
 const STEPS = [
   {
     id: 1,
-    icon: '👥',
+    iconSrc: '/Icons/stepstojoin_1.png',
     title: 'Get a referral link from a friend.',
   },
   {
     id: 2,
-    icon: '⬇️',
+    iconSrc: '/Icons/steps2join_2.png',
     title: 'Download the payNback app from Play Store & App Store',
   },
   {
     id: 3,
-    icon: '🔗',
+    iconSrc: '/Icons/steps2join_3.png',
     title: 'Open the referral link to start your simple signup.',
   },
 ]
+
+const STEP_ARROWS = ['/Icons/steps2join_arrow1.png', '/Icons/stepstojoin_arrow2.png']
 
 export function HowItWorks() {
   const [visible, setVisible] = useState(false)
@@ -64,7 +66,7 @@ export function HowItWorks() {
             >
               {/* Icon circle */}
               <div className="steps-icon-circle">
-                {step.icon}
+                <img className="steps-icon-image" src={step.iconSrc} alt={`Step ${step.id} icon`} />
 
                 {/* Step number badge */}
                 <div className="steps-badge">
@@ -81,13 +83,17 @@ export function HowItWorks() {
             {/* Curved dashed arrow between steps */}
             {i < STEPS.length - 1 && (
               <div
-                className="steps-arrow"
+                className={`steps-arrow ${i === 0 ? 'steps-arrow-top' : 'steps-arrow-bottom'}`}
                 style={{
                   opacity: visible ? 1 : 0,
                   transition: `opacity 0.6s ease ${i * 0.2 + 0.4}s`,
                 }}
               >
-                <CurvedArrow flip={i % 2 === 1} />
+                <img
+                  className="steps-arrow-image"
+                  src={STEP_ARROWS[i]}
+                  alt={`Step ${i + 1} to step ${i + 2} arrow`}
+                />
               </div>
             )}
           </div>
@@ -97,7 +103,7 @@ export function HowItWorks() {
       <style>{`
         .steps-section {
           background: #fff;
-          padding: 5rem 1.5rem 6rem;
+          padding: 6.5rem 1.5rem 8rem;
           font-family: 'Poppins', sans-serif;
           overflow: hidden;
         }
@@ -126,13 +132,14 @@ export function HowItWorks() {
         }
 
         .steps-row {
-          max-width: 900px;
+          width: fit-content;
+          max-width: 100%;
           margin: 0 auto;
           position: relative;
           display: flex;
           align-items: flex-start;
-          justify-content: space-between;
-          gap: 1rem;
+          justify-content: center;
+          gap: 0.75rem;
         }
 
         .steps-item-wrapper {
@@ -144,7 +151,7 @@ export function HowItWorks() {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          flex: 0 0 220px;
+          flex: 0 0 250px;
         }
 
         .steps-icon-circle {
@@ -160,6 +167,13 @@ export function HowItWorks() {
           box-shadow: 0 8px 30px rgba(29,112,184,0.35);
           position: relative;
           flex-shrink: 0;
+        }
+
+        .steps-icon-image {
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+          display: block;
         }
 
         .steps-badge {
@@ -185,11 +199,12 @@ export function HowItWorks() {
           color: #1e293b;
           line-height: 1.55;
           margin: 0;
-          max-width: 180px;
+          max-width: 230px;
         }
 
         .steps-arrow {
-          flex: 1;
+          flex: 0 0 auto;
+          min-width: 0;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -197,21 +212,39 @@ export function HowItWorks() {
           margin-top: 40px;
         }
 
+        .steps-arrow-top {
+          margin-top: 10px;
+        }
+
+        .steps-arrow-bottom {
+          margin-top: 70px;
+        }
+
+        .steps-arrow-image {
+          width: 300px;
+          height: 150px;
+          object-fit: contain;
+          display: block;
+          filter: saturate(1.35) contrast(1.2) drop-shadow(0 6px 12px rgba(16, 78, 120, 0.35));
+        }
+
         /* ── Tablet (max-width: 1024px) ── */
         @media (max-width: 1024px) {
-          .steps-section { padding: 3.5rem 1rem 4rem; }
+          .steps-section { padding: 4.75rem 1rem 5.5rem; }
           .steps-header { margin-bottom: 3rem; }
           .steps-title { font-size: 1.75rem; }
           .steps-subtitle { font-size: 1rem; }
-          .steps-card { flex: 0 0 180px; }
+          .steps-card { flex: 0 0 210px; }
           .steps-icon-circle { width: 75px; height: 75px; font-size: 1.6rem; }
-          .steps-label { font-size: 0.95rem; max-width: 160px; }
-          .steps-arrow svg { width: 80px; height: 40px; }
+          .steps-label { font-size: 0.95rem; max-width: 200px; }
+          .steps-arrow-top { margin-top: 6px; }
+          .steps-arrow-bottom { margin-top: 56px; }
+          .steps-arrow-image { width: 220px; height: 110px; }
         }
 
         /* ── Mobile (max-width: 640px) ── */
         @media (max-width: 640px) {
-          .steps-section { padding: 2.5rem 1rem 3rem; }
+          .steps-section { padding: 3.5rem 1rem 4.5rem; }
           .steps-header { margin-bottom: 2rem; }
           .steps-title { font-size: 1.4rem; }
           .steps-subtitle { font-size: 0.9rem; }
@@ -228,15 +261,20 @@ export function HowItWorks() {
           .steps-card {
             flex: none;
             width: 100%;
-            max-width: 280px;
+            max-width: 320px;
           }
           .steps-arrow {
             margin-top: 0;
             transform: rotate(90deg);
           }
-          .steps-arrow svg {
-            width: 60px;
-            height: 30px;
+          .steps-arrow-top,
+          .steps-arrow-bottom {
+            margin-top: 0;
+          }
+          .steps-arrow { min-width: 0; }
+          .steps-arrow-image {
+            width: 170px;
+            height: 85px;
           }
           .steps-icon-circle {
             width: 70px; height: 70px;
@@ -247,39 +285,5 @@ export function HowItWorks() {
         }
       `}</style>
     </section>
-  )
-}
-
-// SVG curved dashed arrow
-function CurvedArrow({ flip = false }) {
-  return (
-    <svg
-      width="120"
-      height="60"
-      viewBox="0 0 120 60"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      style={{
-        transform: flip ? 'scaleY(-1)' : 'none',
-        overflow: 'visible',
-      }}
-    >
-      <path
-        d="M 10 45 Q 60 5 110 45"
-        stroke="#93c5fd"
-        strokeWidth="2"
-        strokeDasharray="6 5"
-        strokeLinecap="round"
-        fill="none"
-      />
-      <path
-        d="M 103 38 L 110 45 L 101 47"
-        stroke="#93c5fd"
-        strokeWidth="2"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        fill="none"
-      />
-    </svg>
   )
 }

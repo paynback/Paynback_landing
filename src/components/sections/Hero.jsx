@@ -1,6 +1,6 @@
 // src/components/sections/Hero/Hero.jsx
 'use client'
-
+import {useState} from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -146,7 +146,7 @@ export function Hero() {
         <div className="hero-badge">
           {Array.from({ length: 4 }).map((_, i) => (
             <Star key={i} className="w-3 h-3 fill-white" />
-          ))} &nbsp;4/5 from 1k reviews
+          ))} &nbsp;4.3/5 from 1k reviews
         </div>
 
         <h1 className="hero-title">
@@ -162,12 +162,23 @@ export function Hero() {
             <Info className="w-5 h-5 opacity-80" /> App Available For
           </span>
           <div className="hero-stores__images">
-            <Image
-              src="/Icons/app&play_store_icons_hero.png"
-              alt="Available on App Store and Google Play"
-              fill
-              style={{ objectFit: 'contain' }}
+           <div className="hero-store-pill">
+              <Image 
+                src="/Icons/home_playstore.png"
+                alt="Google Play"
+                width={100}
+                height={100}
+                className="hero-store-pill__icon"
+              />
+              <span className="hero-store-pill__divider" />
+              <Image 
+              src="/Icons/home_appstore.png" 
+              alt="App Store"
+              width={100}
+              height={100}
+              className="hero-store-pill__icon"
             />
+           </div>
           </div>
         </div>
       </motion.div>
@@ -179,12 +190,42 @@ export function Hero() {
         display: 'flex', alignItems: 'flex-start', justifyContent: 'center',
         flexShrink: 0,
       }}>
+        {/* Cashback badges */}
+        <motion.div
+          className="hero-cashback hero-cashback--left"
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.65, delay: 0.75, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Image
+            src="/Icons/2_cashback.png"
+            alt="Cashback credited"
+            fill
+            sizes="(max-width: 768px) 160px, 220px"
+            style={{ objectFit: 'contain' }}
+          />
+        </motion.div>
+        <motion.div
+          className="hero-cashback hero-cashback--right"
+          initial={{ opacity: 0, scale: 0.7 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.55, delay: 0.78, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <Image
+            src="/Icons/2_cashback.png"
+            alt="Cashback credited"
+            fill
+            sizes="(max-width: 768px) 160px, 220px"
+            style={{ objectFit: 'contain' }}
+          />
+        </motion.div>
+
         {/* Orbit (clipped so it never appears above the phone) */}
         <div
           style={{
             position: 'absolute',
             left: '50%',
-            top: '0%',
+            top: '6%',
             width: '900px',
             height: '560px',
             transform: 'translateX(-50%)',
@@ -198,7 +239,7 @@ export function Hero() {
             style={{
               position: 'absolute',
               left: '50%',
-              top: '46%',
+              top: '52%',
               width: '800px',
               height: '800px',
               transform: 'translate(-50%, -50%) scaleY(0.55)',
@@ -215,7 +256,7 @@ export function Hero() {
             style={{
               position: 'absolute',
               left: '50%',
-              top: '46%',
+              top: '52%',
               width: 0,
               height: 0,
               transform: 'translate(-50%, -50%) scaleY(0.55)',
@@ -304,6 +345,13 @@ export function Hero() {
         .hero-nav__logo {
           object-fit: contain; object-position: left;
           width: 160px; height: auto;
+          cursor: pointer;
+          transition: transform 0.28s ease, filter 0.28s ease;
+          transform-origin: left center;
+        }
+        .hero-nav__logo:hover {
+          transform: translateY(-2px) scale(1.03);
+          filter: drop-shadow(0 8px 18px rgba(0, 60, 140, 0.22));
         }
         .hero-nav__hamburger {
           display: none;
@@ -320,6 +368,15 @@ export function Hero() {
           display: flex; align-items: center; gap: 0.4rem;
           box-shadow: 0 4px 20px rgba(0,0,0,0.15);
           white-space: nowrap;
+          transition: transform 0.24s ease, box-shadow 0.24s ease, background-color 0.24s ease;
+        }
+        .hero-nav__btn:hover {
+          transform: translateY(-2px) scale(1.02);
+          box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+          background-color: #f8fbff;
+        }
+        .hero-nav__btn:active {
+          transform: translateY(0) scale(0.99);
         }
 
         /* Text content */
@@ -352,7 +409,40 @@ export function Hero() {
           color: white; font-size: 1rem; font-weight: 500;
         }
         .hero-stores__images {
-          position: relative; width: 280px; height: 50px;
+          position: relative;
+          width: auto;
+          height: auto;
+        }
+        .hero-store-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 0.7rem;
+          padding: 0.38rem 0.9rem;
+          border-radius: 999px;
+          border: 1.25px solid rgba(255, 255, 255, 0.9);
+          background: rgba(255, 255, 255, 0.08);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+        }
+        .hero-store-pill__icon {
+          width: auto;
+          height: 30px;
+          cursor: pointer;
+          transition: transform 0.22s ease, filter 0.22s ease;
+        }
+        .hero-store-pill__icon:hover {
+          transform: translateY(-1px) scale(1.08);
+          filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.22));
+        }
+        .hero-store-pill__icon:active {
+          transform: scale(0.96);
+        }
+        .hero-store-pill__divider {
+          width: 1.25px;
+          height: 26px;
+          background: rgba(255, 255, 255, 0.95);
+          border-radius: 999px;
+          flex-shrink: 0;
         }
 
         /* Orbital wrapper */
@@ -377,6 +467,22 @@ export function Hero() {
           flex-shrink: 0; z-index: 10;
         }
 
+        .hero-cashback {
+          position: absolute;
+          width: 165px;
+          height: 49px;
+          z-index: 12;
+          pointer-events: none;
+        }
+        .hero-cashback--left {
+          left: 24px;
+          top: 102px;
+        }
+        .hero-cashback--right {
+          right: 58px;
+          bottom: 110px;
+        }
+
         /* ── Keyframes ── */
         @keyframes orbit-glide {
           0% { 
@@ -395,6 +501,9 @@ export function Hero() {
           .hero-nav { padding: 1rem 2rem; }
           .hero-orbital-wrapper { width: 420px; height: 360px; }
           .hero-phone { width: 440px; height: 440px; }
+          .hero-cashback { width: 150px; height: 50px; }
+          .hero-cashback--left { left: 2px; top: 108px; }
+          .hero-cashback--right { right: 20px; bottom: 98px; }
         }
 
         /* ── Mobile (max-width: 768px) ── */
@@ -419,7 +528,12 @@ export function Hero() {
           .hero-title { font-size: clamp(1.25rem, 6vw, 1.75rem); }
           .hero-subtitle { font-size: 0.9rem; margin-bottom: 1.25rem; }
           .hero-stores { flex-direction: column; gap: 0.75rem; }
-          .hero-stores__images { width: 220px; height: 40px; }
+          .hero-store-pill {
+            padding: 0.32rem 0.52rem;
+            gap: 0.42rem;
+          }
+          .hero-store-pill__icon { height: 24px; }
+          .hero-store-pill__divider { height: 20px; }
           .hero-bottom-fade { height: 140px; }
 
           /* Scale down orbital system on mobile */
@@ -428,6 +542,9 @@ export function Hero() {
             margin-top: 1.5rem;
           }
           .hero-phone { width: 320px; height: 320px; }
+          .hero-cashback { width: 125px; height: 42px; }
+          .hero-cashback--left { left: 0; top: 88px; }
+          .hero-cashback--right { right: 14px; bottom: 78px; }
           .hero-orbital-icons { display: none; }
           .hero-orbital-ring { display: none; }
           .hero-floating-rects { display: none; }
