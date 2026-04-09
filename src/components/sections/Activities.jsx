@@ -3,15 +3,51 @@
 import React from 'react'
 import Image from 'next/image'
 import { motion } from 'framer-motion'
+import { useEffect, useRef, useState } from 'react'
 
 const STAT_CARDS = [
-  { id: 1, value: "93", label: "Happy Customers", color: "#FBBF24", angle: -90 },
-  { id: 2, value: "1000", label: "Tech-Savvy Users", color: "#4C1D95", angle: -30 },
-  { id: 3, value: "453", label: "Smart Influencers", color: "#EF4444", angle: 30 },
-  { id: 4, value: "1000", label: "Search Listing", color: "#2563EB", angle: 90 },
-  { id: 5, value: "93", label: "Referral Bonus", color: "#C084FC", angle: 150 },
-  { id: 6, value: "276", label: "Downloads", color: "#10B981", angle: 210 },
+  { id: 1, value: 93, label: "Happy Customers", color: "#FBBF24", angle: -90 },
+  { id: 2, value: 1000, label: "Tech-Savvy Users", color: "#4C1D95", angle: -30 },
+  { id: 3, value: 453, label: "Smart Influencers", color: "#EF4444", angle: 30 },
+  { id: 4, value: 1000, label: "Search Listing", color: "#2563EB", angle: 90 },
+  { id: 5, value: 93, label: "Referral Bonus", color: "#C084FC", angle: 150 },
+  { id: 6, value: 276, label: "Downloads", color: "#10B981", angle: 210 },
 ]
+
+function CountUpNumber({ end, duration = 850 }) {
+  const ref = useRef(null)
+  const [value, setValue] = useState(0)
+  const [hasAnimated, setHasAnimated] = useState(false)
+
+  useEffect(() => {
+    const element = ref.current
+    if (!element || hasAnimated) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return
+        setHasAnimated(true)
+
+        const start = performance.now()
+        const frame = (now) => {
+          const progress = Math.min((now - start) / duration, 1)
+          const eased = 1 - Math.pow(1 - progress, 3)
+          setValue(Math.round(end * eased))
+          if (progress < 1) requestAnimationFrame(frame)
+        }
+
+        requestAnimationFrame(frame)
+        observer.disconnect()
+      },
+      { threshold: 0.25 }
+    )
+
+    observer.observe(element)
+    return () => observer.disconnect()
+  }, [duration, end, hasAnimated])
+
+  return <span ref={ref}>{value}</span>
+}
 
 export default function Activities() {
   const rotationDuration = 40
@@ -59,7 +95,7 @@ export default function Activities() {
                   className="activities-stat-card"
                 >
                   <span style={{ color: stat.color }} className="activities-stat-value">
-                    {stat.value}
+                    <CountUpNumber end={stat.value} />
                   </span>
                   <span className="activities-stat-label">
                     {stat.label}

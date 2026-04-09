@@ -1,27 +1,71 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 
 const STATS = [
   {
-    value: "1M",
+    end: 1,
+    suffix: "M",
     caption:
       "Intelligent capabilities that prioritize usability, speed, and security.",
     symbol: "+",
   },
   {
-    value: "70",
+    end: 70,
+    suffix: "",
     caption:
       "Intelligent capabilities that prioritize usability, speed, and security.",
     symbol: "%",
   },
   {
-    value: "30",
+    end: 30,
+    suffix: "",
     caption:
       "Intelligent capabilities that prioritize usability, speed, and security.",
     symbol: "sec",
   },
 ];
+
+function CountUpNumber({ end, duration = 850, suffix = "" }) {
+  const ref = useRef(null);
+  const [value, setValue] = useState(0);
+  const [hasAnimated, setHasAnimated] = useState(false);
+
+  useEffect(() => {
+    const element = ref.current;
+    if (!element || hasAnimated) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setHasAnimated(true);
+
+        const start = performance.now();
+        const frame = (now) => {
+          const progress = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - progress, 3);
+          setValue(Math.round(end * eased));
+          if (progress < 1) requestAnimationFrame(frame);
+        };
+
+        requestAnimationFrame(frame);
+        observer.disconnect();
+      },
+      { threshold: 0.35 }
+    );
+
+    observer.observe(element);
+    return () => observer.disconnect();
+  }, [duration, end, hasAnimated]);
+
+  return (
+    <span ref={ref}>
+      {value}
+      {suffix}
+    </span>
+  );
+}
 
 export default function HowIntoSection() {
   return (
@@ -59,7 +103,7 @@ export default function HowIntoSection() {
         <div className="mx-auto mt-10 grid w-full max-w-6xl grid-cols-1 gap-8 sm:mt-14 sm:grid-cols-3 sm:gap-12 lg:gap-26">
           {STATS.map((s, idx) => (
             <div
-              key={s.value}
+              key={`${s.end}${s.suffix}${s.symbol}`}
               className={cn(
                 "relative pt-2",
                 idx !== 0 &&
@@ -67,7 +111,7 @@ export default function HowIntoSection() {
               )}
             >
               <div className="text-5xl font-semibold leading-none tracking-tight text-(--brand-primary) sm:text-6xl lg:text-7xl">
-                {s.value}
+                <CountUpNumber end={s.end} suffix={s.suffix} />
                 <span className="ml-1 text-3xl font-medium leading-none text-slate-900">
                   {s.symbol}
                 </span>

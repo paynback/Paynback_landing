@@ -1,4 +1,48 @@
-import Image from"next/image";
+'use client'
+
+import Image from "next/image";
+import { useEffect, useRef, useState } from "react";
+
+function CountUpNumber({ end, duration = 900 }) {
+ const ref = useRef(null);
+ const [count, setCount] = useState(0);
+ const [hasAnimated, setHasAnimated] = useState(false);
+
+ useEffect(() => {
+ const element = ref.current;
+ if (!element || hasAnimated) return;
+
+ const observer = new IntersectionObserver(
+ ([entry]) => {
+ if (!entry.isIntersecting) return;
+
+ setHasAnimated(true);
+ const startTime = performance.now();
+ const startValue = 0;
+
+ const tick = (now) => {
+ const progress = Math.min((now - startTime) / duration, 1);
+ const eased = 1 - Math.pow(1 - progress, 3);
+ const value = Math.round(startValue + (end - startValue) * eased);
+ setCount(value);
+
+ if (progress < 1) {
+ requestAnimationFrame(tick);
+ }
+ };
+
+ requestAnimationFrame(tick);
+ observer.disconnect();
+ },
+ { threshold: 0.3 }
+ );
+
+ observer.observe(element);
+ return () => observer.disconnect();
+ }, [duration, end, hasAnimated]);
+
+ return <span ref={ref}>{count}</span>;
+}
 
 export default function Statistics() {
  const IMG_CENTER_MANTIS ="/images/89070870dc113db25d12458ae30da2d0d8cf718c.png";
@@ -6,35 +50,35 @@ export default function Statistics() {
  const cards = [
  {
  id: 1,
- title:"1000",
+ title: 1000,
  description:"Tech-Savvy\nUsers",
  titleColor:"#3B1159", // Dark purple
  angle: -90, // Top
  },
  {
  id: 2,
- title:"453",
+ title: 453,
  description:"Smart\nInfluencers",
  titleColor:"#EA6C53", // Orange/red
  angle: -18,
  },
  {
  id: 3,
- title:"276",
+ title: 276,
  description:"Digitalized\nBrands",
  titleColor:"#32C954", // Green
  angle: 54,
  },
  {
  id: 4,
- title:"1000",
+ title: 1000,
  description:"Search Listing",
  titleColor:"#3B82F6", // Blue
  angle: 126,
  },
  {
  id: 5,
- title:"93",
+ title: 93,
  description:"Happy\nCustomers",
  titleColor:"#EAB308", // Yellow
  angle: 198,
@@ -107,7 +151,7 @@ export default function Statistics() {
  className="text-[26px] font-bold leading-none tracking-tight"
  style={{ color: card.titleColor }}
  >
- {card.title}
+ <CountUpNumber end={card.title} />
  </span>
  <span className="text-[12px] font-medium leading-[1.2] text-slate-600 mt-1 whitespace-pre-wrap">
  {card.description}
