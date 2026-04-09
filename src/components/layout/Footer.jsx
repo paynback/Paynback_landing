@@ -12,6 +12,7 @@ import {
   Mail,
   Info,
 } from "lucide-react";
+import { StoreBadges } from "../ui/StoreBadges";
 
 /* ── Asset paths ─────────────────────────────────────────── */
 const LOGO = "/Icons/Paynback_logo.png";
@@ -189,17 +190,7 @@ export default function Footer() {
                   <Info className="h-3 w-3 text-white/60" strokeWidth={2.5} />
                 </span>
                 <span className="text-xs text-white/60">App Available For</span>
-                <div
-                  className="flex items-center rounded-full px-3 py-1"
-                >
-                  <Image
-                    src={STORE_BADGES}
-                    alt="Google Play and App Store"
-                    width={120}
-                    height={38}
-                    className="h-9 w-auto object-contain"
-                  />
-                </div>
+                <StoreBadges />
               </div>
             </div>
 

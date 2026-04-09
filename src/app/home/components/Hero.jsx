@@ -5,6 +5,7 @@ import { Info } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import Header from "@/components/layout/Header";
+import { StoreBadges } from "@/components/ui/StoreBadges";
 
 export default function HomeHero() {
   const reduceMotion = useReducedMotion();
@@ -15,21 +16,7 @@ export default function HomeHero() {
   const IMG_BUBBLE = "/images/e9eaa1ec2bb31dedd4c5ca5b5780dc6bb78f2b36.png";
   const IMG_COIN_SWIRL = "/images/33b06127ad13c66d1ea9ad4918ed9018d0d01e8a.png";
 
-  /** Public/Icons — `&` encoded for valid URL parsing */
-  const STORE_BADGES_SRC = "/Icons/app%26play_store_icons_hero.png";
 
-  function AppStoreBadges() {
-    return (
-      <Image
-        src={STORE_BADGES_SRC}
-        alt="Get it on Google Play and the App Store"
-        width={320}
-        height={72}
-        className="h-9 w-auto max-w-[min(100%,220px)] object-contain object-left sm:h-10 sm:max-w-[260px]"
-        sizes="260px"
-      />
-    );
-  }
 
   const floatTransition = {
     duration: reduceMotion ? 0 : 3.5,
@@ -91,7 +78,7 @@ export default function HomeHero() {
                   App Available For
                 </span>
               </div>
-              <AppStoreBadges />
+              <StoreBadges />
             </div>
 
             <h1 className="text-balance text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
