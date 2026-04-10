@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Header from "@/components/layout/Header";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function ContactHero() {
+  const reduceMotion = useReducedMotion();
   const IMG_APP_HAND = "/images/app-with-two-hand.png";
   const IMG_BIG_LOGO = "/images/big-logo.png";
 
@@ -94,7 +95,13 @@ export default function ContactHero() {
               />
             </div>
             {/* Hand Image */}
-            <div className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]">
+            <motion.div
+              className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]"
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 96 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+            >
               <Image
                 src={IMG_APP_HAND}
                 alt="App With Two Hand"
@@ -103,7 +110,7 @@ export default function ContactHero() {
                 className="w-full h-auto object-bottom object-contain"
                 priority
               />
-            </div>
+            </motion.div>
           </div>
         </div>
 

@@ -2,9 +2,10 @@
 
 import Image from "next/image";
 import Header from "@/components/layout/Header";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function CareersHero() {
+  const reduceMotion = useReducedMotion();
   const IMG_APP_HAND = "/images/app-with-two-hand.png";
   const IMG_BIG_LOGO = "/images/big-logo.png";
 
@@ -69,15 +70,41 @@ export default function CareersHero() {
 
         <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
 
-          <div className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12">
-            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md">Careers</span>
-            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
+          <motion.div
+            className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12"
+            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 42 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.span
+              className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 16 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Careers
+            </motion.span>
+            <motion.h1
+              className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            >
               Build the Future With Us
-            </h1>
-            <p className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md">
+            </motion.h1>
+            <motion.p
+              className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
               Be part of a culture that values creativity, collaboration, and innovation.
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
 
 
@@ -94,7 +121,13 @@ export default function CareersHero() {
               />
             </div>
             {/* Hand Image */}
-            <div className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]">
+            <motion.div
+              className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]"
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 96 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+            >
               <Image
                 src={IMG_APP_HAND}
                 alt="App With Two Hand"
@@ -103,7 +136,7 @@ export default function CareersHero() {
                 className="w-full h-auto object-bottom object-contain"
                 priority
               />
-            </div>
+            </motion.div>
           </div>
         </div>
 

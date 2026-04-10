@@ -22,11 +22,11 @@ const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";
 
 /* ── Nav columns ─────────────────────────────────────────── */
 const COL_PAYNBACK = [
-  { label: "About Us", href: "#" },
-  { label: "Careers", href: "#" },
-  { label: "Internships", href: "#" },
-  { label: "Refer & Earn", href: "#" },
-  { label: "Contact Us", href: "#" },
+  { label: "About Us", href: "/about" },
+  { label: "Careers", href: "/careers" },
+  { label: "Internships", href: "/internships" },
+  { label: "Refer & Earn", href: "/refer-and-earn" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const COL_GUIDELINES = [
@@ -61,7 +61,7 @@ function SocialBtn({ href = "#", label, children }) {
     <Link
       href={href}
       aria-label={label}
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-slate-900 transition-colors hover:bg-slate-200"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/80 bg-white text-slate-900 shadow-[0_12px_28px_rgba(0,0,0,0.42),0_4px_10px_rgba(8,15,24,0.3),inset_0_1px_0_rgba(255,255,255,0.95)] transition-all duration-200 hover:-translate-y-1 hover:bg-slate-100 hover:shadow-[0_18px_34px_rgba(0,0,0,0.5),0_6px_14px_rgba(8,15,24,0.35),inset_0_1px_0_rgba(255,255,255,1)]"
     >
       {children}
     </Link>
@@ -166,20 +166,20 @@ export default function Footer() {
                 <p className="mb-3 text-sm font-semibold text-white">
                   Certifications
                 </p>
-                <div className="flex items-center gap-5">
+                <div className="flex items-center gap-6">
                   <Image
                     src={STARTUP_MSN}
                     alt="Startup Mission"
-                    width={128}
-                    height={64}
-                    className="h-16 w-auto object-contain"
+                    width={228}
+                    height={74}
+                    className="h-32 w-auto object-contain"
                   />
                   <Image
                     src={STARTUP_IND}
                     alt="Startup India"
-                    width={160}
-                    height={64}
-                    className="h-12 w-auto object-contain"
+                    width={260}
+                    height={74}
+                    className="h-32 w-auto object-contain"
                   />
                 </div>
               </div>
@@ -307,7 +307,7 @@ export default function Footer() {
         {/* Copyright bar — absolute overlapping the watermark bottom */}
         <div className="absolute bottom-0 left-0 w-full z-20 px-4 py-4 text-center" style={{ background: "#0C1A31" }}>
           <p className="text-xs text-white/40">
-            Copyright © 2024 payNback. All Rights Reserved.
+            Copyright © 2026 payNback. All Rights Reserved.
           </p>
         </div>
       </div> {/* Closes relative isolate overflow-hidden */}

@@ -4,8 +4,20 @@ import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { Upload } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function JobDetailPage() {
+  const reduceMotion = useReducedMotion();
+  const fadeUp = (delay = 0) =>
+    reduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 28 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.15 },
+          transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
+        };
+
   return (
     <main className="min-h-screen bg-white flex flex-col">
       {/* We add a darker bg block at top if the Header expects it, 
@@ -18,26 +30,26 @@ export default function JobDetailPage() {
       <div className="flex-1 py-12">
         <div className="container mx-auto px-4 md:px-8 max-w-5xl">
           {/* Breadcrumb */}
-          <div className="text-sm text-gray-500 mb-8">
+          <motion.div className="text-sm text-gray-500 mb-8" {...fadeUp(0.05)}>
             <Link href="/" className="hover:text-black">Home</Link>
             <span className="mx-2">/</span>
             <Link href="/careers" className="hover:text-black">Careers</Link>
             <span className="mx-2">/</span>
             <span className="text-gray-800">React Native Developer</span>
-          </div>
+          </motion.div>
 
           {/* Title */}
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+          <motion.h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6" {...fadeUp(0.1)}>
             React Native Developer
-          </h1>
+          </motion.h1>
 
           {/* Description */}
-          <p className="text-gray-600 text-[15px] sm:text-[16px] leading-[1.8] font-normal mb-10 max-w-4xl">
+          <motion.p className="text-gray-600 text-[15px] sm:text-[16px] leading-[1.8] font-normal mb-10 max-w-4xl" {...fadeUp(0.15)}>
             We are seeking an experienced React Native Developer with at least 2 years of hands-on mobile application development experience. The ideal candidate must have solid expertise in React Native and...
-          </p>
+          </motion.p>
 
           {/* What will you do? */}
-          <div className="mb-10">
+          <motion.div className="mb-10" {...fadeUp(0.2)}>
             <h2 className="text-xl font-bold mb-4">What will you do?</h2>
             <ul className="space-y-2 text-gray-600 text-[15px] sm:text-[16px] leading-[1.8]">
               <li className="flex items-start">
@@ -61,10 +73,10 @@ export default function JobDetailPage() {
                 <span>You will be responsible for mentoring other engineers, defining our technical culture, and helping to build a fast-growing team.</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Requirements */}
-          <div className="mb-12">
+          <motion.div className="mb-12" {...fadeUp(0.24)}>
             <h2 className="text-xl font-bold mb-4">Requirements</h2>
             <ul className="space-y-2 text-gray-600 text-[15px] sm:text-[16px] leading-[1.8]">
               <li className="flex items-start">
@@ -88,10 +100,13 @@ export default function JobDetailPage() {
                 <span>Passionate to code, but also you're awesome at it!</span>
               </li>
             </ul>
-          </div>
+          </motion.div>
 
           {/* Application Form Card */}
-          <div className="bg-white rounded-[24px]  p-8 md:p-12 shadow-sm mb-40">
+          <motion.div
+            className="bg-white rounded-[24px] p-8 md:p-12 shadow-sm mb-40"
+            {...fadeUp(0.28)}
+          >
             <form className="space-y-6 ">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 {/* First Name */}
@@ -182,7 +197,7 @@ export default function JobDetailPage() {
                 </button>
               </div>
             </form>
-          </div>
+          </motion.div>
         </div>
       </div>
 
