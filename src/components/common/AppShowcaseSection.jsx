@@ -1,5 +1,6 @@
 "use client";
 
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 const PHONE_IMG = "/images/b8485b8034de2d844a4e8c1cb4ee22d60b2b54ae.png";
@@ -40,6 +41,8 @@ function CalloutLabel({ corner, eyebrow, title, desc }) {
 
 /* ── Section ───────────────────────────────────────────────── */
 export default function AppShowcaseSection() {
+  const reduceMotion = useReducedMotion();
+
   return (
     <section
       className="relative isolate w-full overflow-hidden font-sans text-white"
@@ -140,12 +143,21 @@ export default function AppShowcaseSection() {
           {/*
             ── Phone image ──
             File is 1024×1080 (user-cropped). Show it fully with object-contain.
+            Rises from below on scroll into view and on reload when in viewport.
           */}
-          <div
+          <motion.div
             className="relative z-10 overflow-hidden"
             style={{
               width: "clamp(320px, 42vw, 580px)",
               aspectRatio: "1024 / 1080",
+            }}
+            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 88 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{
+              duration: 0.9,
+              delay: 0.08,
+              ease: [0.22, 1, 0.36, 1],
             }}
           >
             <Image
@@ -156,7 +168,7 @@ export default function AppShowcaseSection() {
               sizes="(max-width:640px) 320px, (max-width:1024px) 440px, 580px"
               priority
             />
-          </div>
+          </motion.div>
 
 
           {/* Download — upper-right near arc — glass card */}

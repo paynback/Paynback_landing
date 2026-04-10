@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 export default function BlogHero() {
+  const reduceMotion = useReducedMotion();
 
 
   const MAX_SHIFT = -35; // Shorter max shift so the end isn't brought all the way left
@@ -63,19 +64,45 @@ export default function BlogHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        {/* Content Centered Vertically */}
-        <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
-          <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 drop-shadow-md lg:pr-12">
-            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">
+        <Header />
+
+        <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
+
+          <motion.div
+            className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12"
+            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 42 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.span
+              className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 16 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            >
               Blogs
-            </span>
-            <h1 className="whitespace-nowrap text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
+            </motion.span>
+            <motion.h1
+              className="text-balance text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            >
               Stories Behind the Screens
-            </h1>
-            <p className="pr-4 leading-[144%] tracking-[-0.56px] text-white/75 sm:text-xs lg:text-sm">
+            </motion.h1>
+            <motion.p
+              className="pr-4 leading-[144%] tracking-[-0.56px] text-white/75 sm:text-xs lg:text-sm"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
               Where design meets strategy and real-world impact
-            </p>
-          </div>
+            </motion.p>
+          </motion.div>
 
 
           {/* Right-aligned Hero Image with deeper, faster floating animation */}
@@ -97,8 +124,25 @@ export default function BlogHero() {
                 className="h-full w-full object-contain drop-shadow-[0_20px_45px_rgba(255,255,255,0.2)]"
                 priority
               />
+            </div>
+            {/* Hand Image */}
+            <motion.div
+              className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]"
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 96 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+            >
+              <Image
+                src={IMG_APP_HAND}
+                alt="App With Two Hand"
+                width={1000}
+                height={1300}
+                className="w-full h-auto object-bottom object-contain"
+                priority
+              />
             </motion.div>
-          </motion.div>
+          </div>
         </div>
 
       </div>

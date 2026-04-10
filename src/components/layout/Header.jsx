@@ -10,11 +10,13 @@ import { motion, useScroll, useMotionValueEvent } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const LOGO_SRC = "/Icons/Paynback_logo.png";
+const LOGO_SRC_LIGHT = "/Icons/paynbacklogo_for_whitebg.png";
 
 export const headerNavItems = [
   { href: "/home", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/blog", label: "Blogs" },
+  { href: "/careers", label: "Careers" },
 ];
 
 function navActive(pathname, href) {
@@ -23,7 +25,7 @@ function navActive(pathname, href) {
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
-function LogoMark({ isScrolled }) {
+function LogoMark({ isScrolled, isLight }) {
   return (
     <Link
       href="/"
@@ -36,7 +38,7 @@ function LogoMark({ isScrolled }) {
       aria-label="PayNBack home"
     >
       <Image
-        src={LOGO_SRC}
+        src={isLight ? LOGO_SRC_LIGHT : LOGO_SRC}
         alt="PayNBack"
         fill
         className="object-contain object-left"
@@ -54,6 +56,7 @@ export default function Header({
   className,
   navItems = headerNavItems,
   contactHref = "/contact",
+  theme = "dark",
 }) {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -71,6 +74,9 @@ export default function Header({
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 30);
   });
+
+  const isLight = theme === "light";
+  const useWhiteNavbar = isLight;
 
  if(pathname === "/") return null;
 
@@ -97,18 +103,27 @@ export default function Header({
             className={cn(
               "flex flex-col gap-3 transition-all duration-500 pointer-events-auto",
               isScrolled
-                ? "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl bg-black/60 backdrop-blur-xl shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/20 py-2 sm:py-2.5 px-4 sm:px-6 rounded-full"
-                : "w-full max-w-7xl pt-5 pb-2 sm:pt-6 lg:pt-8 px-4 sm:px-6 lg:px-8 bg-transparent rounded-none border-transparent",
+                ? cn(
+                    "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl backdrop-blur-xl py-2 sm:py-2.5 px-4 sm:px-6 rounded-full",
+                    useWhiteNavbar
+                      ? "bg-white/95 border border-black/10 shadow-[0_10px_30px_rgba(15,23,42,0.16)]"
+                      : "bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/20"
+                  )
+                : cn(
+                    "w-full max-w-7xl pt-5 pb-2 sm:pt-6 lg:pt-8 px-4 sm:px-6 lg:px-8 rounded-none",
+                    useWhiteNavbar ? "bg-white border-b border-black/10" : "bg-transparent border-transparent"
+                  ),
               className
             )}
           >
             <div className="flex items-center justify-between gap-4">
-              <LogoMark isScrolled={isScrolled} />
+              <LogoMark isScrolled={isScrolled} isLight={useWhiteNavbar} />
 
               {/* Desktop nav */}
               <nav
                 className={cn(
-                  "hidden items-center font-medium text-white/90 lg:flex transition-all duration-500",
+                  "hidden items-center font-medium lg:flex transition-all duration-500",
+                  useWhiteNavbar ? "text-black/90" : "text-white/90",
                   isScrolled 
                     ? "gap-6 text-xs lg:gap-10 xl:gap-16" 
                     : "gap-8 text-sm lg:gap-14 xl:gap-24"
@@ -122,8 +137,15 @@ export default function Header({
                       key={href}
                       href={href}
                       className={cn(
-                        "transition-colors hover:text-white",
-                        active ? "font-semibold text-white" : "text-white/80",
+                        "transition-colors",
+                        useWhiteNavbar ? "hover:text-black" : "hover:text-white",
+                        active
+                          ? useWhiteNavbar
+                            ? "font-semibold text-black"
+                            : "font-semibold text-white"
+                          : useWhiteNavbar
+                            ? "text-black/80"
+                            : "text-white/80",
                       )}
                     >
                       {label}
@@ -150,7 +172,10 @@ export default function Header({
                 {/* Mobile hamburger */}
                 <button
                   className={cn(
-                    "flex items-center justify-center bg-white/10 text-white backdrop-blur-sm lg:hidden transition-all duration-500 hover:bg-white/20",
+                    "flex items-center justify-center backdrop-blur-sm lg:hidden transition-all duration-500",
+                    useWhiteNavbar
+                      ? "bg-black/5 text-black hover:bg-black/10 border border-black/10"
+                      : "bg-white/10 text-white hover:bg-white/20",
                     isScrolled ? "h-8 w-8 rounded-lg" : "h-10 w-10 rounded-lg"
                   )}
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -169,8 +194,11 @@ export default function Header({
             {mobileMenuOpen && (
               <nav
                 className={cn(
-                  "flex flex-col gap-1 rounded-xl bg-white/10 p-3 backdrop-blur-md lg:hidden mt-2",
-                  isScrolled ? "bg-black/40 border border-white/5 shadow-inner" : ""
+                  "flex flex-col gap-1 rounded-xl p-3 backdrop-blur-md lg:hidden mt-2",
+                  useWhiteNavbar
+                    ? "bg-white border border-black/10 shadow-[0_10px_24px_rgba(15,23,42,0.12)]"
+                    : "bg-white/10",
+                  isScrolled && !useWhiteNavbar ? "bg-black/40 border border-white/5 shadow-inner" : ""
                 )}
                 aria-label="Primary mobile"
               >
@@ -182,10 +210,15 @@ export default function Header({
                       href={href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={cn(
-                        "rounded-lg px-4 py-2.5 text-sm transition-colors hover:bg-white/10",
+                        "rounded-lg px-4 py-2.5 text-sm transition-colors",
+                        useWhiteNavbar ? "hover:bg-black/5" : "hover:bg-white/10",
                         active
-                          ? "font-semibold text-white bg-white/15"
-                          : "text-white/80",
+                          ? useWhiteNavbar
+                            ? "font-semibold text-black bg-black/5"
+                            : "font-semibold text-white bg-white/15"
+                          : useWhiteNavbar
+                            ? "text-black/80"
+                            : "text-white/80",
                       )}
                     >
                       {label}
@@ -198,7 +231,8 @@ export default function Header({
             {/* Scrollable mobile nav — fallback for quick access */}
             <nav
               className={cn(
-                "-mx-1 flex overflow-x-auto px-1 pb-1 font-medium text-white/90 lg:hidden mt-1 transition-all duration-500",
+                "-mx-1 flex overflow-x-auto px-1 pb-1 font-medium lg:hidden mt-1 transition-all duration-500",
+                useWhiteNavbar ? "text-black/90" : "text-white/90",
                 isScrolled ? "gap-4 sm:gap-5 text-xs" : "gap-5 sm:gap-6 text-sm",
                 mobileMenuOpen && "hidden",
               )}
@@ -211,8 +245,15 @@ export default function Header({
                     key={href}
                     href={href}
                     className={cn(
-                      "shrink-0 whitespace-nowrap transition-colors hover:text-white",
-                      active ? "font-semibold text-white" : "text-white/80",
+                      "shrink-0 whitespace-nowrap transition-colors",
+                      useWhiteNavbar ? "hover:text-black" : "hover:text-white",
+                      active
+                        ? useWhiteNavbar
+                          ? "font-semibold text-black"
+                          : "font-semibold text-white"
+                        : useWhiteNavbar
+                          ? "text-black/80"
+                          : "text-white/80",
                     )}
                   >
                     {label}

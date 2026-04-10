@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Header from "@/components/layout/Header";
 import { motion, useReducedMotion } from "framer-motion";
 
-export default function ContactHero() {
+export default function CareersHero() {
   const reduceMotion = useReducedMotion();
   const IMG_APP_HAND = "/images/app-with-two-hand.png";
   const IMG_BIG_LOGO = "/images/big-logo.png";
@@ -30,7 +31,7 @@ export default function ContactHero() {
   tickerTimes.push(0.96, 1);
 
   return (
-    <section className="relative isolate z-100 min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
+    <section className="relative isolate z-[100] min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
       {/* Atmospheric gradient base (blob lights) */}
       <div
         className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-80"
@@ -65,18 +66,45 @@ export default function ContactHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+        <Header />
 
         <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
 
-          <div className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12">
-            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md">Contact Us</span>
-            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
-              We’d Love to Hear From You
-            </h1>
-            <p className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md">
-              Reach out to our team and we’ll respond as quickly as possible.
-            </p>
-          </div>
+          <motion.div
+            className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12"
+            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 42 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.35 }}
+            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <motion.span
+              className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 16 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Careers
+            </motion.span>
+            <motion.h1
+              className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Build the Future With Us
+            </motion.h1>
+            <motion.p
+              className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.55, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Be part of a culture that values creativity, collaboration, and innovation.
+            </motion.p>
+          </motion.div>
 
 
 
