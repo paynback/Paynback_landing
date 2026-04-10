@@ -2,7 +2,7 @@ import HomeHero from "./components/Hero";
 import DiscoverDealsSection from "./components/DiscoverDealsSection";
 import HowIntoSection from "./components/HowIntoSection";
 import AmazingFeaturesSection from "./components/AmazingFeaturesSection";
-import Activities from "@/components/sections/Activities";
+import AppShowcaseSection from "@/components/common/AppShowcaseSection";
 import WhyChooseSection from "@/components/common/WhyChooseSection";
 import TestimonialsSection from "./components/TestimonialsSection";
 import DownloadCTASection from "./components/DownloadCTASection";
@@ -27,7 +27,7 @@ export default function HomePage() {
         <AmazingFeaturesSection />
       </ScrollReveal>
       <ScrollReveal delay={200}>
-        <Activities />
+        <AppShowcaseSection />
       </ScrollReveal>
       <ScrollReveal delay={240}>
         <WhyChooseSection />
