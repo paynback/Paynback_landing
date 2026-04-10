@@ -45,7 +45,7 @@ export default function AboutHero() {
             <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
                 {/* Content Centered Vertically */}
                 <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
-                    <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 drop-shadow-md lg:pr-12">
+                    <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-12 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
                         <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">
                             About Us
                         </span>
@@ -59,7 +59,7 @@ export default function AboutHero() {
 
                     {/* Right-aligned Hero Image */}
                     <motion.div 
-                        className="pointer-events-none absolute right-[-10%] top-[40%] z-0 h-[280px] w-[280px] -translate-y-1/2 opacity-30 drop-shadow-2xl sm:right-[-5%] sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[154px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
+                        className="pointer-events-none absolute right-[-10%] top-[50%] z-0 h-[280px] w-[280px] -translate-y-1/2 opacity-30 drop-shadow-2xl sm:right-[-5%] sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[254px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
                         initial={{ opacity: 0, y: -400 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}

@@ -5,6 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 export default function BlogHero() {
   const reduceMotion = useReducedMotion();
+  const IMG_APP_HAND = "/images/app-with-two-hand.png";
 
 
   const MAX_SHIFT = -35; // Shorter max shift so the end isn't brought all the way left
@@ -64,12 +65,11 @@ export default function BlogHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <Header />
-
-        <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
+        {/* Content Centered Vertically */}
+        <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
 
           <motion.div
-            className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12"
+            className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-12 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12"
             initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 42 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
@@ -85,7 +85,7 @@ export default function BlogHero() {
               Blogs
             </motion.span>
             <motion.h1
-              className="text-balance text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+              className="whitespace-nowrap text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
               initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
@@ -106,8 +106,8 @@ export default function BlogHero() {
 
 
           {/* Right-aligned Hero Image with deeper, faster floating animation */}
-          <motion.div 
-            className="pointer-events-none absolute right-[-10%] top-[40%] z-0 h-[280px] w-[280px] -translate-y-1/2 opacity-30 drop-shadow-2xl sm:right-[-5%] sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[154px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
+          <motion.div
+            className="pointer-events-none absolute right-[-10%] top-[50%] z-0 h-[280px] w-[280px] -translate-y-1/2 opacity-30 drop-shadow-2xl sm:right-[-5%] sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[254px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
             initial={{ opacity: 0, y: -400 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
@@ -116,7 +116,7 @@ export default function BlogHero() {
               animate={{ y: [0, -35, 0] }}
               transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
             >
-              <Image 
+              <Image
                 src="/images/wate-note-swirl.png"
                 alt="Water Note Swirl"
                 width={407}
@@ -124,27 +124,9 @@ export default function BlogHero() {
                 className="h-full w-full object-contain drop-shadow-[0_20px_45px_rgba(255,255,255,0.2)]"
                 priority
               />
-            </div>
-            {/* Hand Image */}
-            <motion.div
-              className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]"
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 96 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
-            >
-              <Image
-                src={IMG_APP_HAND}
-                alt="App With Two Hand"
-                width={1000}
-                height={1300}
-                className="w-full h-auto object-bottom object-contain"
-                priority
-              />
             </motion.div>
-          </div>
+          </motion.div>
         </div>
-
       </div>
 
       {/* Full-width screen bleed text */}

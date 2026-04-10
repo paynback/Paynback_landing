@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Header from "@/components/layout/Header";
 import { motion, useReducedMotion } from "framer-motion";
 
 export default function CareersHero() {
@@ -31,7 +30,7 @@ export default function CareersHero() {
   tickerTimes.push(0.96, 1);
 
   return (
-    <section className="relative isolate z-[100] min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
+    <section className="relative isolate z-100 min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
       {/* Atmospheric gradient base (blob lights) */}
       <div
         className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-80"
@@ -66,12 +65,11 @@ export default function CareersHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <Header />
-
-        <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
+        {/* Content Centered Vertically */}
+        <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
 
           <motion.div
-            className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12"
+            className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-12 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12"
             initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 42 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.35 }}
@@ -96,7 +94,7 @@ export default function CareersHero() {
               Build the Future With Us
             </motion.h1>
             <motion.p
-              className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md"
+              className="pr-4 leading-[144%] tracking-[-0.56px] text-white/75 sm:text-xs lg:text-sm"
               initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}

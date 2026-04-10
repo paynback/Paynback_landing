@@ -65,15 +65,15 @@ export default function ContactHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
+        {/* Content Centered Vertically */}
+        <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
 
-        <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
-
-          <div className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12">
-            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md">Contact Us</span>
-            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
+          <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-12 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
+            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">Contact Us</span>
+            <h1 className="whitespace-nowrap text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
               We’d Love to Hear From You
             </h1>
-            <p className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md">
+            <p className="pr-4 leading-[144%] tracking-[-0.56px] text-[18px] text-white/90 sm:text-xs lg:text-sm">
               Reach out to our team and we’ll respond as quickly as possible.
             </p>
           </div>
