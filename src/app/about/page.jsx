@@ -16,9 +16,7 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
-      <ScrollReveal>
-        <AboutHero />
-      </ScrollReveal>
+      <AboutHero />
       <ScrollReveal delay={80}>
         <AboutDetails />
       </ScrollReveal>

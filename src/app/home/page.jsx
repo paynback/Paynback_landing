@@ -14,9 +14,7 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <ScrollReveal>
-        <HomeHero />
-      </ScrollReveal>
+      <HomeHero />
       <ScrollReveal delay={80}>
         <HowIntoSection />
       </ScrollReveal>

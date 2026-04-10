@@ -11,9 +11,7 @@ export const metadata = {
 export default function ContactPage() {
     return (
         <main className="min-h-screen">
-            <ScrollReveal>
-                <ContactHero />
-            </ScrollReveal>
+            <ContactHero />
             <ScrollReveal delay={80}>
                 <ContactSection />
             </ScrollReveal>
