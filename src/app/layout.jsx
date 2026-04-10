@@ -18,9 +18,9 @@ export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
-      className={`${poppins.variable} h-full antialiased`}
+      className={`${poppins.variable} antialiased`}
     >
-      <body className='flex min-h-full flex-col'>
+      <body className='flex min-h-screen flex-col'>
         <SmoothScroll>
           {children}
         </SmoothScroll>
