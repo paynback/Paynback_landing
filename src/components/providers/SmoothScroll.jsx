@@ -1,6 +1,21 @@
 "use client";
 
-import { ReactLenis } from 'lenis/react';
+import { useEffect } from 'react';
+import { usePathname } from 'next/navigation';
+import { ReactLenis, useLenis } from 'lenis/react';
+
+function RouteChangeTracker() {
+  const pathname = usePathname();
+  const lenis = useLenis();
+
+  useEffect(() => {
+    if (lenis) {
+      lenis.scrollTo(0, { immediate: true });
+    }
+  }, [pathname, lenis]);
+
+  return null;
+}
 
 export function SmoothScroll({ children }) {
   // Lerp is the linear interpolation factor. A lower lerp creates a significantly slower, "butter smooth" drag.
@@ -13,6 +28,7 @@ export function SmoothScroll({ children }) {
 
   return (
     <ReactLenis root options={lenisOptions}>
+      <RouteChangeTracker />
       {children}
     </ReactLenis>
   );
