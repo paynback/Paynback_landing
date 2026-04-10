@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { motion } from "framer-motion";
 
 const SALE_IMG = "/images/09b3196ae2b68dd5cfe0c65d459c42330889ebb7.png";
 
@@ -42,8 +43,13 @@ export default function WhyChooseSection() {
       className="w-full bg-[#F2F2F2] font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20">
-
+      <motion.div 
+        className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20"
+        initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
+        whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        viewport={{ once: true, margin: "0px 0px -25% 0px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {/* ── Heading ── */}
         <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem]">
           <span className="text-(--brand-primary)">Why</span>{" "}
@@ -112,7 +118,7 @@ export default function WhyChooseSection() {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
 
       {/* Keyframe for description fade */}
       <style>{`

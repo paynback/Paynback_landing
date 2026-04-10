@@ -8,6 +8,7 @@ import {
   Tag,
   TrendingUp,
 } from "lucide-react";
+import { motion } from "framer-motion";
 
 const FEATURES = [
   {
@@ -54,7 +55,13 @@ export default function AmazingFeaturesSection() {
       className="w-full bg-white font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-20 lg:py-20">
+      <motion.div 
+        className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-20 lg:py-20"
+        initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
+        whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        viewport={{ once: true, margin: "0px 0px -25% 0px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {/* Section heading */}
         <h2 className="mb-10 text-balance text-[1.65rem] font-normal tracking-tight sm:text-3xl md:text-[clamp(1.75rem,2.2vw,2.25rem)] lg:mb-14 lg:text-4xl xl:text-5xl">
           Our{" "}
@@ -86,7 +93,7 @@ export default function AmazingFeaturesSection() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Info } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
-import Header from "@/components/layout/Header";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 
 export default function HomeHero() {
@@ -60,8 +59,6 @@ export default function HomeHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <Header />
-
         <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-6 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
           <div className="order-2 flex max-w-xl flex-col gap-y-4 lg:order-1 lg:pl-14 xl:pl-20">
             <div className="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
@@ -84,7 +81,7 @@ export default function HomeHero() {
             <h1 className="text-balance text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
               Finances that work for you
             </h1>
-            <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-lg lg:text-[14px]">
+            <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm">
               Sign up and become a member today to get exclusive offers in your
               area and other benefits.
             </p>
@@ -93,37 +90,49 @@ export default function HomeHero() {
           <div className="relative order-1 mx-auto h-[340px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:order-2 lg:mx-0 lg:h-[560px] lg:max-w-none">
             <motion.div
               className="absolute left-[-1%] top-[-2%] z-20 w-[58%] max-w-[240px] sm:left-[0%] sm:top-[0%] sm:w-[52%] sm:max-w-[260px] md:left-[2%] md:top-[6%] md:w-[44%] md:max-w-[280px] lg:left-[5%] lg:top-[18%] lg:w-[46%] lg:max-w-[240px]"
-              animate={reduceMotion ? undefined : { y: [0, -24, 0] }}
-              transition={floatTransition}
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 35, damping: 20, duration: 2.2, delay: 0.3 }}
             >
-              <Image
-                src={IMG_BUBBLE}
-                alt="PayNBack Bubble"
-                width={600}
-                height={600}
-                className="h-auto w-full drop-shadow-[0_25px_55px_rgba(56,189,248,0.45)]"
-                sizes="(min-width: 1024px) 300px, 52vw"
-                priority
-              />
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, -24, 0] }}
+                transition={floatTransition}
+              >
+                <Image
+                  src={IMG_BUBBLE}
+                  alt="PayNBack Bubble"
+                  width={600}
+                  height={600}
+                  className="h-auto w-full drop-shadow-[0_25px_55px_rgba(56,189,248,0.45)]"
+                  sizes="(min-width: 1024px) 300px, 52vw"
+                  priority
+                />
+              </motion.div>
             </motion.div>
 
             <motion.div
               className="absolute bottom-[-12%] right-[-18%] z-10 w-[96%] max-w-[460px] sm:bottom-[-14%] sm:right-[-14%] sm:w-[92%] sm:max-w-[520px] md:bottom-[-12%] md:right-[-14%] md:w-[78%] md:max-w-[560px] lg:bottom-[-18%] lg:right-[-12%] lg:w-[64%] lg:max-w-[420px]"
-              animate={reduceMotion ? undefined : { y: [0, 44, 0] }}
-              transition={{
-                ...floatTransition,
-                duration: reduceMotion ? 0 : 3.4,
-              }}
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 400 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 35, damping: 20, duration: 2.2, delay: 0.45 }}
             >
-              <Image
-                src={IMG_COIN_SWIRL}
-                alt="PayNBack Coin Swirl"
-                width={800}
-                height={800}
-                className="h-auto w-full object-contain drop-shadow-[0_30px_70px_rgba(14,165,233,0.35)]"
-                sizes="(min-width: 1024px) 420px, (min-width: 768px) 560px, 92vw"
-                priority
-              />
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, 44, 0] }}
+                transition={{
+                  ...floatTransition,
+                  duration: reduceMotion ? 0 : 3.4,
+                }}
+              >
+                <Image
+                  src={IMG_COIN_SWIRL}
+                  alt="PayNBack Coin Swirl"
+                  width={800}
+                  height={800}
+                  className="h-auto w-full object-contain drop-shadow-[0_30px_70px_rgba(14,165,233,0.35)]"
+                  sizes="(min-width: 1024px) 420px, (min-width: 768px) 560px, 92vw"
+                  priority
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>

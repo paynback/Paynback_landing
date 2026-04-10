@@ -1,6 +1,8 @@
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/layout/Footer";
+import Header from "@/components/layout/Header";
+import ScrollReveal from "@/components/ui/ScrollReveal";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 
 const poppins = Poppins({
@@ -22,7 +24,11 @@ export default function RootLayout({ children }) {
     >
       <body className='flex min-h-screen flex-col'>
         <SmoothScroll>
+          <Header />
           {children}
+          <ScrollReveal delay={120}>
+            <Footer />
+          </ScrollReveal>
         </SmoothScroll>
       </body>
     </html>

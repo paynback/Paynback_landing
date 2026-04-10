@@ -62,6 +62,8 @@ export default function Header({
 
   const { scrollY } = useScroll();
 
+
+
   useEffect(() => {
     setMounted(true);
   }, []);
@@ -70,10 +72,11 @@ export default function Header({
     setIsScrolled(latest > 30);
   });
 
+ if(pathname === "/") return null;
+
   return (
     <>
-      {/* Invisible spacer to prevent layout jumping when Header becomes deeply detached */}
-      <div className="w-full shrink-0 h-[88px] sm:h-[96px] lg:h-[128px]" aria-hidden />
+
 
       {mounted && typeof document !== 'undefined' ? createPortal(
         <div

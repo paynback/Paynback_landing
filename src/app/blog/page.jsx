@@ -1,6 +1,5 @@
 import BlogHero from "@/app/blog/components/Hero";
 import BlogList from "@/app/blog/components/BlogList";
-import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 export const metadata = {
   title: "Blogs - PayNBack",
@@ -13,9 +12,6 @@ export default function BlogPage() {
       <BlogHero />
       <ScrollReveal delay={80}>
         <BlogList />
-      </ScrollReveal>
-      <ScrollReveal delay={120}>
-        <Footer />
       </ScrollReveal>
     </main>
   );

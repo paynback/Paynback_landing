@@ -1,7 +1,7 @@
 "use client";
 
-import Header from "@/components/layout/Header";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 export default function AboutHero() {
     // --- Reused ticker logic from BlogHero for identical animation behavior ---
@@ -25,7 +25,7 @@ export default function AboutHero() {
     tickerTimes.push(0.96, 1);
 
     return (
-        <section className="relative isolate z-[100] min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
+        <section className="relative isolate z-100 min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
             {/* ── Atmospheric gradient base ── */}
             <div
                 className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-80"
@@ -43,21 +43,41 @@ export default function AboutHero() {
             </div>
 
             <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-                <Header />
-
                 {/* Content Centered Vertically */}
-                <div className="relative flex-1 flex flex-col justify-center pb-32 sm:pb-40 w-full">
-                    <div className="w-full max-w-3xl flex flex-col items-start gap-5 drop-shadow-md lg:pr-12">
+                <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
+                    <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 drop-shadow-md lg:pr-12">
                         <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">
                             About Us
                         </span>
                         <h1 className="text-balance text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
                             Vision & Mission
                         </h1>
-                        <p className="text-[18px] font-normal leading-[144%] tracking-[-0.56px] text-white pr-4">
+                        <p className="pr-4 leading-[144%] tracking-[-0.56px] text-white/75 sm:text-xs lg:text-sm">
                             To be the world&apos;s leading platform for seamless and secure shopping experiences, empowering individuals and businesses everywhere with the freedom and flexibility of a rewarding and cashless future.
                         </p>
                     </div>
+
+                    {/* Right-aligned Hero Image */}
+                    <motion.div 
+                        className="pointer-events-none absolute right-[-10%] top-[40%] z-0 h-[280px] w-[280px] -translate-y-1/2 opacity-30 drop-shadow-2xl sm:right-[-5%] sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[154px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
+                        initial={{ opacity: 0, y: -400 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
+                    >
+                        <motion.div
+                            animate={{ y: [0, -35, 0] }}
+                            transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
+                        >
+                            <Image 
+                                src="/images/water-profile-swirl.png"
+                                alt="Water Profile Swirl"
+                                width={407}
+                                height={407}
+                                className="h-full w-full object-contain drop-shadow-[0_15px_35px_rgba(255,255,255,0.15)]"
+                                priority
+                            />
+                        </motion.div>
+                    </motion.div>
                 </div>
             </div>
 

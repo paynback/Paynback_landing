@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Bookmark } from "lucide-react";
+import { motion } from "framer-motion";
 
 const BLOG_IMG   = "/images/qr-with-hand.jpg";
 const AVATAR_IMG = "/images/cartoon-char.jpg";
@@ -98,8 +99,13 @@ export default function BlogsSection() {
       className="w-full bg-white font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20">
-
+      <motion.div 
+        className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20"
+        initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
+        whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        viewport={{ once: true, margin: "0px 0px -25% 0px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         {/* ── Top row: heading (left) + description + CTA (right) ── */}
         <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-start md:justify-between">
 
@@ -132,7 +138,7 @@ export default function BlogsSection() {
           ))}
         </div>
 
-      </div>
+      </motion.div>
     </section>
   );
 }

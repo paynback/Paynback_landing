@@ -8,42 +8,30 @@ import TestimonialsSection from "./components/TestimonialsSection";
 import DownloadCTASection from "./components/DownloadCTASection";
 import BlogsSection from "./components/BlogsSection";
 import FAQSection from "./components/FAQSection";
-import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export default function HomePage() {
   return (
     <main className="min-h-screen">
       <HomeHero />
-      <ScrollReveal delay={80}>
-        <HowIntoSection />
-      </ScrollReveal>
+      <HowIntoSection />
       <ScrollReveal delay={120}>
         <DiscoverDealsSection />
       </ScrollReveal>
-      <ScrollReveal delay={160}>
-        <AmazingFeaturesSection />
-      </ScrollReveal>
+      <AmazingFeaturesSection />
       <ScrollReveal delay={200}>
         <Activities />
       </ScrollReveal>
-      <ScrollReveal delay={240}>
-        <WhyChooseSection />
-      </ScrollReveal>
+      <WhyChooseSection />
       <ScrollReveal delay={280}>
         <TestimonialsSection />
       </ScrollReveal>
       <ScrollReveal delay={320}>
         <DownloadCTASection />
       </ScrollReveal>
-      <ScrollReveal delay={360}>
-        <BlogsSection />
-      </ScrollReveal>
+      <BlogsSection />
       <ScrollReveal delay={400}>
         <FAQSection />
-      </ScrollReveal>
-      <ScrollReveal delay={440}>
-        <Footer />
       </ScrollReveal>
     </main>
   );

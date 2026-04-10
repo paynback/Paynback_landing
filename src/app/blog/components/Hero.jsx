@@ -1,12 +1,10 @@
 "use client";
 
 import Image from "next/image";
-import Header from "@/components/layout/Header";
 import { motion } from "framer-motion";
 
 export default function BlogHero() {
-  const IMG_APP_HAND = "/images/app-with-two-hand.png";
-  const IMG_BIG_LOGO = "/images/big-logo.png";
+
 
   const MAX_SHIFT = -35; // Shorter max shift so the end isn't brought all the way left
   const TOTAL_STEPS = 7; // Exactly seven moves
@@ -30,7 +28,7 @@ export default function BlogHero() {
   tickerTimes.push(0.96, 1);
 
   return (
-    <section className="relative isolate z-[100] min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
+    <section className="relative isolate z-100 min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
       {/* Atmospheric gradient base (blob lights) */}
       <div
         className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-80"
@@ -65,46 +63,42 @@ export default function BlogHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <Header />
-
-        <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
-
-          <div className="w-full flex flex-col justify-center mt-12 sm:mt-24 lg:mt-32 relative z-30 lg:pl-12">
-            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md">Blogs</span>
-            <h1 className="text-balance text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
+        {/* Content Centered Vertically */}
+        <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
+          <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 drop-shadow-md lg:pr-12">
+            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">
+              Blogs
+            </span>
+            <h1 className="whitespace-nowrap text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
               Stories Behind the Screens
             </h1>
-            <p className="whitespace-nowrap font-normal text-[18px] leading-[124%] tracking-[-0.56px] text-white/90 drop-shadow-md">
+            <p className="pr-4 leading-[144%] tracking-[-0.56px] text-white/75 sm:text-xs lg:text-sm">
               Where design meets strategy and real-world impact
             </p>
           </div>
 
 
-
-          {/* Right Images Container - absolute to overlap */}
-          <div className="absolute right-0 bottom-[-3%] top-10 w-full lg:w-[65%] xl:w-[60%] pointer-events-none z-20 flex justify-end items-end overflow-hidden sm:overflow-visible">
-            {/* Big Logo in background */}
-            <div className="absolute right-[2%] bottom-[-20%] w-[110%] h-[110%] opacity-20 z-0">
-              <Image
-                src={IMG_BIG_LOGO}
-                alt="Big PayNBack Logo"
-                fill
-                className="object-contain object-bottom-right transform rotate-[-5deg] scale-125"
+          {/* Right-aligned Hero Image with deeper, faster floating animation */}
+          <motion.div 
+            className="pointer-events-none absolute right-[-10%] top-[40%] z-0 h-[280px] w-[280px] -translate-y-1/2 opacity-30 drop-shadow-2xl sm:right-[-5%] sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[154px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
+            initial={{ opacity: 0, y: -400 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
+          >
+            <motion.div
+              animate={{ y: [0, -35, 0] }}
+              transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
+            >
+              <Image 
+                src="/images/wate-note-swirl.png"
+                alt="Water Note Swirl"
+                width={407}
+                height={407}
+                className="h-full w-full object-contain drop-shadow-[0_20px_45px_rgba(255,255,255,0.2)]"
                 priority
               />
-            </div>
-            {/* Hand Image */}
-            <div className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]">
-              <Image
-                src={IMG_APP_HAND}
-                alt="App With Two Hand"
-                width={1000}
-                height={1300}
-                className="w-full h-auto object-bottom object-contain"
-                priority
-              />
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
 
       </div>

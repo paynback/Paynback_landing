@@ -1,7 +1,6 @@
 "use client";
 
 import Image from "next/image";
-import Header from "@/components/layout/Header";
 import { motion } from "framer-motion";
 
 export default function ContactHero() {
@@ -30,7 +29,7 @@ export default function ContactHero() {
   tickerTimes.push(0.96, 1);
 
   return (
-    <section className="relative isolate z-[100] min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
+    <section className="relative isolate z-100 min-h-screen w-full flex flex-col overflow-hidden bg-black font-sans text-white">
       {/* Atmospheric gradient base (blob lights) */}
       <div
         className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-80"
@@ -65,7 +64,6 @@ export default function ContactHero() {
       </div>
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <Header />
 
         <div className="relative flex-1 flex flex-col justify-between pt-10 pb-8 sm:pb-12 xl:pb-16 w-full">
 

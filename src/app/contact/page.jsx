@@ -1,6 +1,5 @@
 import ContactHero from "./components/Hero";
 import ContactSection from "./components/ContactSection";
-import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export const metadata = {
@@ -14,9 +13,6 @@ export default function ContactPage() {
             <ContactHero />
             <ScrollReveal delay={80}>
                 <ContactSection />
-            </ScrollReveal>
-            <ScrollReveal delay={120}>
-                <Footer />
             </ScrollReveal>
         </main>
     );

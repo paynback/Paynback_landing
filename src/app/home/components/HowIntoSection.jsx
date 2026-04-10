@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
+import { motion } from "framer-motion";
 
 const STATS = [
   {
@@ -69,10 +70,14 @@ function CountUpNumber({ end, duration = 850, suffix = "" }) {
 
 export default function HowIntoSection() {
   return (
-    <section
-      className="w-full bg-white"
-    >
-      <div className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-30 lg:py-30">
+    <section className="w-full bg-white">
+      <motion.div 
+        className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-30 lg:py-30"
+        initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
+        whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+        viewport={{ once: true, margin: "0px 0px -25% 0px" }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+      >
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-26">
           {/* Left heading */}
           <div className="max-w-xl leading-tight">
@@ -122,7 +127,7 @@ export default function HowIntoSection() {
             </div>
           ))}
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

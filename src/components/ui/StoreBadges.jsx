@@ -32,7 +32,7 @@ export function StoreBadges({ className }) {
 
       {/* App Store Icon (Flat Color) */}
       <a
-        href="#"
+        href="https://apps.apple.com/in/app/paynback/id6751259946"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download on the App Store"
