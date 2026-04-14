@@ -1,7 +1,11 @@
+"use client"
+
 import Image from "next/image";
 import { PhoneCall, CircleQuestionMark } from "lucide-react";
+import MapEmbed from "./MapEmbed";
 
 export default function ContactSection() {
+
   return (
     <section className="w-full bg-white font-sans py-16 mb-28 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-20">
@@ -129,13 +133,20 @@ export default function ContactSection() {
             </div>
 
             {/* Map Image */}
-            <div className="relative w-full overflow-hidden rounded-2xl shadow-sm border border-slate-100" style={{ aspectRatio: "16/10" }}>
+            {/* <div className="relative w-full overflow-hidden rounded-2xl shadow-sm border border-slate-100" style={{ aspectRatio: "16/10" }}>
               <Image
                 src="/images/map-point.png"
                 alt="PayNBack Location on Map"
                 fill
                 className="object-cover object-center"
               />
+            </div> */}
+
+            <div
+              className="relative w-full overflow-hidden rounded-2xl shadow-sm border border-slate-100"
+              style={{ aspectRatio: "16/10" }}
+            >
+              <MapEmbed />
             </div>
 
           </div>
