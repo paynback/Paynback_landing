@@ -3,7 +3,20 @@
 
 import { useState } from 'react'
 import Image from 'next/image'
+import { motion, AnimatePresence } from 'framer-motion'
 import trophyImage from '../../../public/Icons/trophy.png'
+
+const containerVars = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+}
+const itemVars = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+}
 
 // import trophy from '../public/images/trophy.png'
 
@@ -62,16 +75,28 @@ export function WhyChoose() {
   return (
     <section className="why-section">
       {/* Heading */}
-      <h2 className="why-heading">
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: "-50px" }}
+        transition={{ duration: 0.5 }}
+        className="why-heading"
+      >
         Why Choose{' '}
         <span style={{ color: '#1d70b8' }}>payNback?</span>
-      </h2>
+      </motion.h2>
 
       {/* 3-column grid */}
-      <div className="why-grid">
+      <motion.div 
+        className="why-grid"
+        variants={containerVars}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-50px" }}
+      >
 
         {/* --- Col 1: Feature list --- */}
-        <div className="why-feature-list">
+        <motion.div variants={itemVars} className="why-feature-list">
           {FEATURES.map((f, i) => (
             <button
               key={f.id}
@@ -82,25 +107,37 @@ export function WhyChoose() {
               {f.id}.&nbsp;&nbsp;{f.title}
             </button>
           ))}
-        </div>
+        </motion.div>
 
         {/* --- Col 2: Description card --- */}
-        <div className="why-desc-card">
+        <motion.div variants={itemVars} className="why-desc-card">
           <div>
-            {/* Animated tag */}
-            <span
-              key={current.tag}
-              className="why-tag"
-            >
-              {current.tag}
-            </span>
+            <AnimatePresence mode="wait">
+              {/* Animated tag */}
+              <motion.span
+                key={current.tag}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="why-tag"
+              >
+                {current.tag}
+              </motion.span>
+            </AnimatePresence>
 
-            <p
-              key={current.id}
-              className="why-desc-text"
-            >
-              {current.description}
-            </p>
+            <AnimatePresence mode="wait">
+              <motion.p
+                key={current.id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2, delay: 0.05 }}
+                className="why-desc-text"
+              >
+                {current.description}
+              </motion.p>
+            </AnimatePresence>
           </div>
 
           {/* Bottom label */}
@@ -125,10 +162,10 @@ export function WhyChoose() {
               ))}
             </div>
           </div>
-        </div>
+        </motion.div>
 
         {/* --- Col 3: Image card --- */}
-        <div className="why-image-card">
+        <motion.div variants={itemVars} className="why-image-card">
           <div className="why-image-inner">
             <Image 
               src={trophyImage} 
@@ -144,15 +181,21 @@ export function WhyChoose() {
 
           {/* Overlay label bottom */}
           <div className="why-image-overlay">
-            <span
-              key={current.title}
-              className="why-image-label"
-            >
-              {current.title}
-            </span>
+            <AnimatePresence mode="wait">
+              <motion.span
+                key={current.title}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 10 }}
+                transition={{ duration: 0.2 }}
+                className="why-image-label"
+              >
+                {current.title}
+              </motion.span>
+            </AnimatePresence>
           </div>
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
       {/* Keyframes & Responsive */}
       <style>{`

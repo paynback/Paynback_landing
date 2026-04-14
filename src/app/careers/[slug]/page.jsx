@@ -191,7 +191,7 @@ export default function JobDetailPage() {
               <div>
                 <button 
                   type="button" 
-                  className="bg-[#0964BC] hover:bg-[#0855A1] text-white px-8 py-3 rounded-full font-medium transition-colors"
+                  className="bg-brand-primary hover:bg-[#0855A1] text-white px-8 py-3 rounded-full font-medium transition-colors"
                 >
                   Submit
                 </button>
@@ -200,7 +200,6 @@ export default function JobDetailPage() {
           </motion.div>
         </div>
       </div>
-
       <Footer />
     </main>
   );

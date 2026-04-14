@@ -1,7 +1,7 @@
 // src/components/sections/HowItWorks/HowItWorks.jsx
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { motion } from 'framer-motion'
 
 const STEPS = [
   {
@@ -23,47 +23,66 @@ const STEPS = [
 
 const STEP_ARROWS = ['/Icons/steps2join_arrow1.png', '/Icons/stepstojoin_arrow2.png']
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.25,
+      delayChildren: 0.1,
+    }
+  }
+}
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 40 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", bounce: 0.4, duration: 0.8 } }
+}
+
+const arrowVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  show: { opacity: 1, scale: 1, transition: { type: "spring", bounce: 0.3, duration: 0.8 } }
+}
+
 export function HowItWorks() {
-  const [visible, setVisible] = useState(false)
-  const ref = useRef(null)
-
-  // Trigger animation when section scrolls into view
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => { if (entry.isIntersecting) setVisible(true) },
-      { threshold: 0.3 }
-    )
-    if (ref.current) observer.observe(ref.current)
-    return () => observer.disconnect()
-  }, [])
-
   return (
-    <section ref={ref} className="steps-section">
+    <section className="steps-section">
       {/* Heading */}
       <div className="steps-header">
-        <h2 className="steps-title">
+        <motion.h2 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5 }}
+          className="steps-title"
+        >
           Steps to join in{' '}
           <span style={{ color: '#1d70b8' }}>payNback?</span>
-        </h2>
-        <p className="steps-subtitle">
+        </motion.h2>
+        <motion.p 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-50px" }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="steps-subtitle"
+        >
           Follow these simple steps to quickly download and install the app on your device.
-        </p>
+        </motion.p>
       </div>
 
       {/* Steps row */}
-      <div className="steps-row">
+      <motion.div 
+        className="steps-row"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true, margin: "-100px" }}
+      >
         {STEPS.map((step, i) => (
           <div key={step.id} className="steps-item-wrapper">
 
             {/* Step card */}
-            <div
-              className="steps-card"
-              style={{
-                opacity: visible ? 1 : 0,
-                transform: visible ? 'translateY(0)' : 'translateY(40px)',
-                transition: `opacity 0.6s ease ${i * 0.2}s, transform 0.6s ease ${i * 0.2}s`,
-              }}
-            >
+            <motion.div variants={itemVariants} className="steps-card">
               {/* Icon circle */}
               <div className="steps-icon-circle">
                 <img className="steps-icon-image" src={step.iconSrc} alt={`Step ${step.id} icon`} />
@@ -78,27 +97,24 @@ export function HowItWorks() {
               <p className="steps-label">
                 {step.id}.&nbsp;{step.title}
               </p>
-            </div>
+            </motion.div>
 
             {/* Curved dashed arrow between steps */}
             {i < STEPS.length - 1 && (
-              <div
+              <motion.div
+                variants={arrowVariants}
                 className={`steps-arrow ${i === 0 ? 'steps-arrow-top' : 'steps-arrow-bottom'}`}
-                style={{
-                  opacity: visible ? 1 : 0,
-                  transition: `opacity 0.6s ease ${i * 0.2 + 0.4}s`,
-                }}
               >
                 <img
                   className="steps-arrow-image"
                   src={STEP_ARROWS[i]}
                   alt={`Step ${i + 1} to step ${i + 2} arrow`}
                 />
-              </div>
+              </motion.div>
             )}
           </div>
         ))}
-      </div>
+      </motion.div>
 
       <style>{`
         .steps-section {
