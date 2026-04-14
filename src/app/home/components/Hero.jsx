@@ -60,7 +60,7 @@ export default function HomeHero() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
         <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-6 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
-          <div className="order-2 flex max-w-xl flex-col gap-y-4 lg:order-1 lg:pl-14 xl:pl-20">
+          <div className="order-2 flex max-w-xl flex-col gap-y-4 mt-14 lg:order-1 lg:mt-48 lg:pl-14 xl:pl-20">
             <div className="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
               <div className="flex items-center gap-2 text-sm text-white/85">
                 <span
