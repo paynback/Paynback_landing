@@ -137,12 +137,13 @@ export default function Header({
                       key={href}
                       href={href}
                       className={cn(
-                        "transition-colors",
+                        "relative z-0 transition-all duration-300",
                         useWhiteNavbar ? "hover:text-black" : "hover:text-white",
                         active
-                          ? useWhiteNavbar
-                            ? "font-semibold text-black"
-                            : "font-semibold text-white"
+                          ? cn(
+                              useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
+                              "before:absolute before:-inset-x-3 before:-inset-y-1 before:-z-10 before:rounded-full before:bg-white/70 before:blur-xl"
+                            )
                           : useWhiteNavbar
                             ? "text-black/80"
                             : "text-white/80",
@@ -210,12 +211,13 @@ export default function Header({
                       href={href}
                       onClick={() => setMobileMenuOpen(false)}
                       className={cn(
-                        "rounded-lg px-4 py-2.5 text-sm transition-colors",
+                        "relative z-0 rounded-lg px-4 py-2.5 text-sm transition-all duration-300",
                         useWhiteNavbar ? "hover:bg-black/5" : "hover:bg-white/10",
                         active
-                          ? useWhiteNavbar
-                            ? "font-semibold text-black bg-black/5"
-                            : "font-semibold text-white bg-white/15"
+                          ? cn(
+                              useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
+                              "before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-purple-500/40 before:blur-md"
+                            )
                           : useWhiteNavbar
                             ? "text-black/80"
                             : "text-white/80",
@@ -245,12 +247,13 @@ export default function Header({
                     key={href}
                     href={href}
                     className={cn(
-                      "shrink-0 whitespace-nowrap transition-colors",
+                      "relative z-0 shrink-0 whitespace-nowrap transition-all duration-300",
                       useWhiteNavbar ? "hover:text-black" : "hover:text-white",
                       active
-                        ? useWhiteNavbar
-                          ? "font-semibold text-black"
-                          : "font-semibold text-white"
+                        ? cn(
+                            useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
+                            "before:absolute before:-inset-x-3 before:-inset-y-1 before:-z-10 before:rounded-full before:bg-purple-500/50 before:blur-md"
+                          )
                         : useWhiteNavbar
                           ? "text-black/80"
                           : "text-white/80",
