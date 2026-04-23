@@ -29,12 +29,32 @@ function CalloutLabel({ corner, eyebrow, title, desc }) {
   return (
     <div className={`flex flex-col gap-0.5 ${isRight ? "items-end text-right" : "items-start text-left"}`}>
       {eyebrow && (
-        <span className="text-[10px] font-medium tracking-wide text-white/45">
-          {eyebrow} →
+        <span className="text-[11px] font-medium tracking-wide text-[#3B82F6] mb-0.5">
+          {eyebrow}
         </span>
       )}
       <p className="text-sm font-semibold leading-tight text-white">{title}</p>
       <p className="max-w-[130px] text-xs leading-snug text-white/50">{desc}</p>
+    </div>
+  );
+}
+
+/* ── Mobile Card ───────────────────────────────────────────── */
+function MobileCard({ step, title, desc }) {
+  return (
+    <div
+      className="w-full max-w-sm rounded-2xl p-5"
+      style={{
+        background: "linear-gradient(180deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%)",
+        border: "1px solid rgba(255, 255, 255, 0.08)",
+        boxShadow: "0 4px 20px rgba(0,0,0,0.1)",
+      }}
+    >
+      <span className="mb-1 block text-[13px] font-medium tracking-wide text-[#3B82F6]">
+        Step {step}
+      </span>
+      <h3 className="mb-1 text-base font-semibold text-white">{title}</h3>
+      <p className="text-sm leading-relaxed text-white/70">{desc}</p>
     </div>
   );
 }
@@ -87,10 +107,6 @@ export default function AppShowcaseSection() {
       />
 
       {/* ── Content ─────────────────────────────────────────── */}
-      {/*
-        pt-10 lg:pt-16 — reduced top padding (shorter section)
-        pb-0            — no bottom padding so phone sits flush at bottom
-      */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 pt-6 pb-0 sm:px-6 lg:px-20 lg:pt-10">
 
         {/* Heading */}
@@ -112,14 +128,16 @@ export default function AppShowcaseSection() {
           </div>
         </div>
 
-        {/*
-          Phone + callouts
-          items-end  → everyone sticks to the bottom of this box
-          The phone wrapper has no bottom margin so it sits right
-          at the section bottom edge (flush with the arc).
-        */}
+        {/* Mobile Cards (Steps) */}
+        <div className="mt-10 flex flex-col items-center gap-4 md:hidden relative z-20">
+          <MobileCard step="1" title="Referral link" desc="Get a referral link from a friend." />
+          <MobileCard step="2" title="Download" desc="From Play Store & App Store" />
+          <MobileCard step="3" title="Sign up" desc="Open the referral link and signup." />
+        </div>
+
+        {/* Phone + callouts */}
         <div
-          className="relative mt-6 flex items-end justify-center lg:mt-8"
+          className="relative mt-10 md:mt-6 flex items-end justify-center lg:mt-8"
           style={{ minHeight: "clamp(300px, 50vw, 460px)" }}
         >
           {/* Referral link — mid-left — glass card */}
@@ -135,16 +153,12 @@ export default function AppShowcaseSection() {
                 border: "1px solid rgba(255,255,255,0.13)",
               }}
             >
-              <CalloutLabel corner="bottom-left" title="Referral link" desc="Get a referral link from a friend." />
+              <CalloutLabel corner="bottom-left" eyebrow="Step 1" title="Referral link" desc="Get a referral link from a friend." />
             </div>
             <Connector side="left" />
           </div>
 
-          {/*
-            ── Phone image ──
-            File is 1024×1080 (user-cropped). Show it fully with object-contain.
-            Rises from below on scroll into view and on reload when in viewport.
-          */}
+          {/* ── Phone image ── */}
           <motion.div
             className="relative z-10 overflow-hidden"
             style={{
@@ -170,7 +184,6 @@ export default function AppShowcaseSection() {
             />
           </motion.div>
 
-
           {/* Download — upper-right near arc — glass card */}
           <div className="absolute top-[12%] right-[26%] hidden items-center gap-2 md:flex">
             <Connector side="right" />
@@ -183,7 +196,7 @@ export default function AppShowcaseSection() {
                 border: "1px solid rgba(255,255,255,0.13)",
               }}
             >
-              <CalloutLabel corner="top-right" eyebrow="Next" title="Download" desc="From App Store & App Store" />
+              <CalloutLabel corner="top-right" eyebrow="Step 2" title="Download" desc="From Play Store & App Store" />
             </div>
           </div>
 
@@ -199,7 +212,7 @@ export default function AppShowcaseSection() {
                 border: "1px solid rgba(255,255,255,0.13)",
               }}
             >
-              <CalloutLabel corner="bottom-right" title="Sign up" desc="Open the referral link and sign up." />
+              <CalloutLabel corner="bottom-right" eyebrow="Step 3" title="Sign up" desc="Open the referral link and signup." />
             </div>
           </div>
         </div>

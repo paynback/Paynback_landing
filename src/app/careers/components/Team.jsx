@@ -53,11 +53,11 @@ export default function Team() {
             Be part of a culture that values creativity, collaboration, and innovation.
           </p>
           
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="flex sm:grid flex-nowrap overflow-x-auto sm:overflow-x-visible pb-6 sm:pb-0 sm:grid-cols-2 lg:grid-cols-4 gap-5 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
             {teamMembers.map((member, index) => (
               <motion.div
                 key={index}
-                className="relative overflow-hidden group bg-black/5 rounded-2xl aspect-[4/5]"
+                className="relative overflow-hidden group bg-black/5 rounded-2xl aspect-[4/5] min-w-[75vw] sm:min-w-0 shrink-0 snap-center"
                 {...cardMotion(index)}
               >
                 <Image

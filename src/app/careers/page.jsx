@@ -1,6 +1,5 @@
 import CareersHero from "./components/Hero";
 import Team from "./components/Team";
-import Footer from "@/components/layout/Footer";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export const metadata = {
@@ -19,9 +18,7 @@ export default function CareersPage() {
                 <Team />
             </ScrollReveal>
          
-            <ScrollReveal delay={120}>
-                <Footer />
-            </ScrollReveal>
+            
         </main>
     );
 }
