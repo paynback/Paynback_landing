@@ -139,12 +139,13 @@ export default function Header({
                       key={href}
                       href={href}
                       className={cn(
-                        "transition-colors",
+                        "relative z-0 transition-all duration-300",
                         useWhiteNavbar ? "hover:text-black" : "hover:text-white",
                         active
-                          ? useWhiteNavbar
-                            ? "font-semibold text-black"
-                            : "font-semibold text-white"
+                          ? cn(
+                              useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
+                              "before:absolute before:-inset-x-3 before:-inset-y-1 before:-z-10 before:rounded-full before:bg-white/70 before:blur-xl"
+                            )
                           : useWhiteNavbar
                             ? "text-black/80"
                             : "text-white/80",

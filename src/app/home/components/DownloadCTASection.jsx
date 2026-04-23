@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { Info } from "lucide-react";
+import { motion } from "framer-motion";
 
 const QR_IMG         = "/images/c06b42d0f732be45d4b2fbaa6d59d55d1aa88ea8.png";
 const COIN_SWIRL_IMG = "/images/33b06127ad13c66d1ea9ad4918ed9018d0d01e8a.png";
@@ -73,13 +74,15 @@ export default function DownloadCTASection() {
 
             {/* Coin swirl — sits to the left of the QR card */}
             <div className="hidden sm:block" style={{ width: "clamp(120px, 16vw, 250px)", transform: "translateY(-24px) translateX(12px)" }}>
-              <Image
-                src={COIN_SWIRL_IMG}
-                alt="PayNBack Coin Swirl"
-                width={400}
-                height={400}
-                className="h-auto w-full object-contain drop-shadow-[0_20px_40px_rgba(153,186,236,0.25)]"
-              />
+              <motion.div animate={{ y: [0, -35, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
+                <Image
+                  src={COIN_SWIRL_IMG}
+                  alt="PayNBack Coin Swirl"
+                  width={400}
+                  height={400}
+                  className="h-auto w-full object-contain drop-shadow-[0_20px_40px_rgba(153,186,236,0.25)]"
+                />
+              </motion.div>
             </div>
 
             {/* QR card */}
@@ -114,13 +117,15 @@ export default function DownloadCTASection() {
                 className="pointer-events-none absolute z-30"
                 style={{ bottom: "8px", right: "-46px", width: "82px", display: "var(--bubble-display, block)" }}
               >
-                <Image
-                  src={BUBBLE_IMG}
-                  alt=""
-                  width={100}
-                  height={100}
-                  className="h-auto w-full object-contain drop-shadow-[0_4px_12px_rgba(153,186,236,0.4)]"
-                />
+                <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}>
+                  <Image
+                    src={BUBBLE_IMG}
+                    alt=""
+                    width={100}
+                    height={100}
+                    className="h-auto w-full object-contain drop-shadow-[0_4px_12px_rgba(153,186,236,0.4)]"
+                  />
+                </motion.div>
               </div>
             </div>
           </div>

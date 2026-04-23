@@ -152,7 +152,7 @@ export default function Activities() {
         .activities-section {
           position: relative;
           width: 100%;
-          padding: 6rem 0;
+          padding: 2rem 0; /* Reduced from 6rem */
           background: #fff;
           overflow: hidden;
           display: flex;
@@ -165,7 +165,7 @@ export default function Activities() {
         .activities-orbit-container {
           position: relative;
           width: 100%;
-          max-width: 64rem;
+          max-width: 52rem; /* Reduced from 64rem */
           aspect-ratio: 1;
           display: flex;
           align-items: center;
@@ -190,8 +190,8 @@ export default function Activities() {
         .activities-stat-card {
           background: #fff;
           border-radius: 9999px;
-          width: 8.25rem;
-          height: 8.25rem;
+          width: 7.25rem; /* Reduced from 8.25rem */
+          height: 7.25rem; /* Reduced from 8.25rem */
           box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
           display: flex;
           flex-direction: column;
@@ -204,7 +204,7 @@ export default function Activities() {
         }
 
         .activities-stat-value {
-          font-size: 1.75rem;
+          font-size: 1.5rem; /* Reduced from 1.75rem */
           font-weight: 800;
           display: block;
           line-height: 1;
@@ -212,7 +212,7 @@ export default function Activities() {
 
         .activities-stat-label {
           color: #6b7280;
-          font-size: 0.56rem;
+          font-size: 0.5rem; /* Reduced from 0.56rem */
           font-weight: 600;
           text-transform: uppercase;
           letter-spacing: -0.025em;
@@ -269,7 +269,7 @@ export default function Activities() {
           z-index: 50;
           pointer-events: none;
           width: 100%;
-          max-width: 1020px;
+          max-width: 840px; /* Reduced from 1020px */
         }
 
         .activities-branding-img {
@@ -280,12 +280,12 @@ export default function Activities() {
 
         /* ── Tablet (max-width: 1024px) ── */
         @media (max-width: 1024px) {
-          .activities-section { padding: 4rem 0; }
-          .activities-orbit-container { max-width: 50rem; }
+          .activities-section { padding: 1.5rem 0; }
+          .activities-orbit-container { max-width: 44rem; }
           .activities-orbit-spinner { width: 80%; height: 80%; }
-          .activities-stat-card { width: 6.4rem; height: 6.4rem; }
-          .activities-stat-value { font-size: 1.35rem; }
-          .activities-stat-label { font-size: 0.48rem; }
+          .activities-stat-card { width: 6rem; height: 6rem; }
+          .activities-stat-value { font-size: 1.25rem; }
+          .activities-stat-label { font-size: 0.44rem; }
           .activities-branding {
             bottom: 12%;
             max-width: 470px;
@@ -294,7 +294,7 @@ export default function Activities() {
 
         /* ── Mobile (max-width: 640px) ── */
         @media (max-width: 640px) {
-          .activities-section { padding: 2.5rem 0; }
+          .activities-section { padding: 1rem 0; }
           .activities-orbit-container { max-width: 26rem; }
           .activities-orbit-spinner { width: 78%; height: 78%; }
           .activities-stat-card {
