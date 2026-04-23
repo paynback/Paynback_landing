@@ -130,7 +130,7 @@ export default function BlogHero() {
       </div>
 
       {/* Full-width screen bleed text */}
-      <div className="z-40 absolute bottom-2 left-0 w-full overflow-hidden flex items-center h-10 justify-start">
+      {/* <div className="z-40 absolute bottom-2 left-0 w-full overflow-hidden flex items-center h-10 justify-start">
         <motion.p
           className="text-[19px] font-normal text-white leading-[35.62px] tracking-[-0.66px] whitespace-nowrap drop-shadow-md px-4 sm:px-6 lg:px-8"
           animate={{ x: tickerX }}
@@ -144,7 +144,7 @@ export default function BlogHero() {
         >
           Find your favourite stores, discover exclusive deals, and connect directly with them on payNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
         </motion.p>
-      </div>
+      </div> */}
     </section>
   );
 }

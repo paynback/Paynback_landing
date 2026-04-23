@@ -89,7 +89,7 @@ export default function MsmeHero() {
             </div>
 
             {/* ── Full-width screen bleed text (Ticker) ── */}
-            <div className="z-40 absolute bottom-0 sm:bottom-2 lg:bottom-4 left-0 w-full overflow-hidden flex items-center h-10 justify-start">
+            {/* <div className="z-40 absolute bottom-0 sm:bottom-2 lg:bottom-4 left-0 w-full overflow-hidden flex items-center h-10 justify-start">
                 <motion.p
                     className="text-[19px] font-normal text-white leading-[35.62px] tracking-[-0.66px] whitespace-nowrap drop-shadow-md px-4 sm:px-6 lg:px-8"
                     animate={{ x: tickerX }}
@@ -103,7 +103,7 @@ export default function MsmeHero() {
                 >
                     Become our merchant to expand your reach. Discover exclusive tools to grow your business, manage sales, and connect directly with your customers on payNback.
                 </motion.p>
-            </div>
+            </div> */}
         </section>
     );
 }
