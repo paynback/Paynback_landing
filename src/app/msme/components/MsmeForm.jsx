@@ -1,8 +1,97 @@
 'use client'
-import { motion } from 'framer-motion'
-import { Upload } from 'lucide-react'
+
+import { useState, useRef, useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { zodResolver } from '@hookform/resolvers/zod'
+import * as z from 'zod'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Upload, AlertCircle, Loader2, CheckCircle2 } from 'lucide-react'
+import { submitMerchantForm, fetchShopCategories } from '../services/merchantService'
+
+const msmeSchema = z.object({
+  name: z.string().min(1, "Full name is required"),
+  phone: z.string().min(1, "Mobile number is required").regex(/^[0-9+\-\s()]*$/, "Please enter a valid phone number"),
+  shopName: z.string().min(1, "Shop name is required"),
+  category: z.string().min(1, "Category is required"),
+  landmark: z.string().min(1, "Landmark is required"),
+  pincode: z.string().min(1, "Location PIN is required"),
+})
 
 export default function MsmeForm() {
+  const fileInputRef = useRef(null)
+  const [shopThumbnail, setShopThumbnail] = useState(null)
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [errorMessage, setErrorMessage] = useState('')
+  const [successMessage, setSuccessMessage] = useState('')
+  const [categories, setCategories] = useState([])
+  const [categoriesLoading, setCategoriesLoading] = useState(true)
+
+  useEffect(() => {
+    fetchShopCategories()
+      .then((data) => setCategories(data))
+      .catch(() => setCategories([]))
+      .finally(() => setCategoriesLoading(false))
+  }, [])
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(msmeSchema),
+    defaultValues: {
+      name: '',
+      phone: '',
+      shopName: '',
+      category: '',
+      landmark: '',
+      pincode: '',
+    },
+  })
+
+  const handleFileChange = (event) => {
+    const file = event.target.files?.[0]
+    setShopThumbnail(file || null)
+  }
+
+  const triggerFilePicker = () => {
+    fileInputRef.current?.click()
+  }
+
+  const onSubmit = async (data) => {
+    setErrorMessage('')
+    setSuccessMessage('')
+
+    if (!shopThumbnail) {
+      setErrorMessage('Please upload a shop thumbnail image.')
+      setTimeout(() => setErrorMessage(''), 5000)
+      return
+    }
+
+    setIsSubmitting(true)
+    try {
+      const response = await submitMerchantForm({
+        ...data,
+        shopThumbnail,
+      })
+      setSuccessMessage(response?.message || 'Submitted successfully.')
+      reset()
+      setShopThumbnail(null)
+      if (fileInputRef.current) {
+        fileInputRef.current.value = ''
+      }
+    } catch (error) {
+      setErrorMessage(error?.message || 'Unable to submit form. Please try again.')
+    } finally {
+      setIsSubmitting(false)
+      setTimeout(() => {
+        setErrorMessage('')
+        setSuccessMessage('')
+      }, 5000)
+    }
+  }
+
   return (
     <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50 font-sans text-slate-900">
       <div className="max-w-4xl mx-auto">
@@ -31,116 +120,152 @@ export default function MsmeForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.2 }}
         >
-          <form className="space-y-6">
+          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             
             {/* 2-column grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               
               {/* Full Name */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">Full name*</label>
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="name" className="text-sm font-medium text-(--brand-primary)">Full name*</label>
                 <input 
                   type="text" 
+                  id="name"
                   placeholder="Enter your full name" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors placeholder-gray-400 text-sm"
-                  required
+                  {...register("name")}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
+                    errors.name
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                  }`}
                 />
+                {errors.name && (
+                  <span className="mt-1.5 text-xs text-red-500">
+                    {errors.name.message}
+                  </span>
+                )}
               </div>
 
               {/* Mobile Number */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">Mobile number*</label>
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="phone" className="text-sm font-medium text-(--brand-primary)">Mobile number*</label>
                 <input 
                   type="tel" 
+                  id="phone"
                   placeholder="Enter your mobile number" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors placeholder-gray-400 text-sm"
-                  required
+                  {...register("phone")}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
+                    errors.phone
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                  }`}
                 />
-              </div>
-
-              {/* Email */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">E-mail id*</label>
-                <input 
-                  type="email" 
-                  placeholder="Enter your e-mail id" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors placeholder-gray-400 text-sm"
-                  required
-                />
-              </div>
-
-              {/* District */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">District*</label>
-                <div className="relative">
-                  <select 
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors appearance-none text-sm text-gray-500 bg-white"
-                    required
-                    defaultValue=""
-                  >
-                    <option value="" disabled>Select district</option>
-                    <option value="kochi">Ernakulam</option>
-                    <option value="trivandrum">Trivandrum</option>
-                    {/* Add more as needed */}
-                  </select>
-                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
-                  </div>
-                </div>
+                {errors.phone && (
+                  <span className="mt-1.5 text-xs text-red-500">
+                    {errors.phone.message}
+                  </span>
+                )}
               </div>
 
               {/* Shop Name */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">Shop name*</label>
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="shopName" className="text-sm font-medium text-(--brand-primary)">Shop name*</label>
                 <input 
                   type="text" 
+                  id="shopName"
                   placeholder="Enter your shop name" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors placeholder-gray-400 text-sm"
-                  required
+                  {...register("shopName")}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
+                    errors.shopName
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                  }`}
                 />
+                {errors.shopName && (
+                  <span className="mt-1.5 text-xs text-red-500">
+                    {errors.shopName.message}
+                  </span>
+                )}
               </div>
 
               {/* Category */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">Category*</label>
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="category" className="text-sm font-medium text-(--brand-primary)">Category*</label>
                 <div className="relative">
                   <select 
-                    className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors appearance-none text-sm text-gray-500 bg-white"
-                    required
+                    id="category"
+                    {...register("category")}
+                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-sm text-gray-500 bg-white ${
+                      errors.category
+                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                        : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                     defaultValue=""
+                    disabled={categoriesLoading}
                   >
-                    <option value="" disabled>Select category</option>
-                    <option value="retail">Retail</option>
-                    <option value="food">Food & Beverage</option>
-                    <option value="services">Services</option>
-                    {/* Add more as needed */}
+                    <option value="" disabled>
+                      {categoriesLoading ? 'Loading categories...' : 'Select category'}
+                    </option>
+                    {categories.map((cat) => (
+                      <option key={cat.category_id} value={cat.category_id}>
+                        {cat.categoryName}
+                      </option>
+                    ))}
                   </select>
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
-                    <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    {categoriesLoading
+                      ? <Loader2 className="h-4 w-4 animate-spin" />
+                      : <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    }
                   </div>
                 </div>
+                {errors.category && (
+                  <span className="mt-1.5 text-xs text-red-500">
+                    {errors.category.message}
+                  </span>
+                )}
               </div>
 
-              {/* Shop Location */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">Shop Location*</label>
+              {/* Shop Location / Landmark */}
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="landmark" className="text-sm font-medium text-(--brand-primary)">Landmark*</label>
                 <input 
                   type="text" 
-                  placeholder="Enter your shop location" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors placeholder-gray-400 text-sm"
-                  required
+                  id="landmark"
+                  placeholder="Enter your landmark" 
+                  {...register("landmark")}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
+                    errors.landmark
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                  }`}
                 />
+                {errors.landmark && (
+                  <span className="mt-1.5 text-xs text-red-500">
+                    {errors.landmark.message}
+                  </span>
+                )}
               </div>
 
               {/* Location PIN */}
-              <div className="space-y-2">
-                <label className="text-sm font-medium text-(--brand-primary)">Location PIN*</label>
+              <div className="flex flex-col space-y-2">
+                <label htmlFor="pincode" className="text-sm font-medium text-(--brand-primary)">Location PIN*</label>
                 <input 
                   type="text" 
+                  id="pincode"
                   placeholder="Enter your location PIN" 
-                  className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors placeholder-gray-400 text-sm"
-                  required
+                  {...register("pincode")}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
+                    errors.pincode
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                  }`}
                 />
+                {errors.pincode && (
+                  <span className="mt-1.5 text-xs text-red-500">
+                    {errors.pincode.message}
+                  </span>
+                )}
               </div>
 
             </div>
@@ -148,7 +273,18 @@ export default function MsmeForm() {
             {/* Thumbnail Upload */}
             <div className="space-y-2 mt-6">
               <label className="text-sm font-medium text-(--brand-primary)">Thumbnail Upload*</label>
-              <div className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer">
+              <div
+                className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer"
+                onClick={triggerFilePicker}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault()
+                    triggerFilePicker()
+                  }
+                }}
+              >
                 <Upload className="w-8 h-8 text-gray-400 mb-3" />
                 <p className="text-sm text-gray-600 mb-1">
                   <span className="text-(--brand-primary) font-semibold">Upload an image</span>, Drag 'n' drop an image here or click to select image
@@ -156,18 +292,19 @@ export default function MsmeForm() {
                 <p className="text-xs text-gray-400">
                   jpg, png, upto 5MB
                 </p>
-                {/* Hidden file input would go here */}
+                {shopThumbnail && (
+                  <p className="text-xs text-(--brand-primary) mt-2">
+                    Selected: {shopThumbnail.name}
+                  </p>
+                )}
+                <input
+                  ref={fileInputRef}
+                  type="file"
+                  accept=".jpg,.jpeg,.png"
+                  className="hidden"
+                  onChange={handleFileChange}
+                />
               </div>
-            </div>
-
-            {/* Message */}
-            <div className="space-y-2 mt-6">
-              <label className="text-sm font-medium text-(--brand-primary)">Message</label>
-              <textarea 
-                placeholder="Enter your message" 
-                rows={4}
-                className="w-full px-4 py-3 rounded-lg border border-gray-200 focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:border-(--brand-primary) transition-colors placeholder-gray-400 text-sm resize-none"
-              ></textarea>
             </div>
 
             {/* Disclaimer */}
@@ -175,27 +312,57 @@ export default function MsmeForm() {
               By clicking submit below, you consent to allow paynback to store and process the personal information submitted above to provide you the content requested.
             </p>
 
-            {/* Captcha Placeholder */}
-            <div className="mt-4 flex items-center gap-3 p-3 border border-gray-200 rounded-lg w-fit bg-gray-50">
-              <input type="checkbox" className="w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500" />
-              <span className="text-sm text-gray-700">I am human</span>
-              <div className="ml-8 flex flex-col items-center">
-                {/* Simulated reCAPTCHA logo */}
-                <div className="w-8 h-8 border border-gray-300 rounded-full flex items-center justify-center bg-white shadow-sm">
-                  <span className="text-(--brand-primary) font-bold text-xs">↻</span>
-                </div>
-                <span className="text-[10px] text-gray-400 mt-1">reCAPTCHA</span>
-                <span className="text-[8px] text-gray-400">Privacy - Terms</span>
-              </div>
+            {/* Status Message Animation */}
+            <div className="min-h-[50px] flex flex-col justify-center">
+              <AnimatePresence mode="wait">
+                {isSubmitting ? (
+                  <motion.div
+                    key="submitting"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="flex items-center justify-center text-center gap-3 rounded-xl bg-blue-50 px-4 py-3 text-sm text-(--brand-primary) border border-blue-100/50"
+                  >
+                    <Loader2 className="h-5 w-5 animate-spin shrink-0" />
+                    <span className="font-medium">Submitting application...</span>
+                  </motion.div>
+                ) : successMessage ? (
+                  <motion.div
+                    key="success"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+                    className="flex items-center justify-center text-center gap-3 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-700 border border-emerald-100/50"
+                  >
+                    <CheckCircle2 className="h-5 w-5 text-emerald-600 shrink-0 mt-0.5" />
+                    <span className="font-medium leading-relaxed">{successMessage}</span>
+                  </motion.div>
+                ) : errorMessage ? (
+                  <motion.div
+                    key="error"
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.3, type: "spring", stiffness: 200 }}
+                    className="flex items-center justify-center text-center gap-3 rounded-xl bg-red-50 px-4 py-3 text-sm text-red-700 border border-red-100/50"
+                  >
+                    <AlertCircle className="h-5 w-5 text-red-600 shrink-0 mt-0.5" />
+                    <span className="font-medium leading-relaxed">{errorMessage}</span>
+                  </motion.div>
+                ) : null}
+              </AnimatePresence>
             </div>
 
             {/* Submit Button */}
-            <div className="mt-8">
+            <div className="mt-8 flex justify-center">
               <button 
                 type="submit"
-                className="bg-(--brand-primary) hover:bg-(--brand-primary) active:scale-[0.98] text-white font-medium py-3 px-8 rounded-full transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-(--brand-primary) focus:ring-offset-2"
+                disabled={isSubmitting}
+                className="block w-full sm:w-auto min-w-[240px] bg-(--brand-primary) hover:bg-(--brand-primary) active:scale-[0.98] text-white font-medium py-3.5 px-8 rounded-full transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-(--brand-primary) cursor-pointer focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
-                Submit
+                {isSubmitting ? 'Submitting...' : 'Submit'}
               </button>
             </div>
 
