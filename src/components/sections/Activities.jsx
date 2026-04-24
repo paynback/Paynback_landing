@@ -68,7 +68,7 @@ export default function Activities() {
             <Image
               src="/Icons/outer_cirlce_only.png"
               alt="Outer Orbital Circle Line"
-              fill
+              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain"
             />
           </div>
@@ -116,7 +116,7 @@ export default function Activities() {
           <Image
             src="/Icons/inner_circle.png"
             alt="Inner Orbital Circle"
-            fill
+            fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="object-contain"
           />
         </motion.div>
@@ -127,7 +127,7 @@ export default function Activities() {
              <Image
                 src="/Icons/jaami.png"
                 alt="Jaami character"
-                fill
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-cover"
               />
           </div>
@@ -140,7 +140,7 @@ export default function Activities() {
             <Image
               src="/Icons/enhanced_activity_status.png"
               alt="Enhanced activity status"
-              fill
+              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain"
             />
           </div>

@@ -154,7 +154,8 @@ export default function Footer() {
                 alt="payNback logo"
                 width={140}
                 height={48}
-                className="h-auto w-36 object-contain"
+                className="w-36 object-contain"
+                style={{ height: "auto" }}
               />
               <p className="max-w-[400px] text-sm leading-relaxed text-white/55">
                 payNback is India&apos;s first in-store shopping support app<br />
@@ -196,7 +197,7 @@ export default function Footer() {
 
             {/* Col 2 — payNback links */}
             <div className="flex flex-col gap-4">
-              <h4 className="text-base font-semibold text-white">payNback</h4>
+              <h4>payNback</h4>
               <ul className="flex flex-col gap-3">
                 {COL_PAYNBACK.map((item) => (
                   <li key={item.label}>
@@ -213,7 +214,7 @@ export default function Footer() {
 
             {/* Col 3 — Guidelines */}
             <div className="flex flex-col gap-4">
-              <h4 className="text-base font-semibold text-white">Guidelines</h4>
+              <h4>Guidelines</h4>
               <ul className="flex flex-col gap-3">
                 {COL_GUIDELINES.map((item) => (
                   <li key={item.label}>
@@ -231,7 +232,7 @@ export default function Footer() {
             {/* Col 4 — Support + Social */}
             <div className="flex flex-col gap-6">
               <div className="flex flex-col gap-3">
-                <h4 className="text-base font-semibold text-white">Support</h4>
+                <h4>Support</h4>
                 <ul className="flex flex-col gap-2.5">
                   <li className="flex items-center gap-2 text-sm text-white/60">
                     <Phone className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
@@ -253,7 +254,7 @@ export default function Footer() {
 
               {/* Social icons */}
               <div className="flex flex-col gap-3">
-                <h4 className="text-sm font-semibold text-white">Follow us on</h4>
+                <h5>Follow us on</h5>
                 <div className="flex flex-nowrap gap-2">
                   <SocialBtn label="Facebook">
                     <Facebook className="h-4 w-4" strokeWidth={1.8} />

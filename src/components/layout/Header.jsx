@@ -12,7 +12,7 @@ import { cn } from "@/lib/utils";
 const LOGO_SRC = "/Icons/Paynback_logo.png";
 const LOGO_SRC_LIGHT = "/Icons/paynbacklogo_for_whitebg.png";
 
-export const headerNavItems = [
+const headerNavItems = [
   { href: "/home", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/blog", label: "Blogs" },
@@ -107,7 +107,7 @@ export default function Header({
                     "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl backdrop-blur-xl py-2 sm:py-2.5 px-4 sm:px-6 rounded-full",
                     useWhiteNavbar
                       ? "bg-white/95 border border-black/10 shadow-[0_10px_30px_rgba(15,23,42,0.16)]"
-                      : "bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/20"
+                      : "bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10"
                   )
                 : cn(
                     "w-full max-w-7xl pt-5 pb-2 sm:pt-6 lg:pt-8 px-4 sm:px-6 lg:px-8 rounded-none",
@@ -142,7 +142,7 @@ export default function Header({
                         active
                           ? cn(
                               useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
-                              "before:absolute before:-inset-x-3 before:-inset-y-1 before:-z-10 before:rounded-full before:bg-white/70 before:blur-xl"
+                              "before:absolute before:-inset-x-2 before:-inset-y-2 before:-z-10 before:rounded-full before:bg-[#87B3E0] before:blur-lg"
                             )
                           : useWhiteNavbar
                             ? "text-black/80"

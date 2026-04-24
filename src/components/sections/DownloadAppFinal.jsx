@@ -91,7 +91,7 @@ const DownloadAppFinal = () => {
             viewport={{ once: true, amount: 0.2 }}
             style={{ position: 'relative', width: '100%', height: '100%' }}
           >
-            <Image src="/Icons/phone_history.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+            <Image src="/Icons/phone_history.png" alt="Phone" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
           </motion.div>
         </div>
         {/* Phone 2 */}
@@ -108,7 +108,7 @@ const DownloadAppFinal = () => {
             viewport={{ once: true, amount: 0.2 }}
             style={{ position: 'relative', width: '100%', height: '100%' }}
           >
-            <Image src="/Icons/phone_home_page.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom'  }} priority />
+            <Image src="/Icons/phone_home_page.png" alt="Phone" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'contain', objectPosition: 'bottom'  }} priority />
           </motion.div>
         </div>
         {/* Phone 3 */}
@@ -128,7 +128,7 @@ const DownloadAppFinal = () => {
             <Image
               src="/Icons/phone_profile_page.png"
               alt="Phone"
-              fill
+              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: 'contain', objectPosition: 'bottom' }}
               priority
             />
@@ -148,7 +148,7 @@ const DownloadAppFinal = () => {
             viewport={{ once: true, amount: 0.2 }}
             style={{ position: 'relative', width: '100%', height: '100%' }}
           >
-            <Image src="/Icons/phone_cashback.png" alt="Phone" fill style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
+            <Image src="/Icons/phone_cashback.png" alt="Phone" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
           </motion.div>
         </div>
       </div>
@@ -300,7 +300,7 @@ const StoreButton = ({ src, alt }) => (
       filter: 'drop-shadow(0 8px 18px rgba(0,0,0,0.18))',
     }}
   >
-    <Image src={src} alt={alt} fill style={{ objectFit: 'contain' }} />
+    <Image src={src} alt={alt} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'contain' }} />
     <style>{`
       .dl-store-link {
         display: block;

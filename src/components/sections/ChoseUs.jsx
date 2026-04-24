@@ -170,7 +170,7 @@ export function WhyChoose() {
             <Image 
               src={trophyImage} 
               alt="Why Choose payNback Trophy"
-              fill
+              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ 
                 objectFit: 'cover',
                 filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',

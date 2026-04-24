@@ -63,7 +63,7 @@ export default function AmazingFeaturesSection() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Section heading */}
-        <h2 className="mb-10 text-balance text-[1.65rem] font-normal tracking-tight sm:text-3xl md:text-[clamp(1.75rem,2.2vw,2.25rem)] lg:mb-14 lg:text-4xl xl:text-5xl">
+        <h2>
           Our{" "}
           <span className="text-(--brand-primary)">amazing</span>{" "}
           features
@@ -82,7 +82,7 @@ export default function AmazingFeaturesSection() {
               </div>
 
               {/* Feature title */}
-              <h3 className="text-base font-semibold leading-snug text-(--brand-primary) sm:text-[0.95rem]">
+              <h3>
                 {title}
               </h3>
 

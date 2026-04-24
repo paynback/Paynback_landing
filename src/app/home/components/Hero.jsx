@@ -78,7 +78,7 @@ export default function HomeHero() {
               <StoreBadges />
             </div>
 
-            <h1 className="text-balance text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl">
+            <h1>
               Finances that work for you
             </h1>
             <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm">

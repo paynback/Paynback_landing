@@ -81,7 +81,7 @@ export default function HowIntoSection() {
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-26">
           {/* Left heading */}
           <div className="max-w-xl leading-tight">
-            <h2 className="text-balance text-2xl font-normal tracking-tight sm:text-3xl lg:text-5xl">
+            <h2>
               <span className="text-(--brand-primary)">How</span> we
               turn data{" "}
               <span className="text-(--brand-primary)">into</span>{" "}

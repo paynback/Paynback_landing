@@ -115,7 +115,7 @@ const DownloadApp = () => {
               <Image 
                 src={phone.src} 
                 alt="Phone Mockup" 
-                fill 
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
                 style={{ objectFit: 'contain', objectPosition: 'bottom' }} // Force to bottom
                 priority
               />
@@ -156,7 +156,7 @@ const StoreButton = ({ src, alt }) => (
     <Image 
       src={src} 
       alt={alt} 
-      fill 
+      fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
       style={{ objectFit: 'contain' }}
     />
   </motion.a>

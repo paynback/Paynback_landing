@@ -87,7 +87,7 @@ export default function ContactHero() {
               <Image
                 src={IMG_BIG_LOGO}
                 alt="Big PayNBack Logo"
-                fill
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-contain object-bottom-right transform rotate-[-5deg] scale-125"
                 priority
               />

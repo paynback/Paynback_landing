@@ -110,6 +110,7 @@ export function Hero() {
             width={160}
             height={48}
             className="hero-nav__logo"
+            style={{ width: "auto", height: "auto" }}
             priority
           />
         </div>
@@ -613,7 +614,7 @@ function OrbitalIcon({ icon, reduced, ellipseY = 1 }) {
             <Image
               src={icon.emoji}
               alt={icon.id}
-              fill
+              fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               style={{ objectFit: 'contain' }}
             />
           </div>

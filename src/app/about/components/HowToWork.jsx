@@ -45,7 +45,7 @@ export default function HowToWork() {
 
                     <div className="relative w-full aspect-4/5 sm:aspect-571/439 max-w-[571px] rounded-[16px] bg-linear-to-tr from-[#2b4fa8] to-[#86b5e5] flex items-end justify-center shadow-xl mx-auto lg:mx-0 overflow-hidden pt-12">
                         <div className="relative z-10 w-[85%] sm:w-[65%] lg:w-[60%] h-[95%]">
-                            <Image src={IMG_TWO_HANDS} fill className="object-contain object-bottom" alt="App with two hands" />
+                            <Image src={IMG_TWO_HANDS} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-contain object-bottom" alt="App with two hands" />
                         </div>
                     </div>
                 </div>
@@ -54,7 +54,7 @@ export default function HowToWork() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div className="relative w-full aspect-4/5 sm:aspect-571/439 max-w-[571px] rounded-[16px] bg-linear-to-tr from-[#2b4fa8] to-[#86b5e5] flex items-end justify-center shadow-xl mx-auto lg:mx-0 overflow-hidden pt-12 order-last lg:order-first">
                         <div className="relative z-10 w-[85%] sm:w-[65%] lg:w-[60%] h-[95%]">
-                            <Image src={IMG_TWO_HANDS} fill className="object-contain object-bottom" alt="App with two hands" />
+                            <Image src={IMG_TWO_HANDS} fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" className="object-contain object-bottom" alt="App with two hands" />
                         </div>
                     </div>
 
