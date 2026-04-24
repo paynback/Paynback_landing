@@ -58,9 +58,9 @@ export default function HomeHero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,transparent_42%,rgba(0,0,0,0.42)_100%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-6 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
-          <div className="order-2 flex max-w-xl flex-col gap-y-4 mt-14 lg:order-1 lg:mt-48 lg:pl-14 xl:pl-20">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0">
+        <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-10 sm:pt-14 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
+          <div className="flex max-w-xl flex-col gap-y-4 mt-10 sm:mt-14 lg:mt-48 lg:pl-14 xl:pl-20">
             <div className="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
               <div className="flex items-center gap-2 text-sm text-white/85">
                 <span
@@ -87,9 +87,9 @@ export default function HomeHero() {
             </p>
           </div>
 
-          <div className="relative order-1 mx-auto h-[340px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:order-2 lg:mx-0 lg:h-[560px] lg:max-w-none">
+          <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none">
             <motion.div
-              className="absolute left-[-1%] top-[-2%] z-20 w-[58%] max-w-[240px] sm:left-[0%] sm:top-[0%] sm:w-[52%] sm:max-w-[260px] md:left-[2%] md:top-[6%] md:w-[44%] md:max-w-[280px] lg:left-[5%] lg:top-[18%] lg:w-[46%] lg:max-w-[240px]"
+              className="absolute left-[0%] top-[0%] z-20 w-[46%] max-w-[170px] sm:left-[0%] sm:top-[0%] sm:w-[52%] sm:max-w-[260px] md:left-[2%] md:top-[6%] md:w-[44%] md:max-w-[280px] lg:left-[5%] lg:top-[18%] lg:w-[46%] lg:max-w-[240px]"
               initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 35, damping: 20, duration: 2.2, delay: 0.3 }}
@@ -111,7 +111,7 @@ export default function HomeHero() {
             </motion.div>
 
             <motion.div
-              className="absolute bottom-[-12%] right-[-18%] z-10 w-[96%] max-w-[460px] sm:bottom-[-14%] sm:right-[-14%] sm:w-[92%] sm:max-w-[520px] md:bottom-[-12%] md:right-[-14%] md:w-[78%] md:max-w-[560px] lg:bottom-[-18%] lg:right-[-12%] lg:w-[64%] lg:max-w-[420px]"
+              className="absolute bottom-[-10%] right-[-10%] z-10 w-[86%] max-w-[360px] sm:bottom-[-14%] sm:right-[-14%] sm:w-[92%] sm:max-w-[520px] md:bottom-[-12%] md:right-[-14%] md:w-[78%] md:max-w-[560px] lg:bottom-[-18%] lg:right-[-12%] lg:w-[64%] lg:max-w-[420px]"
               initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 400 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ type: "spring", stiffness: 35, damping: 20, duration: 2.2, delay: 0.45 }}
@@ -128,8 +128,8 @@ export default function HomeHero() {
                   alt="PayNBack Coin Swirl"
                   width={800}
                   height={800}
-                  className="h-auto w-full object-contain drop-shadow-[0_30px_70px_rgba(14,165,233,0.35)]"
-                  sizes="(min-width: 1024px) 420px, (min-width: 768px) 560px, 92vw"
+                  className="h-auto w-full max-w-[250px] md:max-w-[420px] object-contain drop-shadow-[0_30px_70px_rgba(14,165,233,0.35)]"
+                  sizes="(min-width: 1024px) 420px, (min-width: 668px) 460px, 60vw"
                   priority
                 />
               </motion.div>

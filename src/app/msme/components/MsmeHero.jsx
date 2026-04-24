@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import Image from "next/image";
 
-export default function AboutHero() {
+export default function MsmeHero() {
     // --- Reused ticker logic from BlogHero for identical animation behavior ---
     const MAX_SHIFT = -35;
     const TOTAL_STEPS = 7;
@@ -47,17 +47,17 @@ export default function AboutHero() {
                 <div className="relative flex-1 flex w-full flex-col justify-start pt-28 sm:pt-0 sm:justify-center pb-32 sm:pb-40">
                     <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-3 sm:gap-5 mt-16 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
                         <span className="text-[18px] sm:text-[24px] font-semibold sm:font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9] sm:text-white/90">
-                            About Us
+                            MSME
                         </span>
                         <h1 className="text-balance text-[38px] sm:text-4xl font-semibold sm:font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                            Vision & Mission
+                            Partner for Profit
                         </h1>
                         <p className="pr-4 leading-[1.5] tracking-[-0.56px] text-white/90 sm:text-white/75 text-[15px] sm:text-xs lg:text-sm">
                             <span className="block sm:hidden">
-                                To be the leading platform for seamless, secure,<br />and rewarding cashless shopping worldwide
+                                Leverage our fintech ecosystem to grow<br />visibility, trust, and long-term customer loyalty.
                             </span>
                             <span className="hidden sm:block">
-                                To be the world&apos;s leading platform for seamless and secure shopping experiences, empowering individuals and businesses everywhere with the freedom and flexibility of a rewarding and cashless future.
+                                Leverage our fintech ecosystem to grow visibility, trust, and long-term customer loyalty. Partner with us to boost visibility, increase sales, and scale smarter.
                             </span>
                         </p>
                     </div>
@@ -74,9 +74,10 @@ export default function AboutHero() {
                             transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
                             className="h-full w-full"
                         >
+                            {/* Reusing the About Us Hero image as requested, but with a different alt text */}
                             <Image 
                                 src="/images/water-profile-swirl.png"
-                                alt="Water Profile Swirl"
+                                alt="MSME Partner Visual"
                                 width={407}
                                 height={407}
                                 className="h-full w-full object-contain drop-shadow-[0_15px_35px_rgba(255,255,255,0.15)]"
@@ -100,7 +101,7 @@ export default function AboutHero() {
                         repeatDelay: 0.5,
                     }}
                 >
-                    Find your favourite stores, discover exclusive deals, and connect directly with them on payNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
+                    Become our merchant to expand your reach. Discover exclusive tools to grow your business, manage sales, and connect directly with your customers on payNback.
                 </motion.p>
             </div> */}
         </section>

@@ -66,11 +66,11 @@ export default function ContactHero() {
 
       <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
         {/* Content Centered Vertically */}
-        <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
+        <div className="relative flex-1 flex w-full flex-col justify-start sm:justify-center pt-28 sm:pt-0 pb-32 sm:pb-40">
 
-          <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-12 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
+          <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-16 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
             <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">Contact Us</span>
-            <h1 className="whitespace-nowrap text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
+            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
               We’d Love to Hear From You
             </h1>
             <p className="pr-4 leading-[144%] tracking-[-0.56px] text-[18px] text-white/90 sm:text-xs lg:text-sm">
@@ -94,7 +94,7 @@ export default function ContactHero() {
             </div>
             {/* Hand Image */}
             <motion.div
-              className="relative z-10 w-full sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-26%] sm:mr-[-20%] mb-[-2%]"
+              className="relative z-10 w-[135%] sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-35%] sm:mr-[-20%] mb-[-5%] sm:mb-[-2%]"
               initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 96 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.3 }}
@@ -115,7 +115,7 @@ export default function ContactHero() {
       </div>
 
       {/* Full-width screen bleed text */}
-      <div className="z-40 absolute bottom-2 left-0 w-full overflow-hidden flex items-center h-10 justify-start">
+      {/* <div className="z-40 absolute bottom-2 left-0 w-full overflow-hidden flex items-center h-10 justify-start">
         <motion.p
           className="text-[19px] font-normal text-white leading-[35.62px] tracking-[-0.66px] whitespace-nowrap drop-shadow-md px-4 sm:px-6 lg:px-8"
           animate={{ x: tickerX }}
@@ -129,7 +129,7 @@ export default function ContactHero() {
         >
           Find your favourite stores, discover exclusive deals, and connect directly with them on payNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
         </motion.p>
-      </div>
+      </div> */}
     </section>
   );
 }

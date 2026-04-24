@@ -200,7 +200,6 @@ export default function JobDetailPage() {
           </motion.div>
         </div>
       </div>
-      <Footer />
     </main>
   );
 }

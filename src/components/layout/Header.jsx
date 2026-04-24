@@ -5,8 +5,8 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone, Menu, X } from "lucide-react";
-import { motion, useScroll, useMotionValueEvent } from "framer-motion";
+import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
 const LOGO_SRC = "/Icons/Paynback_logo.png";
@@ -17,6 +17,7 @@ const headerNavItems = [
   { href: "/about", label: "About Us" },
   { href: "/blog", label: "Blogs" },
   { href: "/careers", label: "Careers" },
+  {href: "/msme", label:"For MSME"}
 ];
 
 function navActive(pathname, href) {
@@ -85,9 +86,10 @@ export default function Header({
 
 
       {mounted && typeof document !== 'undefined' ? createPortal(
+        <>
         <div
           className={cn(
-            "fixed left-0 right-0 top-0 z-999 flex justify-center w-full transition-all duration-500 ease-in-out pointer-events-none",
+            "fixed left-0 right-0 top-0 z-990 flex justify-center w-full transition-all duration-500 ease-in-out pointer-events-none",
             isScrolled ? "pt-4 sm:pt-6" : "pt-0"
           )}
         >
@@ -116,7 +118,7 @@ export default function Header({
               className
             )}
           >
-            <div className="flex items-center justify-between gap-4">
+              <div className="flex items-center justify-between gap-4">
               <LogoMark isScrolled={isScrolled} isLight={useWhiteNavbar} />
 
               {/* Desktop nav */}
@@ -160,7 +162,7 @@ export default function Header({
                 <Link
                   href={contactHref}
                   className={cn(
-                    "flex shrink-0 items-center justify-center gap-1.5 bg-white font-semibold text-slate-900 shadow-lg shadow-cyan-500/10 transition-all duration-500 hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
+                    "hidden lg:flex shrink-0 items-center justify-center gap-1.5 bg-white font-semibold text-slate-900 shadow-lg shadow-cyan-500/10 transition-all duration-500 hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
                     isScrolled
                       ? "rounded-full px-2 py-1.5 sm:px-2 sm:py-1.5 text-[11px] sm:text-xs"
                       : "rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm"
@@ -179,93 +181,75 @@ export default function Header({
                       : "bg-white/10 text-white hover:bg-white/20",
                     isScrolled ? "h-8 w-8 rounded-lg" : "h-10 w-10 rounded-lg"
                   )}
-                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  onClick={() => setMobileMenuOpen(true)}
                   aria-label="Toggle navigation menu"
                 >
-                  {mobileMenuOpen ? (
-                    <X className={isScrolled ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2} />
-                  ) : (
-                    <Menu className={isScrolled ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2} />
-                  )}
+                  <Menu className={isScrolled ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2} />
                 </button>
               </div>
             </div>
-
-            {/* Mobile nav dropdown */}
-            {mobileMenuOpen && (
-              <nav
-                className={cn(
-                  "flex flex-col gap-1 rounded-xl p-3 backdrop-blur-md lg:hidden mt-2",
-                  useWhiteNavbar
-                    ? "bg-white border border-black/10 shadow-[0_10px_24px_rgba(15,23,42,0.12)]"
-                    : "bg-white/10",
-                  isScrolled && !useWhiteNavbar ? "bg-black/40 border border-white/5 shadow-inner" : ""
-                )}
-                aria-label="Primary mobile"
-              >
-                {navItems.map(({ href, label }) => {
-                  const active = navActive(pathname, href);
-                  return (
-                    <Link
-                      key={href}
-                      href={href}
-                      onClick={() => setMobileMenuOpen(false)}
-                      className={cn(
-                        "relative z-0 rounded-lg px-4 py-2.5 text-sm transition-all duration-300",
-                        useWhiteNavbar ? "hover:bg-black/5" : "hover:bg-white/10",
-                        active
-                          ? cn(
-                              useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
-                              "before:absolute before:inset-0 before:-z-10 before:rounded-lg before:bg-purple-500/40 before:blur-md"
-                            )
-                          : useWhiteNavbar
-                            ? "text-black/80"
-                            : "text-white/80",
-                      )}
-                    >
-                      {label}
-                    </Link>
-                  );
-                })}
-              </nav>
-            )}
-
-            {/* Scrollable mobile nav — fallback for quick access */}
-            <nav
-              className={cn(
-                "-mx-1 flex overflow-x-auto px-1 pb-1 font-medium lg:hidden mt-1 transition-all duration-500",
-                useWhiteNavbar ? "text-black/90" : "text-white/90",
-                isScrolled ? "gap-4 sm:gap-5 text-xs" : "gap-5 sm:gap-6 text-sm",
-                mobileMenuOpen && "hidden",
-              )}
-              aria-label="Primary mobile scroll"
-            >
-              {navItems.map(({ href, label }) => {
-                const active = navActive(pathname, href);
-                return (
-                  <Link
-                    key={href}
-                    href={href}
-                    className={cn(
-                      "relative z-0 shrink-0 whitespace-nowrap transition-all duration-300",
-                      useWhiteNavbar ? "hover:text-black" : "hover:text-white",
-                      active
-                        ? cn(
-                            useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
-                            "before:absolute before:-inset-x-3 before:-inset-y-1 before:-z-10 before:rounded-full before:bg-purple-500/50 before:blur-md"
-                          )
-                        : useWhiteNavbar
-                          ? "text-black/80"
-                          : "text-white/80",
-                    )}
-                  >
-                    {label}
-                  </Link>
-                );
-              })}
-            </nav>
           </motion.header>
         </div>
+
+        {/* Mobile Full Screen Menu */}
+        <AnimatePresence>
+          {mobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.98 }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="fixed inset-0 z-1000 bg-white flex flex-col pointer-events-auto min-h-screen w-full lg:hidden"
+            >
+              <div className="flex justify-between items-center p-6 sm:p-8">
+                <div className="w-8" /> {/* spacer for flex balance if needed, or leave empty */}
+                <button
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="p-2 transition-opacity hover:opacity-70"
+                  aria-label="Close menu"
+                >
+                  <X className="h-8 w-8 text-black" strokeWidth={2.5} />
+                </button>
+              </div>
+              
+              <div className="flex-1 overflow-y-auto px-6 sm:px-10 pb-20 mt-4">
+                <div className="flex flex-col gap-6 text-black">
+                  
+                  {/* Home Section (Default Open Accordion or Just Links) */}
+                  <div className="flex flex-col">
+                      <div className="flex items-center justify-between font-semibold text-[22px] mb-5 tracking-tight">
+                        <span>Home</span>
+                        <ChevronDown className="h-6 w-6" strokeWidth={2.5} />
+                      </div>
+                      <div className="flex flex-col gap-[18px] pl-1">
+                        <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">About Us</Link>
+                        <Link href="/merchants" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Merchants</Link>
+                        <Link href="/msme" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">MSME</Link>
+                        <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Careers</Link>
+                        <Link href="/internships" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Internships</Link>
+                        <Link href="/refer-earn" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Refer &amp; Earn</Link>
+                        <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Contact Us</Link>
+                      </div>
+                  </div>
+
+                  <div className="h-px w-full bg-gray-300/60 my-2" />
+
+                  <Link href="/guidelines" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70">
+                    Guidelines
+                  </Link>
+
+                  <div className="h-px w-full bg-gray-300/60 my-2" />
+
+                  <Link href="/support" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70">
+                    Support
+                  </Link>
+
+                </div>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+        </>
       , document.body) : null}
     </>
   );

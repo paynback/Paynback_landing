@@ -110,7 +110,7 @@ export default function HowIntoSection() {
             <div
               key={`${s.end}${s.suffix}${s.symbol}`}
               className={cn(
-                "relative pt-2",
+                "relative pt-2 text-center sm:text-left",
                 idx !== 0 &&
                 "sm:pl-16 sm:before:absolute sm:before:left-0 sm:before:top-1/2 sm:before:h-20 sm:before:w-[2px] sm:before:-translate-y-1/2 sm:before:bg-slate-400",
               )}
@@ -121,7 +121,7 @@ export default function HowIntoSection() {
                   {s.symbol}
                 </span>
               </div>
-              <p className="mt-3 max-w-xs text-sm leading-relaxed text-slate-600">
+              <p className="mx-auto mt-3 max-w-xs text-sm leading-relaxed text-slate-600 sm:mx-0">
                 {s.caption}
               </p>
             </div>

@@ -201,14 +201,32 @@ export default function DiscoverDealsSection() {
           {/* Right paragraph */}
           <div className="max-w-3xl text-sm leading-relaxed text-slate-700 sm:text-base sm:leading-relaxed md:max-w-none md:pt-1 lg:text-lg">
             <p>
-            PayNback is India’s first in-store shopping support app that connects users with nearby merchants offering exclusive discounts.
+              PayNback is India’s first in-store shopping support app that connects users with nearby merchants offering exclusive discounts.
             </p>
           </div>
         </div>
 
-        <div className="mx-auto mt-8 grid w-full max-w-6xl grid-cols-1 justify-items-center gap-6 sm:mt-10 sm:gap-7 md:mt-12 md:grid-cols-2 md:justify-items-stretch md:gap-8 lg:grid-cols-3 lg:gap-10">
+        {/* <div className="mx-auto mt-8 grid w-full max-w-6xl grid-cols-1 justify-items-center gap-6 sm:mt-10 sm:gap-7 md:mt-12 md:grid-cols-2 md:justify-items-stretch md:gap-8 lg:grid-cols-3 lg:gap-10">
           {ends.map((endMs, i) => (
             <DealCard key={i} endMs={endMs} />
+          ))}
+        </div> */}
+
+        <div
+          className="
+    mx-auto mt-8 w-full max-w-6xl
+
+    flex gap-6 overflow-x-auto snap-x snap-mandatory px-4
+
+    sm:mt-10 sm:gap-7
+    md:mt-12 md:grid md:grid-cols-2 md:justify-items-stretch md:gap-8 md:overflow-visible
+    lg:grid-cols-3 lg:gap-10
+  "
+        >
+          {ends.map((endMs, i) => (
+            <div key={i} className="min-w-[85%] snap-center md:min-w-0">
+              <DealCard endMs={endMs} />
+            </div>
           ))}
         </div>
       </div>

@@ -31,10 +31,12 @@ export default function AboutDetails() {
                     {/* Right Text */}
                     <div className="flex flex-col lg:pt-22">
                         <div className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
-                            Find your favourite stores, discover exclusive deals, and connect
-                            directly with them on payNback through calls or chats. Need
-                            directions? We&apos;ve got you covered. Enjoy seamless bill payments
-                            using UPI, your personal wallet, or by redeeming rewards.
+                            The platform enables seamless bill payments using UPI, a personal wallet,
+                             or by redeeming earned reward points. Users can enjoy cashback offers,
+                             loyalty benefits, and special promotions on every eligible purchase. 
+                             By combining digital payments, rewards, referrals, and personalized 
+                             offers in one place, PayNback transforms everyday spending into a more
+                              rewarding, convenient, and engaging experience for both customers and businesses.
                         </div>
                     </div>
                 </div>

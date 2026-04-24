@@ -282,23 +282,22 @@ export default function Footer() {
 
         {/* ── Brand watermark text ── */}
         <div
-          className="relative z-10 pointer-events-none select-none overflow-hidden flex justify-center w-full"
+          className="relative z-10 pointer-events-none select-none overflow-hidden flex justify-center w-full pb-16 md:pb-14 mt-4"
           aria-hidden
         >
           <p
-            className="whitespace-nowrap text-center"
+            className="whitespace-nowrap text-center translate-y-3 md:translate-y-5"
             style={{
               fontFamily: "var(--font-poppins), sans-serif",
               fontWeight: 500,
-              fontSize: "clamp(100px, 20vw, 287.17px)", // scales down smoothly on mobile
+              fontSize: "clamp(64px, 18vw, 287.17px)", // Reduced minimum and vw to prevent horizontal overflow
               lineHeight: 0.8, // compresses the bounding box to reduce overall footer height
-              letterSpacing: "-8.04px", // applies exact Figma kerning
+              letterSpacing: "-0.03em", // making it relative to font size
               background: "linear-gradient(175.53deg, rgba(31, 96, 186, 0.8) 17.23%, rgba(8, 15, 24, 0.8) 79.61%)",
               WebkitBackgroundClip: "text",
               backgroundClip: "text",
               color: "transparent",
               opacity: 0.5,
-              transform: "translateY(20px)", // pushes it further down to be cut off by copyright
             }}
           >
             payNback
