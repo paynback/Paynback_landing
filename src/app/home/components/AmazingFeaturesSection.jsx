@@ -39,13 +39,13 @@ const FEATURES = [
     icon: Tag,
     title: "Exclusive Discounts & Rewards",
     description:
-      "Unlock savings with PayNBack's exclusive deals and reward points for discounts on every purchase.",
+      "Unlock savings with PayNback's exclusive deals and reward points for discounts on every purchase.",
   },
   {
     icon: TrendingUp,
     title: "Business Growth Support",
     description:
-      "Empower your business with PayNBack's loan facilitation and growth support for enhanced success and shopping experiences.",
+      "Empower your business with PayNback's loan facilitation and growth support for enhanced success and shopping experiences.",
   },
 ];
 
@@ -55,7 +55,7 @@ export default function AmazingFeaturesSection() {
       className="w-full bg-white font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <motion.div 
+      <motion.div
         className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-20 lg:py-20"
         initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
         whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}

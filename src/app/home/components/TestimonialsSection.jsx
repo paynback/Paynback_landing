@@ -11,7 +11,7 @@ const REVIEWS = [
     name: "Arun Dev",
     role: "Supermarket Owner",
     rating: 5,
-    text: "I've been using payNback since it launched, and it's been amazing for my business. I've gained more customers, increased profits, and seen real growth. Highly recommended!",
+    text: "I've been using PayNback since it launched, and it's been amazing for my business. I've gained more customers, increased profits, and seen real growth. Highly recommended!",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const REVIEWS = [
     name: "Rahul Sharma",
     role: "Retail Shop Owner",
     rating: 5,
-    text: "payNback has completely changed how I manage loyalty for my customers. The discount features and cashback system bring people back again and again. Couldn't be happier!",
+    text: "PayNback has completely changed how I manage loyalty for my customers. The discount features and cashback system bring people back again and again. Couldn't be happier!",
   },
   {
     id: 3,
@@ -27,7 +27,7 @@ const REVIEWS = [
     name: "James Miller",
     role: "Regular Shopper",
     rating: 5,
-    text: "I've been using payNback since it launched, and it's been amazing for my business. I've gained more customers, increased profits, and seen real growth. Highly recommended!",
+    text: "I've been using PayNback since it launched, and it's been amazing for my business. I've gained more customers, increased profits, and seen real growth. Highly recommended!",
   },
   {
     id: 4,
@@ -35,7 +35,7 @@ const REVIEWS = [
     name: "Sophia Carter",
     role: "Frequent Buyer",
     rating: 5,
-    text: "Absolutely love the personalized deals and reward points. Every purchase feels rewarding. payNback makes shopping smarter and more enjoyable every single time.",
+    text: "Absolutely love the personalized deals and reward points. Every purchase feels rewarding. PayNback makes shopping smarter and more enjoyable every single time.",
   },
 ];
 
@@ -101,7 +101,7 @@ export default function TestimonialsSection() {
             </h2>
 
             <p className="max-w-xs text-sm leading-relaxed text-slate-500">
-              Hear what our users love about paying and earning with payNback.
+              Hear what our users love about paying and earning with PayNback.
             </p>
 
             {/* Rating badge */}

@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const MERCHANT_LOGO = "/images/3c0116fa484f774824ac2f339552f593418ec815.png";
 const IMG_DISH_WITH_JAMMY = "/images/dish-with-jammy.png";
 /** Small header mark on card (white treatment on blue) */
-const PAYNBACK_ICON = "/Icons/Paynback_logo.png";
+const PayNback_ICON = "/Icons/PayNback_logo.png";
 
 function pad2(n) {
   return String(n).padStart(2, "0");
@@ -86,8 +86,8 @@ function DealCard({ endMs }) {
           <div className="flex items-start justify-between gap-2 sm:gap-3">
             <div className="relative h-7 w-20 shrink-0 sm:h-8 sm:w-22 md:h-9 md:w-28">
               <Image
-                src={PAYNBACK_ICON}
-                alt="PayNBack"
+                src={PayNback_ICON}
+                alt="PayNback"
                 fill
                 className="object-contain object-left drop-shadow"
                 sizes="(max-width:640px) 80px, (max-width:768px) 88px, 112px"

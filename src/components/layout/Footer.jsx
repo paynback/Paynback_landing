@@ -15,13 +15,13 @@ import {
 import { StoreBadges } from "../ui/StoreBadges";
 
 /* ── Asset paths ─────────────────────────────────────────── */
-const LOGO = "/Icons/Paynback_logo.png";
+const LOGO = "/Icons/PayNback_logo.png";
 const STARTUP_MSN = "/Icons/start-up-mission-logo.png";
 const STARTUP_IND = "/Icons/start-up-india-logo.png";
 const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";
 
 /* ── Nav columns ─────────────────────────────────────────── */
-const COL_PAYNBACK = [
+const COL_PayNback = [
   { label: "About Us", href: "/about" },
   { label: "Careers", href: "/careers" },
   { label: "Internships", href: "/internships" },
@@ -99,7 +99,7 @@ function NewsletterBanner() {
       </h3>
       <p className="mx-auto mb-6 max-w-lg text-sm leading-relaxed text-white/60">
         Subscribe to our newsletter for exclusive deals, rewards, and early
-        access to offers. Stay ahead with payNback!
+        access to offers. Stay ahead with PayNback!
       </p>
 
       <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -151,14 +151,14 @@ export default function Footer() {
             <div className="flex flex-col gap-7 lg:col-span-2">
               <Image
                 src={LOGO}
-                alt="payNback logo"
+                alt="PayNback logo"
                 width={140}
                 height={48}
                 className="w-36 object-contain"
                 style={{ height: "auto" }}
               />
               <p className="max-w-[400px] text-sm leading-relaxed text-white/55">
-                payNback is India&apos;s first in-store shopping support app<br />
+                PayNback is India&apos;s first in-store shopping support app<br />
                 that offers rewards and discounts to consumers.
               </p>
 
@@ -195,11 +195,11 @@ export default function Footer() {
               </div>
             </div>
 
-            {/* Col 2 — payNback links */}
+            {/* Col 2 — PayNback links */}
             <div className="flex flex-col gap-4">
-              <h4>payNback</h4>
+              <h4>PayNback</h4>
               <ul className="flex flex-col gap-3">
-                {COL_PAYNBACK.map((item) => (
+                {COL_PayNback.map((item) => (
                   <li key={item.label}>
                     <Link
                       href={item.href}
@@ -247,7 +247,7 @@ export default function Footer() {
                   </li>
                   <li className="flex items-center gap-2 text-sm text-white/60">
                     <Mail className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
-                    Support@payNback.com
+                    Support@PayNback.com
                   </li>
                 </ul>
               </div>
@@ -300,14 +300,14 @@ export default function Footer() {
               opacity: 0.5,
             }}
           >
-            payNback
+            PayNback
           </p>
         </div>
 
         {/* Copyright bar — absolute overlapping the watermark bottom */}
         <div className="absolute bottom-0 left-0 w-full z-20 px-4 py-4 text-center" style={{ background: "#0C1A31" }}>
           <p className="text-xs text-white/40">
-            Copyright © 2026 payNback. All Rights Reserved.
+            Copyright © 2026 PayNback. All Rights Reserved.
           </p>
         </div>
       </div> {/* Closes relative isolate overflow-hidden */}

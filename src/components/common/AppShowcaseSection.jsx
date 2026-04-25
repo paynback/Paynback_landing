@@ -176,7 +176,7 @@ export default function AppShowcaseSection() {
           >
             <Image
               src={PHONE_IMG}
-              alt="PayNBack app running on an iPhone held in a hand"
+              alt="PayNback app running on an iPhone held in a hand"
               fill
               className="object-contain"
               sizes="(max-width:640px) 320px, (max-width:1024px) 440px, 580px"

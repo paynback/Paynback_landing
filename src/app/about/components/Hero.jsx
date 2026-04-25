@@ -63,7 +63,7 @@ export default function AboutHero() {
                     </div>
 
                     {/* Right-aligned or Centered Hero Image */}
-                    <motion.div 
+                    <motion.div
                         className="pointer-events-none relative mx-auto mt-16 sm:mt-0 sm:absolute sm:right-[-5%] sm:top-[50%] z-0 h-[300px] w-[300px] sm:-translate-y-1/2 opacity-100 drop-shadow-2xl sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[254px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
                         initial={{ opacity: 0, y: -400 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -74,7 +74,7 @@ export default function AboutHero() {
                             transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
                             className="h-full w-full"
                         >
-                            <Image 
+                            <Image
                                 src="/images/water-profile-swirl.png"
                                 alt="Water Profile Swirl"
                                 width={407}
@@ -100,7 +100,7 @@ export default function AboutHero() {
                         repeatDelay: 0.5,
                     }}
                 >
-                    Find your favourite stores, discover exclusive deals, and connect directly with them on payNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
+                    Find your favourite stores, discover exclusive deals, and connect directly with them on PayNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
                 </motion.p>
             </div> */}
         </section>

@@ -4,10 +4,10 @@ import Image from "next/image";
 import { Info } from "lucide-react";
 import { motion } from "framer-motion";
 
-const QR_IMG         = "/images/c06b42d0f732be45d4b2fbaa6d59d55d1aa88ea8.png";
+const QR_IMG = "/images/c06b42d0f732be45d4b2fbaa6d59d55d1aa88ea8.png";
 const COIN_SWIRL_IMG = "/images/33b06127ad13c66d1ea9ad4918ed9018d0d01e8a.png";
-const BUBBLE_IMG     = "/images/e9eaa1ec2bb31dedd4c5ca5b5780dc6bb78f2b36.png";
-const STORE_BADGES   = "/Icons/app%26play_store_icons_hero.png";
+const BUBBLE_IMG = "/images/e9eaa1ec2bb31dedd4c5ca5b5780dc6bb78f2b36.png";
+const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";
 
 export default function DownloadCTASection() {
   return (
@@ -65,7 +65,7 @@ export default function DownloadCTASection() {
 
             {/* Sub-text */}
             <p className="text-sm leading-relaxed text-white/55">
-              Experience seamless online payment only on payNback app
+              Experience seamless online payment only on PayNback app
             </p>
           </div>
 
@@ -77,7 +77,7 @@ export default function DownloadCTASection() {
               <motion.div animate={{ y: [0, -35, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
                 <Image
                   src={COIN_SWIRL_IMG}
-                  alt="PayNBack Coin Swirl"
+                  alt="PayNback Coin Swirl"
                   width={400}
                   height={400}
                   className="h-auto w-full object-contain drop-shadow-[0_20px_40px_rgba(153,186,236,0.25)]"
@@ -100,7 +100,7 @@ export default function DownloadCTASection() {
               <div className="overflow-hidden rounded-xl bg-white p-2">
                 <Image
                   src={QR_IMG}
-                  alt="Scan QR code to download payNback"
+                  alt="Scan QR code to download PayNback"
                   width={160}
                   height={160}
                   className="h-auto w-[clamp(120px,14vw,160px)]"

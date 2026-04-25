@@ -99,11 +99,10 @@ export default function ContactSection() {
                   id="firstName"
                   placeholder="Enter your first name"
                   {...register("firstName")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${
-                    errors.firstName
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.firstName
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.firstName && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -122,11 +121,10 @@ export default function ContactSection() {
                   id="lastName"
                   placeholder="Enter your last name"
                   {...register("lastName")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${
-                    errors.lastName
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.lastName
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.lastName && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -145,11 +143,10 @@ export default function ContactSection() {
                   id="email"
                   placeholder="Enter your e-mail id"
                   {...register("email")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${
-                    errors.email
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.email
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.email && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -168,11 +165,10 @@ export default function ContactSection() {
                   id="phone"
                   placeholder="Enter your mobile number"
                   {...register("phone")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${
-                    errors.phone
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.phone
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.phone && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -194,11 +190,10 @@ export default function ContactSection() {
                   rows={4}
                   placeholder="Enter your message"
                   {...register("message")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors resize-none ${
-                    errors.message
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors resize-none ${errors.message
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.message && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -282,7 +277,7 @@ export default function ContactSection() {
             <div className="mb-10">
               <h3 className="mb-3 text-lg font-medium text-slate-900">Visit us</h3>
               <p className="text-sm leading-relaxed text-slate-500">
-                payNback, Kerala Technology Innovation<br />
+                PayNback, Kerala Technology Innovation<br />
                 Zone, Kinfra Hi-Tech Park Main Rd, HMT<br />
                 Colony, P.O, Kalamassery, Kochi, Kerala<br />
                 683503

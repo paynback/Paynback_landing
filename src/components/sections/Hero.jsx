@@ -1,6 +1,6 @@
 // src/components/sections/Hero/Hero.jsx
 'use client'
-import {useState} from 'react'
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -12,12 +12,12 @@ const ORBIT_RADIUS = 400
 const ORBIT_DURATION = 24
 const ICON_SIZE = 44
 const BASE_ICONS = [
-  { id: 'security',  emoji: "/Icons/blue_lock.png" },
-  { id: 'gift_red',  emoji: "/Icons/Gift_red.png" },
-  { id: 'location',  emoji: "/Icons/lcoaiton_red.png" },
+  { id: 'security', emoji: "/Icons/blue_lock.png" },
+  { id: 'gift_red', emoji: "/Icons/Gift_red.png" },
+  { id: 'location', emoji: "/Icons/lcoaiton_red.png" },
   { id: 'coin_gold', emoji: "/Icons/gold_coin.png" },
-  { id: 'shopping',  emoji: "/Icons/Green_shop_bag.png" },
-  { id: 'share',     emoji: "/Icons/share_clip_blue.png" },
+  { id: 'shopping', emoji: "/Icons/Green_shop_bag.png" },
+  { id: 'share', emoji: "/Icons/share_clip_blue.png" },
 ]
 
 // 12 icons total, evenly spaced but clustered more tightly in the visible arc
@@ -105,8 +105,8 @@ export function Hero() {
       <nav className="hero-nav">
         <div style={{ position: 'relative' }}>
           <Image
-            src="/Icons/Paynback_logo.png"
-            alt="Paynback Logo"
+            src="/Icons/PayNback_logo.png"
+            alt="PayNback Logo"
             width={160}
             height={48}
             className="hero-nav__logo"
@@ -163,8 +163,8 @@ export function Hero() {
             <Info className="w-5 h-5 opacity-80" /> App Available For
           </span>
           <div className="hero-stores__images">
-           <div className="hero-store-pill">
-              <Image 
+            <div className="hero-store-pill">
+              <Image
                 src="/Icons/home_playstore.png"
                 alt="Google Play"
                 width={100}
@@ -172,14 +172,14 @@ export function Hero() {
                 className="hero-store-pill__icon"
               />
               <span className="hero-store-pill__divider" />
-              <Image 
-              src="/Icons/home_appstore.png" 
-              alt="App Store"
-              width={100}
-              height={100}
-              className="hero-store-pill__icon"
-            />
-           </div>
+              <Image
+                src="/Icons/home_appstore.png"
+                alt="App Store"
+                width={100}
+                height={100}
+                className="hero-store-pill__icon"
+              />
+            </div>
           </div>
         </div>
       </motion.div>

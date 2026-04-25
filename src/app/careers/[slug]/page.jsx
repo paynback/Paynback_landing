@@ -12,11 +12,11 @@ export default function JobDetailPage() {
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 28 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.15 },
-          transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
-        };
+        initial: { opacity: 0, y: 28 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.15 },
+        transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
+      };
 
   return (
     <main className="min-h-screen bg-white flex flex-col">
@@ -112,37 +112,37 @@ export default function JobDetailPage() {
                 {/* First Name */}
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">First name*</label>
-                  <input 
-                    type="text" 
-                    placeholder="Enter your first name" 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]" 
+                  <input
+                    type="text"
+                    placeholder="Enter your first name"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
                   />
                 </div>
                 {/* Last Name */}
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">Last name*</label>
-                  <input 
-                    type="text" 
-                    placeholder="Enter your last name" 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]" 
+                  <input
+                    type="text"
+                    placeholder="Enter your last name"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
                   />
                 </div>
                 {/* Mobile Number */}
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">Mobile number*</label>
-                  <input 
-                    type="tel" 
-                    placeholder="Enter your mobile number" 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]" 
+                  <input
+                    type="tel"
+                    placeholder="Enter your mobile number"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
                   />
                 </div>
                 {/* E-mail Id */}
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">E-mail id*</label>
-                  <input 
-                    type="email" 
-                    placeholder="Enter your e-mail id" 
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]" 
+                  <input
+                    type="email"
+                    placeholder="Enter your e-mail id"
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
                   />
                 </div>
               </div>
@@ -163,16 +163,16 @@ export default function JobDetailPage() {
               {/* Message */}
               <div className="space-y-2">
                 <label className="block text-[#0964BC] font-medium text-[15px]">Message</label>
-                <textarea 
-                  placeholder="Enter your message" 
+                <textarea
+                  placeholder="Enter your message"
                   rows={4}
-                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none" 
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
                 ></textarea>
               </div>
 
               {/* Consent */}
               <p className="text-gray-500 text-[14px]">
-                By clicking submit below, you consent to allow payNback to store and process the personal information submitted above to provide you the content requested.
+                By clicking submit below, you consent to allow PayNback to store and process the personal information submitted above to provide you the content requested.
               </p>
 
               {/* Fake reCAPTCHA */}
@@ -189,8 +189,8 @@ export default function JobDetailPage() {
               </div>
 
               <div>
-                <button 
-                  type="button" 
+                <button
+                  type="button"
                   className="bg-brand-primary hover:bg-[#0855A1] text-white px-8 py-3 rounded-full font-medium transition-colors"
                 >
                   Submit

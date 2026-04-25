@@ -35,12 +35,12 @@ const DownloadAppFinal = () => {
           transition={{ duration: 0.6, delay: 0.12 }}
           viewport={{ once: true, amount: 0.35 }}
           style={{
-          color: 'rgba(255,255,255,0.9)',
-          fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
-          maxWidth: '600px',
-          margin: '0 auto 1.75rem',
-        }}>
-          Experience seamless online payment only on payNback app
+            color: 'rgba(255,255,255,0.9)',
+            fontSize: 'clamp(0.9rem, 2vw, 1.1rem)',
+            maxWidth: '600px',
+            margin: '0 auto 1.75rem',
+          }}>
+          Experience seamless online payment only on PayNback app
         </motion.p>
 
         <motion.div
@@ -49,20 +49,20 @@ const DownloadAppFinal = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           viewport={{ once: true, amount: 0.35 }}
           style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '1rem',
-          flexWrap: 'wrap',
-          marginBottom: '0.25rem',
-        }}>
-          <StoreButton 
-            src="/Icons/get_iton_playstore.png" 
-            alt="Get it on Play Store" 
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            gap: '1rem',
+            flexWrap: 'wrap',
+            marginBottom: '0.25rem',
+          }}>
+          <StoreButton
+            src="/Icons/get_iton_playstore.png"
+            alt="Get it on Play Store"
           />
-          <StoreButton 
-            src="/Icons/get_iton_appstore.png" 
-            alt="Get it on App Store" 
+          <StoreButton
+            src="/Icons/get_iton_appstore.png"
+            alt="Get it on App Store"
           />
         </motion.div>
       </div>
@@ -108,7 +108,7 @@ const DownloadAppFinal = () => {
             viewport={{ once: true, amount: 0.2 }}
             style={{ position: 'relative', width: '100%', height: '100%' }}
           >
-            <Image src="/Icons/phone_home_page.png" alt="Phone" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'contain', objectPosition: 'bottom'  }} priority />
+            <Image src="/Icons/phone_home_page.png" alt="Phone" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" style={{ objectFit: 'contain', objectPosition: 'bottom' }} priority />
           </motion.div>
         </div>
         {/* Phone 3 */}

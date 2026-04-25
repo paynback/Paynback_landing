@@ -95,9 +95,9 @@ export default function MsmeForm() {
   return (
     <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50 font-sans text-slate-900">
       <div className="max-w-4xl mx-auto">
-        
+
         {/* Header */}
-        <motion.div 
+        <motion.div
           className="mb-10 text-center md:text-left"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -113,7 +113,7 @@ export default function MsmeForm() {
         </motion.div>
 
         {/* Form Card */}
-        <motion.div 
+        <motion.div
           className="bg-white rounded-xl shadow-lg border border-gray-100 p-6 md:p-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -121,23 +121,22 @@ export default function MsmeForm() {
           transition={{ duration: 0.7, delay: 0.2 }}
         >
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
-            
+
             {/* 2-column grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              
+
               {/* Full Name */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="name" className="text-sm font-medium text-(--brand-primary)">Full name*</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   id="name"
-                  placeholder="Enter your full name" 
+                  placeholder="Enter your full name"
                   {...register("name")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
-                    errors.name
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.name
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.name && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -149,16 +148,15 @@ export default function MsmeForm() {
               {/* Mobile Number */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="phone" className="text-sm font-medium text-(--brand-primary)">Mobile number*</label>
-                <input 
-                  type="tel" 
+                <input
+                  type="tel"
                   id="phone"
-                  placeholder="Enter your mobile number" 
+                  placeholder="Enter your mobile number"
                   {...register("phone")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
-                    errors.phone
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.phone
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.phone && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -170,16 +168,15 @@ export default function MsmeForm() {
               {/* Shop Name */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="shopName" className="text-sm font-medium text-(--brand-primary)">Shop name*</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   id="shopName"
-                  placeholder="Enter your shop name" 
+                  placeholder="Enter your shop name"
                   {...register("shopName")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
-                    errors.shopName
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.shopName
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.shopName && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -192,14 +189,13 @@ export default function MsmeForm() {
               <div className="flex flex-col space-y-2">
                 <label htmlFor="category" className="text-sm font-medium text-(--brand-primary)">Category*</label>
                 <div className="relative">
-                  <select 
+                  <select
                     id="category"
                     {...register("category")}
-                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-sm text-gray-500 bg-white ${
-                      errors.category
-                        ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                        : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                    }`}
+                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-sm text-gray-500 bg-white ${errors.category
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                      }`}
                     defaultValue=""
                     disabled={categoriesLoading}
                   >
@@ -215,7 +211,7 @@ export default function MsmeForm() {
                   <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
                     {categoriesLoading
                       ? <Loader2 className="h-4 w-4 animate-spin" />
-                      : <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                      : <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
                     }
                   </div>
                 </div>
@@ -229,16 +225,15 @@ export default function MsmeForm() {
               {/* Shop Location / Landmark */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="landmark" className="text-sm font-medium text-(--brand-primary)">Landmark*</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   id="landmark"
-                  placeholder="Enter your landmark" 
+                  placeholder="Enter your landmark"
                   {...register("landmark")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
-                    errors.landmark
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.landmark
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.landmark && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -250,16 +245,15 @@ export default function MsmeForm() {
               {/* Location PIN */}
               <div className="flex flex-col space-y-2">
                 <label htmlFor="pincode" className="text-sm font-medium text-(--brand-primary)">Location PIN*</label>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   id="pincode"
-                  placeholder="Enter your location PIN" 
+                  placeholder="Enter your location PIN"
                   {...register("pincode")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${
-                    errors.pincode
-                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
-                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
-                  }`}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.pincode
+                    ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                    : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                    }`}
                 />
                 {errors.pincode && (
                   <span className="mt-1.5 text-xs text-red-500">
@@ -309,7 +303,7 @@ export default function MsmeForm() {
 
             {/* Disclaimer */}
             <p className="text-xs text-gray-500 mt-4 leading-relaxed">
-              By clicking submit below, you consent to allow paynback to store and process the personal information submitted above to provide you the content requested.
+              By clicking submit below, you consent to allow PayNback to store and process the personal information submitted above to provide you the content requested.
             </p>
 
             {/* Status Message Animation */}
@@ -357,7 +351,7 @@ export default function MsmeForm() {
 
             {/* Submit Button */}
             <div className="mt-8 flex justify-center">
-              <button 
+              <button
                 type="submit"
                 disabled={isSubmitting}
                 className="block w-full sm:w-auto min-w-[240px] bg-(--brand-primary) hover:bg-(--brand-primary) active:scale-[0.98] text-white font-medium py-3.5 px-8 rounded-full transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-(--brand-primary) cursor-pointer focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"

@@ -49,7 +49,7 @@ const DownloadApp = () => {
           maxWidth: '600px',
           margin: '0 auto 1.75rem',
         }}>
-          Experience seamless online payment only on payNback app
+          Experience seamless online payment only on PayNback app
         </p>
 
         {/* --- Store Buttons --- */}
@@ -61,13 +61,13 @@ const DownloadApp = () => {
           flexWrap: 'wrap',
           marginBottom: '0.25rem',
         }}>
-          <StoreButton 
-            src="/Icons/get_iton_playstore.png" 
-            alt="Get it on Play Store" 
+          <StoreButton
+            src="/Icons/get_iton_playstore.png"
+            alt="Get it on Play Store"
           />
-          <StoreButton 
-            src="/Icons/get_iton_appstore.png" 
-            alt="Get it on App Store" 
+          <StoreButton
+            src="/Icons/get_iton_appstore.png"
+            alt="Get it on App Store"
           />
         </div>
       </motion.div>
@@ -89,10 +89,10 @@ const DownloadApp = () => {
             initial={{ opacity: 0, y: 100, rotate: 0, x: phone.x }}
             whileInView={{ opacity: 1, y: 0, rotate: 0, x: phone.x }}
             viewport={{ once: true }}
-            transition={{ 
-              duration: 0.8, 
+            transition={{
+              duration: 0.8,
               delay: phone.delay,
-              ease: [0.22, 1, 0.36, 1] 
+              ease: [0.22, 1, 0.36, 1]
             }}
             style={{
               position: 'absolute',
@@ -106,16 +106,16 @@ const DownloadApp = () => {
             }}
           >
 
-            <div style={{ 
-              position: 'relative', 
-              width: '100%', 
+            <div style={{
+              position: 'relative',
+              width: '100%',
               height: '100%',
               transform: `scale(1) translate(0, 0)`
             }}>
-              <Image 
-                src={phone.src} 
-                alt="Phone Mockup" 
-                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+              <Image
+                src={phone.src}
+                alt="Phone Mockup"
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 style={{ objectFit: 'contain', objectPosition: 'bottom' }} // Force to bottom
                 priority
               />
@@ -153,10 +153,10 @@ const StoreButton = ({ src, alt }) => (
       filter: 'drop-shadow(0 8px 18px rgba(0,0,0,0.18))',
     }}
   >
-    <Image 
-      src={src} 
-      alt={alt} 
-      fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" 
+    <Image
+      src={src}
+      alt={alt}
+      fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       style={{ objectFit: 'contain' }}
     />
   </motion.a>

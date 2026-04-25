@@ -86,7 +86,7 @@ export default function ContactHero() {
             <div className="absolute right-[2%] bottom-[-20%] w-[110%] h-[110%] z-0 opacity-20">
               <Image
                 src={IMG_BIG_LOGO}
-                alt="Big PayNBack Logo"
+                alt="Big PayNback Logo"
                 fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-contain object-bottom-right transform rotate-[-5deg] scale-125"
                 priority
@@ -127,7 +127,7 @@ export default function ContactHero() {
             repeatDelay: 0.5,
           }}
         >
-          Find your favourite stores, discover exclusive deals, and connect directly with them on payNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
+          Find your favourite stores, discover exclusive deals, and connect directly with them on PayNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
         </motion.p>
       </div> */}
     </section>

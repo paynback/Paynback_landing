@@ -12,7 +12,7 @@ const STEPS = [
   {
     id: 2,
     iconSrc: '/Icons/steps2join_2.png',
-    title: 'Download the payNback app from Play Store & App Store',
+    title: 'Download the PayNback app from Play Store & App Store',
   },
   {
     id: 3,
@@ -49,7 +49,7 @@ export function HowItWorks() {
     <section className="steps-section">
       {/* Heading */}
       <div className="steps-header">
-        <motion.h2 
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -57,9 +57,9 @@ export function HowItWorks() {
           className="steps-title"
         >
           Steps to join in{' '}
-          <span style={{ color: '#1d70b8' }}>payNback?</span>
+          <span style={{ color: '#1d70b8' }}>PayNback?</span>
         </motion.h2>
-        <motion.p 
+        <motion.p
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
@@ -71,7 +71,7 @@ export function HowItWorks() {
       </div>
 
       {/* Steps row */}
-      <motion.div 
+      <motion.div
         className="steps-row"
         variants={containerVariants}
         initial="hidden"

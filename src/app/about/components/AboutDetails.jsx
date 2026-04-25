@@ -13,13 +13,13 @@ export default function AboutDetails() {
                     {/* Left Text */}
                     <div className="flex flex-col gap-6">
                         <h2 className="text-[48px] font-medium leading-[124%] tracking-[-0.56px] text-slate-900">
-                            <span className="text-brand-primary">About</span> payNback
+                            <span className="text-brand-primary">About</span> PayNback
                         </h2>
                         <div className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
-                            payNback is India&apos;s first in-store shopping support app that offers
+                            PayNback is India&apos;s first in-store shopping support app that offers
                             rewards and discounts to consumers. Enjoy massive benefits and
-                            pre-reduced prices when you shop at payNback-associated
-                            merchants. payNback is not an eCommerce platform from which
+                            pre-reduced prices when you shop at PayNback-associated
+                            merchants. PayNback is not an eCommerce platform from which
                             you can buy or sell stuffs, but a platform that connects you with
                             your desired merchants offering competitive prices, and significant
                             cash back rewards and incentives for all parties involved, such as
@@ -32,11 +32,11 @@ export default function AboutDetails() {
                     <div className="flex flex-col lg:pt-22">
                         <div className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
                             The platform enables seamless bill payments using UPI, a personal wallet,
-                             or by redeeming earned reward points. Users can enjoy cashback offers,
-                             loyalty benefits, and special promotions on every eligible purchase. 
-                             By combining digital payments, rewards, referrals, and personalized 
-                             offers in one place, PayNback transforms everyday spending into a more
-                              rewarding, convenient, and engaging experience for both customers and businesses.
+                            or by redeeming earned reward points. Users can enjoy cashback offers,
+                            loyalty benefits, and special promotions on every eligible purchase.
+                            By combining digital payments, rewards, referrals, and personalized
+                            offers in one place, PayNback transforms everyday spending into a more
+                            rewarding, convenient, and engaging experience for both customers and businesses.
                         </div>
                     </div>
                 </div>
@@ -61,7 +61,7 @@ export default function AboutDetails() {
                         <div className="relative z-10 w-[85%] sm:w-[65%] lg:w-[75%] h-[95%]">
                             <Image
                                 src={IMG_APP_ONE_HAND}
-                                alt="PayNBack App displayed in one hand"
+                                alt="PayNback App displayed in one hand"
                                 fill
                                 className="object-contain object-bottom"
                                 sizes="(max-width: 1024px) 100vw, 50vw"
@@ -101,7 +101,7 @@ export default function AboutDetails() {
                                 <span className="mr-3 mt-[8px] w-[4px] h-[4px] bg-slate-800 rounded-full shrink-0"></span>
                                 <span>
                                     <strong className="text-slate-900 font-medium tracking-tight">Pay with ease :</strong> Settle bills effortlessly using UPI or redeem your
-                                    payNback rewards.
+                                    PayNback rewards.
                                 </span>
                             </li>
                             <li className="text-slate-600 font-normal flex items-start">

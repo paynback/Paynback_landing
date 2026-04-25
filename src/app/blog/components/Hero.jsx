@@ -142,7 +142,7 @@ export default function BlogHero() {
             repeatDelay: 0.5,
           }}
         >
-          Find your favourite stores, discover exclusive deals, and connect directly with them on payNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
+          Find your favourite stores, discover exclusive deals, and connect directly with them on PayNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
         </motion.p>
       </div> */}
     </section>
