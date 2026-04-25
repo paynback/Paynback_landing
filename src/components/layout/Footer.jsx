@@ -15,7 +15,7 @@ import {
 import { StoreBadges } from "../ui/StoreBadges";
 
 /* ── Asset paths ─────────────────────────────────────────── */
-const LOGO = "/Icons/PayNback_logo.png";
+const LOGO = "/Icons/Paynback_logo.png";
 const STARTUP_MSN = "/Icons/start-up-mission-logo.png";
 const STARTUP_IND = "/Icons/start-up-india-logo.png";
 const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";

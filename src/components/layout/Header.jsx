@@ -9,8 +9,8 @@ import { Phone, Menu, X, ChevronDown } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
-const LOGO_SRC = "/Icons/PayNback_logo.png";
-const LOGO_SRC_LIGHT = "/Icons/PayNbacklogo_for_whitebg.png";
+const LOGO_SRC = "/Icons/Paynback_logo.png";
+const LOGO_SRC_LIGHT = "/Icons/Paynbacklogo_for_whitebg.png";
 
 const headerNavItems = [
   { href: "/home", label: "Home" },
