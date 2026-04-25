@@ -255,7 +255,7 @@ export default function ContactSection() {
                 <button
                   type="submit"
                   disabled={isSubmittingForm}
-                  className="mx-auto block w-full sm:w-auto min-w-[460px] rounded-full bg-(--brand-primary) px-8 py-4 text-sm font-medium text-white transition-all hover:bg-(--brand-primary) cursor-pointer active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
+                  className="mx-auto block w-full sm:w-auto sm:min-w-[460px] rounded-full bg-(--brand-primary) px-8 py-4 text-sm font-medium text-white transition-all hover:bg-(--brand-primary) cursor-pointer active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-70"
                 >
                   {isSubmittingForm ? "Sending..." : "Send message"}
                 </button>

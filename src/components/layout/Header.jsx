@@ -215,33 +215,25 @@ export default function Header({
               <div className="flex-1 overflow-y-auto px-6 sm:px-10 pb-20 mt-4">
                 <div className="flex flex-col gap-6 text-black">
                   
-                  {/* Home Section (Default Open Accordion or Just Links) */}
-                  <div className="flex flex-col">
-                      <div className="flex items-center justify-between font-semibold text-[22px] mb-5 tracking-tight">
-                        <span>Home</span>
-                        <ChevronDown className="h-6 w-6" strokeWidth={2.5} />
-                      </div>
-                      <div className="flex flex-col gap-[18px] pl-1">
-                        <Link href="/about" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">About Us</Link>
-                        <Link href="/merchants" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Merchants</Link>
-                        <Link href="/msme" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">MSME</Link>
-                        <Link href="/careers" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Careers</Link>
-                        <Link href="/internships" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Internships</Link>
-                        <Link href="/refer-earn" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Refer &amp; Earn</Link>
-                        <Link href="/contact" onClick={() => setMobileMenuOpen(false)} className="text-[17px] text-gray-600 font-medium hover:text-black transition-colors tracking-tight">Contact Us</Link>
-                      </div>
-                  </div>
+                  {navItems.map(({ href, label }) => (
+                    <Link
+                      key={href}
+                      href={href}
+                      onClick={() => setMobileMenuOpen(false)}
+                      className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70"
+                    >
+                      {label}
+                    </Link>
+                  ))}
 
                   <div className="h-px w-full bg-gray-300/60 my-2" />
 
-                  <Link href="/guidelines" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70">
-                    Guidelines
-                  </Link>
-
-                  <div className="h-px w-full bg-gray-300/60 my-2" />
-
-                  <Link href="/support" onClick={() => setMobileMenuOpen(false)} className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70">
-                    Support
+                  <Link
+                    href={contactHref}
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70"
+                  >
+                    Contact Us
                   </Link>
 
                 </div>
