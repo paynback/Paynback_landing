@@ -4,7 +4,7 @@ import Image from "next/image";
 import { Bookmark } from "lucide-react";
 import { motion } from "framer-motion";
 
-const BLOG_IMG   = "/images/qr-with-hand.jpg";
+const BLOG_IMG = "/images/qr-with-hand.jpg";
 const AVATAR_IMG = "/images/cartoon-char.jpg";
 
 const BLOGS = [
@@ -12,24 +12,24 @@ const BLOGS = [
     id: 1,
     title: "Quietly Revolutionizing Offline Shopping",
     excerpt:
-      "payNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
-    author: "payNback",
+      "PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
+    author: "PayNback",
     date: "July 1, 2025",
   },
   {
     id: 2,
     title: "Quietly Revolutionizing Offline Shopping",
     excerpt:
-      "payNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
-    author: "payNback",
+      "PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
+    author: "PayNback",
     date: "July 1, 2025",
   },
   {
     id: 3,
     title: "Quietly Revolutionizing Offline Shopping",
     excerpt:
-      "payNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
-    author: "payNback",
+      "PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
+    author: "PayNback",
     date: "July 1, 2025",
   },
 ];
@@ -99,7 +99,7 @@ export default function BlogsSection() {
       className="w-full bg-white font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <motion.div 
+      <motion.div
         className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20"
         initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
         whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}

@@ -12,8 +12,8 @@ const poppins = Poppins({
 });
 
 export const metadata = {
-  title: "payNback — India's first in-store shopping reward app",
-  description: "payNback connects users with nearby merchants offering exclusive discounts, cashback and rewards.",
+  title: "PayNback — India's first in-store shopping reward app",
+  description: "PayNback connects users with nearby merchants offering exclusive discounts, cashback and rewards.",
 };
 
 export default function RootLayout({ children }) {

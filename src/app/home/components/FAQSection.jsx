@@ -14,7 +14,7 @@ const FAQS = [
     id: 2,
     question: "Are there any hidden charges?",
     answer:
-      "No. payNback is completely transparent with zero hidden charges. You pay only what is shown — no surprises, no fine print.",
+      "No. PayNback is completely transparent with zero hidden charges. You pay only what is shown — no surprises, no fine print.",
   },
   {
     id: 3,
@@ -30,9 +30,9 @@ const FAQS = [
   },
   {
     id: 5,
-    question: "Is payNback available across India?",
+    question: "Is PayNback available across India?",
     answer:
-      "Yes. payNback is available nationwide and is rapidly expanding its network of partnered merchants across every major city in India.",
+      "Yes. PayNback is available nationwide and is rapidly expanding its network of partnered merchants across every major city in India.",
   },
 ];
 

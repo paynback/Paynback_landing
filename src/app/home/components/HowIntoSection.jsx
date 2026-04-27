@@ -71,7 +71,7 @@ function CountUpNumber({ end, duration = 850, suffix = "" }) {
 export default function HowIntoSection() {
   return (
     <section className="w-full bg-white">
-      <motion.div 
+      <motion.div
         className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-30 lg:py-30"
         initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
         whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
@@ -92,7 +92,7 @@ export default function HowIntoSection() {
           {/* Right paragraph */}
           <div className="max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg sm:leading-relaxed">
             <p>
-              PayNBack is India’s first in-store shopping support app that
+              PayNback is India’s first in-store shopping support app that
               connects users with nearby merchants offering exclusive discounts,
               cashback rewards, and pre-reduced prices.It helps customers
               discover better deals while also managing purchase bills and

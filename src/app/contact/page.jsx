@@ -3,8 +3,8 @@ import ContactSection from "./components/ContactSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export const metadata = {
-    title: "Contact Us - PayNBack",
-    description: "Contact Us - PayNBack",
+    title: "Contact Us - PayNback",
+    description: "Contact Us - PayNback",
 };
 
 export default function ContactPage() {

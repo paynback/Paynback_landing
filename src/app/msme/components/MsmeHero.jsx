@@ -63,7 +63,7 @@ export default function MsmeHero() {
                     </div>
 
                     {/* Right-aligned or Centered Hero Image */}
-                    <motion.div 
+                    <motion.div
                         className="pointer-events-none relative mx-auto mt-16 sm:mt-0 sm:absolute sm:right-[-5%] sm:top-[50%] z-0 h-[300px] w-[300px] sm:-translate-y-1/2 opacity-100 drop-shadow-2xl sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[254px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
                         initial={{ opacity: 0, y: -400 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -75,7 +75,7 @@ export default function MsmeHero() {
                             className="h-full w-full"
                         >
                             {/* Reusing the About Us Hero image as requested, but with a different alt text */}
-                            <Image 
+                            <Image
                                 src="/images/water-profile-swirl.png"
                                 alt="MSME Partner Visual"
                                 width={407}
@@ -101,7 +101,7 @@ export default function MsmeHero() {
                         repeatDelay: 0.5,
                     }}
                 >
-                    Become our merchant to expand your reach. Discover exclusive tools to grow your business, manage sales, and connect directly with your customers on payNback.
+                    Become our merchant to expand your reach. Discover exclusive tools to grow your business, manage sales, and connect directly with your customers on PayNback.
                 </motion.p>
             </div> */}
         </section>

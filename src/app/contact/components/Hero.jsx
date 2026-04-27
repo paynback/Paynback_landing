@@ -69,11 +69,11 @@ export default function ContactHero() {
         <div className="relative flex-1 flex w-full flex-col justify-start sm:justify-center pt-28 sm:pt-0 pb-32 sm:pb-40">
 
           <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-16 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
-            <span className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">Contact Us</span>
-            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
+            <span className="text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">Contact Us</span>
+            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
               We’d Love to Hear From You
             </h1>
-            <p className="pr-4 leading-[144%] tracking-[-0.56px] text-[18px] text-white/90 sm:text-xs lg:text-sm">
+            <p className="pr-4 leading-[144%] tracking-[-0.56px] text-base sm:text-lg lg:text-xl text-white/90">
               Reach out to our team and we’ll respond as quickly as possible.
             </p>
           </div>
@@ -86,7 +86,7 @@ export default function ContactHero() {
             <div className="absolute right-[2%] bottom-[-20%] w-[110%] h-[110%] z-0 opacity-20">
               <Image
                 src={IMG_BIG_LOGO}
-                alt="Big PayNBack Logo"
+                alt="Big PayNback Logo"
                 fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 className="object-contain object-bottom-right transform rotate-[-5deg] scale-125"
                 priority
@@ -127,7 +127,7 @@ export default function ContactHero() {
             repeatDelay: 0.5,
           }}
         >
-          Find your favourite stores, discover exclusive deals, and connect directly with them on payNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
+          Find your favourite stores, discover exclusive deals, and connect directly with them on PayNback through calls or chats. Need directions? We've got you covered. Enjoy seamless bill payments using UPI, your personal wallet, or by redeeming rewards.
         </motion.p>
       </div> */}
     </section>

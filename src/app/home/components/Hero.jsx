@@ -100,7 +100,7 @@ export default function HomeHero() {
               >
                 <Image
                   src={IMG_BUBBLE}
-                  alt="PayNBack Bubble"
+                  alt="PayNback Bubble"
                   width={600}
                   height={600}
                   className="h-auto w-full drop-shadow-[0_25px_55px_rgba(56,189,248,0.45)]"
@@ -125,7 +125,7 @@ export default function HomeHero() {
               >
                 <Image
                   src={IMG_COIN_SWIRL}
-                  alt="PayNBack Coin Swirl"
+                  alt="PayNback Coin Swirl"
                   width={800}
                   height={800}
                   className="h-auto w-full max-w-[250px] md:max-w-[420px] object-contain drop-shadow-[0_30px_70px_rgba(14,165,233,0.35)]"

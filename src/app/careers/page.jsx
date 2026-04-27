@@ -3,8 +3,8 @@ import Team from "./components/Team";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
 export const metadata = {
-    title: "Careers - PayNBack",
-    description: "Careers - PayNBack",
+    title: "Careers - PayNback",
+    description: "Careers - PayNback",
 };
 
 export default function CareersPage() {
@@ -13,12 +13,12 @@ export default function CareersPage() {
             <ScrollReveal>
                 <CareersHero />
             </ScrollReveal>
-            
+
             <ScrollReveal delay={50}>
                 <Team />
             </ScrollReveal>
-         
-            
+
+
         </main>
     );
 }

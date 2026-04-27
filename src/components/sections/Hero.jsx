@@ -1,10 +1,12 @@
 // src/components/sections/Hero/Hero.jsx
 'use client'
-import {useState} from 'react'
+import { useState } from 'react'
 import { motion, useReducedMotion } from 'framer-motion'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Star, Info, Download, ArrowRight, Menu, X } from 'lucide-react'
+import { StoreBadges } from '@/components/ui/StoreBadges'
+import { cn } from "@/lib/utils"
 
 // --- Orbital icon data ---
 // Repeat the icon set around the orbit so it feels continuous
@@ -12,12 +14,12 @@ const ORBIT_RADIUS = 400
 const ORBIT_DURATION = 24
 const ICON_SIZE = 44
 const BASE_ICONS = [
-  { id: 'security',  emoji: "/Icons/blue_lock.png" },
-  { id: 'gift_red',  emoji: "/Icons/Gift_red.png" },
-  { id: 'location',  emoji: "/Icons/lcoaiton_red.png" },
+  { id: 'security', emoji: "/Icons/blue_lock.png" },
+  { id: 'gift_red', emoji: "/Icons/Gift_red.png" },
+  { id: 'location', emoji: "/Icons/lcoaiton_red.png" },
   { id: 'coin_gold', emoji: "/Icons/gold_coin.png" },
-  { id: 'shopping',  emoji: "/Icons/Green_shop_bag.png" },
-  { id: 'share',     emoji: "/Icons/share_clip_blue.png" },
+  { id: 'shopping', emoji: "/Icons/Green_shop_bag.png" },
+  { id: 'share', emoji: "/Icons/share_clip_blue.png" },
 ]
 
 // 12 icons total, evenly spaced but clustered more tightly in the visible arc
@@ -106,9 +108,9 @@ export function Hero() {
         <div style={{ position: 'relative' }}>
           <Image
             src="/Icons/Paynback_logo.png"
-            alt="Paynback Logo"
-            width={160}
-            height={48}
+            alt="PayNback Logo"
+            width={250}
+            height={75}
             className="hero-nav__logo"
             style={{ width: "auto", height: "auto" }}
             priority
@@ -158,29 +160,21 @@ export function Hero() {
           Sign up and become a member today to get exclusive offers in your area and other benefits.
         </p>
 
-        <div className="hero-stores">
-          <span className='hero-stores__label'>
-            <Info className="w-5 h-5 opacity-80" /> App Available For
-          </span>
-          <div className="hero-stores__images">
-           <div className="hero-store-pill">
-              <Image 
-                src="/Icons/home_playstore.png"
-                alt="Google Play"
-                width={100}
-                height={100}
-                className="hero-store-pill__icon"
-              />
-              <span className="hero-store-pill__divider" />
-              <Image 
-              src="/Icons/home_appstore.png" 
-              alt="App Store"
-              width={100}
-              height={100}
-              className="hero-store-pill__icon"
-            />
-           </div>
+        <div className="hero-stores mb-6 flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-6">
+          <div className="flex items-center gap-2 text-sm text-white/85">
+            <span
+              className={cn(
+                "flex h-7 w-7 items-center justify-center rounded-full",
+                "border border-white/20 bg-white/5",
+              )}
+            >
+              <Info className="h-3.5 w-3.5" strokeWidth={2.5} />
+            </span>
+            <span className="font-normal tracking-tight text-white">
+              App Available For
+            </span>
           </div>
+          <StoreBadges />
         </div>
       </motion.div>
 
@@ -345,7 +339,7 @@ export function Hero() {
         }
         .hero-nav__logo {
           object-fit: contain; object-position: left;
-          width: 160px; height: auto;
+          width: 250px; height: auto;
           cursor: pointer;
           transition: transform 0.28s ease, filter 0.28s ease;
           transform-origin: left center;
@@ -511,7 +505,7 @@ export function Hero() {
         @media (max-width: 768px) {
           .hero-section { min-height: auto; padding: 1.5rem 1rem 0; }
           .hero-nav { padding: 1rem 1.25rem; }
-          .hero-nav__logo { width: 120px; }
+          .hero-nav__logo { width: 180px; }
           .hero-nav__hamburger { display: flex; align-items: center; justify-content: center; }
           .hero-nav__actions {
             display: none;

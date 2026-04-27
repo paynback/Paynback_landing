@@ -7,8 +7,8 @@ import ScrollReveal from "@/components/ui/ScrollReveal";
 import Activities from "@/components/sections/Activities";
 
 export const metadata = {
-  title: "About Us - PayNBack",
-  description: "Vision & Mission of PayNBack",
+  title: "About Us - PayNback",
+  description: "Vision & Mission of PayNback",
 };
 
 export default function AboutPage() {

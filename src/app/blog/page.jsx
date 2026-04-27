@@ -2,7 +2,7 @@ import BlogHero from "@/app/blog/components/Hero";
 import BlogList from "@/app/blog/components/BlogList";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 export const metadata = {
-  title: "Blogs - PayNBack",
+  title: "Blogs - PayNback",
   description: "Stories Behind the Screens - where design meets strategy and real-world impact.",
 };
 

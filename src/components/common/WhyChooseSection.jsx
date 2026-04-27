@@ -10,7 +10,7 @@ const REASONS = [
   {
     id: 1,
     title: "Exclusive Discounts",
-    desc: "payNback offers exclusive discounts, limited-time deals, and special coupons to help users maximize savings and get the best value on every purchase.",
+    desc: "PayNback offers exclusive discounts, limited-time deals, and special coupons to help users maximize savings and get the best value on every purchase.",
   },
   {
     id: 2,
@@ -43,7 +43,7 @@ export default function WhyChooseSection() {
       className="w-full bg-[#F2F2F2] font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <motion.div 
+      <motion.div
         className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20"
         initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
         whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
@@ -54,7 +54,7 @@ export default function WhyChooseSection() {
         <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem]">
           <span className="text-(--brand-primary)">Why</span>{" "}
           Choose{" "}
-          <span className="text-(--brand-primary)">payNback?</span>
+          <span className="text-(--brand-primary)">PayNback?</span>
         </h2>
 
         {/* ── 3-col grid ── */}
@@ -111,7 +111,7 @@ export default function WhyChooseSection() {
           >
             <Image
               src={SALE_IMG}
-              alt="Woman in blue outfit holding a SALE badge, representing payNback exclusive discounts"
+              alt="Woman in blue outfit holding a SALE badge, representing PayNback exclusive discounts"
               fill
               className="object-cover object-center"
               sizes="(max-width:768px) 100vw, 33vw"

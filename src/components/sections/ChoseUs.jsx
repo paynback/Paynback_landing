@@ -25,7 +25,7 @@ const FEATURES = [
     id: 1,
     title: 'Exclusive Discounts',
     description:
-      'payNback rewards every purchase with points that can be redeemed for cashback, gift cards, and exclusive benefits — adding more value to every transaction.',
+      'PayNback rewards every purchase with points that can be redeemed for cashback, gift cards, and exclusive benefits — adding more value to every transaction.',
     image: '/Icons/trophy.png',
     imageAlt: 'Exclusive discounts trophy',
     tag: 'Discounts',
@@ -75,7 +75,7 @@ export function WhyChoose() {
   return (
     <section className="why-section">
       {/* Heading */}
-      <motion.h2 
+      <motion.h2
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, margin: "-50px" }}
@@ -83,11 +83,11 @@ export function WhyChoose() {
         className="why-heading"
       >
         Why Choose{' '}
-        <span style={{ color: '#1d70b8' }}>payNback?</span>
+        <span style={{ color: '#1d70b8' }}>PayNback?</span>
       </motion.h2>
 
       {/* 3-column grid */}
-      <motion.div 
+      <motion.div
         className="why-grid"
         variants={containerVars}
         initial="hidden"
@@ -167,15 +167,15 @@ export function WhyChoose() {
         {/* --- Col 3: Image card --- */}
         <motion.div variants={itemVars} className="why-image-card">
           <div className="why-image-inner">
-            <Image 
-              src={trophyImage} 
-              alt="Why Choose payNback Trophy"
+            <Image
+              src={trophyImage}
+              alt="Why Choose PayNback Trophy"
               fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              style={{ 
+              style={{
                 objectFit: 'cover',
                 filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
                 zIndex: 0
-              }} 
+              }}
             />
           </div>
 

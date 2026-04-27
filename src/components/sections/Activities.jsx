@@ -138,10 +138,11 @@ export default function Activities() {
         <div className="activities-branding">
           <div className="activities-branding-img">
             <Image
-              src="/Icons/enhanced_activity_status.png"
+              src="/Icons/enhanced_activity_status.png?v=2"
               alt="Enhanced activity status"
               fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-contain"
+              unoptimized
             />
           </div>
         </div>
