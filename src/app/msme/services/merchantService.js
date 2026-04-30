@@ -1,28 +1,11 @@
-const getApiBaseUrl = () => {
-  const baseUrl = process.env.NEXT_PUBLIC_SERVER_BASE_URL || "http://localhost:3001";
-  return baseUrl.replace(/\/+$/, "");
-};
+import axiosInstance from "@/lib/axiosInstance";
 
 export const fetchShopCategories = async () => {
-  const apiBaseUrl = getApiBaseUrl();
-  const response = await fetch(`${apiBaseUrl}/api/v1/web/merchant/categories`);
-
-  let data = null;
-  try {
-    data = await response.json();
-  } catch {
-    data = null;
-  }
-
-  if (!response.ok) {
-    throw new Error(data?.message || "Unable to fetch categories. Please try again.");
-  }
-
+  const { data } = await axiosInstance.get("/api/v1/web/merchant/categories");
   return data?.categories ?? [];
 };
 
 export const submitMerchantForm = async (payload) => {
-  const apiBaseUrl = getApiBaseUrl();
   const formData = new FormData();
 
   formData.append("name", payload.name);
@@ -33,23 +16,9 @@ export const submitMerchantForm = async (payload) => {
   formData.append("pincode", payload.pincode);
   formData.append("shopThumbnail", payload.shopThumbnail);
 
-  const response = await fetch(`${apiBaseUrl}/api/v1/web/merchant`, {
-    method: "POST",
-    body: formData,
+  const { data } = await axiosInstance.post("/api/v1/web/merchant", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
   });
-
-  let data = null;
-  try {
-    data = await response.json();
-  } catch {
-    data = null;
-  }
-
-  if (!response.ok) {
-    throw new Error(
-      data?.message || "Unable to submit merchant details right now. Please try again."
-    );
-  }
 
   return data;
 };
