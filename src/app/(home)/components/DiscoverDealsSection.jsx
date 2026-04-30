@@ -187,7 +187,7 @@ export default function DiscoverDealsSection() {
       className="w-full bg-[#F2F2F2] font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-14 md:px-10 md:py-16 lg:px-20 lg:py-24 xl:py-28">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-6 sm:py-14 md:px-10 md:py-16 lg:px-20 lg:py-24 xl:py-28">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-8 sm:gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-6 lg:gap-x-16 lg:gap-y-8">
           {/* Left heading */}
           <div className="max-w-xl leading-tight md:max-w-none">
@@ -216,7 +216,7 @@ export default function DiscoverDealsSection() {
           className="
     mx-auto mt-8 w-full max-w-6xl
 
-    flex gap-6 overflow-x-auto snap-x snap-mandatory px-4
+    flex gap-6 overflow-x-auto snap-x snap-mandatory
 
     sm:mt-10 sm:gap-7
     md:mt-12 md:grid md:grid-cols-2 md:justify-items-stretch md:gap-8 md:overflow-visible

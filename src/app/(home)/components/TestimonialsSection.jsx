@@ -89,7 +89,7 @@ export default function TestimonialsSection() {
       className="w-full overflow-hidden bg-white font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20">
+      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-20">
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-3 lg:gap-12">
 
           {/* ── Left: heading + description + rating ── */}

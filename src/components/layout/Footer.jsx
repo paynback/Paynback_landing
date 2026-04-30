@@ -16,8 +16,8 @@ import { StoreBadges } from "../ui/StoreBadges";
 
 /* ── Asset paths ─────────────────────────────────────────── */
 const LOGO = "/Icons/Paynback_logo.png";
-const STARTUP_MSN = "/Icons/start-up-mission-logo.png";
-const STARTUP_IND = "/Icons/start-up-india-logo.png";
+const STARTUP_MSN = "/Icons/ksum_logo_white.svg";
+const STARTUP_IND = "/Icons/Startup india.svg";
 const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";
 
 /* ── Nav columns ─────────────────────────────────────────── */
@@ -61,7 +61,7 @@ function SocialBtn({ href = "#", label, children }) {
     <Link
       href={href}
       aria-label={label}
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/80 bg-white text-slate-900 shadow-[0_12px_28px_rgba(0,0,0,0.42),0_4px_10px_rgba(8,15,24,0.3),inset_0_1px_0_rgba(255,255,255,0.95)] transition-all duration-200 hover:-translate-y-1 hover:bg-slate-100 hover:shadow-[0_18px_34px_rgba(0,0,0,0.5),0_6px_14px_rgba(8,15,24,0.35),inset_0_1px_0_rgba(255,255,255,1)]"
+      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white/10 hover:shadow-lg"
     >
       {children}
     </Link>
@@ -125,12 +125,12 @@ export default function Footer() {
   return (
     <footer className="relative bg-[#080F18] font-sans text-white">
       {/* ── Newsletter banner — exactly half-overlaps the top border ── */}
-      <div
-        className="absolute left-0 right-0 top-0 z-20 flex justify-center px-4 sm:px-8 lg:px-20"
+      {/* <div
+        className="absolute left-0 right-0 top-0 z-20 flex justify-center px-6 sm:px-8 lg:px-20"
         style={{ transform: "translateY(-50%)" }}
       >
         <NewsletterBanner />
-      </div>
+      </div> */}
 
       <div className="relative isolate overflow-hidden">
         {/* Gradient glow — top-right → bottom-left */}
@@ -144,7 +144,7 @@ export default function Footer() {
         />
 
         {/* Main footer grid — extra top padding clears the overlapping absolute banner */}
-        <div className="relative z-10 mx-auto max-w-7xl px-4 pb-4 pt-40 sm:px-6 lg:px-20">
+        <div className="relative z-10 mx-auto max-w-7xl px-6 pb-4 pt-40 sm:px-6 lg:px-20">
           <div className="grid grid-cols-1 gap-10 sm:grid-cols-2 lg:grid-cols-5 lg:gap-16">
 
             {/* Col 1 — Brand */}
@@ -167,20 +167,20 @@ export default function Footer() {
                 <p className="mb-3 text-sm font-semibold text-white">
                   Certifications
                 </p>
-                <div className="flex items-center gap-6">
+                <div className="flex items-center gap-6 justify-start mt-5">
                   <Image
                     src={STARTUP_MSN}
                     alt="Startup Mission"
-                    width={228}
+                    width={180}
                     height={74}
-                    className="h-32 w-auto object-contain"
+                    className="h-12 sm:h-11 w-auto object-contain object-left"
                   />
                   <Image
                     src={STARTUP_IND}
                     alt="Startup India"
-                    width={260}
+                    width={160}
                     height={74}
-                    className="h-32 w-auto object-contain"
+                    className="h-6 sm:h-7 w-auto object-contain object-left"
                   />
                 </div>
               </div>
@@ -305,7 +305,7 @@ export default function Footer() {
         </div>
 
         {/* Copyright bar — absolute overlapping the watermark bottom */}
-        <div className="absolute bottom-0 left-0 w-full z-20 px-4 py-4 text-center" style={{ background: "#0C1A31" }}>
+        <div className="absolute bottom-0 left-0 w-full z-20 px-6 py-4 text-center" style={{ background: "#0C1A31" }}>
           <p className="text-xs text-white/40">
             Copyright © 2026 PayNback. All Rights Reserved.
           </p>

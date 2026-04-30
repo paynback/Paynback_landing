@@ -1,9 +1,8 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { motion } from 'framer-motion'
-import { useEffect, useRef, useState } from 'react'
+import { motion, useScroll, useTransform } from 'framer-motion'
 
 const STAT_CARDS = [
   { id: 1, value: 93, label: "Happy Customers", color: "#FBBF24", angle: -90 },
@@ -50,12 +49,21 @@ function CountUpNumber({ end, duration = 850 }) {
 }
 
 export default function Activities() {
-  const rotationDuration = 40
+  const rotationDuration = 40;
+  const sectionRef = useRef(null);
+
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"]
+  });
+
+  // Zooms in from 0.7x to 1.15x as the user scrolls down through the section
+  const orbitScale = useTransform(scrollYProgress, [0, 1], [0.7, 1.15]);
 
   return (
-    <section className="activities-section">
+    <section ref={sectionRef} className="activities-section">
       {/* Container for the Orbital System */}
-      <div className="activities-orbit-container">
+      <motion.div style={{ scale: orbitScale }} className="activities-orbit-container">
         
         {/* Orbit Rotating Container */}
         <motion.div
@@ -147,7 +155,7 @@ export default function Activities() {
           </div>
         </div>
 
-      </div>
+      </motion.div>
 
       <style>{`
         .activities-section {

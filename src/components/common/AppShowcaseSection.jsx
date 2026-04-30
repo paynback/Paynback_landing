@@ -107,7 +107,7 @@ export default function AppShowcaseSection() {
       />
 
       {/* ── Content ─────────────────────────────────────────── */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-6 pb-0 sm:px-6 lg:px-20 lg:pt-10">
+      <div className="relative z-10 mx-auto max-w-7xl px-6 pt-6 pb-0 sm:px-6 lg:px-20 lg:pt-10">
 
         {/* Heading */}
         <div className="max-w-5xl">

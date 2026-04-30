@@ -100,7 +100,7 @@ export default function BlogsSection() {
       style={{ "--brand-primary": "#0964BC" }}
     >
       <motion.div
-        className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20"
+        className="mx-auto max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-20"
         initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
         whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
         viewport={{ once: true, margin: "0px 0px -25% 0px" }}

@@ -128,7 +128,7 @@ export function Hero() {
 
         {/* Desktop nav buttons (always visible on md+) */}
         <div className={`hero-nav__actions ${menuOpen ? 'hero-nav__actions--open' : ''}`}>
-          <Link href="/home">
+          <Link href="/">
             <button className='hero-nav__btn text-blue-800'>
               Go to home <ArrowRight className="w-4 h-4" />
             </button>
@@ -153,7 +153,7 @@ export function Hero() {
         </div>
 
         <h1 className="hero-title">
-          Banking Made Simple, Secure and Smart
+          Shopping Made Simple, Secure and Smart
         </h1>
 
         <p className="hero-subtitle">

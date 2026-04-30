@@ -22,7 +22,7 @@ export default function DownloadCTASection() {
     >
 
       {/* ── Content ── */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-14">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-14">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
 
           {/* ── Left: copy ── */}
@@ -70,11 +70,11 @@ export default function DownloadCTASection() {
           </div>
 
           {/* ── Right: coin swirl LEFT + QR card RIGHT ── */}
-          <div className="flex items-center gap-4">
+          <div className="relative flex w-full items-center justify-center sm:w-auto sm:justify-start gap-4 mt-8 sm:mt-0">
 
             {/* Coin swirl — sits to the left of the QR card */}
-            <div className="hidden sm:block" style={{ width: "clamp(120px, 16vw, 250px)", transform: "translateY(-24px) translateX(12px)" }}>
-              <motion.div animate={{ y: [0, -35, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
+            <div className="absolute -z-10 -top-8 left-1/2 -translate-x-[120%] w-[150px] sm:relative sm:z-auto sm:top-auto sm:left-auto sm:translate-x-2 sm:-translate-y-4 sm:w-[clamp(120px,16vw,250px)]">
+              <motion.div animate={{ y: [0, -20, 0] }} transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}>
                 <Image
                   src={COIN_SWIRL_IMG}
                   alt="PayNback Coin Swirl"
@@ -87,7 +87,7 @@ export default function DownloadCTASection() {
 
             {/* QR card */}
             <div
-              className="relative flex flex-col items-center gap-3 rounded-2xl px-6 pb-5 pt-6"
+              className="relative isolate z-10 flex flex-col items-center gap-3 rounded-2xl px-6 pb-5 pt-6"
               style={{
                 background: "rgba(255,255,255,0.06)",
                 backdropFilter: "blur(16px)",
@@ -112,10 +112,9 @@ export default function DownloadCTASection() {
                 Scan to Download
               </p>
 
-              {/* Bubble coin — moved up, larger */}
+              {/* Bubble coin */}
               <div
-                className="pointer-events-none absolute z-30"
-                style={{ bottom: "8px", right: "-46px", width: "82px", display: "var(--bubble-display, block)" }}
+                className="pointer-events-none absolute -z-10 -bottom-6 -right-16 w-[90px] sm:z-30 sm:bottom-2 sm:-right-[46px] sm:w-[82px]"
               >
                 <motion.div animate={{ y: [0, -10, 0] }} transition={{ duration: 3.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}>
                   <Image

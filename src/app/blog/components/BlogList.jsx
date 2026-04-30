@@ -80,7 +80,7 @@ export default function BlogList() {
                 {/* ── Top row: heading + description ── */}
                 <div className="mb-14 flex flex-col items-start gap-3">
                     <h2 className="text-[48px] font-medium leading-[100%] tracking-[-0.56px] text-slate-900">
-                        <span style={{ color: "var(--brand-primary)" }}>Meet</span>{""}
+                        <span style={{ color: "var(--brand-primary)" }}>Meet </span>{""}
                         the fresh{""}
                         <span style={{ color: "var(--brand-primary)" }}>Blogs.</span>
                     </h2>
