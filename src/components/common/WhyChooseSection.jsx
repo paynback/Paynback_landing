@@ -1,130 +1,481 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const SALE_IMG = "/images/09b3196ae2b68dd5cfe0c65d459c42330889ebb7.png";
+
+const containerVars = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15 }
+  }
+};
+
+const itemVars = {
+  hidden: { opacity: 0, y: 30 },
+  show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
+};
 
 const REASONS = [
   {
     id: 1,
     title: "Exclusive Discounts",
     desc: "PayNback offers exclusive discounts, limited-time deals, and special coupons to help users maximize savings and get the best value on every purchase.",
+    tag: "Discounts",
   },
   {
     id: 2,
     title: "Rewarding Points System",
     desc: "Earn reward points on every purchase and redeem them for exciting benefits, making every shopping experience more rewarding and worthwhile.",
+    tag: "Rewards",
   },
   {
     id: 3,
     title: "Modern and User-Friendly Experience",
     desc: "Navigate effortlessly through a sleek, intuitive interface designed to make discovering deals and managing rewards simple and enjoyable.",
+    tag: "Experience",
   },
   {
     id: 4,
     title: "Secure and Reliable Transactions",
     desc: "Shop with confidence knowing every transaction is protected by advanced security measures, ensuring your data and payments are always safe.",
+    tag: "Security",
   },
   {
     id: 5,
     title: "Personalized Recommendations",
     desc: "Receive tailored offers and product suggestions based on your preferences and shopping history, helping you find the best deals effortlessly.",
+    tag: "Smart",
   },
 ];
 
 export default function WhyChooseSection() {
-  const [activeId, setActiveId] = useState(1);
-  const active = REASONS.find((r) => r.id === activeId);
+  const [active, setActive] = useState(0);
+  const current = REASONS[active];
+  const carouselRef = useRef(null);
+
+  const handleScroll = () => {
+    if (!carouselRef.current) return;
+    const scrollLeft = carouselRef.current.scrollLeft;
+    const width = carouselRef.current.clientWidth;
+    const index = Math.round(scrollLeft / width);
+    if (index !== active) {
+      setActive(index);
+    }
+  };
+
+  const handleDotClick = (i) => {
+    setActive(i);
+    if (carouselRef.current) {
+      const width = carouselRef.current.clientWidth;
+      carouselRef.current.scrollTo({
+        left: width * i,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section
-      className="w-full bg-[#F2F2F2] font-sans"
+      className="w-full overflow-x-hidden bg-[#F2F2F2] font-sans why-section"
       style={{ "--brand-primary": "#0964BC" }}
     >
       <motion.div
-        className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-20 lg:py-20"
+        className="mx-auto max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-20"
         initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
         whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
         viewport={{ once: true, margin: "0px 0px -25% 0px" }}
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* ── Heading ── */}
-        <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem]">
+        <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem] text-center lg:text-left why-heading">
           <span className="text-(--brand-primary)">Why</span>{" "}
           Choose{" "}
           <span className="text-(--brand-primary)">PayNback?</span>
         </h2>
 
-        {/* ── 3-col grid ── */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3 lg:gap-5">
-
-          {/* Col 1 — Numbered list */}
-          <div className="flex flex-col gap-1 rounded-2xl bg-white p-3 shadow-sm">
-            {REASONS.map((r) => (
+        {/* ── 3-column grid (Desktop) ── */}
+        <motion.div
+          className="why-grid-desktop"
+          variants={containerVars}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          {/* --- Col 1: Feature list --- */}
+          <motion.div variants={itemVars} className="why-feature-list">
+            {REASONS.map((r, i) => (
               <button
                 key={r.id}
-                onClick={() => setActiveId(r.id)}
-                className={[
-                  "w-full rounded-xl px-4 py-3.5 text-left transition-all duration-200",
-                  activeId === r.id
-                    ? "bg-(--brand-primary) text-white shadow-md"
-                    : "text-slate-800 hover:bg-slate-50",
-                ].join(" ")}
+                onMouseEnter={() => setActive(i)}
+                onClick={() => setActive(i)}
+                className={`why-feature-btn ${active === i ? 'why-feature-btn--active' : ''}`}
               >
-                <span
-                  className={[
-                    "text-sm font-semibold leading-snug",
-                    activeId === r.id ? "text-white" : "text-slate-800",
-                  ].join(" ")}
-                >
-                  {r.id}.&nbsp; {r.title}
-                </span>
+                {r.id}.&nbsp;&nbsp;{r.title}
               </button>
+            ))}
+          </motion.div>
+
+          {/* --- Col 2: Description card --- */}
+          <motion.div variants={itemVars} className="why-desc-card">
+            <div>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={current.tag}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2 }}
+                  className="why-tag"
+                >
+                  {current.tag}
+                </motion.span>
+              </AnimatePresence>
+
+              <AnimatePresence mode="wait">
+                <motion.p
+                  key={current.id}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -10 }}
+                  transition={{ duration: 0.2, delay: 0.05 }}
+                  className="why-desc-text"
+                >
+                  {current.desc}
+                </motion.p>
+              </AnimatePresence>
+            </div>
+
+            {/* Bottom label */}
+            <div className="why-dots-row">
+              <span style={{ fontSize: '0.85rem', color: '#94a3b8', fontWeight: 500 }}>
+                Services
+              </span>
+              <div style={{ flex: 1, height: '1px', background: '#e2e8f0' }} />
+              {/* Step dots */}
+              <div style={{ display: 'flex', gap: '0.35rem' }}>
+                {REASONS.map((_, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      width: i === active ? '18px' : '6px',
+                      height: '6px',
+                      borderRadius: '999px',
+                      background: i === active ? '#0964BC' : '#cbd5e1',
+                      transition: 'all 0.3s ease',
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </motion.div>
+
+          {/* --- Col 3: Image card --- */}
+          <motion.div variants={itemVars} className="why-image-card">
+            <div className="why-image-inner">
+              <Image
+                src={SALE_IMG}
+                alt={current.title}
+                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                style={{
+                  objectFit: 'cover',
+                  filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
+                  zIndex: 0
+                }}
+              />
+            </div>
+            
+            {/* Overlay label bottom */}
+            <div className="why-image-overlay">
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={current.title}
+                  initial={{ opacity: 0, y: 10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: 10 }}
+                  transition={{ duration: 0.2 }}
+                  className="why-image-label"
+                >
+                  {current.title}
+                </motion.span>
+              </AnimatePresence>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* ── Mobile Single Fixed Card with Swipeable Content ── */}
+        <div className="why-mobile-container">
+          <div 
+            className="why-mobile-carousel"
+            ref={carouselRef}
+            onScroll={handleScroll}
+          >
+            {REASONS.map((f, i) => (
+              <div key={f.id} className="why-mobile-content-slide">
+                <h3 className="why-mobile-title">{f.id}. {f.title}</h3>
+                <p className="why-mobile-desc">{f.desc}</p>
+                <div className="why-mobile-image-container">
+                  <Image 
+                    src={SALE_IMG} 
+                    alt={f.title} 
+                    fill sizes="(max-width: 640px) 100vw"
+                    style={{objectFit: 'cover'}} 
+                  />
+                </div>
+              </div>
             ))}
           </div>
 
-          {/* Col 2 — Description card */}
-          <div className="flex flex-col justify-between rounded-2xl bg-white p-6 shadow-sm">
-            {/* Animated description — key forces re-mount on change */}
-            <p
-              key={activeId}
-              className="animate-[fadeIn_0.25s_ease] text-sm leading-relaxed text-slate-600"
-            >
-              {active.desc}
-            </p>
-
-            {/* Services footer line */}
-            <div className="mt-8 flex items-center gap-3 pt-4">
-              <span className="shrink-0 text-xs font-medium text-slate-400">
-                Services
-              </span>
-              <div className="h-px flex-1 bg-slate-200" />
-            </div>
-          </div>
-
-          {/* Col 3 — Image card */}
-          <div
-            className="relative overflow-hidden rounded-2xl"
-            style={{ minHeight: "clamp(220px, 40vw, 340px)", background: "#1565D8" }}
-          >
-            <Image
-              src={SALE_IMG}
-              alt="Woman in blue outfit holding a SALE badge, representing PayNback exclusive discounts"
-              fill
-              className="object-cover object-center"
-              sizes="(max-width:768px) 100vw, 33vw"
-            />
+          {/* Mobile Pagination Dots */}
+          <div className="why-mobile-dots">
+            {REASONS.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => handleDotClick(i)}
+                className={`why-dot ${i === active ? 'why-dot--active' : ''}`}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
           </div>
         </div>
       </motion.div>
 
-      {/* Keyframe for description fade */}
+      {/* Keyframes & Responsive */}
       <style>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(6px); }
-          to   { opacity: 1; transform: translateY(0);   }
+        @keyframes fadeSlideIn {
+          from { opacity: 0; transform: translateY(10px); }
+          to   { opacity: 1; transform: translateY(0); }
+        }
+
+        .why-grid-desktop {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          gap: 1.25rem;
+          width: 100%;
+          align-items: stretch;
+        }
+
+        .why-feature-list {
+          background: #fff;
+          border-radius: 20px;
+          padding: 0.4rem;
+          display: flex;
+          flex-direction: column;
+          gap: 0.35rem;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          overflow: hidden;
+          height: 480px;
+        }
+
+        .why-feature-btn {
+          width: 100%;
+          text-align: left;
+          padding: 1.25rem 2rem;
+          border: none;
+          border-radius: 12px;
+          cursor: pointer;
+          font-family: inherit;
+          font-size: 1.05rem;
+          font-weight: 500;
+          color: #1e293b;
+          background: transparent;
+          transition: all 0.2s ease;
+        }
+        .why-feature-btn--active {
+          font-weight: 600;
+          color: #fff;
+          background: #0964BC;
+        }
+
+        .why-desc-card {
+          background: #fff;
+          border-radius: 20px;
+          padding: 2rem 1.75rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          height: 480px;
+        }
+
+        .why-tag {
+          display: inline-block;
+          background: #eff6ff;
+          color: #0964BC;
+          font-size: 0.75rem;
+          font-weight: 700;
+          padding: 0.3rem 0.85rem;
+          border-radius: 999px;
+          margin-bottom: 1rem;
+          letter-spacing: 0.5px;
+          text-transform: uppercase;
+          animation: fadeSlideIn 0.3s ease;
+        }
+
+        .why-desc-text {
+          font-size: 1.125rem;
+          line-height: 1.65;
+          color: #64748b;
+          font-weight: 400;
+          animation: fadeSlideIn 0.3s ease;
+        }
+
+        .why-dots-row {
+          margin-top: 1.5rem;
+          padding-top: 1rem;
+          border-top: 1px solid #e2e8f0;
+          display: flex;
+          align-items: center;
+          gap: 0.75rem;
+        }
+
+        .why-image-card {
+          border-radius: 20px;
+          overflow: hidden;
+          background: #1565D8;
+          box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+          height: 480px;
+          position: relative;
+        }
+
+        .why-image-inner {
+          position: absolute;
+          inset: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 6rem;
+          animation: fadeSlideIn 0.35s ease;
+          background: #1565D8;
+        }
+
+        .why-image-overlay {
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          padding: 2rem 1.25rem 1.25rem;
+          background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+          z-index: 10;
+        }
+
+        .why-image-label {
+          color: #fff;
+          font-weight: 700;
+          font-size: 1.1rem;
+          animation: fadeSlideIn 0.3s ease;
+          display: block;
+        }
+
+        .why-mobile-container {
+          display: none;
+        }
+        
+        .why-mobile-dots {
+          display: none;
+        }
+
+        .why-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #cbd5e1;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+        .why-dot--active {
+          background: #0964BC;
+        }
+
+        /* ── Tablet (max-width: 1024px) ── */
+        @media (max-width: 1024px) {
+          .why-grid-desktop {
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+          }
+          .why-feature-list { min-height: auto; }
+          .why-desc-card { min-height: auto; }
+          .why-image-card {
+            min-height: 360px;
+            grid-column: 1 / -1;
+          }
+          .why-feature-btn { padding: 1rem 1.5rem; font-size: 0.95rem; }
+          .why-desc-text { font-size: 1rem; }
+        }
+
+        /* ── Mobile (max-width: 640px) ── */
+        @media (max-width: 640px) {
+          .why-heading { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+          .why-grid-desktop {
+            display: none !important;
+          }
+
+          .why-mobile-container {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: 560px; /* Fixed card height */
+            width: 100%;
+            overflow: hidden;
+          }
+
+          .why-mobile-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            flex-grow: 1;
+            gap: 1.5rem;
+          }
+          .why-mobile-carousel::-webkit-scrollbar {
+            display: none;
+          }
+
+          .why-mobile-content-slide {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
+          }
+
+          .why-mobile-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 1rem;
+          }
+
+          .why-mobile-desc {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+          }
+
+          .why-mobile-image-container {
+            position: relative;
+            width: 100%;
+            height: 280px; /* Fixed image height */
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #1565D8;
+            margin-top: auto;
+          }
+
+          .why-mobile-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+          }
         }
       `}</style>
     </section>

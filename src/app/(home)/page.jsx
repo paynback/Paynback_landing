@@ -9,6 +9,8 @@ import DownloadCTASection from "./components/DownloadCTASection";
 import BlogsSection from "./components/BlogsSection";
 import FAQSection from "./components/FAQSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import { Hero } from "@/components/sections/Hero";
+
 
 export default function HomePage() {
   return (

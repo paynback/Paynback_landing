@@ -84,7 +84,7 @@ export default function FAQSection() {
       className="w-full bg-[#F2F2F2] font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-4 pb-40 pt-12 sm:px-6 lg:px-20 lg:pb-56 lg:pt-20">
+      <div className="mx-auto max-w-7xl px-6 pb-52 pt-12 sm:px-6 sm:pb-40 lg:px-20 lg:pb-56 lg:pt-20">
 
         {/* Heading */}
         <h2 className="mb-8 text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.4rem]">

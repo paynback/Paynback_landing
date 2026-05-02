@@ -13,7 +13,7 @@ const LOGO_SRC = "/Icons/Paynback_logo.png";
 const LOGO_SRC_LIGHT = "/Icons/Paynbacklogo_for_whitebg.png";
 
 const headerNavItems = [
-  { href: "/home", label: "Home" },
+  { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/blog", label: "Blogs" },
   { href: "/careers", label: "Careers" },
@@ -21,8 +21,8 @@ const headerNavItems = [
 ];
 
 function navActive(pathname, href) {
-  if (href === "/home")
-    return pathname === "/home" || pathname.startsWith("/home/");
+  if (href === "/")
+    return pathname === "/";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -79,8 +79,6 @@ export default function Header({
   const isLight = theme === "light";
   const useWhiteNavbar = isLight;
 
-  if (pathname === "/") return null;
-
   return (
     <>
 
@@ -106,13 +104,13 @@ export default function Header({
                 "flex flex-col gap-3 transition-all duration-500 pointer-events-auto",
                 isScrolled
                   ? cn(
-                    "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl backdrop-blur-xl py-2 sm:py-2.5 px-4 sm:px-6 rounded-full",
+                    "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl backdrop-blur-xl py-2 sm:py-2.5 px-6 sm:px-6 rounded-full",
                     useWhiteNavbar
                       ? "bg-white/95 border border-black/10 shadow-[0_10px_30px_rgba(15,23,42,0.16)]"
                       : "bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10"
                   )
                   : cn(
-                    "w-full max-w-7xl pt-5 pb-2 sm:pt-6 lg:pt-8 px-4 sm:px-6 lg:px-8 rounded-none",
+                    "w-full max-w-7xl pt-5 pb-2 sm:pt-6 lg:pt-8 px-6 sm:px-6 lg:px-8 rounded-none",
                     useWhiteNavbar ? "bg-white border-b border-black/10" : "bg-transparent border-transparent"
                   ),
                 className
@@ -220,7 +218,7 @@ export default function Header({
                         key={href}
                         href={href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70"
+                        className="flex items-center justify-between font-medium text-[22px] tracking-tight transition-opacity hover:opacity-70"
                       >
                         {label}
                       </Link>
@@ -231,7 +229,7 @@ export default function Header({
                     <Link
                       href={contactHref}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between font-semibold text-[22px] tracking-tight transition-opacity hover:opacity-70"
+                      className="flex items-center justify-between font-medium text-[22px] tracking-tight transition-opacity hover:opacity-70"
                     >
                       Contact Us
                     </Link>

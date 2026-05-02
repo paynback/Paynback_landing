@@ -1,7 +1,7 @@
 // src/components/sections/WhyChoose/WhyChoose.jsx
 'use client'
 
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import Image from 'next/image'
 import { motion, AnimatePresence } from 'framer-motion'
 import trophyImage from '../../../public/Icons/trophy.png'
@@ -17,8 +17,6 @@ const itemVars = {
   hidden: { opacity: 0, y: 30 },
   show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 15 } }
 }
-
-// import trophy from '../public/images/trophy.png'
 
 const FEATURES = [
   {
@@ -71,6 +69,28 @@ const FEATURES = [
 export function WhyChoose() {
   const [active, setActive] = useState(0)
   const current = FEATURES[active]
+  const carouselRef = useRef(null)
+
+  const handleScroll = () => {
+    if (!carouselRef.current) return;
+    const scrollLeft = carouselRef.current.scrollLeft;
+    const width = carouselRef.current.clientWidth;
+    const index = Math.round(scrollLeft / width);
+    if (index !== active) {
+      setActive(index);
+    }
+  };
+
+  const handleDotClick = (i) => {
+    setActive(i);
+    if (carouselRef.current) {
+      const width = carouselRef.current.clientWidth;
+      carouselRef.current.scrollTo({
+        left: width * i,
+        behavior: 'smooth'
+      });
+    }
+  };
 
   return (
     <section className="why-section">
@@ -86,9 +106,9 @@ export function WhyChoose() {
         <span style={{ color: '#1d70b8' }}>PayNback?</span>
       </motion.h2>
 
-      {/* 3-column grid */}
+      {/* ── 3-column grid (Desktop) ── */}
       <motion.div
-        className="why-grid"
+        className="why-grid-desktop"
         variants={containerVars}
         initial="hidden"
         whileInView="show"
@@ -197,6 +217,42 @@ export function WhyChoose() {
         </motion.div>
       </motion.div>
 
+      {/* ── Mobile Single Fixed Card with Swipeable Content ── */}
+      <div className="why-mobile-container">
+        <div 
+          className="why-mobile-carousel"
+          ref={carouselRef}
+          onScroll={handleScroll}
+        >
+          {FEATURES.map((f, i) => (
+            <div key={f.id} className="why-mobile-content-slide">
+              <h3 className="why-mobile-title">{f.id}. {f.title}</h3>
+              <p className="why-mobile-desc">{f.description}</p>
+              <div className="why-mobile-image-container">
+                <Image 
+                  src={trophyImage} 
+                  alt={f.imageAlt} 
+                  fill sizes="(max-width: 640px) 100vw"
+                  style={{objectFit: 'cover', filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))'}} 
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Mobile Pagination Dots */}
+        <div className="why-mobile-dots">
+          {FEATURES.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => handleDotClick(i)}
+              className={`why-dot ${i === active ? 'why-dot--active' : ''}`}
+              aria-label={`Go to slide ${i + 1}`}
+            />
+          ))}
+        </div>
+      </div>
+
       {/* Keyframes & Responsive */}
       <style>{`
         @keyframes fadeSlideIn {
@@ -220,7 +276,7 @@ export function WhyChoose() {
           line-height: 1.15;
         }
 
-        .why-grid {
+        .why-grid-desktop {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           gap: 1.25rem;
@@ -238,7 +294,7 @@ export function WhyChoose() {
           gap: 0.35rem;
           box-shadow: 0 2px 16px rgba(0,0,0,0.06);
           overflow: hidden;
-          min-height: 480px;
+          height: 480px;
         }
 
         .why-feature-btn {
@@ -269,7 +325,7 @@ export function WhyChoose() {
           flex-direction: column;
           justify-content: space-between;
           box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-          min-height: 480px;
+          height: 480px;
         }
 
         .why-tag {
@@ -308,7 +364,7 @@ export function WhyChoose() {
           overflow: hidden;
           background: #cbd5e1;
           box-shadow: 0 2px 16px rgba(0,0,0,0.06);
-          min-height: 480px;
+          height: 480px;
           position: relative;
         }
 
@@ -339,11 +395,33 @@ export function WhyChoose() {
           display: block;
         }
 
+        .why-mobile-container {
+          display: none;
+        }
+        
+        .why-mobile-dots {
+          display: none;
+        }
+
+        .why-dot {
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #cbd5e1;
+          border: none;
+          padding: 0;
+          cursor: pointer;
+          transition: background 0.3s;
+        }
+        .why-dot--active {
+          background: #1d70b8;
+        }
+
         /* ── Tablet (max-width: 1024px) ── */
         @media (max-width: 1024px) {
           .why-section { padding: 3.5rem 1rem; }
           .why-heading { font-size: 1.75rem; margin-bottom: 2rem; }
-          .why-grid {
+          .why-grid-desktop {
             grid-template-columns: 1fr 1fr;
             gap: 1rem;
           }
@@ -359,36 +437,74 @@ export function WhyChoose() {
 
         /* ── Mobile (max-width: 640px) ── */
         @media (max-width: 640px) {
-          .why-section { padding: 2.5rem 0.75rem; }
-          .why-heading { font-size: 1.5rem; margin-bottom: 1.5rem; }
-          .why-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
+          .why-heading { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+          .why-grid-desktop {
+            display: none !important;
           }
-          .why-feature-list {
-            min-height: auto;
-            flex-direction: row;
-            flex-wrap: wrap;
-            border-radius: 14px;
+
+          .why-mobile-container {
+            display: flex;
+            flex-direction: column;
+            background: #fff;
+            border-radius: 20px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            height: 560px; /* Fixed card height */
+            width: 100%;
+            overflow: hidden;
           }
-          .why-feature-btn {
-            padding: 0.75rem 1rem;
-            font-size: 0.85rem;
-            flex: 1 1 auto;
-            text-align: center;
-            min-width: 0;
+
+          .why-mobile-carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -webkit-overflow-scrolling: touch;
+            flex-grow: 1;
+            gap: 1.5rem;
           }
-          .why-desc-card {
-            min-height: auto;
-            padding: 1.5rem 1.25rem;
-            border-radius: 14px;
+          .why-mobile-carousel::-webkit-scrollbar {
+            display: none;
           }
-          .why-desc-text { font-size: 0.95rem; }
-          .why-image-card {
-            min-height: 260px;
-            border-radius: 14px;
+
+          .why-mobile-content-slide {
+            flex: 0 0 100%;
+            scroll-snap-align: center;
+            display: flex;
+            flex-direction: column;
           }
-          .why-image-inner { font-size: 4rem; }
+
+          .why-mobile-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 1rem;
+          }
+
+          .why-mobile-desc {
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+          }
+
+          .why-mobile-image-container {
+            position: relative;
+            width: 100%;
+            height: 280px; /* Fixed image height */
+            flex-shrink: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
+            margin-top: auto;
+          }
+
+          .why-mobile-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+          }
         }
       `}</style>
     </section>

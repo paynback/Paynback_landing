@@ -23,12 +23,12 @@ export default function JobDetailPage() {
       {/* We add a darker bg block at top if the Header expects it, 
           but usually the Header has a default clear or white state. 
           Let's put the Header in a clear container. */}
-      <div className="bg-white border-b border-gray-100">
+      <div className="bg-white border-b border-gray-100 mb-24">
         <Header theme="light" />
       </div>
 
       <div className="flex-1 py-12">
-        <div className="container mx-auto px-4 md:px-8 max-w-5xl">
+        <div className="container mx-auto max-w-5xl px-6 sm:px-6 md:px-8">
           {/* Breadcrumb */}
           <motion.div className="text-sm text-gray-500 mb-8" {...fadeUp(0.05)}>
             <Link href="/" className="hover:text-black">Home</Link>
