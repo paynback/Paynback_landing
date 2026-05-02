@@ -6,6 +6,9 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Upload, AlertCircle, Loader2, CheckCircle2 } from 'lucide-react'
+import { LiaExchangeAltSolid } from "react-icons/lia"
+import { IoCloseOutline } from "react-icons/io5"
+import Image from 'next/image'
 import { submitMerchantForm, fetchShopCategories } from '../services/merchantService'
 
 const msmeSchema = z.object({
@@ -20,6 +23,7 @@ const msmeSchema = z.object({
 export default function MsmeForm() {
   const fileInputRef = useRef(null)
   const [shopThumbnail, setShopThumbnail] = useState(null)
+  const [previewUrl, setPreviewUrl] = useState(null)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
@@ -32,6 +36,16 @@ export default function MsmeForm() {
       .catch(() => setCategories([]))
       .finally(() => setCategoriesLoading(false))
   }, [])
+
+  useEffect(() => {
+    if (!shopThumbnail) {
+      setPreviewUrl(null)
+      return
+    }
+    const url = URL.createObjectURL(shopThumbnail)
+    setPreviewUrl(url)
+    return () => URL.revokeObjectURL(url)
+  }, [shopThumbnail])
 
   const {
     register,
@@ -267,38 +281,83 @@ export default function MsmeForm() {
             {/* Thumbnail Upload */}
             <div className="space-y-2 mt-6">
               <label className="text-sm font-medium text-(--brand-primary)">Thumbnail Upload*</label>
-              <div
-                className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer"
-                onClick={triggerFilePicker}
-                role="button"
-                tabIndex={0}
-                onKeyDown={(event) => {
-                  if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault()
-                    triggerFilePicker()
-                  }
-                }}
-              >
-                <Upload className="w-8 h-8 text-gray-400 mb-3" />
-                <p className="text-sm text-gray-600 mb-1">
-                  <span className="text-(--brand-primary) font-semibold">Upload an image</span>, Drag 'n' drop an image here or click to select image
-                </p>
-                <p className="text-xs text-gray-400">
-                  jpg, png, upto 5MB
-                </p>
-                {shopThumbnail && (
-                  <p className="text-xs text-(--brand-primary) mt-2">
-                    Selected: {shopThumbnail.name}
+              
+              {!shopThumbnail ? (
+                <div
+                  className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer"
+                  onClick={triggerFilePicker}
+                  role="button"
+                  tabIndex={0}
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault()
+                      triggerFilePicker()
+                    }
+                  }}
+                >
+                  <Upload className="w-8 h-8 text-gray-400 mb-3" />
+                  <p className="text-sm text-gray-600 mb-1">
+                    <span className="text-(--brand-primary) font-semibold">Upload an image</span>, Drag 'n' drop an image here or click to select image
                   </p>
-                )}
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept=".jpg,.jpeg,.png"
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-              </div>
+                  <p className="text-xs text-gray-400">
+                    jpg, png, upto 5MB
+                  </p>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".jpg,.jpeg,.png"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
+                </div>
+              ) : (
+                <div className="relative border-2 border-gray-200 rounded-xl overflow-hidden aspect-video max-h-[200px] flex items-center justify-center bg-gray-50 group">
+                  {previewUrl && (
+                    <Image 
+                      src={previewUrl} 
+                      alt="Thumbnail Preview" 
+                      fill 
+                      className="object-contain" 
+                      unoptimized 
+                    />
+                  )}
+                  
+                  {/* Overlay for hover actions */}
+                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                    <button
+                      type="button"
+                      onClick={triggerFilePicker}
+                      className="text-white hover:bg-white/20 p-2 rounded-full transition-all cursor-pointer hover:scale-110"
+                      title="Change image"
+                    >
+                      <LiaExchangeAltSolid className="w-6 h-6" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShopThumbnail(null);
+                        if (fileInputRef.current) {
+                          fileInputRef.current.value = '';
+                        }
+                      }}
+                      className="text-white hover:bg-red-500/80 p-2 rounded-full transition-all cursor-pointer hover:scale-110"
+                      title="Remove image"
+                    >
+                      <IoCloseOutline className="w-6 h-6" />
+                    </button>
+                  </div>
+                  
+                  {/* Keep the input hidden but functional */}
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept=".jpg,.jpeg,.png"
+                    className="hidden"
+                    onChange={handleFileChange}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Disclaimer */}
