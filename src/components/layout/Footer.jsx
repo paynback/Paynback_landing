@@ -34,7 +34,7 @@ const COL_GUIDELINES = [
   { label: "Privacy Policy", href: "#" },
   { label: "Refund Policy", href: "#" },
   { label: "Merchant Terms", href: "#" },
-  { label: "Channel Partners", href: "#" },
+  { label: "Partners", href: "/partners" },
 ];
 
 /* X (Twitter) icon — not in Lucide, so inline SVG */
