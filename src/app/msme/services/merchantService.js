@@ -5,6 +5,12 @@ export const fetchShopCategories = async () => {
   return data?.categories ?? [];
 };
 
+export const fetchLatestShops = async () => {
+  const { data } = await axiosInstance.get("/api/v1/web/merchant/shops");
+  console.log(data)
+  return data?.shops ?? [];
+};
+
 export const submitMerchantForm = async (payload) => {
   const formData = new FormData();
 
