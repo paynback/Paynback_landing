@@ -181,7 +181,7 @@ export default function ContactSection() {
               <div className="flex flex-col md:col-span-2">
                 <div className="mb-2 flex items-center justify-start gap-1">
                   <label htmlFor="message" className="text-sm font-medium text-(--brand-primary)">
-                    Message*
+                    Message
                   </label>
                   <CircleQuestionMark size={14} className="text-slate-400" />
                 </div>

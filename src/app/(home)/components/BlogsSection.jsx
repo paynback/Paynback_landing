@@ -1,96 +1,29 @@
 "use client";
 
-import Image from "next/image";
-import { Bookmark } from "lucide-react";
+import BlogCard from "@/components/ui/BlogCard";
 import { motion } from "framer-motion";
 
-const BLOG_IMG = "/images/qr-with-hand.jpg";
-const AVATAR_IMG = "/images/cartoon-char.jpg";
-
 const BLOGS = [
-  {
+{
     id: 1,
-    title: "Quietly Revolutionizing Offline Shopping",
-    excerpt:
-      "PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
-    author: "PayNback",
-    date: "July 1, 2025",
+    title: "How PayNback is Turning Everyday UPI Payments into Real Rewards",
+    excerpt: "Discover how PayNback transforms simple offline purchases at your local kirana store, supermarket, or restaurant into cashback and loyalty points — making every UPI scan more rewarding than ever.",
+    image: "/images/blog-image.png"
   },
   {
     id: 2,
-    title: "Quietly Revolutionizing Offline Shopping",
-    excerpt:
-      "PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
-    author: "PayNback",
-    date: "July 1, 2025",
+    title: "Why Local Merchants Love PayNback: Real Stories from Kochi",
+    excerpt: "From increased footfall to higher repeat purchases — see how supermarket owners, clothing stores, and food outlets in Kerala are growing their business with PayNback’s loyalty tools and cashback offers.",
+    image: "/images/blog-image.png"
   },
   {
     id: 3,
-    title: "Quietly Revolutionizing Offline Shopping",
-    excerpt:
-      "PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
-    author: "PayNback",
-    date: "July 1, 2025",
+    title: "Bridging Online Convenience with Offline Trust: The PayNback Edge",
+    excerpt: "PayNback brings the best of both worlds — instant digital deals and rewards for your favourite brick-and-mortar stores. Shop locally, save smartly, and enjoy a seamless experience.",
+    image: "/images/blog-image.png"
   },
 ];
 
-/* ── Single blog card ─────────────────────────────────────── */
-function BlogCard({ title, excerpt, author, date }) {
-  return (
-    <article className="flex flex-col">
-
-      {/* Image — stays same, all corners curved */}
-      <div className="relative h-52 w-full overflow-hidden rounded-2xl bg-slate-100">
-        <Image
-          src={BLOG_IMG}
-          alt={title}
-          fill
-          className="object-cover object-center transition-transform duration-300 hover:scale-105"
-          sizes="(max-width:768px) 100vw, 33vw"
-        />
-        {/* Featured badge */}
-        <div
-          className="absolute left-3 top-3 flex items-center gap-1.5 rounded-full px-3 py-1"
-          style={{
-            background: "rgba(255,255,255,0.88)",
-            backdropFilter: "blur(6px)",
-            WebkitBackdropFilter: "blur(6px)",
-          }}
-        >
-          <Bookmark className="h-3 w-3 text-slate-500" strokeWidth={2} />
-          <span className="text-[11px] font-medium text-slate-600">Featured</span>
-        </div>
-      </div>
-
-      {/* Text content — no card, plain layout below image */}
-      <div className="flex flex-1 flex-col gap-2 pt-4">
-        <h3 className="text-base font-semibold leading-snug text-slate-800">
-          {title}
-        </h3>
-        <p className="line-clamp-3 text-sm leading-relaxed text-slate-400">
-          {excerpt}
-        </p>
-
-        {/* Author row */}
-        <div className="mt-auto flex items-center gap-2.5 pt-2">
-          <div className="relative h-8 w-8 overflow-hidden rounded-full">
-            <Image
-              src={AVATAR_IMG}
-              alt={author}
-              fill
-              className="object-cover object-top"
-              sizes="32px"
-            />
-          </div>
-          <div>
-            <p className="text-xs font-semibold text-slate-700">{author}</p>
-            <p className="text-[11px] text-slate-400">{date}</p>
-          </div>
-        </div>
-      </div>
-    </article>
-  );
-}
 
 /* ── Section ──────────────────────────────────────────────── */
 export default function BlogsSection() {
