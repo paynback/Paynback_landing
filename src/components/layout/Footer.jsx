@@ -61,7 +61,7 @@ function SocialBtn({ href = "#", label, children }) {
     <Link
       href={href}
       aria-label={label}
-      className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white/10 hover:shadow-lg"
+      className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white/10 hover:shadow-lg"
     >
       {children}
     </Link>
@@ -247,7 +247,7 @@ export default function Footer() {
                   </li>
                   <li className="flex items-center gap-2 text-sm text-white/60">
                     <Mail className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
-                    Support@PayNback.com
+                    support@PayNback.com
                   </li>
                 </ul>
               </div>
@@ -255,24 +255,24 @@ export default function Footer() {
               {/* Social icons */}
               <div className="flex flex-col gap-3">
                 <h5>Follow us on</h5>
-                <div className="flex flex-nowrap gap-2">
+                <div className="flex flex-nowrap gap-2 -ml-3.5">
                   <SocialBtn label="Facebook">
-                    <Facebook className="h-4 w-4" strokeWidth={1.8} />
+                    <Facebook className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
                   <SocialBtn label="Instagram">
-                    <Instagram className="h-4 w-4" strokeWidth={1.8} />
+                    <Instagram className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
                   <SocialBtn label="X (Twitter)">
-                    <XIcon className="h-4 w-4" />
+                    <XIcon className="h-5 w-5" />
                   </SocialBtn>
                   <SocialBtn label="LinkedIn">
-                    <Linkedin className="h-4 w-4" strokeWidth={1.8} />
+                    <Linkedin className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
                   <SocialBtn label="Pinterest">
-                    <PinterestIcon className="h-4 w-4" />
+                    <PinterestIcon className="h-5 w-5" />
                   </SocialBtn>
                   <SocialBtn label="YouTube">
-                    <Youtube className="h-4 w-4" strokeWidth={1.8} />
+                    <Youtube className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
                 </div>
               </div>

@@ -265,7 +265,7 @@ export default function ContactSection() {
             <div className="mb-10">
               <h3 className="mb-3 text-lg font-medium text-slate-900">Call us</h3>
               <p className="mb-4 text-sm text-slate-500">
-                Call our team Mon - Fri 9:30 am to 6:30pm
+                Call our team Monday - Friday 9:30 am to 6:30 pm.
               </p>
               <div className="flex items-center gap-2.5 text-slate-900 font-medium">
                 <PhoneCall size={20} className="text-slate-500" />
@@ -280,7 +280,7 @@ export default function ContactSection() {
                 PayNback, Kerala Technology Innovation<br />
                 Zone, Kinfra Hi-Tech Park Main Rd, HMT<br />
                 Colony, P.O, Kalamassery, Kochi, Kerala<br />
-                683503
+                683503.
               </p>
             </div>
 

@@ -31,12 +31,12 @@ export default function Founders() {
                             Meet Our Founders
                         </h2>
                         <p className="text-[15px] sm:text-[16px] leading-[1.8] text-white/90 font-normal">
-                            PayNback Infosolutions was founded by <strong className="font-semibold text-white">Bony Thomas</strong> and <strong className="font-semibold text-white">S. Shybi Varghese</strong>,
+                            PayNback Infosolutions was founded by <strong className="font-semibold text-white">Bony Thomas</strong> and <strong className="font-semibold text-white">Shybi Varghese</strong>,
                              a visionary leadership duo driven by strong entrepreneurial focus and disciplined execution. Identifying a gap between digital payments and offline value, they built a scalable, 
                              user-centric platform that benefits both consumers and merchants. Their resilient leadership and long-term vision continue to position PayNback as a promising player in India&apos;s 
                              in-store savings and rewards ecosystem.
                         </p>
-                        <button className="mt-4 px-9 py-3 bg-[#0964BC] text-white text-[15px] font-medium rounded-full transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-[#0964BC]/30">
+                        <button className="mt-4 px-9 py-3 bg-brand-primary text-white text-[15px] font-medium rounded-full transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-[#0964BC]/30">
                             Join our Team
                         </button>
                     </div>
