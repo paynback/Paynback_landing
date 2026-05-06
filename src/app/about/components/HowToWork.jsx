@@ -78,7 +78,7 @@ export default function HowToWork() {
                         </h3>
                         <ol className="flex flex-col gap-5 text-[15px] sm:text-[16px] leading-[1.6] text-slate-600 list-decimal list-outside pl-4">
                             <li className="pl-2">
-                                <strong className="text-slate-900 font-medium tracking-tight">Simple Sign-Up :</strong> Get started by accepting a referral link from our marketing team, sharing it on social media, or visiting our website www.PayNback.in. Download and install PayNback mobile app from play store.
+                                <strong className="text-slate-900 font-medium tracking-tight">Simple Sign-Up :</strong> Get started by accepting a referral link from our marketing team, sharing it on social media, or visiting our website www.paynback.in. Download and install PayNback mobile app from play store.
                             </li>
                             <li className="pl-2">
                                 <strong className="text-slate-900 font-medium tracking-tight">Open App :</strong> Open the app and register using your basic business details to create your merchant profile in just a few steps.

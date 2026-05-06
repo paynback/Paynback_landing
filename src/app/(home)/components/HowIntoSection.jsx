@@ -9,21 +9,21 @@ const STATS = [
     end: 1,
     suffix: "M",
     caption:
-      "Merchants Onboarded.Expanding rapidly with verified local businesses",
+      "Merchants Onboarded. Expanding rapidly with verified local businesses",
     symbol: "+",
   },
   {
     end: 70,
     suffix: "",
     caption:
-      "Deals Discovered Monthly.Helping users save more with every visit.",
+      "Deals Discovered Monthly. Helping users save more with every visit.",
     symbol: "+",
   },
   {
     end: 30,
     suffix: "",
     caption:
-      "User Satisfaction Rate.Built for seamless, reliable shopping experiences",
+      "User Satisfaction Rate. Built for seamless, reliable shopping experiences",
     symbol: "%",
   },
 ];
