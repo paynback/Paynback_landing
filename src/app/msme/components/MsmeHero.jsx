@@ -46,9 +46,9 @@ export default function MsmeHero() {
 
             <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0">
                 <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-10 sm:pt-14 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
-                    <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-48 lg:pl-14 xl:pl-20 drop-shadow-md">
+                    <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-32 lg:pl-14 xl:pl-20 drop-shadow-md">
                         <motion.span
-                            className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9] sm:text-white/90"
+                            className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9]"
                             initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
                             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.5 }}
@@ -63,28 +63,23 @@ export default function MsmeHero() {
                             viewport={{ once: true, amount: 0.35 }}
                             transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            Partner for Profit
+                            <span className="whitespace-nowrap">Amplify Sales</span>
                         </motion.h1>
                         <motion.p
-                            className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm"
+                            className="max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm"
                             initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
                             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                             viewport={{ once: true, amount: 0.35 }}
                             transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
                         >
-                            <span className="block sm:hidden">
-                                Leverage our fintech ecosystem to grow<br />visibility, trust, and long-term customer loyalty.
-                            </span>
-                            <span className="hidden sm:block">
-                                Leverage our fintech ecosystem to grow visibility, trust, and long-term customer loyalty. Partner with us to boost visibility, increase sales, and scale smarter.
-                            </span>
+                            Leverage our fintech ecosystem to grow visibility, trust, and long-term customer loyalty.
                         </motion.p>
                     </div>
 
                     <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none flex items-center justify-center mt-8 lg:mt-20">
                         {/* MSME Hero Image */}
                         <motion.div
-                            className="relative z-10 h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] lg:h-[407px] lg:w-[407px] flex justify-center items-center drop-shadow-2xl"
+                            className="relative z-10 h-[360px] w-[360px] sm:h-[420px] sm:w-[420px] lg:h-[520px] lg:w-[520px] flex justify-center items-center drop-shadow-2xl"
                             initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
                             animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
                             transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
@@ -96,10 +91,10 @@ export default function MsmeHero() {
                             >
                                 {/* Reusing the About Us Hero image as requested, but with a different alt text */}
                                 <Image
-                                    src="/images/water-profile-swirl.png"
-                                    alt="MSME Partner Visual"
-                                    width={407}
-                                    height={407}
+                                    src="/images/msme-hero-image.png"
+                                    alt="MSME Hero Image"
+                                    width={520}
+                                    height={520}
                                     className="h-full w-full object-contain drop-shadow-[0_15px_35px_rgba(255,255,255,0.15)]"
                                     priority
                                 />

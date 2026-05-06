@@ -65,9 +65,9 @@ export default function BlogHero() {
 
       <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0">
         <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-10 sm:pt-14 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
-          <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-48 lg:pl-14 xl:pl-20 drop-shadow-md">
+          <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-32 lg:pl-14 xl:pl-20 drop-shadow-md">
             <motion.span
-              className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90"
+              className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9]"
               initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.5 }}
@@ -97,7 +97,7 @@ export default function BlogHero() {
           </div>
 
           <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none flex items-center justify-center mt-8 lg:mt-20">
-            {/* Contact Hero Image */}
+            {/* Blog Hero Image */}
             <motion.div
               className="relative z-10 h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] lg:h-[407px] lg:w-[407px] flex justify-center items-center drop-shadow-2xl"
               initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
