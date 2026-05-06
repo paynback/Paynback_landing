@@ -49,7 +49,7 @@ const FEATURES = [
   },
 ];
 
-export default function AmazingFeaturesSection() {
+export default function   AmazingFeaturesSection() {
   return (
     <section
       className="w-full bg-white font-sans"
@@ -66,7 +66,7 @@ export default function AmazingFeaturesSection() {
         <h2 className="pb-10">
           <span className="text-(--brand-primary)">What</span>{" "}
           <span className="">makes</span>{" "}
-          <span className="text-(--brand-primary)">Paynback</span>{" "}
+          <span className="text-(--brand-primary)">PayNback</span>{" "}
           <br/>
            different?
         </h2>
