@@ -79,7 +79,7 @@ export default function HomeHero() {
             </div>
 
             <h1>
-              Finances that work for you
+              Shopping that work for you
             </h1>
             <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm">
               Sign up and become a member today to get exclusive offers in your
