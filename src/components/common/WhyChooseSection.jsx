@@ -114,7 +114,7 @@ export default function WhyChooseSection() {
                 onClick={() => setActive(i)}
                 className={`why-feature-btn ${active === i ? 'why-feature-btn--active' : ''}`}
               >
-                {r.id}.&nbsp;&nbsp;{r.title}
+              {r.title}
               </button>
             ))}
           </motion.div>

@@ -50,7 +50,7 @@ export default function MsmeHero() {
                             MSME
                         </span>
                         <h1 className="text-balance text-[38px] sm:text-4xl font-semibold sm:font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                            Partner for Profit
+                            Amplify Sales
                         </h1>
                         <p className="pr-4 leading-[1.5] tracking-[-0.56px] text-white/90 sm:text-white/75 text-[15px] sm:text-xs lg:text-sm">
                             <span className="block sm:hidden">

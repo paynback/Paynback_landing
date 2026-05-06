@@ -112,18 +112,16 @@ export default function AppShowcaseSection() {
         {/* Heading */}
         <div className="max-w-5xl">
           <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px]">
-            Where <span className="font-semibold text-[#1468C5]">financial</span> data
+            Turning <span className="font-semibold text-[#1468C5]">Transactions</span> 
           </h2>
 
           <div className="mt-4 flex flex-col md:flex-row md:items-start gap-10 md:gap-14">
             <p className="max-w-[320px] text-[13px] leading-[1.7] text-white/70">
-              PayNback is India&apos;s first in-store shopping
-              support app that connects users with nearby
-              merchants offering exclusive discounts
+             With payNback, every purchase boosts engagement, improves operations, and adds value for both merchants and users.
             </p>
 
             <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px] whitespace-nowrap">
-              <span className="font-semibold text-[#1468C5]">becomes</span> understanding
+              <span className="font-semibold text-[#1468C5]">into growth</span> oppertunities
             </h2>
           </div>
         </div>

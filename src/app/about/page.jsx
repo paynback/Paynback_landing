@@ -30,9 +30,6 @@ export default function AboutPage() {
       <ScrollReveal delay={240}>
         <HowToWork />
       </ScrollReveal>
-      <ScrollReveal delay={280}>
-        <HowToWork />
-      </ScrollReveal>
     </main>
   );
 }

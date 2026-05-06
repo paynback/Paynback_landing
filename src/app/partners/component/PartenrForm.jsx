@@ -202,7 +202,7 @@ export default function PartenrForm() {
                 </p>
 
                 {/* hCaptcha (Mockup) */}
-                <div className="inline-flex items-center justify-between border border-gray-200 rounded-lg bg-[#FAFAFA] px-4 py-3 w-[280px]">
+                {/* <div className="inline-flex items-center justify-between border border-gray-200 rounded-lg bg-[#FAFAFA] px-4 py-3 w-[280px]">
                     <div className="flex items-center space-x-3">
                         <div className="w-6 h-6 border border-gray-300 rounded-sm bg-white cursor-pointer hover:border-gray-400 flex-shrink-0"></div>
                         <span className="text-sm text-gray-700 font-medium">I am human</span>
@@ -217,7 +217,7 @@ export default function PartenrForm() {
                         </div>
                         <span className="text-[10px] text-gray-500 mt-0.5 whitespace-nowrap">Privacy - Terms</span>
                     </div>
-                </div>
+                </div> */}
 
                 {/* Buttons */}
                 <div className="mt-8 flex flex-col sm:flex-row items-center gap-4">

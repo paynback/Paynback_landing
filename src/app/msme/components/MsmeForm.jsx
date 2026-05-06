@@ -118,12 +118,17 @@ export default function MsmeForm() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-slate-900 mb-4">
-            Be <span className="text-(--brand-primary)">Our Merchant</span>
+          <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-slate-900 mb-6">
+            <span className="text-(--brand-primary)">Be</span> Our Merchant
           </h2>
-          <p className="text-base text-slate-600 max-w-lg mx-auto md:mx-0">
-            Partner with us to boost visibility, increase sales, and scale smarter.
-          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-base md:text-lg text-slate-600 text-left">
+            <p>
+              Join PayNback’s merchant network and connect your business with customers seeking exclusive deals, rewards, and seamless digital payments.
+            </p>
+            <p>
+              Boost your visibility, increase repeat purchases, and build stronger customer relationships through our smart rewards ecosystem.
+            </p>
+          </div>
         </motion.div>
 
         {/* Form Card */}

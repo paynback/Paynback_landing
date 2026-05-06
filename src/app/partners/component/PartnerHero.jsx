@@ -53,7 +53,8 @@ export default function PartnerHero() {
                             Partner for Profit
                         </h1>
                         <p className="pr-4 leading-[1.5] tracking-[-0.56px] text-white/90 sm:text-white/75 text-[15px] sm:text-xs lg:text-sm">
-                            Leverage our fintech ecosystem to grow visibility, trust, and long-term customer loyalty.
+                            A growth-driven program offering high market exposure, structured training, 
+                            and company-supported merchant pitching to help individuals scale and earn.
                         </p>
                     </div>
 

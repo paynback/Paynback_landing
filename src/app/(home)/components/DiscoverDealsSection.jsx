@@ -192,16 +192,17 @@ export default function DiscoverDealsSection() {
           {/* Left heading */}
           <div className="max-w-xl leading-tight md:max-w-none">
             <h2 className="text-balance text-[1.65rem] font-normal tracking-tight sm:text-3xl md:text-[clamp(1.75rem,2.2vw,2.25rem)] lg:text-4xl xl:text-5xl">
-              <span className="text-(--brand-primary)">Discover</span>{" "}
-              today's store {" "}
-              <span className="text-(--brand-primary)">deals</span>
+              <span className="text-(--brand-primary)">Experience</span>{" "}
+              the Future {" "}
+              <span className="text-(--brand-primary)">of</span>
+              Deals
             </h2>
           </div>
 
           {/* Right paragraph */}
           <div className="max-w-3xl text-sm leading-relaxed text-slate-700 sm:text-base sm:leading-relaxed md:max-w-none md:pt-1 lg:text-lg">
             <p>
-              PayNback is India’s first in-store shopping support app that connects users with nearby merchants offering exclusive discounts.
+              A new way to shop begins here. payNback introduces India’s first in-store shopping support app, bringing you closer to nearby merchants and exclusive offers.
             </p>
           </div>
         </div>

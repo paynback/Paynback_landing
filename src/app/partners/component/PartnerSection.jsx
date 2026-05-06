@@ -4,6 +4,7 @@ import React from 'react';
 import PartenrForm from './PartenrForm';
 
 export default function PartnerSection() {
+
     return (
         <section className="py-16 px-4 md:px-8 lg:px-16 bg-gray-50 font-sans text-slate-900 w-full">
             <div className="max-w-4xl mx-auto">

@@ -3,7 +3,8 @@
 import Image from "next/image";
 import { Info } from "lucide-react";
 import { motion } from "framer-motion";
-
+import { StoreBadges } from "@/components/ui/StoreBadges";
+import { cn } from "@/lib/utils";
 const QR_IMG = "/images/c06b42d0f732be45d4b2fbaa6d59d55d1aa88ea8.png";
 const COIN_SWIRL_IMG = "/images/33b06127ad13c66d1ea9ad4918ed9018d0d01e8a.png";
 const BUBBLE_IMG = "/images/e9eaa1ec2bb31dedd4c5ca5b5780dc6bb78f2b36.png";
@@ -28,31 +29,21 @@ export default function DownloadCTASection() {
           {/* ── Left: copy ── */}
           <div className="flex max-w-lg flex-col gap-5">
 
-            {/* "App Available For" badge row */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 text-sm text-white/70">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full border border-white/20 bg-white/5">
-                  <Info className="h-3 w-3" strokeWidth={2.5} />
+            <div className="mb-6 flex flex-wrap items-center gap-3 sm:gap-4">
+              <div className="flex items-center gap-2 text-sm text-white/85">
+                <span
+                  className={cn(
+                    "flex h-7 w-7 items-center justify-center rounded-full",
+                    "border border-white/20 bg-white/5",
+                  )}
+                >
+                  <Info className="h-3.5 w-3.5" strokeWidth={2.5} />
                 </span>
-                <span className="text-sm font-normal tracking-tight">App Available For</span>
+                <span className="font-normal tracking-tight">
+                  App Available For
+                </span>
               </div>
-
-              {/* Combined store badges image */}
-              <div
-                className="flex items-center rounded-full px-3 py-1"
-                style={{
-                  background: "rgba(255,255,255,0.08)",
-                  border: "1px solid rgba(255,255,255,0.15)",
-                }}
-              >
-                <Image
-                  src={STORE_BADGES}
-                  alt="Get it on Google Play and the App Store"
-                  width={120}
-                  height={32}
-                  className="h-6 w-auto object-contain"
-                />
-              </div>
+              <StoreBadges />
             </div>
 
             {/* Heading */}

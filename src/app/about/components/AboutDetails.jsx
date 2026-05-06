@@ -2,7 +2,7 @@ import Image from "next/image";
 import LiquidChrome from "@/components/ui/LiquidChrome";
 
 export default function AboutDetails() {
-    const IMG_APP_ONE_HAND = "/images/app-with-one-hand.png";
+    const IMG_2PHONES = "/images/About-us_2phone.png";
 
     return (
         <section className="w-full bg-white">
@@ -16,27 +16,24 @@ export default function AboutDetails() {
                             <span className="text-brand-primary">About</span> PayNback
                         </h2>
                         <div className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
-                            PayNback is India&apos;s first in-store shopping support app that offers
-                            rewards and discounts to consumers. Enjoy massive benefits and
-                            pre-reduced prices when you shop at PayNback-associated
-                            merchants. PayNback is not an eCommerce platform from which
-                            you can buy or sell stuffs, but a platform that connects you with
-                            your desired merchants offering competitive prices, and significant
-                            cash back rewards and incentives for all parties involved, such as
-                            customers, referees, merchants, and franchisees. Moreover, it helps
-                            you manage your purchase bill payments and budgeting.
+                            PayNback is redefining how local commerce works by turning everyday transactions into 
+                            meaningful value for both customers and businesses. As India’s first in-store shopping 
+                            support platform, we bridge the gap between nearby merchants and consumers—enabling smarter 
+                            spending, stronger visibility, and sustainable growth. Unlike traditional marketplaces,
+                             payNback does not replace physical stores—it strengthens them. By connecting users directly 
+                             with local merchants, the platform enhances in-store experiences while driving measurable 
+                             outcomes such as increased footfall, improved customer engagement, and higher conversion rates.
                         </div>
                     </div>
 
                     {/* Right Text */}
                     <div className="flex flex-col lg:pt-22">
                         <div className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
-                            The platform enables seamless bill payments using UPI, a personal wallet,
-                            or by redeeming earned reward points. Users can enjoy cashback offers,
-                            loyalty benefits, and special promotions on every eligible purchase.
-                            By combining digital payments, rewards, referrals, and personalized
-                            offers in one place, PayNback transforms everyday spending into a more
-                            rewarding, convenient, and engaging experience for both customers and businesses.
+                            For users, payNback delivers a seamless way to discover nearby deals, unlock exclusive rewards, 
+                            and make every purchase more rewarding. For merchants, it provides a powerful ecosystem to promote their business,
+                             reach the right audience, and grow consistently in a competitive market.
+                            By integrating discovery, rewards, promotions, and engagement into a single platform, payNback transforms 
+                            routine spending into a strategic advantage—creating long-term value for all stakeholders.
                         </div>
                     </div>
                 </div>
@@ -45,7 +42,7 @@ export default function AboutDetails() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
 
                     {/* Left Image with Gradient Background */}
-                    <div className="relative w-full aspect-4/5 sm:aspect-4/3 lg:aspect-4/3 rounded-[24px] overflow-hidden bg-black flex items-end justify-center pt-16">
+                    <div className="relative w-full aspect-4/5 sm:aspect-4/3 lg:aspect-4/3 rounded-[24px] overflow-hidden bg-black flex items-end justify-center pt-16 pb-8">
                         {/* Customized Gradient Glows replaced by Liquid Chrome */}
                         <div className="absolute inset-0 z-0 opacity-50">
                             <LiquidChrome
@@ -60,7 +57,7 @@ export default function AboutDetails() {
                         {/* Hand Image */}
                         <div className="relative z-10 w-[85%] sm:w-[65%] lg:w-[75%] h-[95%]">
                             <Image
-                                src={IMG_APP_ONE_HAND}
+                                src={IMG_2PHONES}
                                 alt="PayNback App displayed in one hand"
                                 fill
                                 className="object-contain object-bottom"
@@ -79,37 +76,32 @@ export default function AboutDetails() {
                             <li className="text-slate-600 font-normal flex items-start">
                                 <span className="mr-3 mt-[8px] w-[4px] h-[4px] bg-slate-800 rounded-full shrink-0"></span>
                                 <span>
-                                    <strong className="text-slate-900 font-medium tracking-tight">Discover :</strong> Find nearby stores, explore their offerings and
-                                    uncover hidden gems.
+                                    <strong className="text-slate-900 font-medium tracking-tight">Explore Local Opportunities:</strong> 
+                                    Discover nearby businesses and relevant offers tailored to your needs
                                 </span>
                             </li>
                             <li className="text-slate-600 font-normal flex items-start">
                                 <span className="mr-3 mt-[8px] w-[4px] h-[4px] bg-slate-800 rounded-full shrink-0"></span>
                                 <span>
-                                    <strong className="text-slate-900 font-medium tracking-tight">Save :</strong> Benefit from pre-reduced prices, exclusive discounts, and
-                                    cashback rewards on every purchase.
+                                    <strong className="text-slate-900 font-medium tracking-tight">Unlock Better Savings:</strong> Benefit from exclusive deals and reward-driven pricing. 
                                 </span>
                             </li>
                             <li className="text-slate-600 font-normal flex items-start">
                                 <span className="mr-3 mt-[8px] w-[4px] h-[4px] bg-slate-800 rounded-full shrink-0"></span>
                                 <span>
-                                    <strong className="text-slate-900 font-medium tracking-tight">Engage :</strong> Chat directly with store owners, ask questions, and get
-                                    personalized recommendations.
+                                    <strong className="text-slate-900 font-medium tracking-tight">Interact with Confidence:</strong> Communicate directly with merchants for a more personalized experience.
                                 </span>
                             </li>
                             <li className="text-slate-600 font-normal flex items-start">
                                 <span className="mr-3 mt-[8px] w-[4px] h-[4px] bg-slate-800 rounded-full shrink-0"></span>
                                 <span>
-                                    <strong className="text-slate-900 font-medium tracking-tight">Pay with ease :</strong> Settle bills effortlessly using UPI or redeem your
-                                    PayNback rewards.
+                                    <strong className="text-slate-900 font-medium tracking-tight">Simplify Payments: </strong> Enjoy smooth, hassle-free transactions with integrated options. 
                                 </span>
                             </li>
                             <li className="text-slate-600 font-normal flex items-start">
                                 <span className="mr-3 mt-[8px] w-[4px] h-[4px] bg-slate-800 rounded-full shrink-0"></span>
                                 <span>
-                                    <strong className="text-slate-900 font-medium tracking-tight">Earn :</strong> Refer friends, onboard merchants, and earn attractive
-                                    incentives, including cash rewards, commissions, and exciting
-                                    prizes.
+                                    <strong className="text-slate-900 font-medium tracking-tight">Gain More Value:</strong> Earn rewards and incentives through active participation and referrals. 
                                 </span>
                             </li>
                         </ul>

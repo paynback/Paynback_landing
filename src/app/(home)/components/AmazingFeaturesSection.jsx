@@ -15,37 +15,37 @@ const FEATURES = [
     icon: Users,
     title: "Community Building",
     description:
-      "The app fosters a sense of community by encouraging collaboration and friendly competitions.",
+      "Become part of a collaborative business community. PayNback brings together merchants—partners and even competitors—to support each other, share opportunities, and grow collectively.",
   },
   {
     icon: Gift,
     title: "Experiential Rewards",
     description:
-      "Rewards are not just discounts or products, but experiences that connect users to their chosen cause.",
+      "Rewards go beyond savings and cashback. Designed to support business growth, they drive promotions, enhance visibility, and increase customer footfall.",
   },
   {
     icon: Gamepad2,
-    title: "Gamification",
+    title: "Business Growth Support",
     description:
-      "The constellations, theme and progress tracking create a fun & engaging way to earn rewards.",
+      "Empowering businesses with data-driven promotions, improved discoverability, and consistent customer engagement to accelerate growth.",
   },
   {
     icon: ShoppingBag,
     title: "Effortless Shopping Experience",
     description:
-      "Enjoy a user-friendly platform with seamless navigation, instant offer notifications, and direct merchant support.",
+      "Shop smarter with a user-friendly platform that makes discovering deals, navigating stores, and connecting with merchants quick and effortless.",
   },
   {
     icon: Tag,
     title: "Exclusive Discounts & Rewards",
     description:
-      "Unlock savings with PayNback's exclusive deals and reward points for discounts on every purchase.",
+      "Curated offers and exclusive discounts from nearby businesses—delivering relevant savings and enhanced shopping value.",
   },
   {
     icon: TrendingUp,
-    title: "Business Growth Support",
+    title: "Engagement Driven Rewards",
     description:
-      "Empower your business with PayNback's loan facilitation and growth support for enhanced success and shopping experiences.",
+      "Experience a dynamic reward system that keeps users engaged. Progress tracking and interactive elements encourage continued participation, boosting loyalty and repeat visits",
   },
 ];
 
@@ -63,10 +63,12 @@ export default function AmazingFeaturesSection() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Section heading */}
-        <h2>
-          Our{" "}
-          <span className="text-(--brand-primary)">amazing</span>{" "}
-          features
+        <h2 className="pb-10">
+          <span className="text-(--brand-primary)">What</span>{" "}
+          <span className="">makes</span>{" "}
+          <span className="text-(--brand-primary)">Paynback</span>{" "}
+          <br/>
+           different?
         </h2>
 
         {/* Feature grid — 1 col on mobile, 3 cols on md+ */}

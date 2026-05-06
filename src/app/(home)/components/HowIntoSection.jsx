@@ -9,22 +9,22 @@ const STATS = [
     end: 1,
     suffix: "M",
     caption:
-      "Intelligent capabilities that prioritize usability, speed, and security.",
+      "Merchants Onboarded.Expanding rapidly with verified local businesses",
     symbol: "+",
   },
   {
     end: 70,
     suffix: "",
     caption:
-      "Intelligent capabilities that prioritize usability, speed, and security.",
-    symbol: "%",
+      "Deals Discovered Monthly.Helping users save more with every visit.",
+    symbol: "+",
   },
   {
     end: 30,
     suffix: "",
     caption:
-      "Intelligent capabilities that prioritize usability, speed, and security.",
-    symbol: "sec",
+      "User Satisfaction Rate.Built for seamless, reliable shopping experiences",
+    symbol: "%",
   },
 ];
 
