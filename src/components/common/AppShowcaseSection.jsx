@@ -121,7 +121,7 @@ export default function AppShowcaseSection() {
             </p>
 
             <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px] whitespace-nowrap">
-              <span className="font-semibold text-[#1468C5]">into growth</span> oppertunities
+              <span className="font-semibold text-[#1468C5]">into growth</span> opportunities
             </h2>
           </div>
         </div>
@@ -130,7 +130,7 @@ export default function AppShowcaseSection() {
         <div className="mt-10 flex flex-col items-center gap-4 md:hidden relative z-20">
           <MobileCard step="1" title="Referral link" desc="Get a referral link from a friend." />
           <MobileCard step="2" title="Download" desc="From Play Store & App Store" />
-          <MobileCard step="3" title="Sign up" desc="Open the referral link and signup." />
+          <MobileCard step="3" title="Sign up" desc="Open the referral link and sign up." />
         </div>
 
         {/* Phone + callouts */}

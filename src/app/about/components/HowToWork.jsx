@@ -16,7 +16,7 @@ export default function HowToWork() {
                         </h2>
                         <p className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
                             PayNback is a connected retail ecosystem that brings customers and partner merchants onto a single, 
-                            seamless platform—enhancing the way everyday shopping is experienced and rewarded.Every purchase made
+                            seamless platform—enhancing the way everyday shopping is experienced and rewarded. Every purchase made
                              at an onboarded merchant earns you cashback and rewards, credited directly to your PayNback account. 
                              These rewards are not limited to a single store—they can be redeemed instantly or used across other
                               participating merchants within the ecosystem, creating continuous value with every transaction.
@@ -26,7 +26,7 @@ export default function HowToWork() {
                         <p className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
                             The app also enables effortless discovery and engagement. Users can explore curated partner stores,
                              view exclusive in-store offers, and connect directly with merchants for enquiries or assistance through
-                              chat or call.Payments are designed to be smooth and flexible. Bills can be settled instantly via UPI, 
+                              chat or call. Payments are designed to be smooth and flexible. Bills can be settled instantly via UPI, 
                               PayNback wallet, or redeemed rewards—ensuring a frictionless checkout experience at every step.
                         </p>
                     </div>
@@ -81,7 +81,7 @@ export default function HowToWork() {
                                 <strong className="text-slate-900 font-medium tracking-tight">Simple Sign-Up :</strong> Get started by accepting a referral link from our marketing team, sharing it on social media, or visiting our website www.PayNback.in. Download and install PayNback mobile app from play store.
                             </li>
                             <li className="pl-2">
-                                <strong className="text-slate-900 font-medium tracking-tight">Open App :</strong> and click to sign up with basic information.
+                                <strong className="text-slate-900 font-medium tracking-tight">Open App :</strong> Open the app and register using your basic business details to create your merchant profile in just a few steps.
                             </li>
                             <li className="pl-2">
                                 <strong className="text-slate-900 font-medium tracking-tight">Complete your Profile :</strong> Provide essential information about your business, including licenses, tax details, location, bank account details, and at least four high-quality photos showcasing your shop and key products.
