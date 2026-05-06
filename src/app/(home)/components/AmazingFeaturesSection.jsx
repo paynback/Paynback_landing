@@ -3,10 +3,10 @@
 import {
   Users,
   Gift,
-  Gamepad2,
   ShoppingBag,
   Tag,
   TrendingUp,
+  ChartLine
 } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -24,7 +24,7 @@ const FEATURES = [
       "Rewards go beyond savings and cashback. Designed to support business growth, they drive promotions, enhance visibility, and increase customer footfall.",
   },
   {
-    icon: Gamepad2,
+    icon: ChartLine,
     title: "Business Growth Support",
     description:
       "Empowering businesses with data-driven promotions, improved discoverability, and consistent customer engagement to accelerate growth.",
