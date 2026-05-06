@@ -247,7 +247,7 @@ export default function Footer() {
                   </li>
                   <li className="flex items-center gap-2 text-sm text-white/60">
                     <Mail className="h-3.5 w-3.5 shrink-0" strokeWidth={1.8} />
-                    support@PayNback.com
+                    support@paynback.com
                   </li>
                 </ul>
               </div>
@@ -268,9 +268,9 @@ export default function Footer() {
                   <SocialBtn label="LinkedIn">
                     <Linkedin className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
-                  <SocialBtn label="Pinterest">
+                  {/* <SocialBtn label="Pinterest">
                     <PinterestIcon className="h-5 w-5" />
-                  </SocialBtn>
+                  </SocialBtn> */}
                   <SocialBtn label="YouTube">
                     <Youtube className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
