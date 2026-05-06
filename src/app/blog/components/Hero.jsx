@@ -5,8 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 export default function BlogHero() {
   const reduceMotion = useReducedMotion();
-  const IMG_APP_HAND = "/images/app-with-two-hand.png";
-
+  const IMG_BLOG_HERO = "/images/blog-hero-image.png";
 
   const MAX_SHIFT = -35; // Shorter max shift so the end isn't brought all the way left
   const TOTAL_STEPS = 7; // Exactly seven moves
@@ -64,68 +63,63 @@ export default function BlogHero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,transparent_42%,rgba(0,0,0,0.42)_100%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        {/* Content Centered Vertically */}
-        <div className="relative flex-1 flex w-full flex-col justify-center pb-32 sm:pb-40">
-
-          <motion.div
-            className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-12 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12"
-            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 42 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          >
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0">
+        <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-10 sm:pt-14 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
+          <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-48 lg:pl-14 xl:pl-20 drop-shadow-md">
             <motion.span
-              className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md"
-              initial={reduceMotion ? undefined : { opacity: 0, y: 16 }}
+              className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             >
-              Blogs
+              Blog
             </motion.span>
             <motion.h1
-              className="whitespace-nowrap text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+              className="text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
               initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
             >
-              Stories Behind the Screens
+              <span className="whitespace-nowrap">Stories Behind the</span> <br />
+              Screens
             </motion.h1>
             <motion.p
-              className="pr-4 leading-[144%] tracking-[-0.56px] text-white/75 sm:text-xs lg:text-sm"
-              initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
+              className="max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.55, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
-              Where design meets strategy and real-world impact
+              Where design meets strategy and real-world impact.
             </motion.p>
-          </motion.div>
+          </div>
 
-
-          {/* Right-aligned Hero Image with deeper, faster floating animation */}
-          <motion.div
-            className="pointer-events-none absolute right-[-10%] top-[50%] z-0 h-[280px] w-[280px] -translate-y-1/2 opacity-30 drop-shadow-2xl sm:right-[-5%] sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[254px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
-            initial={{ opacity: 0, y: -400 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
-          >
+          <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none flex items-center justify-center mt-8 lg:mt-20">
+            {/* Contact Hero Image */}
             <motion.div
-              animate={{ y: [0, -35, 0] }}
-              transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
+              className="relative z-10 h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] lg:h-[407px] lg:w-[407px] flex justify-center items-center drop-shadow-2xl"
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
             >
-              <Image
-                src="/images/wate-note-swirl.png"
-                alt="Water Note Swirl"
-                width={407}
-                height={407}
-                className="h-full w-full object-contain drop-shadow-[0_20px_45px_rgba(255,255,255,0.2)]"
-                priority
-              />
+              <motion.div
+                className="w-full h-full"
+                animate={reduceMotion ? undefined : { y: [0, -35, 0] }}
+                transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
+              >
+                <Image
+                  src={IMG_BLOG_HERO}
+                  alt="Blog Hero Image"
+                  width={407}
+                  height={407}
+                  className="h-full w-full object-contain drop-shadow-[0_25px_55px_rgba(56,189,248,0.35)]"
+                  priority
+                />
+              </motion.div>
             </motion.div>
-          </motion.div>
+          </div>
         </div>
       </div>
 

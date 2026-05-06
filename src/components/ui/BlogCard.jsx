@@ -3,7 +3,11 @@ import Image from 'next/image';
 import { Star } from 'lucide-react';
 import Link from 'next/link';
 
-export default function BlogCard({ title, excerpt, image = '/images/blog-image.png', isFeatured = true }) {
+export default function BlogCard({
+  title, excerpt,
+  image = '/images/blog-image.png',
+  isFeatured = true
+}) {
   return (
     <Link href="/blog" className="relative flex flex-col justify-end w-full overflow-hidden rounded-[24px] bg-black group aspect-387/537 cursor-pointer">
       {/* Background Image */}
@@ -16,7 +20,7 @@ export default function BlogCard({ title, excerpt, image = '/images/blog-image.p
       />
 
       {/* Gradient Overlay */}
-      <div 
+      <div
         className="absolute inset-0 z-0 pointer-events-none"
         style={{
           background: 'linear-gradient(187.26deg, rgba(0, 0, 0, 0) 25.83%, #000000 83.99%)',
