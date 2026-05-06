@@ -5,8 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 export default function CareersHero() {
   const reduceMotion = useReducedMotion();
-  const IMG_APP_HAND = "/images/app-with-two-hand.png";
-  const IMG_BIG_LOGO = "/images/big-logo.png";
+  const IMG_CAREER_HERO = "/images/career-hero-image.png";
 
   const MAX_SHIFT = -35; // Shorter max shift so the end isn't brought all the way left
   const TOTAL_STEPS = 7; // Exactly seven moves
@@ -64,80 +63,66 @@ export default function CareersHero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,transparent_42%,rgba(0,0,0,0.42)_100%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        {/* Content Centered Vertically */}
-        <div className="relative flex-1 flex w-full flex-col justify-start sm:justify-center pt-28 sm:pt-0 pb-32 sm:pb-40">
-
-          <motion.div
-            className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-16 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12"
-            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 42 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
-            transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-          >
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0">
+        <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-10 sm:pt-14 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
+          <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-32 lg:pl-14 xl:pl-20 drop-shadow-md">
             <motion.span
-              className="text-[24px] font-normal leading-[124%] tracking-[-0.56px] mb-8 drop-shadow-md"
-              initial={reduceMotion ? undefined : { opacity: 0, y: 16 }}
+              className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9]"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.55, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             >
               Careers
             </motion.span>
             <motion.h1
-              className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-4xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+              className="text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
               initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
               transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
             >
-              Build the Future With Us
+              <span className="whitespace-nowrap">Build the Future</span> <br />
+              With Us
+
             </motion.h1>
             <motion.p
-              className="pr-4 leading-[144%] tracking-[-0.56px] text-white/75 sm:text-xs lg:text-sm"
-              initial={reduceMotion ? undefined : { opacity: 0, y: 14 }}
+              className="max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
               whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.35 }}
-              transition={{ duration: 0.55, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
             >
               Be part of a culture that values creativity, collaboration, and innovation.
             </motion.p>
-          </motion.div>
+          </div>
 
-
-
-          {/* Right Images Container - absolute to overlap */}
-          <div className="absolute right-0 bottom-[-3%] top-10 w-full lg:w-[65%] xl:w-[60%] pointer-events-none z-20 flex justify-end items-end overflow-hidden sm:overflow-visible">
-            {/* Big Logo in background */}
-            <div className="absolute right-[2%] bottom-[-20%] w-[110%] h-[110%] z-0 opacity-20">
-              <Image
-                src={IMG_BIG_LOGO}
-                alt="Big PayNback Logo"
-                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-contain object-bottom-right transform rotate-[-5deg] scale-125"
-                priority
-              />
-            </div>
-            {/* Hand Image */}
+          <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[600px] lg:max-w-none flex items-center justify-center mt-8 lg:mt-20">
+            {/* Career Hero Image */}
             <motion.div
-              className="relative z-10 w-[135%] sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-35%] sm:mr-[-20%] mb-[-5%] sm:mb-[-2%]"
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 96 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative z-10 h-[400px] w-[400px] sm:h-[480px] sm:w-[480px] lg:h-[600px] lg:w-[600px] flex justify-center items-center drop-shadow-2xl"
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
             >
-              <Image
-                src={IMG_APP_HAND}
-                alt="App With Two Hand"
-                width={1000}
-                height={1300}
-                className="w-full h-auto object-bottom object-contain"
-                priority
-              />
+              <motion.div
+                animate={reduceMotion ? undefined : { y: [0, -35, 0] }}
+                transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
+                className="h-full w-full"
+              >
+                {/* Reusing the About Us Hero image as requested, but with a different alt text */}
+                <Image
+                  src={IMG_CAREER_HERO}
+                  alt="Careers Hero Image"
+                  width={600}
+                  height={600}
+                  className="h-full w-full object-contain drop-shadow-[0_15px_35px_rgba(255,255,255,0.15)]"
+                  priority
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>
-
       </div>
 
       {/* Full-width screen bleed text */}
