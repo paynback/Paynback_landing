@@ -73,7 +73,7 @@ export default function BlogHero() {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             >
-              Blog
+              Blogs
             </motion.span>
             <motion.h1
               className="text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
