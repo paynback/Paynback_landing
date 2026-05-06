@@ -1,9 +1,11 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 
 export default function MsmeHero() {
+    const reduceMotion = useReducedMotion();
+
     // --- Reused ticker logic from BlogHero for identical animation behavior ---
     const MAX_SHIFT = -35;
     const TOTAL_STEPS = 7;
@@ -42,49 +44,68 @@ export default function MsmeHero() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,transparent_42%,rgba(0,0,0,0.42)_100%)]" />
             </div>
 
-            <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-6 sm:px-6 lg:px-8">
-                {/* Content Centered Vertically */}
-                <div className="relative flex-1 flex w-full flex-col justify-start pt-28 sm:pt-0 sm:justify-center pb-32 sm:pb-40">
-                    <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-3 sm:gap-5 mt-16 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
-                        <span className="text-[18px] sm:text-[24px] font-semibold sm:font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9] sm:text-white/90">
+            <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0">
+                <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-10 sm:pt-14 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
+                    <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-48 lg:pl-14 xl:pl-20 drop-shadow-md">
+                        <motion.span
+                            className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9] sm:text-white/90"
+                            initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
+                            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.5 }}
+                            transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+                        >
                             MSME
-                        </span>
-                        <h1 className="text-balance text-[38px] sm:text-4xl font-semibold sm:font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl">
-                            Amplify Sales
-                        </h1>
-                        <p className="pr-4 leading-[1.5] tracking-[-0.56px] text-white/90 sm:text-white/75 text-[15px] sm:text-xs lg:text-sm">
+                        </motion.span>
+                        <motion.h1
+                            className="text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+                            initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+                            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.35 }}
+                            transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+                        >
+                            Partner for Profit
+                        </motion.h1>
+                        <motion.p
+                            className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm"
+                            initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+                            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                            viewport={{ once: true, amount: 0.35 }}
+                            transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+                        >
                             <span className="block sm:hidden">
                                 Leverage our fintech ecosystem to grow<br />visibility, trust, and long-term customer loyalty.
                             </span>
                             <span className="hidden sm:block">
                                 Leverage our fintech ecosystem to grow visibility, trust, and long-term customer loyalty. Partner with us to boost visibility, increase sales, and scale smarter.
                             </span>
-                        </p>
+                        </motion.p>
                     </div>
 
-                    {/* Right-aligned or Centered Hero Image */}
-                    <motion.div
-                        className="pointer-events-none relative mx-auto mt-16 sm:mt-0 sm:absolute sm:right-[-5%] sm:top-[50%] z-0 h-[300px] w-[300px] sm:-translate-y-1/2 opacity-100 drop-shadow-2xl sm:h-[320px] sm:w-[320px] sm:opacity-50 lg:right-[2%] lg:top-[254px] lg:h-[407px] lg:w-[407px] lg:translate-y-0 lg:opacity-100 xl:right-[4%]"
-                        initial={{ opacity: 0, y: -400 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
-                    >
+                    <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none flex items-center justify-center mt-8 lg:mt-20">
+                        {/* MSME Hero Image */}
                         <motion.div
-                            animate={{ y: [0, -35, 0] }}
-                            transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
-                            className="h-full w-full"
+                            className="relative z-10 h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] lg:h-[407px] lg:w-[407px] flex justify-center items-center drop-shadow-2xl"
+                            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
+                            animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+                            transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
                         >
-                            {/* Reusing the About Us Hero image as requested, but with a different alt text */}
-                            <Image
-                                src="/images/water-profile-swirl.png"
-                                alt="MSME Partner Visual"
-                                width={407}
-                                height={407}
-                                className="h-full w-full object-contain drop-shadow-[0_15px_35px_rgba(255,255,255,0.15)]"
-                                priority
-                            />
+                            <motion.div
+                                animate={reduceMotion ? undefined : { y: [0, -35, 0] }}
+                                transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
+                                className="h-full w-full"
+                            >
+                                {/* Reusing the About Us Hero image as requested, but with a different alt text */}
+                                <Image
+                                    src="/images/water-profile-swirl.png"
+                                    alt="MSME Partner Visual"
+                                    width={407}
+                                    height={407}
+                                    className="h-full w-full object-contain drop-shadow-[0_15px_35px_rgba(255,255,255,0.15)]"
+                                    priority
+                                />
+                            </motion.div>
                         </motion.div>
-                    </motion.div>
+                    </div>
                 </div>
             </div>
 

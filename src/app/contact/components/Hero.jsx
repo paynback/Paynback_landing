@@ -5,8 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 
 export default function ContactHero() {
   const reduceMotion = useReducedMotion();
-  const IMG_APP_HAND = "/images/app-with-two-hand.png";
-  const IMG_BIG_LOGO = "/images/big-logo.png";
+  const IMG_CONTACT_HERO = "/images/contact-hero-image.png";
 
   const MAX_SHIFT = -35; // Shorter max shift so the end isn't brought all the way left
   const TOTAL_STEPS = 7; // Exactly seven moves
@@ -64,54 +63,64 @@ export default function ContactHero() {
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,transparent_42%,rgba(0,0,0,0.42)_100%)]" />
       </div>
 
-      <div className="relative z-10 mx-auto flex w-full flex-1 max-w-7xl flex-col px-4 sm:px-6 lg:px-8">
-        {/* Content Centered Vertically */}
-        <div className="relative flex-1 flex w-full flex-col justify-start sm:justify-center pt-28 sm:pt-0 pb-32 sm:pb-40">
-
-          <div className="relative z-10 flex w-full max-w-3xl flex-col items-start gap-5 mt-16 sm:mt-24 lg:mt-32 drop-shadow-md lg:pr-12">
-            <span className="text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90">Contact Us</span>
-            <h1 className="text-balance text-4xl font-medium leading-[1.30] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]">
-              We’d Love to Hear From You
-            </h1>
-            <p className="pr-4 leading-[144%] tracking-[-0.56px] text-base sm:text-lg lg:text-xl text-white/90">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-7xl flex-col px-4 pt-6 sm:px-6 sm:pt-8 lg:px-8 lg:pt-0">
+        <div className="grid flex-1 grid-cols-1 items-center gap-10 pb-16 pt-10 sm:pt-14 lg:grid-cols-2 lg:gap-6 lg:pb-24 lg:pt-4">
+          <div className="flex max-w-2xl flex-col gap-y-5 mt-10 sm:mt-14 lg:mt-48 lg:pl-14 xl:pl-20 drop-shadow-md">
+            <motion.span
+              className="inline-block text-xl sm:text-[24px] font-normal leading-[124%] tracking-[-0.56px] text-white/90"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.5 }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Contact Us
+            </motion.span>
+            <motion.h1
+              className="text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl lg:text-6xl -ml-[2px] lg:-ml-[4px]"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <span className="whitespace-nowrap">We’d Love to Hear</span> <br />
+              From You
+            </motion.h1>
+            <motion.p
+              className="max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.35 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
               Reach out to our team and we’ll respond as quickly as possible.
-            </p>
+            </motion.p>
           </div>
 
-
-
-          {/* Right Images Container - absolute to overlap */}
-          <div className="absolute right-0 bottom-[-3%] top-10 w-full lg:w-[65%] xl:w-[60%] pointer-events-none z-20 flex justify-end items-end overflow-hidden sm:overflow-visible">
-            {/* Big Logo in background */}
-            <div className="absolute right-[2%] bottom-[-20%] w-[110%] h-[110%] z-0 opacity-20">
-              <Image
-                src={IMG_BIG_LOGO}
-                alt="Big PayNback Logo"
-                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                className="object-contain object-bottom-right transform rotate-[-5deg] scale-125"
-                priority
-              />
-            </div>
-            {/* Hand Image */}
+          <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none flex items-center justify-center mt-8 lg:mt-20">
+            {/* Contact Hero Image */}
             <motion.div
-              className="relative z-10 w-[135%] sm:w-[95%] max-w-[800px] flex justify-end items-end mr-[-35%] sm:mr-[-20%] mb-[-5%] sm:mb-[-2%]"
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 96 }}
-              whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.35, ease: [0.22, 1, 0.36, 1], delay: 0.18 }}
+              className="relative z-10 h-[280px] w-[280px] sm:h-[320px] sm:w-[320px] lg:h-[407px] lg:w-[407px] flex justify-center items-center drop-shadow-2xl"
+              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
             >
-              <Image
-                src={IMG_APP_HAND}
-                alt="App With Two Hand"
-                width={1000}
-                height={1300}
-                className="w-full h-auto object-bottom object-contain"
-                priority
-              />
+              <motion.div
+                className="w-full h-full"
+                animate={reduceMotion ? undefined : { y: [0, -35, 0] }}
+                transition={{ duration: 2.8, ease: "easeInOut", repeat: Infinity }}
+              >
+                <Image
+                  src={IMG_CONTACT_HERO}
+                  alt="Contact Hero Image"
+                  width={407}
+                  height={407}
+                  className="h-full w-full object-contain drop-shadow-[0_25px_55px_rgba(56,189,248,0.35)]"
+                  priority
+                />
+              </motion.div>
             </motion.div>
           </div>
         </div>
-
       </div>
 
       {/* Full-width screen bleed text */}

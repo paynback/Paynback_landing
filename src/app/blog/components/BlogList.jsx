@@ -1,75 +1,47 @@
 "use client";
 
-import Image from "next/image";
-import { Bookmark } from "lucide-react";
+import BlogCard from "@/components/ui/BlogCard";
 
 // Mock Data matching the design references
-const BLOG_IMG = "/images/qr-with-hand.jpg";
-const AVATAR_IMG = "/images/cartoon-char.jpg";
+const MOCK_BLOGS = [
+  {
+    id: 1,
+    title: "How PayNback is Turning Everyday UPI Payments into Real Rewards",
+    excerpt: "Discover how PayNback transforms simple offline purchases at your local kirana store, supermarket, or restaurant into cashback and loyalty points — making every UPI scan more rewarding than ever.",
+    image: "/images/blog-image.png"
+  },
+  {
+    id: 2,
+    title: "Why Local Merchants Love PayNback: Real Stories from Kochi",
+    excerpt: "From increased footfall to higher repeat purchases — see how supermarket owners, clothing stores, and food outlets in Kerala are growing their business with PayNback’s loyalty tools and cashback offers.",
+    image: "/images/blog-image.png"
+  },
+  {
+    id: 3,
+    title: "Bridging Online Convenience with Offline Trust: The PayNback Edge",
+    excerpt: "PayNback brings the best of both worlds — instant digital deals and rewards for your favourite brick-and-mortar stores. Shop locally, save smartly, and enjoy a seamless experience.",
+    image: "/images/blog-image.png"
+  },
+  {
+    id: 4,
+    title: "Maximize Your Savings: Pro Tips to Earn More Points with PayNback",
+    excerpt: "From referral bonuses to multi-partner point redemption and personalized offers — here are practical ways to save more money and unlock exciting rewards while shopping offline.",
+    image: "/images/blog-image.png"
+  },
+  {
+    id: 5,
+    title: "The Future of Offline Retail: How PayNback Empowers Small Businesses",
+    excerpt: "In a world dominated by big e-commerce players, PayNback levels the playing field by helping local merchants attract loyal customers through cashback, loyalty programs, and easy digital tools.",
+    image: "/images/blog-image.png"
+  },
+  {
+    id: 6,
+    title: "PayNback’s Stealth Launch: What Happened on July 1st & What’s Next",
+    excerpt: "A quiet revolution began in Kochi. One year on, explore the journey so far, user success stories, and exciting upcoming features that will further enhance your offline shopping experience.",
+    image: "/images/blog-image.png"
+  }
+];
 
-const MOCK_BLOGS = Array(6).fill({
-    title: "Quietly Revolutionizing Offline Shopping",
-    excerpt: "PayNback, a groundbreaking new platform designed to elevate the offline shopping experience, made its stealth launch on July 1st...",
-    author: "PayNback Team",
-    date: "July 1, 2025",
-}).map((blog, idx) => ({ ...blog, id: idx + 1 }));
-
-/* ── Single blog card ─────────────────────────────────────── */
-function BlogCard({ title, excerpt, author, date }) {
-    return (
-        <article className="flex flex-col">
-            {/* Image — all corners curved */}
-            <div className="relative h-56 sm:h-60 lg:h-52 w-full overflow-hidden rounded-[20px] bg-slate-100">
-                <Image
-                    src={BLOG_IMG}
-                    alt={title}
-                    fill
-                    className="object-cover object-center transition-transform duration-300 hover:scale-105"
-                    sizes="(max-width:768px) 100vw, 33vw"
-                />
-                {/* Featured badge */}
-                <div
-                    className="absolute left-4 top-4 flex items-center gap-1.5 rounded-full px-3 py-1.5"
-                    style={{
-                        background: "rgba(255,255,255,0.88)",
-                        backdropFilter: "blur(6px)",
-                        WebkitBackdropFilter: "blur(6px)",
-                    }}
-                >
-                    <Bookmark className="h-[14px] w-[14px] text-slate-500" strokeWidth={2} />
-                    <span className="text-xs font-medium text-slate-600">Featured</span>
-                </div>
-            </div>
-
-            {/* Text content */}
-            <div className="flex flex-1 flex-col gap-2.5 pt-5">
-                <h3 className="text-[20px] font-semibold leading-snug text-slate-900">
-                    {title}
-                </h3>
-                <p className="line-clamp-3 text-[14px] leading-relaxed text-slate-500">
-                    {excerpt}
-                </p>
-
-                {/* Author row */}
-                <div className="mt-auto flex items-center gap-3 pt-4">
-                    <div className="relative h-9 w-9 overflow-hidden rounded-full">
-                        <Image
-                            src={AVATAR_IMG}
-                            alt={author}
-                            fill
-                            className="object-cover object-top"
-                            sizes="36px"
-                        />
-                    </div>
-                    <div className="flex flex-col">
-                        <p className="text-[13px] font-bold text-slate-800">{author}</p>
-                        <p className="text-[12px] text-slate-500">{date}</p>
-                    </div>
-                </div>
-            </div>
-        </article>
-    );
-}
 
 /* ── Section ──────────────────────────────────────────────── */
 export default function BlogList() {

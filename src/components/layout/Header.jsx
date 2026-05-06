@@ -142,7 +142,7 @@ export default function Header({
                           active
                             ? cn(
                               useWhiteNavbar ? "font-semibold text-black" : "font-semibold text-white",
-                              "before:absolute before:-inset-x-2 before:-inset-y-2 before:-z-10 before:rounded-full before:bg-[#87B3E0] before:blur-lg"
+                              "before:absolute before:-inset-x-2 before:-inset-y-[2px] before:-z-10 before:rounded-full before:bg-[#87B3E0] before:blur-lg"
                             )
                             : useWhiteNavbar
                               ? "text-black/80"
