@@ -16,14 +16,14 @@ export function StoreBadges({ className }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Get it on Google Play"
-        className="flex items-center justify-center transition-transform hover:scale-110 active:scale-95"
+        className="flex w-7 sm:w-8 items-center justify-center transition-transform hover:scale-110 active:scale-95"
       >
         <Image
           src="/Icons/playstore-svgrepo-com.svg"
           alt="Google Play icon"
           width={36}
           height={36}
-          className="h-4 w-4 sm:h-5 sm:w-5 drop-shadow-md object-contain"
+          className="h-5 w-5 sm:h-6 sm:w-6 drop-shadow-md object-contain"
         />
       </a>
 
@@ -36,14 +36,14 @@ export function StoreBadges({ className }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download on the App Store"
-        className="flex items-center justify-center transition-transform hover:scale-110 active:scale-95"
+        className="flex w-7 sm:w-8 items-center justify-center transition-transform hover:scale-110 active:scale-95"
       >
         <Image
-          src="/Icons/appstore-svgrepo-com.svg"
+          src="/Icons/app-store-rounded-icon.svg"
           alt="Apple App Store icon"
           width={36}
           height={36}
-          className="h-4 w-4 sm:h-5 sm:w-5 drop-shadow-md object-contain"
+          className="h-7 w-7 sm:h-8 sm:w-8 drop-shadow-md object-contain"
         />
       </a>
     </div>

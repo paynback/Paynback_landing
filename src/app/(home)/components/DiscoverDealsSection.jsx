@@ -202,7 +202,7 @@ export default function DiscoverDealsSection() {
           {/* Right paragraph */}
           <div className="max-w-3xl text-sm leading-relaxed text-slate-700 sm:text-base sm:leading-relaxed md:max-w-none md:pt-1 lg:text-lg">
             <p>
-              A new way to shop begins here. payNback introduces India’s first in-store shopping support app, bringing you closer to nearby merchants and exclusive offers.
+              A new way to shop begins here. PayNback introduces India’s first in-store shopping support app, bringing you closer to nearby merchants and exclusive offers.
             </p>
           </div>
         </div>

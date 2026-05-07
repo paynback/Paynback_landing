@@ -57,10 +57,13 @@ function PinterestIcon({ className }) {
 
 /* ── Social icon button ──────────────────────────────────── */
 function SocialBtn({ href = "#", label, children }) {
+  const isExternal = href.startsWith('http');
   return (
     <Link
       href={href}
       aria-label={label}
+      target={isExternal ? "_blank" : undefined}
+      rel={isExternal ? "noopener noreferrer" : undefined}
       className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-white transition-all duration-200 hover:-translate-y-1 hover:bg-white/10 hover:shadow-lg"
     >
       {children}
@@ -256,22 +259,16 @@ export default function Footer() {
               <div className="flex flex-col gap-3">
                 <h5>Follow us on</h5>
                 <div className="flex flex-nowrap gap-2 -ml-3.5">
-                  <SocialBtn label="Facebook">
+                  <SocialBtn href="https://www.facebook.com/paynback.in" label="Facebook">
                     <Facebook className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
-                  <SocialBtn label="Instagram">
+                  <SocialBtn href="https://www.instagram.com/paynback_" label="Instagram">
                     <Instagram className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
-                  <SocialBtn label="X (Twitter)">
-                    <XIcon className="h-5 w-5" />
-                  </SocialBtn>
-                  <SocialBtn label="LinkedIn">
+                  <SocialBtn href="https://www.linkedin.com/company/paynback/" label="LinkedIn">
                     <Linkedin className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
-                  {/* <SocialBtn label="Pinterest">
-                    <PinterestIcon className="h-5 w-5" />
-                  </SocialBtn> */}
-                  <SocialBtn label="YouTube">
+                  <SocialBtn href="https://www.youtube.com/@payNback" label="YouTube">
                     <Youtube className="h-5 w-5" strokeWidth={1.8} />
                   </SocialBtn>
                 </div>
