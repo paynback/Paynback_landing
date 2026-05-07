@@ -14,7 +14,7 @@ export default function CareersPage() {
                 <CareersHero />
             </ScrollReveal>
 
-            <ScrollReveal delay={50}>
+            <ScrollReveal delay={100}>
                 <Team />
             </ScrollReveal>
 

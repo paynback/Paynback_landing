@@ -1,43 +1,11 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 const PHONE_IMG = "/images/b8485b8034de2d844a4e8c1cb4ee22d60b2b54ae.png";
 
-/* ── Dashed connector line + dot ─────────────────────────── */
-function Connector({ side = "right" }) {
-  const isRight = side === "right";
-  return (
-    <div className={`flex items-center gap-1 ${isRight ? "flex-row-reverse" : ""}`}>
-      <span className="inline-block h-1.5 w-1.5 flex-shrink-0 rounded-full bg-white/40" />
-      <span
-        className="h-px"
-        style={{
-          minWidth: "52px",
-          background:
-            "repeating-linear-gradient(to right, rgba(255,255,255,0.35) 0px, rgba(255,255,255,0.35) 5px, transparent 5px, transparent 10px)",
-        }}
-      />
-    </div>
-  );
-}
 
-/* ── Callout label ─────────────────────────────────────────── */
-function CalloutLabel({ corner, eyebrow, title, desc }) {
-  const isRight = corner.includes("right");
-  return (
-    <div className={`flex flex-col gap-0.5 ${isRight ? "items-end text-right" : "items-start text-left"}`}>
-      {eyebrow && (
-        <span className="text-[11px] font-medium tracking-wide text-[#3B82F6] mb-0.5">
-          {eyebrow}
-        </span>
-      )}
-      <p className="text-sm font-semibold leading-tight text-white">{title}</p>
-      <p className="max-w-[130px] text-xs leading-snug text-white/50">{desc}</p>
-    </div>
-  );
-}
 
 /* ── Mobile Card ───────────────────────────────────────────── */
 function MobileCard({ step, title, desc }) {
@@ -61,11 +29,9 @@ function MobileCard({ step, title, desc }) {
 
 /* ── Section ───────────────────────────────────────────────── */
 export default function AppShowcaseSection() {
-  const reduceMotion = useReducedMotion();
-
   return (
     <section
-      className="relative isolate w-full overflow-hidden font-sans text-white"
+      className="relative isolate w-full font-sans text-white"
       style={{ "--brand-accent": "#99BAEC" }}
     >
       {/* Base dark navy */}
@@ -91,20 +57,22 @@ export default function AppShowcaseSection() {
         ── Half-ellipse arc — precisely 180° at the bottom ──
         Technique: place a full circle whose CENTER sits exactly
         on the bottom edge of the section (bottom:0 + translateY(50%)).
-        overflow:hidden on <section> clips the lower half,
+        overflow-hidden on the wrapper clips the lower half,
         leaving only the perfect top semicircle visible.
       */}
-      <div
-        className="pointer-events-none absolute left-1/2 bottom-0 z-0"
-        style={{
-          width: "65%",
-          aspectRatio: "1 / 1",
-          transform: "translateX(-50%) translateY(50%)",
-          borderRadius: "50%",
-          border: "1px solid rgba(153, 186, 236, 0.25)",
-        }}
-        aria-hidden
-      />
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none md:hidden">
+        <div
+          className="absolute left-1/2 bottom-0"
+          style={{
+            width: "65%",
+            aspectRatio: "1 / 1",
+            transform: "translateX(-50%) translateY(50%)",
+            borderRadius: "50%",
+            border: "1px solid rgba(153, 186, 236, 0.25)",
+          }}
+          aria-hidden
+        />
+      </div>
 
       {/* ── Content ─────────────────────────────────────────── */}
       <div className="relative z-10 mx-auto max-w-7xl px-6 pt-6 pb-0 sm:px-6 lg:px-20 lg:pt-10">
@@ -133,43 +101,36 @@ export default function AppShowcaseSection() {
           <MobileCard step="3" title="Sign up" desc="Open the referral link and sign up." />
         </div>
 
-        {/* Phone + callouts */}
+        {/* Phone + background graphics */}
         <div
           className="relative mt-10 md:mt-6 flex items-end justify-center lg:mt-8"
           style={{ minHeight: "clamp(300px, 50vw, 460px)" }}
         >
-          {/* Referral link — mid-left — glass card */}
-          <div
-            className="absolute bottom-[28%] left-0 hidden items-center gap-2 md:flex lg:left-[3%]"
-          >
-            <div
-              className="rounded-xl px-3 py-2.5"
-              style={{
-                background: "rgba(255,255,255,0.07)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255,255,255,0.13)",
-              }}
-            >
-              <CalloutLabel corner="bottom-left" eyebrow="Step 1" title="Referral link" desc="Get a referral link from a friend." />
-            </div>
-            <Connector side="left" />
+          {/* ── Desktop background image (Arc + Cards) ── */}
+          <div className="absolute inset-0 hidden md:block pointer-events-none" style={{ zIndex: 0 }}>
+            <Image
+              src="/images/half-circle-card.png"
+              alt="App flow steps background"
+              fill
+              className="object-contain object-bottom scale-[1.15] origin-bottom"
+              priority
+            />
           </div>
 
           {/* ── Phone image ── */}
           <motion.div
-            className="relative z-10 overflow-hidden"
+            className="relative z-50"
             style={{
               width: "clamp(320px, 42vw, 580px)",
               aspectRatio: "1024 / 1080",
             }}
-            initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 88 }}
-            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.35 }}
+            initial={{ opacity: 0, y: 120 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "0px 0px -100px 0px" }}
             transition={{
-              duration: 0.9,
-              delay: 0.08,
-              ease: [0.22, 1, 0.36, 1],
+              duration: 1,
+              delay: 0.1,
+              ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
             <Image
@@ -181,38 +142,6 @@ export default function AppShowcaseSection() {
               priority
             />
           </motion.div>
-
-          {/* Download — upper-right near arc — glass card */}
-          <div className="absolute top-[12%] right-[26%] hidden items-center gap-2 md:flex">
-            <Connector side="right" />
-            <div
-              className="rounded-xl px-3 py-2.5"
-              style={{
-                background: "rgba(255,255,255,0.07)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255,255,255,0.13)",
-              }}
-            >
-              <CalloutLabel corner="top-right" eyebrow="Step 2" title="Download" desc="From Play Store & App Store" />
-            </div>
-          </div>
-
-          {/* Sign up — mid-right — glass card */}
-          <div className="absolute bottom-[28%] right-0 hidden items-center gap-2 md:flex lg:right-[3%]">
-            <Connector side="right" />
-            <div
-              className="rounded-xl px-3 py-2.5"
-              style={{
-                background: "rgba(255,255,255,0.07)",
-                backdropFilter: "blur(12px)",
-                WebkitBackdropFilter: "blur(12px)",
-                border: "1px solid rgba(255,255,255,0.13)",
-              }}
-            >
-              <CalloutLabel corner="bottom-right" eyebrow="Step 3" title="Sign up" desc="Open the referral link and signup." />
-            </div>
-          </div>
         </div>
       </div>
     </section>

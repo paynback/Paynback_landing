@@ -14,20 +14,22 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
-      <AboutHero />
-      <ScrollReveal delay={80}>
+      <ScrollReveal>
+        <AboutHero />
+      </ScrollReveal>
+      <ScrollReveal delay={100}>
         <AboutDetails />
       </ScrollReveal>
-      <ScrollReveal delay={120}>
+      <ScrollReveal delay={100}>
         <WhyChooseSection />
       </ScrollReveal>
-      <ScrollReveal delay={160}>
+      <ScrollReveal delay={100}>
         <Activities />
       </ScrollReveal>
-      <ScrollReveal delay={200}>
+      <ScrollReveal delay={100}>
         <Founders />
       </ScrollReveal>
-      <ScrollReveal delay={240}>
+      <ScrollReveal delay={100}>
         <HowToWork />
       </ScrollReveal>
     </main>

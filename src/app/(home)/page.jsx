@@ -15,24 +15,28 @@ import { Hero } from "@/components/sections/Hero";
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <HomeHero />
-      <HowIntoSection />
-      <ScrollReveal delay={120}>
+      <ScrollReveal>
+        <HomeHero />
+      </ScrollReveal>
+
+        <HowIntoSection /> 
+
+      <ScrollReveal delay={100}>
         <DiscoverDealsSection />
       </ScrollReveal>
       <AmazingFeaturesSection />
-      <ScrollReveal delay={200}>
+      <ScrollReveal delay={100}>
         <AppShowcaseSection />
       </ScrollReveal>
       <WhyChooseSection />
-      <ScrollReveal delay={280}>
+      <ScrollReveal delay={100}>
         <TestimonialsSection />
       </ScrollReveal>
-      <ScrollReveal delay={320}>
+      <ScrollReveal delay={100}>
         <DownloadCTASection />
       </ScrollReveal>
       <BlogsSection />
-      <ScrollReveal delay={400}>
+      <ScrollReveal delay={100}>
         <FAQSection />
       </ScrollReveal>
     </main>

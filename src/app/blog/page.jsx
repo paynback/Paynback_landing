@@ -9,8 +9,10 @@ export const metadata = {
 export default function BlogPage() {
   return (
     <main className="min-h-screen">
-      <BlogHero />
-      <ScrollReveal delay={80}>
+      <ScrollReveal>
+        <BlogHero />
+      </ScrollReveal>
+      <ScrollReveal delay={100}>
         <BlogList />
       </ScrollReveal>
     </main>

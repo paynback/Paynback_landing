@@ -280,8 +280,8 @@ export default function PartenrForm() {
         if (navigator.share) {
             try {
                 await navigator.share({
-                    title: 'payNback Partner Application',
-                    text: 'Join as a partner with payNback!',
+                    title: 'PayNback Partner Application',
+                    text: 'Join as a partner with PayNback!',
                     url: window.location.href,
                 });
             } catch (error) {
@@ -547,7 +547,7 @@ export default function PartenrForm() {
 
                             {/* Consent */}
                             <p className="text-xs text-gray-500 leading-relaxed">
-                                By clicking submit below, you consent to allow payNback to store and process the personal information submitted above to provide you the content requested.
+                                By clicking submit below, you consent to allow PayNback to store and process the personal information submitted above to provide you the content requested.
                             </p>
 
                             {/* hCaptcha (Mockup) */}

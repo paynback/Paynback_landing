@@ -20,7 +20,7 @@ export default function AboutDetails() {
                             meaningful value for both customers and businesses. As India’s first in-store shopping 
                             support platform, we bridge the gap between nearby merchants and consumers—enabling smarter 
                             spending, stronger visibility, and sustainable growth. Unlike traditional marketplaces,
-                             payNback does not replace physical stores—it strengthens them. By connecting users directly 
+                             PayNback does not replace physical stores—it strengthens them. By connecting users directly 
                              with local merchants, the platform enhances in-store experiences while driving measurable 
                              outcomes such as increased footfall, improved customer engagement, and higher conversion rates.
                         </div>
@@ -29,10 +29,10 @@ export default function AboutDetails() {
                     {/* Right Text */}
                     <div className="flex flex-col lg:pt-22">
                         <div className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
-                            For users, payNback delivers a seamless way to discover nearby deals, unlock exclusive rewards, 
+                            For users, PayNback delivers a seamless way to discover nearby deals, unlock exclusive rewards, 
                             and make every purchase more rewarding. For merchants, it provides a powerful ecosystem to promote their business,
                              reach the right audience, and grow consistently in a competitive market.
-                            By integrating discovery, rewards, promotions, and engagement into a single platform, payNback transforms 
+                            By integrating discovery, rewards, promotions, and engagement into a single platform, PayNback transforms 
                             routine spending into a strategic advantage—creating long-term value for all stakeholders.
                         </div>
                     </div>

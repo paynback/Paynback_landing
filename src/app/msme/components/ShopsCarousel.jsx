@@ -36,6 +36,10 @@ export default function ShopsCarousel() {
     },
   }
 
+  if (!loading && shops.length === 0) {
+    return null
+  }
+
   return (
     <section className="py-16 mb-40 px-4 md:px-8 lg:px-16 bg-white font-sans text-gray-800 overflow-hidden">
       <div className="max-w-[1400px] mx-auto" ref={containerRef}>
@@ -68,13 +72,8 @@ export default function ShopsCarousel() {
           </div>
         )}
 
-        {/* Empty state */}
-        {!loading && shops.length === 0 && (
-          <p className="text-gray-400 text-sm">No shops available right now.</p>
-        )}
-
         {/* Carousel */}
-        {!loading && shops.length > 0 && (
+        {!loading && (
           <motion.div
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-1 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
             variants={containerVariants}

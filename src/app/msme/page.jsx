@@ -14,7 +14,7 @@ export default function MsmePage() {
         <MsmeForm />
       </ScrollReveal>
 
-      <ScrollReveal delay={150}>
+      <ScrollReveal delay={100}>
         <ShopsCarousel />
       </ScrollReveal>
     </main>
