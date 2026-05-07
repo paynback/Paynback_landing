@@ -115,7 +115,7 @@ export default function AppShowcaseSection() {
             Turning <span className="font-semibold text-[#1468C5]">Transactions</span> 
           </h2>
 
-          <div className="mt-4 flex flex-col md:flex-row md:items-start gap-10 md:gap-14">
+          <div className="mt-1 sm:mt-2 md:mt-4 flex flex-col-reverse md:flex-row md:items-start gap-6 sm:gap-8 md:gap-14">
             <p className="max-w-[320px] text-[13px] leading-[1.7] text-white/70">
              With payNback, every purchase boosts engagement, improves operations, and adds value for both merchants and users.
             </p>
