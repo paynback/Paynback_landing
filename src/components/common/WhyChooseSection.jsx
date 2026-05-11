@@ -4,8 +4,6 @@ import { useState, useRef } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 
-const SALE_IMG = "/images/09b3196ae2b68dd5cfe0c65d459c42330889ebb7.png";
-
 const containerVars = {
   hidden: { opacity: 0 },
   show: {
@@ -25,30 +23,35 @@ const REASONS = [
     title: "Exclusive Discounts",
     desc: "PayNback offers exclusive discounts, limited-time deals, and special coupons to help users maximize savings and get the best value on every purchase.",
     tag: "Discounts",
+    image: "/images/09b3196ae2b68dd5cfe0c65d459c42330889ebb7.png",
   },
   {
     id: 2,
     title: "Rewarding Points System",
     desc: "Earn reward points on every purchase and redeem them for exciting benefits, making every shopping experience more rewarding and worthwhile.",
     tag: "Rewards",
+    image: "/images/Why-chose_img2.png",
   },
   {
     id: 3,
     title: "Modern and User-Friendly Experience",
     desc: "Navigate effortlessly through a sleek, intuitive interface designed to make discovering deals and managing rewards simple and enjoyable.",
     tag: "Experience",
+    image: "/images/Why-chose_img3.png",
   },
   {
     id: 4,
     title: "Secure and Reliable Transactions",
     desc: "Shop with confidence knowing every transaction is protected by advanced security measures, ensuring your data and payments are always safe.",
     tag: "Security",
+    image: "/images/Why-chose_img4.png",
   },
   {
     id: 5,
     title: "Personalized Recommendations",
     desc: "Receive tailored offers and product suggestions based on your preferences and shopping history, helping you find the best deals effortlessly.",
     tag: "Smart",
+    image: "/images/Why-chose_img5.png",
   },
 ];
 
@@ -174,19 +177,28 @@ export default function WhyChooseSection() {
           </motion.div>
 
           {/* --- Col 3: Image card --- */}
-          <motion.div variants={itemVars} className="why-image-card">
-            <div className="why-image-inner">
-              <Image
-                src={SALE_IMG}
-                alt={current.title}
-                fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                style={{
-                  objectFit: 'cover',
-                  filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
-                  zIndex: 0
-                }}
-              />
-            </div>
+          <motion.div variants={itemVars} className="why-image-card" style={{ position: 'relative', overflow: 'hidden' }}>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={current.id}
+                initial={{ opacity: 0, y: -50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 50 }}
+                transition={{ duration: 0.4, ease: "easeOut" }}
+                className="why-image-inner"
+              >
+                <Image
+                  src={current.image}
+                  alt={current.title}
+                  fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  style={{
+                    objectFit: 'cover',
+                    filter: 'drop-shadow(0 10px 15px rgba(0,0,0,0.1))',
+                    zIndex: 0
+                  }}
+                />
+              </motion.div>
+            </AnimatePresence>
             
             {/* Overlay label bottom */}
             <div className="why-image-overlay">
@@ -219,7 +231,7 @@ export default function WhyChooseSection() {
                 <p className="why-mobile-desc">{f.desc}</p>
                 <div className="why-mobile-image-container">
                   <Image 
-                    src={SALE_IMG} 
+                    src={f.image} 
                     alt={f.title} 
                     fill sizes="(max-width: 640px) 100vw"
                     style={{objectFit: 'cover'}} 
@@ -285,7 +297,6 @@ export default function WhyChooseSection() {
           transition: all 0.2s ease;
         }
         .why-feature-btn--active {
-          font-weight: 600;
           color: #fff;
           background: #0964BC;
         }

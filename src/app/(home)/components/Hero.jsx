@@ -107,7 +107,7 @@ export default function HomeHero() {
                   sizes="(min-width: 1024px) 300px, 52vw"
                   priority
                 />
-              </motion.div>
+              </motion.div>  
             </motion.div>
 
             <motion.div
