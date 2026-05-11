@@ -5,9 +5,13 @@ export const fetchShopCategories = async () => {
   return data?.categories ?? [];
 };
 
-export const fetchLatestShops = async () => {
-  const { data } = await axiosInstance.get("/api/v1/web/merchant/shops");
-  console.log(data)
+export const fetchNearbyShops = async (lat, lng) => {
+  const params = {};
+  if (lat !== undefined && lng !== undefined) {
+    params.lat = lat;
+    params.lng = lng;
+  }
+  const { data } = await axiosInstance.get("/api/v1/web/merchant/shops", { params });
   return data?.shops ?? [];
 };
 

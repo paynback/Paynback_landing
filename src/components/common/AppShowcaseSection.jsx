@@ -64,7 +64,7 @@ export default function AppShowcaseSection() {
         <div
           className="absolute left-1/2 bottom-0"
           style={{
-            width: "65%",
+            width: "130%",
             aspectRatio: "1 / 1",
             transform: "translateX(-50%) translateY(50%)",
             borderRadius: "50%",
@@ -88,8 +88,9 @@ export default function AppShowcaseSection() {
              With payNback, every purchase boosts engagement, improves operations, and adds value for both merchants and users.
             </p>
 
-            <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px] whitespace-nowrap">
-              <span className="font-semibold text-[#1468C5]">into growth</span> opportunities
+            <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px] md:whitespace-nowrap">
+              <span className="font-semibold text-[#1468C5]">into growth</span>{" "}
+              <span className="block md:inline mt-1 md:mt-0">opportunities</span>
             </h2>
           </div>
         </div>
@@ -112,7 +113,7 @@ export default function AppShowcaseSection() {
               src="/images/half-circle-card.png"
               alt="App flow steps background"
               fill
-              className="object-contain object-bottom scale-[1.15] origin-bottom"
+              className="object-contain object-bottom scale-[1.30] origin-bottom"
               priority
             />
           </div>

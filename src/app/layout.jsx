@@ -4,6 +4,7 @@ import Footer from "../components/layout/Footer";
 import Header from "@/components/layout/Header";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import GeolocationProvider from "@/components/providers/GeolocationProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -23,6 +24,7 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} antialiased`}
     >
       <body className='flex min-h-screen flex-col'>
+        <GeolocationProvider />
         <SmoothScroll delay={100}>
           <Header />
           {children}

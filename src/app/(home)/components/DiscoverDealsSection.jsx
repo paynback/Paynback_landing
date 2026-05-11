@@ -83,16 +83,7 @@ function DealCard({ endMs }) {
         <div className="absolute -bottom-[19px] -right-[19px] z-11 size-10 rounded-full bg-[#F2F2F2]" />
 
         <div className="relative z-10 flex h-full min-h-0 flex-col p-3 pb-8 sm:p-4 sm:pb-10 md:p-5 md:pb-14">
-          <div className="flex items-start justify-between gap-2 sm:gap-3">
-            <div className="relative h-7 w-20 shrink-0 sm:h-8 sm:w-22 md:h-9 md:w-28">
-              <Image
-                src={PayNback_ICON}
-                alt="PayNback"
-                fill
-                className="object-contain object-left drop-shadow"
-                sizes="(max-width:640px) 80px, (max-width:768px) 88px, 112px"
-              />
-            </div>
+          <div className="flex items-start justify-end gap-2 sm:gap-3">
             <div className="min-w-0 text-right text-white drop-shadow-sm">
               <p className="text-xl font-bold leading-tight sm:text-2xl md:text-3xl">
                 Get 50% Off
@@ -104,7 +95,7 @@ function DealCard({ endMs }) {
           </div>
 
           {/* Merchant logo — smaller, higher; stays under dish (z-0 vs z-20) */}
-          <div className="relative z-0 mt-0 max-w-[30%] -translate-y-2 overflow-visible sm:max-w-[96px] sm:-translate-y-3 md:max-w-[104px] md:-translate-y-3.5">
+          <div className="relative z-0 -mt-2 max-w-[30%] -translate-y-6 overflow-visible sm:-mt-3 sm:max-w-[96px] sm:-translate-y-7 md:-mt-4 md:max-w-[104px] md:-translate-y-8">
             <div className="relative aspect-4/3 w-full">
               <Image
                 src={MERCHANT_LOGO}
@@ -125,7 +116,7 @@ function DealCard({ endMs }) {
               src={IMG_DISH_WITH_JAMMY}
               alt=""
               fill
-              className="object-contain object-bottom drop-shadow-xl"
+              className="object-contain object-bottom drop-shadow-xl scale-[1.25] origin-bottom"
               sizes="(max-width:640px) 100vw, (max-width:1024px) 340px, 385px"
               priority={false}
             />
@@ -152,13 +143,13 @@ function DealCard({ endMs }) {
             </span>
           </div>
 
-          <div className="flex w-full min-w-0 flex-1 flex-wrap items-center justify-center gap-x-0.5 gap-y-1 sm:w-auto sm:flex-nowrap sm:justify-end sm:gap-x-1 md:gap-x-1.5">
+          <div className="flex w-full min-w-0 flex-1 flex-wrap items-center justify-center gap-x-1.5 gap-y-1 sm:w-auto sm:flex-nowrap sm:justify-end sm:gap-x-1 md:gap-x-1.5">
             <TimeBlock value={days} label="days" />
-            <span className="hidden h-6 w-px shrink-0 bg-slate-200 sm:block md:h-7" aria-hidden />
+            <span className="block h-5 w-px shrink-0 bg-slate-200 sm:h-6 md:h-7" aria-hidden />
             <TimeBlock value={hrs} label="hrs" />
-            <span className="hidden h-6 w-px shrink-0 bg-slate-200 sm:block md:h-7" aria-hidden />
+            <span className="block h-5 w-px shrink-0 bg-slate-200 sm:h-6 md:h-7" aria-hidden />
             <TimeBlock value={mins} label="mins" />
-            <span className="hidden h-6 w-px shrink-0 bg-slate-200 sm:block md:h-7" aria-hidden />
+            <span className="block h-5 w-px shrink-0 bg-slate-200 sm:h-6 md:h-7" aria-hidden />
             <TimeBlock value={secs} label="secs" />
           </div>
         </div>
