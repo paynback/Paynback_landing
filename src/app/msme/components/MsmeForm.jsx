@@ -9,7 +9,7 @@ import { Upload, AlertCircle, Loader2, CheckCircle2 } from 'lucide-react'
 import { LiaExchangeAltSolid } from "react-icons/lia"
 import { IoCloseOutline } from "react-icons/io5"
 import Image from 'next/image'
-import { submitMerchantForm, fetchShopCategories } from '../services/merchantService'
+import { submitMerchantForm, fetchShopCategories, fetchSubCategories } from '../services/merchantService'
 import {
   LOCATION_CONSENT_KEY,
   LOCATION_UPDATED_EVENT,
@@ -21,7 +21,8 @@ const msmeSchema = z.object({
   phone: z.string().min(1, "Mobile number is required").regex(/^[0-9+\-\s()]*$/, "Please enter a valid phone number"),
   shopName: z.string().min(1, "Shop name is required"),
   category: z.string().min(1, "Category is required"),
-  landmark: z.string().min(1, "Landmark is required"),
+  subCategory: z.string().optional(),
+  address: z.string().min(1, "Address is required"),
   pincode: z.string().min(1, "Location PIN is required"),
 })
 
@@ -34,6 +35,8 @@ export default function MsmeForm() {
   const [successMessage, setSuccessMessage] = useState('')
   const [categories, setCategories] = useState([])
   const [categoriesLoading, setCategoriesLoading] = useState(true)
+  const [subCategories, setSubCategories] = useState([])
+  const [subCategoriesLoading, setSubCategoriesLoading] = useState(false)
   const [allowLocationAccess, setAllowLocationAccess] = useState(false)
 
   useEffect(() => {
@@ -65,6 +68,8 @@ export default function MsmeForm() {
     register,
     handleSubmit,
     reset,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(msmeSchema),
@@ -73,10 +78,28 @@ export default function MsmeForm() {
       phone: '',
       shopName: '',
       category: '',
-      landmark: '',
+      subCategory: '',
+      address: '',
       pincode: '',
     },
   })
+
+  const selectedCategory = watch("category");
+
+  useEffect(() => {
+    if (selectedCategory) {
+      setSubCategoriesLoading(true);
+      fetchSubCategories(selectedCategory)
+        .then((data) => {
+          setSubCategories(data);
+          setValue("subCategory", "");
+        })
+        .catch(() => setSubCategories([]))
+        .finally(() => setSubCategoriesLoading(false));
+    } else {
+      setSubCategories([]);
+    }
+  }, [selectedCategory, setValue]);
 
   const handleFileChange = (event) => {
     const file = event.target.files?.[0]
@@ -278,22 +301,64 @@ export default function MsmeForm() {
                 )}
               </div>
 
-              {/* Shop Location / Landmark */}
+              {/* Sub Category */}
               <div className="flex flex-col space-y-2">
-                <label htmlFor="landmark" className="text-sm font-medium text-(--brand-primary)">Landmark*</label>
-                <input
-                  type="text"
-                  id="landmark"
-                  placeholder="Enter your landmark"
-                  {...register("landmark")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.landmark
+                <label htmlFor="subCategory" className="text-sm font-medium text-(--brand-primary)">Sub Category*</label>
+                <div className="relative">
+                  <select
+                    id="subCategory"
+                    {...register("subCategory")}
+                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-sm text-gray-500 bg-white ${errors.subCategory
+                      ? "border-red-500 focus:border-red-500 focus:ring-red-500"
+                      : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
+                      } disabled:bg-gray-50 disabled:text-gray-400`}
+                    defaultValue=""
+                    disabled={subCategoriesLoading || !selectedCategory || subCategories.length === 0}
+                  >
+                    <option value="" disabled>
+                      {subCategoriesLoading 
+                        ? 'Loading sub categories...' 
+                        : !selectedCategory 
+                          ? 'Select a category first'
+                          : subCategories.length === 0 
+                            ? 'No sub categories' 
+                            : 'Select sub category'}
+                    </option>
+                    {subCategories.map((cat) => (
+                      <option key={cat.category_id} value={cat.category_id}>
+                        {cat.categoryName}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-500">
+                    {subCategoriesLoading
+                      ? <Loader2 className="h-4 w-4 animate-spin" />
+                      : <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" /></svg>
+                    }
+                  </div>
+                </div>
+                {errors.subCategory && (
+                  <span className="mt-1.5 text-xs text-red-500">
+                    {errors.subCategory.message}
+                  </span>
+                )}
+              </div>
+
+              {/* Address */}
+              <div className="flex flex-col space-y-2 md:row-span-2">
+                <label htmlFor="address" className="text-sm font-medium text-(--brand-primary)">Address*</label>
+                <textarea
+                  id="address"
+                  placeholder="Enter your address"
+                  {...register("address")}
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm resize-none h-full min-h-[120px] ${errors.address
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
                 />
-                {errors.landmark && (
+                {errors.address && (
                   <span className="mt-1.5 text-xs text-red-500">
-                    {errors.landmark.message}
+                    {errors.address.message}
                   </span>
                 )}
               </div>

@@ -82,8 +82,8 @@ export default function HomeHero() {
               Shopping that work for you
             </h1>
             <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm">
-              Sign up and become a member today to get exclusive offers in your
-              area and other benefits.
+              Download the app today and discover a world where every purchase 
+              brings you closer to bigger rewards and better value.
             </p>
           </div>
 

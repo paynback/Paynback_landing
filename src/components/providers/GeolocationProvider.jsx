@@ -53,7 +53,11 @@ export default function GeolocationProvider() {
       const hasConsent = localStorage.getItem(LOCATION_CONSENT_KEY) === 'true'
       if (!hasConsent) return
     } catch {
+<<<<<<< HEAD
       return
+=======
+      console.error('Error while fetching location from cache')
+>>>>>>> 16712c128459484873dcf733c616d4186ee8fbaa
     }
     requestAndCacheLocation()
   }, [])

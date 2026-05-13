@@ -5,6 +5,11 @@ export const fetchShopCategories = async () => {
   return data?.categories ?? [];
 };
 
+export const fetchSubCategories = async (categoryId) => {
+  const { data } = await axiosInstance.get(`/api/v1/web/merchant/categories/${categoryId}/subcategories`);
+  return data?.subCategories ?? [];
+};
+
 export const fetchNearbyShops = async (lat, lng) => {
   const params = {};
   if (lat !== undefined && lng !== undefined) {
@@ -22,7 +27,10 @@ export const submitMerchantForm = async (payload) => {
   formData.append("phone", payload.phone);
   formData.append("shopName", payload.shopName);
   formData.append("category", payload.category);
-  formData.append("landmark", payload.landmark);
+  if (payload.subCategory) {
+    formData.append("subCategory", payload.subCategory);
+  }
+  formData.append("address", payload.address);
   formData.append("pincode", payload.pincode);
   formData.append("shopThumbnail", payload.shopThumbnail);
 

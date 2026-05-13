@@ -12,7 +12,7 @@ export function StoreBadges({ className }) {
     >
       {/* Google Play Store Icon (Flat Color) */}
       <a
-        href="https://play.google.com/store/apps/details?id=com.PayNback.userapp"
+        href="https://play.google.com/store/apps/details?id=com.paynback.userapp"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Get it on Google Play"
