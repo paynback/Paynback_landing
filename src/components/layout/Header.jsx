@@ -160,14 +160,14 @@ export default function Header({
                   <Link
                     href={contactHref}
                     className={cn(
-                      "hidden lg:flex shrink-0 items-center justify-center gap-1.5 bg-white font-semibold text-slate-900 shadow-lg shadow-cyan-500/10 transition-all duration-500 hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400",
+                      "hidden lg:flex shrink-0 items-center justify-center gap-1.5 bg-white font-semibold text-slate-900 shadow-lg shadow-cyan-500/10 transition-all duration-500 hover:bg-white/95 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-sky-400 leading-none",
                       isScrolled
-                        ? "rounded-full px-2 py-1.5 sm:px-2 sm:py-1.5 text-[11px] sm:text-xs"
-                        : "rounded-full px-3 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm"
+                        ? "rounded-full px-3 py-1.5 sm:px-3 sm:py-1.5 text-[11px] sm:text-xs"
+                        : "rounded-full px-4 py-2 sm:px-4 sm:py-2.5 text-xs sm:text-sm"
                     )}
                   >
                     <Phone className={cn("text-sky-500 transition-all duration-500", isScrolled ? "h-3 w-3 sm:h-3.5 sm:w-3.5" : "h-3.5 w-3.5 sm:h-4 sm:w-4")} strokeWidth={2.25} />
-                    Contact
+                    <span className="mt-[2px] block">Contact</span>
                   </Link>
 
                   {/* Mobile hamburger */}

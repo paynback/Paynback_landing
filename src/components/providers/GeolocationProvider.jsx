@@ -22,7 +22,7 @@ export default function GeolocationProvider() {
         }
       }
     } catch {
-      // Invalid cache, proceed to fetch
+      console.error('Error while fetching location from cache')
     }
 
     if (!navigator.geolocation) return
