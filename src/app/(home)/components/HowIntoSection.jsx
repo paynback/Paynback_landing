@@ -6,24 +6,24 @@ import { motion } from "framer-motion";
 
 const STATS = [
   {
-    end: 1,
-    suffix: "M",
+    end: 456,
+    suffix: "",
     caption:
-      "Merchants Onboarded. Expanding rapidly with verified local businesses",
+      "Merchants onboarded. Expanding rapidly with verified local businesses",
     symbol: "+",
   },
   {
     end: 70,
     suffix: "",
     caption:
-      "Deals Discovered Monthly. Helping users save more with every visit.",
+      "Deals discovered monthly. Helping users save more with every visit.",
     symbol: "+",
   },
   {
     end: 30,
     suffix: "",
     caption:
-      "User Satisfaction Rate. Built for seamless, reliable shopping experiences",
+      "User satisfaction rate. Built for seamless, reliable shopping experiences",
     symbol: "%",
   },
 ];
@@ -94,7 +94,7 @@ export default function HowIntoSection() {
             <p>
               PayNback is India’s first in-store shopping support app that
               connects users with nearby merchants offering exclusive discounts,
-              cashback rewards, and pre-reduced prices.It helps customers
+              cashback rewards, and pre-reduced prices. It helps customers
               discover better deals while also managing purchase bills and
               budgeting in one convenient platform.
             </p>

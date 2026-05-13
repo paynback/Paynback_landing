@@ -184,9 +184,9 @@ export default function DiscoverDealsSection() {
           <div className="max-w-xl leading-tight md:max-w-none">
             <h2 className="text-balance text-[1.65rem] font-normal tracking-tight sm:text-3xl md:text-[clamp(1.75rem,2.2vw,2.25rem)] lg:text-4xl xl:text-5xl">
               <span className="text-(--brand-primary)">Experience</span>{" "}
-              the Future {" "}
+              the future {" "}
               <span className="text-(--brand-primary)">of </span>
-              Deals
+              deals
             </h2>
           </div>
 
