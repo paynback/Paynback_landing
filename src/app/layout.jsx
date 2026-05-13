@@ -5,7 +5,6 @@ import Header from "@/components/layout/Header";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import GeolocationProvider from "@/components/providers/GeolocationProvider";
-
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],

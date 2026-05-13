@@ -1,5 +1,6 @@
 import MsmeHero from "@/app/msme/components/MsmeHero";
 import MsmeForm from "@/app/msme/components/MsmeForm";
+import LocationAccessPrompt from "@/app/msme/components/LocationAccessPrompt";
 import ShopsCarousel from "@/app/msme/components/ShopsCarousel";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 
@@ -12,6 +13,10 @@ export default function MsmePage() {
       
       <ScrollReveal delay={100}>
         <MsmeForm />
+      </ScrollReveal>
+
+      <ScrollReveal delay={100}>
+        <LocationAccessPrompt />
       </ScrollReveal>
 
       <ScrollReveal delay={100}>

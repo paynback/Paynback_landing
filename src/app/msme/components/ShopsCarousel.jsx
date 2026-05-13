@@ -4,6 +4,7 @@ import { motion, useInView } from 'framer-motion'
 import Image from 'next/image'
 import { MapPin, Store, Send } from 'lucide-react'
 import { fetchNearbyShops } from '../services/merchantService'
+import { LOCATION_UPDATED_EVENT } from '@/components/providers/GeolocationProvider'
 
 export default function ShopsCarousel() {
   const containerRef = useRef(null)
@@ -12,21 +13,9 @@ export default function ShopsCarousel() {
   const [shops, setShops] = useState([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    const loadShops = async (lat, lng) => {
-      try {
-        const data = await fetchNearbyShops(lat, lng)
-        console.log("DATA AFTER FETCHING: ", data)
-        setShops(data)
-      } catch {
-        setShops([])
-      } finally {
-        setLoading(false)
-      }
-    }
-
-    // Read cached location from localStorage (set by GeolocationProvider in layout)
-    let lat, lng
+  const loadShops = async () => {
+    let lat
+    let lng
     try {
       const cached = localStorage.getItem('paynback_user_location')
       if (cached) {
@@ -38,7 +27,32 @@ export default function ShopsCarousel() {
       // Invalid cache – proceed without location
     }
 
-    loadShops(lat, lng)
+    try {
+      const data = await fetchNearbyShops(lat, lng)
+      console.log("DATA AFTER FETCHING: ", data)
+      setShops(data)
+    } catch {
+      setShops([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    loadShops()
+
+    const handleLocationUpdate = () => {
+      setLoading(true)
+      loadShops()
+    }
+
+    window.addEventListener(LOCATION_UPDATED_EVENT, handleLocationUpdate)
+    window.addEventListener('storage', handleLocationUpdate)
+
+    return () => {
+      window.removeEventListener(LOCATION_UPDATED_EVENT, handleLocationUpdate)
+      window.removeEventListener('storage', handleLocationUpdate)
+    }
   }, [])
 
   const containerVariants = {

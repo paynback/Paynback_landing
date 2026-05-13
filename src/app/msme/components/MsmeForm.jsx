@@ -10,6 +10,11 @@ import { LiaExchangeAltSolid } from "react-icons/lia"
 import { IoCloseOutline } from "react-icons/io5"
 import Image from 'next/image'
 import { submitMerchantForm, fetchShopCategories } from '../services/merchantService'
+import {
+  LOCATION_CONSENT_KEY,
+  LOCATION_UPDATED_EVENT,
+  requestAndCacheLocation,
+} from '@/components/providers/GeolocationProvider'
 
 const msmeSchema = z.object({
   name: z.string().min(1, "Full name is required"),
@@ -29,12 +34,21 @@ export default function MsmeForm() {
   const [successMessage, setSuccessMessage] = useState('')
   const [categories, setCategories] = useState([])
   const [categoriesLoading, setCategoriesLoading] = useState(true)
+  const [allowLocationAccess, setAllowLocationAccess] = useState(false)
 
   useEffect(() => {
     fetchShopCategories()
       .then((data) => setCategories(data))
       .catch(() => setCategories([]))
       .finally(() => setCategoriesLoading(false))
+  }, [])
+
+  useEffect(() => {
+    try {
+      setAllowLocationAccess(localStorage.getItem(LOCATION_CONSENT_KEY) === 'true')
+    } catch {
+      setAllowLocationAccess(false)
+    }
   }, [])
 
   useEffect(() => {
@@ -77,6 +91,12 @@ export default function MsmeForm() {
     setErrorMessage('')
     setSuccessMessage('')
 
+    if (!allowLocationAccess) {
+      setErrorMessage('Please allow location access before submitting.')
+      setTimeout(() => setErrorMessage(''), 5000)
+      return
+    }
+
     if (!shopThumbnail) {
       setErrorMessage('Please upload a shop thumbnail image.')
       setTimeout(() => setErrorMessage(''), 5000)
@@ -103,6 +123,23 @@ export default function MsmeForm() {
         setErrorMessage('')
         setSuccessMessage('')
       }, 5000)
+    }
+  }
+
+  const handleLocationConsentChange = (event) => {
+    const isChecked = event.target.checked
+    setAllowLocationAccess(isChecked)
+
+    try {
+      localStorage.setItem(LOCATION_CONSENT_KEY, isChecked ? 'true' : 'false')
+    } catch {
+      // localStorage unavailable; continue without persistence
+    }
+
+    window.dispatchEvent(new Event(LOCATION_UPDATED_EVENT))
+
+    if (isChecked) {
+      requestAndCacheLocation()
     }
   }
 
@@ -366,9 +403,19 @@ export default function MsmeForm() {
             </div>
 
             {/* Disclaimer */}
-            <p className="text-xs text-gray-500 mt-4 leading-relaxed">
+            <p className="text-xs text-gray-500 mt-4 leading-relaxed mb-10">
               By clicking submit below, you consent to allow PayNback to store and process the personal information submitted above to provide you the content requested.
             </p>
+
+            <label className="flex items-start gap-3 text-sm text-gray-600">
+              <input
+                type="checkbox"
+                checked={allowLocationAccess}
+                onChange={handleLocationConsentChange}
+                className="mt-0.5 h-4 w-4 rounded border-gray-300 text-(--brand-primary) focus:ring-(--brand-primary)"
+              />
+              <span>Allow access to your location</span>
+            </label>
 
             {/* Status Message Animation */}
             <div className="min-h-[50px] flex flex-col justify-center">
@@ -417,7 +464,7 @@ export default function MsmeForm() {
             <div className="mt-8 flex justify-center">
               <button
                 type="submit"
-                disabled={isSubmitting}
+                disabled={isSubmitting || !allowLocationAccess}
                 className="block w-full sm:w-auto min-w-[240px] bg-(--brand-primary) hover:bg-(--brand-primary) active:scale-[0.98] text-white font-medium py-3.5 px-8 rounded-full transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-(--brand-primary) cursor-pointer focus:ring-offset-2 disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {isSubmitting ? 'Submitting...' : 'Submit'}
