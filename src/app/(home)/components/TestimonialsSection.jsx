@@ -95,9 +95,9 @@ export default function TestimonialsSection() {
           {/* ── Left: heading + description + rating ── */}
           <div className="flex flex-col gap-6">
             <h2 className="text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:text-[2.5rem]">
-              <span className="text-(--brand-primary)">Our</span> users talk
+              <span className="text-(--brand-primary)">Our</span> Users Talk
               <br />
-              <span className="text-(--brand-primary)">about us</span>
+              <span className="text-(--brand-primary)">About Us</span>
             </h2>
 
             <p className="max-w-xs text-sm leading-relaxed text-slate-500">

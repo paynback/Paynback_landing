@@ -179,7 +179,7 @@ export default function MsmeForm() {
           transition={{ duration: 0.6 }}
         >
           <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-slate-900 mb-6">
-            <span className="text-(--brand-primary)">Be</span> our Merchant
+            <span className="text-(--brand-primary)">Be</span> Our Merchant
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 text-base md:text-lg text-slate-600 text-left">
             <p>
