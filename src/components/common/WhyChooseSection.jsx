@@ -21,7 +21,7 @@ const REASONS = [
   {
     id: 1,
     title: "Exclusive Discounts",
-    desc: "payNback offers exclusive discounts, limited-time deals, and special coupons to help users maximize savings and get the best value on every purchase.",
+    desc: "PayNback offers exclusive discounts, limited-time deals, and special coupons to help users maximize savings and get the best value on every purchase.",
     tag: "Discounts",
     image: "/images/09b3196ae2b68dd5cfe0c65d459c42330889ebb7.png",
   },
