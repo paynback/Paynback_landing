@@ -45,7 +45,7 @@ const FEATURES = [
     icon: TrendingUp,
     title: "Engagement Driven Rewards",
     description:
-      "Experience a dynamic reward system that keeps users engaged. Progress tracking and interactive elements encourage continued participation, boosting loyalty and repeat visits",
+      "Experience a dynamic reward system that keeps users engaged. Progress tracking and interactive elements encourage continued participation, boosting loyalty and repeat visits.",
   },
 ];
 

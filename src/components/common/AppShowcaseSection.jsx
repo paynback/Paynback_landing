@@ -80,7 +80,7 @@ export default function AppShowcaseSection() {
         {/* Heading */}
         <div className="max-w-5xl">
           <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px]">
-            Turning <span className="font-semibold text-[#1468C5]">Transactions</span> 
+            Turning <span className="font-semibold text-[#1468C5]">transactions</span> 
           </h2>
 
           <div className="mt-1 sm:mt-2 md:mt-4 flex flex-col-reverse md:flex-row md:items-start gap-6 sm:gap-8 md:gap-14">

@@ -40,7 +40,7 @@ export default function DownloadCTASection() {
                   <Info className="h-3.5 w-3.5" strokeWidth={2.5} />
                 </span>
                 <span className="font-normal tracking-tight">
-                  App Available For
+                  App Available on
                 </span>
               </div>
               <StoreBadges />
