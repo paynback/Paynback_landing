@@ -18,9 +18,30 @@ export const LiquidChrome = ({
     if (!containerRef.current) return;
 
     const container = containerRef.current;
-    const renderer = new Renderer({ antialias: true, alpha: true });
-    const gl = renderer.gl;
-    gl.clearColor(0, 0, 0, 0); // Transparent background
+
+    // Pre-flight check: probe WebGL support with a throwaway canvas.
+    // OGL's Renderer internally calls console.error('unable to create webgl context')
+    // before throwing — the only way to silence it is to never call the constructor
+    // when WebGL is unavailable.
+    const testCanvas = document.createElement('canvas');
+    const testGl =
+      testCanvas.getContext('webgl2') ||
+      testCanvas.getContext('webgl') ||
+      testCanvas.getContext('experimental-webgl');
+    if (!testGl) return; // WebGL not supported — skip silently
+    // Free the test context immediately
+    testGl.getExtension?.('WEBGL_lose_context')?.loseContext();
+
+    let renderer;
+    let gl;
+    try {
+      renderer = new Renderer({ antialias: true, alpha: true });
+      gl = renderer.gl;
+      if (!gl || !gl.canvas) return;
+      gl.clearColor(0, 0, 0, 0);
+    } catch {
+      return;
+    }
 
     const vertexShader = `
       attribute vec2 position;
@@ -94,7 +115,12 @@ export const LiquidChrome = ({
     });
     const mesh = new Mesh(gl, { geometry, program });
 
+    gl.canvas.style.width = '100%';
+    gl.canvas.style.height = '100%';
+    gl.canvas.style.display = 'block';
+
     function resize() {
+      if (!container.offsetWidth || !container.offsetHeight) return;
       const scale = 1;
       renderer.setSize(container.offsetWidth * scale, container.offsetHeight * scale);
       const resUniform = program.uniforms.uResolution.value;
@@ -102,7 +128,9 @@ export const LiquidChrome = ({
       resUniform[1] = gl.canvas.height;
       resUniform[2] = gl.canvas.width / gl.canvas.height;
     }
-    window.addEventListener('resize', resize);
+
+    const resizeObserver = new ResizeObserver(() => resize());
+    resizeObserver.observe(container);
     resize();
 
     function handleMouseMove(event) {
@@ -143,7 +171,7 @@ export const LiquidChrome = ({
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
+      resizeObserver.disconnect();
       if (interactive) {
         container.removeEventListener('mousemove', handleMouseMove);
         container.removeEventListener('touchmove', handleTouchMove);

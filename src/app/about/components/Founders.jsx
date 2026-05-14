@@ -1,7 +1,31 @@
+"use client";
+
+import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Founders() {
-    const IMG_FOUNDER = "/images/founder-image.png";
+    const foundersData = [
+        {
+            name: "Bony Thomas",
+            role: "Founder & CEO",
+            image: "/images/founders/Founder.png"
+        },
+        {
+            name: "Shybi Varghese",
+            role: "Co-Founder & COO",
+            image: "/images/founders/CO Founder.png"
+        }
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setCurrentIndex((prev) => (prev + 1) % foundersData.length);
+        }, 3000);
+        return () => clearInterval(timer);
+    }, []);
 
     return (
         <section className="relative isolate w-full flex flex-col overflow-hidden bg-black">
@@ -36,9 +60,9 @@ export default function Founders() {
                              user-centric platform that benefits both consumers and merchants. Their resilient leadership and long-term vision continue to position PayNback as a promising player in India&apos;s 
                              in-store savings and rewards ecosystem.
                         </p>
-                        <button className="mt-4 px-9 py-3 bg-brand-primary cursor-pointer text-white text-[15px] font-medium rounded-full transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-[#0964BC]/30">
+                        <Link href="/careers" className="inline-block mt-4 px-9 py-3 bg-brand-primary text-white text-[15px] font-medium rounded-full transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-primary/30">
                             Join our Team
-                        </button>
+                        </Link>
                     </div>
 
                     {/* ── Right Content (Image Container) ── */}
@@ -46,23 +70,33 @@ export default function Founders() {
 
                         {/* Main Image Box */}
                         <div className="relative w-full max-w-[405px] h-auto aspect-405/514 bg-black rounded-[16px] shadow-2xl z-20 overflow-hidden">
-                            <Image
-                                src={IMG_FOUNDER}
-                                alt="PayNback Founders"
-                                fill
-                                className="object-cover"
-                                sizes="(max-width: 1024px) 100vw, 405px"
-                            />
-
-                            {/* Glassmorphic Name Card at Bottom */}
-                            <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[88%] rounded-[12px] overflow-hidden border border-white/20 bg-white/10 backdrop-blur-[12px] px-6 py-4 flex flex-col items-center justify-center shadow-lg">
-                                <span className="text-[18px] font-bold text-white tracking-wide">
-                                    Name of the Person
-                                </span>
-                                <span className="text-[13px] font-normal text-white/80 mt-1 tracking-[0.08em] uppercase">
-                                    CEO
-                                </span>
-                            </div>
+                            {foundersData.map((founder, index) => (
+                                <div
+                                    key={index}
+                                    className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
+                                        index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                                    }`}
+                                >
+                                    <Image
+                                        src={founder.image}
+                                        alt={`PayNback ${founder.role}`}
+                                        fill
+                                        className="object-cover"
+                                        sizes="(max-width: 1024px) 100vw, 405px"
+                                        priority
+                                    />
+                                    
+                                    {/* Glassmorphic Name Card at Bottom */}
+                                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[88%] rounded-[12px] overflow-hidden border border-white/20 bg-white/10 backdrop-blur-[12px] px-6 py-4 flex flex-col items-center justify-center shadow-lg">
+                                        <span className="text-[18px] font-bold text-white tracking-wide">
+                                            {founder.name}
+                                        </span>
+                                        <span className="text-[13px] font-normal text-white/80 mt-1 tracking-[0.08em] uppercase">
+                                            {founder.role}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
 
                         {/* Rotating SVG Curved Text placed behind bottom-right corner */}
