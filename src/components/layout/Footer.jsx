@@ -193,7 +193,7 @@ export default function Footer() {
                 <span className="flex h-5 w-5 items-center justify-center rounded-full border border-white/20 bg-white/5">
                   <Info className="h-3 w-3 text-white/60" strokeWidth={2.5} />
                 </span>
-                <span className="text-xs text-white/60">App Available For</span>
+                <span className="text-xs text-white/60">App Available on</span>
                 <StoreBadges />
               </div>
             </div>

@@ -7,8 +7,8 @@ import { motion, useReducedMotion } from "framer-motion";
 export default function Team() {
   const reduceMotion = useReducedMotion();
   const technicalTeam = [
-    { name: "Mohammed Azharudheen", role: "Frontend Developer", image: "/images/employers/Azar.jpg" },
-    { name: "Hijas Ahamed", role: "Frontend Developer", image: "/images/employers/Hijas.jpg" },
+    { name: "Mohammed Azharudheen", role: "Application Developer", image: "/images/employers/Azar.jpg" },
+    { name: "Hijas Ahamed", role: "Application Developer", image: "/images/employers/Hijas.jpg" },
     { name: "Jyothis G Tency", role: "Backend Developer", image: "/images/employers/Jyothis.jpg" },
     { name: "Athul Krishna", role: "Backend Developer", image: "/images/employers/Athul.jpg" },
     { name: "Ashik T K", role: "Full Stack Developer", image: "/images/employers/Ashik.jpg" },

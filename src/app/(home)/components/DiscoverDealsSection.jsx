@@ -89,7 +89,7 @@ function DealCard({ endMs }) {
                 Get 50% Off
               </p>
               <p className="mt-0.5 text-xs font-medium text-white/90 sm:text-sm md:text-base">
-                for ever order
+                for every order
               </p>
             </div>
           </div>

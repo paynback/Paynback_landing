@@ -56,9 +56,9 @@ export default function Founders() {
                         </h2>
                         <p className="text-[15px] sm:text-[16px] leading-[1.8] text-white/90 font-normal">
                             PayNback Infosolutions was founded by <strong className="font-semibold text-white">Bony Thomas</strong> and <strong className="font-semibold text-white">Shybi Varghese</strong>,
-                             a visionary leadership duo driven by strong entrepreneurial focus and disciplined execution. Identifying a gap between digital payments and offline value, they built a scalable, 
-                             user-centric platform that benefits both consumers and merchants. Their resilient leadership and long-term vision continue to position PayNback as a promising player in India&apos;s 
-                             in-store savings and rewards ecosystem.
+                            a visionary leadership duo driven by strong entrepreneurial focus and disciplined execution. Identifying a gap between digital payments and offline value, they built a scalable,
+                            user-centric platform that benefits both consumers and merchants. Their resilient leadership and long-term vision continue to position PayNback as a promising player in India&apos;s
+                            in-store savings and rewards ecosystem.
                         </p>
                         <Link href="/careers" className="inline-block mt-4 px-9 py-3 bg-brand-primary text-white text-[15px] font-medium rounded-full transition-transform hover:-translate-y-1 hover:shadow-lg hover:shadow-brand-primary/30">
                             Join our Team
@@ -73,9 +73,8 @@ export default function Founders() {
                             {foundersData.map((founder, index) => (
                                 <div
                                     key={index}
-                                    className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${
-                                        index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
-                                    }`}
+                                    className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ease-in-out ${index === currentIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                                        }`}
                                 >
                                     <Image
                                         src={founder.image}
@@ -85,7 +84,7 @@ export default function Founders() {
                                         sizes="(max-width: 1024px) 100vw, 405px"
                                         priority
                                     />
-                                    
+
                                     {/* Glassmorphic Name Card at Bottom */}
                                     <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[88%] rounded-[12px] overflow-hidden border border-white/20 bg-white/10 backdrop-blur-md px-6 py-4 flex flex-col items-center justify-center shadow-lg">
                                         <span className="text-[18px] font-bold text-white tracking-wide">
@@ -104,9 +103,9 @@ export default function Founders() {
                             <svg viewBox="0 0 100 100" className="w-full h-full text-white fill-current">
                                 {/* Internal circle path (m = move, a = arc) */}
                                 <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="transparent" />
-                                <text fontSize="9.5" fontWeight="400" letterSpacing="1.2">
-                                    <textPath href="#circlePath" startOffset="0%" className="uppercase">
-                                        Join Our Team • Join Our Team • Join Our Team •
+                                <text fontSize="10.5" fontWeight="400">
+                                    <textPath href="#circlePath" startOffset="0%" textLength="220" lengthAdjust="spacing" className="capitalize">
+                                        {"Join Our Team • Join Our Team • Join Our Team • "}
                                     </textPath>
                                 </text>
                             </svg>
