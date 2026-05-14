@@ -218,7 +218,7 @@ export default function Header({
                         key={href}
                         href={href}
                         onClick={() => setMobileMenuOpen(false)}
-                        className="flex items-center justify-between font-medium text-[22px] tracking-tight transition-opacity hover:opacity-70"
+                        className="flex items-center justify-between font-normal text-lg tracking-tight transition-opacity hover:opacity-70"
                       >
                         {label}
                       </Link>
@@ -229,7 +229,7 @@ export default function Header({
                     <Link
                       href={contactHref}
                       onClick={() => setMobileMenuOpen(false)}
-                      className="flex items-center justify-between font-medium text-[22px] tracking-tight transition-opacity hover:opacity-70"
+                      className="flex items-center justify-between font-normal text-lg tracking-tight transition-opacity hover:opacity-70"
                     >
                       Contact Us
                     </Link>
