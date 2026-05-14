@@ -1,19 +1,30 @@
 'use client'
-import { useRef, useState, useEffect } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import Image from 'next/image'
 import { MapPin, Store, Send, ChevronLeft, ChevronRight } from 'lucide-react'
-import { fetchNearbyShops } from '../services/merchantService'
 import { useMsmeLocation } from '@/app/msme/components/MsmeLocationProvider'
 
+const EMPTY_SHOPS = []
+
 export default function ShopsCarousel() {
-  const { enableShopsPayload } = useMsmeLocation()
+  const { shops, shopsLoading } = useMsmeLocation()
+  const [shopList, setShopList] = useState(shops)
+  const [loading, setLoading] = useState(shopsLoading)
   const containerRef = useRef(null)
   const carouselRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, margin: '-100px' })
-  const loadSeqRef = useRef(0)
+  const contextShopList = Array.isArray(shops) ? shops : EMPTY_SHOPS
+  const displayShops = shopList.length > 0 ? shopList : contextShopList
+  const displayLoading = contextShopList.length > 0 ? false : loading
+  console.log('REeee')
 
-  const [shops, setShops] = useState([])
+  /* eslint-disable react-hooks/set-state-in-effect */
+  useEffect(() => {
+    setShopList(contextShopList)
+    setLoading(shopsLoading)
+  }, [contextShopList, shopsLoading])
+  /* eslint-enable react-hooks/set-state-in-effect */
 
   const scrollLeft = () => {
     if (carouselRef.current) {
@@ -26,54 +37,6 @@ export default function ShopsCarousel() {
       carouselRef.current.scrollBy({ left: 309, behavior: 'smooth' })
     }
   }
-  const [loading, setLoading] = useState(true)
-
-  const loadShops = async () => {
-    const seq = ++loadSeqRef.current
-    let lat
-    let lng
-    try {
-      const cached = localStorage.getItem('paynback_user_location')
-      if (cached) {
-        const parsed = JSON.parse(cached)
-        lat = parsed.lat
-        lng = parsed.lng
-      }
-    } catch {
-      // Invalid cache – proceed without location
-    }
-
-    try {
-      const data = await fetchNearbyShops(lat, lng)
-      if (seq !== loadSeqRef.current) return
-      setShops(data)
-    } catch {
-      if (seq !== loadSeqRef.current) return
-      setShops([])
-    } finally {
-      if (seq !== loadSeqRef.current) return
-      setLoading(false)
-    }
-  }
-
-  useEffect(() => {
-    loadShops()
-
-    const onStorage = () => {
-      setLoading(true)
-      loadShops()
-    }
-
-    window.addEventListener('storage', onStorage)
-    return () => window.removeEventListener('storage', onStorage)
-  }, [])
-
-  useEffect(() => {
-    if (!enableShopsPayload) return
-    ++loadSeqRef.current
-    setShops(enableShopsPayload.shops)
-    setLoading(false)
-  }, [enableShopsPayload])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -92,7 +55,7 @@ export default function ShopsCarousel() {
     },
   }
 
-  if (!loading && shops.length === 0) {
+  if (!displayLoading && displayShops.length === 0) {
     return null
   }
 
@@ -109,8 +72,7 @@ export default function ShopsCarousel() {
           Shops near you
         </motion.h2>
 
-        {/* Loading skeletons */}
-        {loading && (
+        {displayLoading && (
           <div className="flex gap-6 overflow-x-auto [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] pb-4 pt-2 px-2 -mx-2">
             {Array.from({ length: 4 }).map((_, i) => (
               <div
@@ -137,17 +99,16 @@ export default function ShopsCarousel() {
           </div>
         )}
 
-        {/* Carousel */}
-        {!loading && (
+        {!displayLoading && (
           <>
             <motion.div
               ref={carouselRef}
               className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 pt-2 px-2 -mx-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
               variants={containerVariants}
               initial="hidden"
-              animate={isInView ? 'visible' : 'hidden'}
+              animate={isInView || displayShops.length > 0 ? 'visible' : 'hidden'}
             >
-              {shops.map((shop) => (
+              {displayShops.map((shop) => (
                 <motion.div
                   key={shop.merchant_id}
                   className="relative shrink-0 snap-start bg-white rounded-[24px] shadow-sm hover:shadow-md border border-gray-100 transition-shadow duration-300 overflow-hidden"
@@ -155,7 +116,6 @@ export default function ShopsCarousel() {
                   variants={itemVariants}
                   whileHover={{ y: -4 }}
                 >
-                  {/* Image Area */}
                   <div
                     className="absolute top-0 bg-gray-100"
                     style={{ width: 303.35, height: 278, left: -9.18 }}
@@ -177,7 +137,6 @@ export default function ShopsCarousel() {
                     )}
                   </div>
 
-                  {/* Details Footer */}
                   <div
                     className="absolute bg-white z-10 flex flex-col justify-center"
                     style={{
@@ -221,7 +180,7 @@ export default function ShopsCarousel() {
               ))}
             </motion.div>
 
-            {shops.length > 5 && (
+            {displayShops.length > 5 && (
               <div className="flex justify-center items-center gap-4 mt-6">
                 <button
                   onClick={scrollLeft}
