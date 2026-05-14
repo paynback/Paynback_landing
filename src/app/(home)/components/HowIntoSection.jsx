@@ -82,10 +82,10 @@ export default function HowIntoSection() {
           {/* Left heading */}
           <div className="max-w-xl leading-tight">
             <h2>
-              <span className="text-(--brand-primary)">How</span> we
-              turn data{" "}
+              <span className="text-(--brand-primary)">How</span> We
+              Turn Data{" "}
               <span className="text-(--brand-primary)">into</span>{" "}
-              clarity
+              Clarity
             </h2>
           </div>
 

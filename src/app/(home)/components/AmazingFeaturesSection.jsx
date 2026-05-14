@@ -65,10 +65,10 @@ export default function   AmazingFeaturesSection() {
         {/* Section heading */}
         <h2 className="pb-10">
           <span className="text-(--brand-primary)">What</span>{" "}
-          <span className="">makes</span>{" "}
+          <span className="">Makes</span>{" "}
           <span className="text-(--brand-primary)">PayNback</span>{" "}
           <br/>
-           different?
+           Different?
         </h2>
 
         {/* Feature grid — 1 col on mobile, 3 cols on md+ */}

@@ -99,7 +99,7 @@ export default function ShopsCarousel() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          Shops For You
+          Shops for you
         </motion.h2>
 
         {/* Loading skeletons */}

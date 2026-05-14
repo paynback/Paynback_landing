@@ -101,25 +101,25 @@ export default function Team() {
   const sectionMotion = reduceMotion
     ? {}
     : {
-        initial: { opacity: 0, y: 36 },
-        whileInView: { opacity: 1, y: 0 },
-        viewport: { once: true, amount: 0.2 },
-        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-      };
+      initial: { opacity: 0, y: 36 },
+      whileInView: { opacity: 1, y: 0 },
+      viewport: { once: true, amount: 0.2 },
+      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+    };
 
   const cardMotion = (index) =>
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 40 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.2 },
-          transition: {
-            duration: 0.65,
-            delay: index * 0.08,
-            ease: [0.22, 1, 0.36, 1],
-          },
-        };
+        initial: { opacity: 0, y: 40 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.2 },
+        transition: {
+          duration: 0.65,
+          delay: index * 0.08,
+          ease: [0.22, 1, 0.36, 1],
+        },
+      };
 
   return (
     <section className="py-28 bg-background min-h-[calc(100vh-70px)] flex flex-col justify-center overflow-hidden">
@@ -143,11 +143,11 @@ export default function Team() {
       <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
         {/* Current Openings Section */}
         <motion.div className="pb-40" {...sectionMotion}>
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">Our Current Openings</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">Our current openings</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
             {openings.map((job, index) => (
               <Link href={`/careers/${job.slug}`} key={index}>
-                <motion.div 
+                <motion.div
                   className="p-5 rounded-2xl border border-gray-100 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-lg transition-shadow cursor-pointer flex flex-col justify-between min-h-[140px]"
                   {...cardMotion(index + 1)}
                 >

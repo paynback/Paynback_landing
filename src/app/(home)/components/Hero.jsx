@@ -79,7 +79,7 @@ export default function HomeHero() {
             </div>
 
             <h1>
-              Shopping that work for you
+              Shopping That Work for You
             </h1>
             <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm">
               Download the app today and discover a world where every purchase 
