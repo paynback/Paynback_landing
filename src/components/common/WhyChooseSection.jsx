@@ -96,7 +96,7 @@ export default function WhyChooseSection() {
         {/* ── Heading ── */}
         <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem] text-center lg:text-left why-heading">
           <span className="text-(--brand-primary)">Why</span>{" "}
-          choose{" "}
+          Choose{" "}
           <span className="text-(--brand-primary)">PayNback?</span>
         </h2>
 
