@@ -24,8 +24,8 @@ const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";
 const COL_PayNback = [
   { label: "About Us", href: "/about" },
   { label: "Careers", href: "/careers" },
-  { label: "Internships", href: "/internships" },
-  { label: "Refer & Earn", href: "/refer-and-earn" },
+  // { label: "Internships", href: "/internships" },
+  // { label: "Refer & Earn", href: "/refer-and-earn" },
   { label: "Contact Us", href: "/contact" },
 ];
 
