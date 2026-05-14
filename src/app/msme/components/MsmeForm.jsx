@@ -10,11 +10,8 @@ import { LiaExchangeAltSolid } from "react-icons/lia"
 import { IoCloseOutline } from "react-icons/io5"
 import Image from 'next/image'
 import { submitMerchantForm, fetchShopCategories, fetchSubCategories } from '../services/merchantService'
-import {
-  LOCATION_CONSENT_KEY,
-  LOCATION_UPDATED_EVENT,
-  requestAndCacheLocation,
-} from '@/components/providers/GeolocationProvider'
+import { LOCATION_UPDATED_EVENT } from '@/components/providers/GeolocationProvider'
+import { useMsmeLocation } from '@/app/msme/components/MsmeLocationProvider'
 
 const msmeSchema = z.object({
   name: z.string().min(1, "Full name is required"),
@@ -27,6 +24,7 @@ const msmeSchema = z.object({
 })
 
 export default function MsmeForm() {
+  const { enableLocation } = useMsmeLocation()
   const fileInputRef = useRef(null)
   const [shopThumbnail, setShopThumbnail] = useState(null)
   const [previewUrl, setPreviewUrl] = useState(null)
@@ -47,10 +45,22 @@ export default function MsmeForm() {
   }, [])
 
   useEffect(() => {
-    try {
-      setAllowLocationAccess(localStorage.getItem(LOCATION_CONSENT_KEY) === 'true')
-    } catch {
-      setAllowLocationAccess(false)
+    const syncLocation = () => {
+      try {
+        setAllowLocationAccess(!!localStorage.getItem('paynback_user_location'))
+      } catch {
+        setAllowLocationAccess(false)
+      }
+    }
+
+    syncLocation()
+
+    window.addEventListener(LOCATION_UPDATED_EVENT, syncLocation)
+    window.addEventListener('storage', syncLocation)
+
+    return () => {
+      window.removeEventListener(LOCATION_UPDATED_EVENT, syncLocation)
+      window.removeEventListener('storage', syncLocation)
     }
   }, [])
 
@@ -151,18 +161,20 @@ export default function MsmeForm() {
 
   const handleLocationConsentChange = (event) => {
     const isChecked = event.target.checked
-    setAllowLocationAccess(isChecked)
 
-    try {
-      localStorage.setItem(LOCATION_CONSENT_KEY, isChecked ? 'true' : 'false')
-    } catch {
-      // localStorage unavailable; continue without persistence
+    // Prevent unticking if location is already set
+    if (!isChecked) {
+      try {
+        if (localStorage.getItem('paynback_user_location')) {
+          return
+        }
+      } catch {}
     }
 
-    window.dispatchEvent(new Event(LOCATION_UPDATED_EVENT))
+    setAllowLocationAccess(isChecked)
 
     if (isChecked) {
-      requestAndCacheLocation()
+      void enableLocation()
     }
   }
 

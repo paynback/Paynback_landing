@@ -2,19 +2,17 @@
 
 import { useEffect, useState } from 'react'
 import { AlertTriangle } from 'lucide-react'
-import {
-  LOCATION_CONSENT_KEY,
-  requestAndCacheLocation,
-  LOCATION_UPDATED_EVENT,
-} from '@/components/providers/GeolocationProvider'
+import { LOCATION_UPDATED_EVENT } from '@/components/providers/GeolocationProvider'
+import { useMsmeLocation } from '@/app/msme/components/MsmeLocationProvider'
 
 export default function LocationAccessPrompt() {
+  const { enableLocation, isEnablingLocation } = useMsmeLocation()
   const [isLocationAllowed, setIsLocationAllowed] = useState(true)
 
   useEffect(() => {
     const syncConsent = () => {
       try {
-        setIsLocationAllowed(localStorage.getItem(LOCATION_CONSENT_KEY) === 'true')
+        setIsLocationAllowed(!!localStorage.getItem('paynback_user_location'))
       } catch {
         setIsLocationAllowed(false)
       }
@@ -31,15 +29,7 @@ export default function LocationAccessPrompt() {
   }, [])
 
   const handleEnableLocation = () => {
-    try {
-      localStorage.setItem(LOCATION_CONSENT_KEY, 'true')
-    } catch {
-      // localStorage unavailable; still attempt geolocation request
-    }
-
-    requestAndCacheLocation()
-    window.dispatchEvent(new Event(LOCATION_UPDATED_EVENT))
-    setIsLocationAllowed(true)
+    void enableLocation()
   }
 
   if (isLocationAllowed) return null
@@ -55,9 +45,10 @@ export default function LocationAccessPrompt() {
           <button
             type="button"
             onClick={handleEnableLocation}
-            className="text-sm font-medium text-(--brand-primary) hover:underline cursor-pointer"
+            disabled={isEnablingLocation}
+            className="text-sm font-medium text-(--brand-primary) hover:underline cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            Enable
+            {isEnablingLocation ? 'Enabling…' : 'Enable'}
           </button>
         </div>
       </div>

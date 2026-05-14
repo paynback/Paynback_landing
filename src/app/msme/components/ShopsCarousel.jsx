@@ -4,12 +4,14 @@ import { motion, useInView } from 'framer-motion'
 import Image from 'next/image'
 import { MapPin, Store, Send, ChevronLeft, ChevronRight } from 'lucide-react'
 import { fetchNearbyShops } from '../services/merchantService'
-import { LOCATION_UPDATED_EVENT } from '@/components/providers/GeolocationProvider'
+import { useMsmeLocation } from '@/app/msme/components/MsmeLocationProvider'
 
 export default function ShopsCarousel() {
+  const { enableShopsPayload } = useMsmeLocation()
   const containerRef = useRef(null)
   const carouselRef = useRef(null)
   const isInView = useInView(containerRef, { once: true, margin: '-100px' })
+  const loadSeqRef = useRef(0)
 
   const [shops, setShops] = useState([])
 
@@ -27,6 +29,7 @@ export default function ShopsCarousel() {
   const [loading, setLoading] = useState(true)
 
   const loadShops = async () => {
+    const seq = ++loadSeqRef.current
     let lat
     let lng
     try {
@@ -42,11 +45,13 @@ export default function ShopsCarousel() {
 
     try {
       const data = await fetchNearbyShops(lat, lng)
-      console.log("DATA AFTER FETCHING: ", data)
+      if (seq !== loadSeqRef.current) return
       setShops(data)
     } catch {
+      if (seq !== loadSeqRef.current) return
       setShops([])
     } finally {
+      if (seq !== loadSeqRef.current) return
       setLoading(false)
     }
   }
@@ -54,19 +59,21 @@ export default function ShopsCarousel() {
   useEffect(() => {
     loadShops()
 
-    const handleLocationUpdate = () => {
+    const onStorage = () => {
       setLoading(true)
       loadShops()
     }
 
-    window.addEventListener(LOCATION_UPDATED_EVENT, handleLocationUpdate)
-    window.addEventListener('storage', handleLocationUpdate)
-
-    return () => {
-      window.removeEventListener(LOCATION_UPDATED_EVENT, handleLocationUpdate)
-      window.removeEventListener('storage', handleLocationUpdate)
-    }
+    window.addEventListener('storage', onStorage)
+    return () => window.removeEventListener('storage', onStorage)
   }, [])
+
+  useEffect(() => {
+    if (!enableShopsPayload) return
+    ++loadSeqRef.current
+    setShops(enableShopsPayload.shops)
+    setLoading(false)
+  }, [enableShopsPayload])
 
   const containerVariants = {
     hidden: { opacity: 0 },
