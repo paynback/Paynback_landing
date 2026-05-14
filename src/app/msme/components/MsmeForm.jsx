@@ -316,12 +316,12 @@ export default function MsmeForm() {
                     disabled={subCategoriesLoading || !selectedCategory || subCategories.length === 0}
                   >
                     <option value="" disabled>
-                      {subCategoriesLoading 
-                        ? 'Loading sub categories...' 
-                        : !selectedCategory 
+                      {subCategoriesLoading
+                        ? 'Loading sub categories...'
+                        : !selectedCategory
                           ? 'Select a category first'
-                          : subCategories.length === 0 
-                            ? 'No sub categories' 
+                          : subCategories.length === 0
+                            ? 'No sub categories'
                             : 'Select sub category'}
                     </option>
                     {subCategories.map((cat) => (
@@ -388,7 +388,7 @@ export default function MsmeForm() {
             {/* Thumbnail Upload */}
             <div className="space-y-2 mt-6">
               <label className="text-sm font-medium text-(--brand-primary)">Thumbnail Upload*</label>
-              
+
               {!shopThumbnail ? (
                 <div
                   className="border-2 border-dashed border-gray-200 rounded-xl p-8 flex flex-col items-center justify-center text-center hover:bg-gray-50 transition-colors cursor-pointer"
@@ -420,15 +420,15 @@ export default function MsmeForm() {
               ) : (
                 <div className="relative border-2 border-gray-200 rounded-xl overflow-hidden aspect-video max-h-[200px] flex items-center justify-center bg-gray-50 group">
                   {previewUrl && (
-                    <Image 
-                      src={previewUrl} 
-                      alt="Thumbnail Preview" 
-                      fill 
-                      className="object-contain" 
-                      unoptimized 
+                    <Image
+                      src={previewUrl}
+                      alt="Thumbnail Preview"
+                      fill
+                      className="object-contain"
+                      unoptimized
                     />
                   )}
-                  
+
                   {/* Overlay for hover actions */}
                   <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
                     <button
@@ -454,7 +454,7 @@ export default function MsmeForm() {
                       <IoCloseOutline className="w-6 h-6" />
                     </button>
                   </div>
-                  
+
                   {/* Keep the input hidden but functional */}
                   <input
                     ref={fileInputRef}

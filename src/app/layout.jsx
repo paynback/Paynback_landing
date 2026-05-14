@@ -23,7 +23,7 @@ export default function RootLayout({ children }) {
       className={`${poppins.variable} antialiased`}
     >
       <body className='flex min-h-screen flex-col'>
-        <GeolocationProvider />
+   
         <SmoothScroll delay={100}>
           <Header />
           {children}
