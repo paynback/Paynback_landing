@@ -45,6 +45,11 @@ export const submitMerchantForm = async (payload) => {
   formData.append("pincode", payload.pincode);
   formData.append("shopThumbnail", payload.shopThumbnail);
 
+  if (payload.lat && payload.lng) {
+    formData.append("lat", payload.lat);
+    formData.append("lng", payload.lng);
+  }
+
   const { data } = await axiosInstance.post("/api/v1/web/merchant", formData, {
     headers: { "Content-Type": "multipart/form-data" },
   });

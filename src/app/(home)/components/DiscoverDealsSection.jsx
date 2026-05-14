@@ -136,7 +136,7 @@ function DealCard({ endMs }) {
         />
         {/* Sit above decorations; single row on desktop so pill and timers align and never stack-draw over each other */}
         <div className="relative z-10 flex w-full flex-col items-center gap-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2 md:gap-3">
-          <div className="inline-flex shrink-0 items-center gap-1 rounded-full bg-sky-100 px-2 py-1 text-[#0964BC] md:px-2.5 md:py-1">
+          <div className="inline-flex shrink-0 items-center gap-1 rounded-full bg-sky-100 px-2 py-1 text-brand-primary md:px-2.5 md:py-1">
             <Clock className="h-3 w-3 shrink-0 md:h-3.5 md:w-3.5" strokeWidth={2.25} />
             <span className="text-[10px] font-semibold leading-none md:text-[11px]">
               Ending in
@@ -182,11 +182,13 @@ export default function DiscoverDealsSection() {
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-8 sm:gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-6 lg:gap-x-16 lg:gap-y-8">
           {/* Left heading */}
           <div className="max-w-xl leading-tight md:max-w-none">
-            <h2 className="text-balance text-[1.65rem] font-normal tracking-tight sm:text-3xl md:text-[clamp(1.75rem,2.2vw,2.25rem)] lg:text-4xl xl:text-5xl">
-              <span className="text-(--brand-primary)">Experience</span>{" "}
-              the Future {" "}
-              <span className="text-(--brand-primary)">of </span>
-              Deals
+            <h2 className="text-[1.65rem] font-normal tracking-tight sm:text-3xl md:text-[clamp(1.75rem,2.2vw,2.25rem)] lg:text-4xl xl:text-5xl">
+              <span className="block lg:inline">
+                <span className="text-(--brand-primary)">Experience</span> the Future{" "}
+              </span>
+              <span className="block lg:inline">
+                <span className="text-(--brand-primary)">of </span> Deals
+              </span>
             </h2>
           </div>
 

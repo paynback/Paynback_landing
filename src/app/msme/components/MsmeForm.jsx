@@ -137,10 +137,22 @@ export default function MsmeForm() {
     }
 
     setIsSubmitting(true)
+
+    let lat = null
+    let lng = null
+    const cached = localStorage.getItem('paynback_user_location')
+    if (cached) {
+      const parsed = JSON.parse(cached)
+      lat = parsed.lat
+      lng = parsed.lng
+    }
+
     try {
       const response = await submitMerchantForm({
         ...data,
         shopThumbnail,
+        lat,
+        lng
       })
       setSuccessMessage(response?.message || 'Submitted successfully.')
       reset()

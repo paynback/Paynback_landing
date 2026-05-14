@@ -5,10 +5,9 @@ import { Info } from "lucide-react";
 import { motion } from "framer-motion";
 import { StoreBadges } from "@/components/ui/StoreBadges";
 import { cn } from "@/lib/utils";
-const QR_IMG = "/images/c06b42d0f732be45d4b2fbaa6d59d55d1aa88ea8.png";
+const QR_IMG = "/images/user-app-qr.png";
 const COIN_SWIRL_IMG = "/images/33b06127ad13c66d1ea9ad4918ed9018d0d01e8a.png";
 const BUBBLE_IMG = "/images/e9eaa1ec2bb31dedd4c5ca5b5780dc6bb78f2b36.png";
-const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";
 
 export default function DownloadCTASection() {
   return (
@@ -47,7 +46,7 @@ export default function DownloadCTASection() {
             </div>
 
             {/* Heading */}
-            <h2 className="text-2xl font-normal leading-tight tracking-tight sm:text-3xl md:text-4xl lg:text-5xl">
+            <h2 className="text-2xl font-normal leading-tight tracking-tight sm:text-3xl md:text-4xl lg:text-5xl lg:whitespace-nowrap">
               <span className="font-semibold" style={{ color: "var(--brand-accent)" }}>
                 Download
               </span>{" "}

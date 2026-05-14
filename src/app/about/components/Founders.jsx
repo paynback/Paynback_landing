@@ -87,7 +87,7 @@ export default function Founders() {
                                     />
                                     
                                     {/* Glassmorphic Name Card at Bottom */}
-                                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[88%] rounded-[12px] overflow-hidden border border-white/20 bg-white/10 backdrop-blur-[12px] px-6 py-4 flex flex-col items-center justify-center shadow-lg">
+                                    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 w-[88%] rounded-[12px] overflow-hidden border border-white/20 bg-white/10 backdrop-blur-md px-6 py-4 flex flex-col items-center justify-center shadow-lg">
                                         <span className="text-[18px] font-bold text-white tracking-wide">
                                             {founder.name}
                                         </span>

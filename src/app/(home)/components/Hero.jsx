@@ -78,8 +78,9 @@ export default function HomeHero() {
               <StoreBadges />
             </div>
 
-            <h1>
-              Shopping That Work for You
+            <h1 className="flex flex-col text-[2rem] sm:text-5xl lg:text-7xl leading-[1.1]">
+              <span className="whitespace-nowrap tracking-tight">Shopping that</span>
+              <span className="tracking-tight">Work for You</span>
             </h1>
             <p className="mt-5 max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-xs lg:text-sm">
               Download the app today and discover a world where every purchase 
