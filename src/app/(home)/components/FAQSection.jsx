@@ -89,7 +89,7 @@ export default function FAQSection() {
         {/* Heading */}
         <h2 className="mb-8 text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.4rem]">
           <span className="text-(--brand-primary)">Frequently</span>{" "}
-          Asked{" "}
+          asked{" "}
           <span className="text-(--brand-primary)">Questions</span>
         </h2>
 

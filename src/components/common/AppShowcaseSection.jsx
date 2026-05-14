@@ -80,17 +80,17 @@ export default function AppShowcaseSection() {
         {/* Heading */}
         <div className="max-w-5xl">
           <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px]">
-            Turning <span className="font-semibold text-[#1468C5]">transactions</span> 
+            Turning <span className="font-semibold text-[#1468C5]">Transactions</span> 
           </h2>
 
           <div className="mt-1 sm:mt-2 md:mt-4 flex flex-col-reverse md:flex-row md:items-start gap-6 sm:gap-8 md:gap-14">
             <p className="max-w-[320px] text-[13px] leading-[1.7] text-white/70">
-             With payNback, every purchase boosts engagement, improves operations, and adds value for both merchants and users.
+             With PayNback, every purchase boosts engagement, improves operations, and adds value for both merchants and users.
             </p>
 
             <h2 className="text-2xl font-medium leading-[1.1] tracking-tight sm:text-3xl md:text-4xl lg:text-5xl xl:text-[56px] md:whitespace-nowrap">
-              <span className="font-semibold text-[#1468C5]">into growth</span>{" "}
-              <span className="block md:inline mt-1 md:mt-0">opportunities</span>
+              <span className="font-semibold text-[#1468C5]">into Growth</span>{" "}
+              <span className="block md:inline mt-1 md:mt-0">Opportunities</span>
             </h2>
           </div>
         </div>

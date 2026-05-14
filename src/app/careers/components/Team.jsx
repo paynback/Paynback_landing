@@ -47,7 +47,7 @@ export default function Team() {
         {/* Team Section */}
         <motion.div className="mb-24" {...sectionMotion}>
           <h2 className="text-2xl md:text-5xl font-medium mb-4 text-foreground">
-            <span className="text-[#0964BC]">Meet</span> our <span className="text-[#0964BC]">Team</span>
+            <span className="text-[#0964BC]">Meet</span> Our <span className="text-[#0964BC]">Team</span>
           </h2>
           <p className="text-muted-foreground max-w-md text-[15px] sm:text-[16px] leading-[1.8] font-normal mb-12">
             Be part of a culture that values creativity, collaboration, and innovation.
@@ -79,7 +79,7 @@ export default function Team() {
 
         {/* Current Openings Section */}
         <motion.div className="pb-40" {...sectionMotion}>
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">Our Current Openings</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">Our current openings</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
             {openings.map((job, index) => (
               <Link href={`/careers/${job.slug}`} key={index}>
