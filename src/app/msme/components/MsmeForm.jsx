@@ -196,7 +196,7 @@ export default function MsmeForm() {
 
         {/* Header */}
         <motion.div
-          className="mb-10 text-center md:text-left"
+          className="mb-10 text-left"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
