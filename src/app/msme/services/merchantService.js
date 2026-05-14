@@ -1,5 +1,16 @@
 import axiosInstance from "@/lib/axiosInstance";
 
+const normalizeShops = (payload) => {
+  if (Array.isArray(payload)) return payload;
+  if (!payload || typeof payload !== "object") return [];
+  if (Array.isArray(payload.shops)) return payload.shops;
+  if (Array.isArray(payload.data)) return payload.data;
+  if (Array.isArray(payload.data?.shops)) return payload.data.shops;
+  if (Array.isArray(payload.result)) return payload.result;
+  if (Array.isArray(payload.result?.shops)) return payload.result.shops;
+  return [];
+};
+
 export const fetchShopCategories = async () => {
   const { data } = await axiosInstance.get("/api/v1/web/merchant/categories");
   return data?.categories ?? [];
@@ -17,7 +28,7 @@ export const fetchNearbyShops = async (lat, lng) => {
     params.lng = lng;
   }
   const { data } = await axiosInstance.get("/api/v1/web/merchant/shops", { params });
-  return data?.shops ?? [];
+  return normalizeShops(data);
 };
 
 export const submitMerchantForm = async (payload) => {

@@ -76,7 +76,7 @@ export default function ContactSection() {
             {/* Header */}
             <div className="mb-10 lg:mb-12">
               <h2 className="text-4xl md:text-5xl font-medium tracking-tight text-slate-900 mb-4">
-                <span className="text-(--brand-primary)">Contact</span> our Team
+                <span className="text-(--brand-primary)">Contact</span> Our Team
               </h2>
               <p className="text-base text-slate-600 max-w-lg">
                 Got any questions about the product or scaling on our platform? We&apos;re here to help.
