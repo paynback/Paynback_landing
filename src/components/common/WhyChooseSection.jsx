@@ -94,7 +94,7 @@ export default function WhyChooseSection() {
         transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* ── Heading ── */}
-        <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem] text-center lg:text-left why-heading">
+        <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem] text-left why-heading">
           <span className="text-(--brand-primary)">Why</span>{" "}
           Choose{" "}
           <span className="text-(--brand-primary)">PayNback?</span>
@@ -419,7 +419,7 @@ export default function WhyChooseSection() {
 
         /* ── Mobile (max-width: 640px) ── */
         @media (max-width: 640px) {
-          .why-heading { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: center; }
+          .why-heading { font-size: 1.5rem; margin-bottom: 1.5rem; text-align: left; }
           .why-grid-desktop {
             display: none !important;
           }

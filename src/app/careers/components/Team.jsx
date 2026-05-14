@@ -14,11 +14,11 @@ export default function Team() {
     { name: "Ashik T K", role: "Full Stack Developer", image: "/images/employers/Ashik.jpg" },
     { name: "Aswin E S", role: "DevOps Engineer", image: "/images/employers/Aswin.jpg" },
     { name: "Aiswarya", role: "Software Tester", image: "/images/employers/Aiswarya.jpg" },
+    { name: "Anand T Devadas", role: "UI/UX Designer", image: "/images/employers/Anand.jpg" },
   ];
 
   const creativeAndOpsTeam = [
     { name: "Adhith C P", role: "Creative Head", image: "/images/employers/Adhi.jpg" },
-    { name: "Anand T Devadas", role: "UI/UX Designer", image: "/images/employers/Anand.jpg" },
     { name: "Jisma N M", role: "HR Manager", image: "/images/employers/Jisma.jpg" },
     { name: "Athulya V S", role: "HR Executive", image: "/images/employers/Athulya.jpg" },
     { name: "Arya Sudhakaran", role: "Process Associate", image: "/images/employers/Arya.jpg" },
@@ -122,10 +122,10 @@ export default function Team() {
       };
 
   return (
-    <section className="py-28 bg-background min-h-[calc(100vh-70px)] flex flex-col justify-center overflow-hidden">
+    <section className="py-10 bg-background min-h-[calc(100vh-70px)] flex flex-col justify-center overflow-hidden">
       <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
         {/* Team Section Title */}
-        <motion.div className="mb-12" {...sectionMotion}>
+        <motion.div className="mt-12 mb-10 md:mt-20" {...sectionMotion}>
           <h2 className="text-2xl md:text-5xl font-medium mb-4 text-foreground">
             <span className="text-brand-primary">Meet</span> our <span className="text-brand-primary">Team</span>
           </h2>
@@ -135,14 +135,14 @@ export default function Team() {
         </motion.div>
       </div>
 
-      <motion.div className="w-full flex flex-col gap-16 md:gap-24 mb-24" {...sectionMotion}>
+      <motion.div className="w-full flex flex-col gap-16 md:gap-24 mb-34" {...sectionMotion}>
         {renderTeamGroup("Technical Team", technicalTeam, "left")}
         {renderTeamGroup("Creative & Operations Team", creativeAndOpsTeam, "right")}
       </motion.div>
 
       <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
         {/* Current Openings Section */}
-        <motion.div className="pb-40" {...sectionMotion}>
+        <motion.div className="pb-10" {...sectionMotion}>
           <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">Our current openings</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
             {openings.map((job, index) => (
