@@ -20,10 +20,10 @@ function RouteChangeTracker() {
 export function SmoothScroll({ children }) {
   // Lerp is the linear interpolation factor. A lower lerp creates a significantly slower, "butter smooth" drag.
   const lenisOptions = {
-    lerp: 0.05,
-    duration: 1.5,
+    lerp: 0.1,       // 0.05 was too sluggish — 0.1 is the sweet spot for smooth-but-responsive
+    duration: 1.2,
     smoothWheel: true,
-    wheelMultiplier: 0.9,
+    wheelMultiplier: 1.0,
   };
 
   return (

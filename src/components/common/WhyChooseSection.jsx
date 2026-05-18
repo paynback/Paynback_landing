@@ -86,12 +86,8 @@ export default function WhyChooseSection() {
       className="w-full overflow-x-hidden bg-[#F2F2F2] font-sans why-section"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <motion.div
+      <div
         className="mx-auto max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-20"
-        initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
-        whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-        viewport={{ once: true, margin: "0px 0px -25% 0px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* ── Heading ── */}
         <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem] text-left why-heading">
@@ -102,7 +98,7 @@ export default function WhyChooseSection() {
 
         {/* ── 3-column grid (Desktop) ── */}
         <motion.div
-          className="why-grid-desktop"
+          className="why-grid-desktop relative"
           variants={containerVars}
           initial="hidden"
           whileInView="show"
@@ -253,7 +249,7 @@ export default function WhyChooseSection() {
             ))}
           </div>
         </div>
-      </motion.div>
+      </div>
 
       {/* Keyframes & Responsive */}
       <style>{`

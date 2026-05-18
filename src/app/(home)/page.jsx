@@ -10,33 +10,40 @@ import BlogsSection from "./components/BlogsSection";
 import FAQSection from "./components/FAQSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import { Hero } from "@/components/sections/Hero";
+import BlurReveal from "@/components/sections/BlurReveal";
 
 
 export default function HomePage() {
   return (
     <main className="min-h-screen">
-      <ScrollReveal>
+      <ScrollReveal> {/**scroll reveal */}
         <HomeHero />
       </ScrollReveal>
-
-        <HowIntoSection /> 
-
-      <ScrollReveal delay={100}>
+      <BlurReveal> {/**blur reveal */}
+        <HowIntoSection />
+      </BlurReveal>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
         <DiscoverDealsSection />
       </ScrollReveal>
-      <AmazingFeaturesSection />
-      <ScrollReveal delay={100}>
+      <BlurReveal> {/**blur reveal */}
+        <AmazingFeaturesSection />
+      </BlurReveal>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
         <AppShowcaseSection />
       </ScrollReveal>
-      <WhyChooseSection />
-      {/* <ScrollReveal delay={100}>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
+        <WhyChooseSection />
+      </ScrollReveal>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
         <TestimonialsSection />
-      </ScrollReveal> */}
-      <ScrollReveal delay={100}>
+      </ScrollReveal>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
         <DownloadCTASection />
       </ScrollReveal>
-      <BlogsSection />
-      <ScrollReveal delay={100}>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
+        <BlogsSection />
+      </ScrollReveal>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
         <FAQSection />
       </ScrollReveal>
     </main>

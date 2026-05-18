@@ -107,7 +107,7 @@ export function Hero() {
       <nav className="hero-nav">
         <div style={{ position: 'relative' }}>
           <Image
-            src="/Icons/Paynback_logo.png"
+            src="/Icons/pnb-white-logo.svg"
             alt="PayNback Logo"
             width={250}
             height={75}

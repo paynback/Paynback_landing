@@ -4,6 +4,7 @@ import WhyChooseSection from "@/components/common/WhyChooseSection";
 import Founders from "@/app/about/components/Founders";
 import HowToWork from "@/app/about/components/HowToWork";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import BlurReveal from "@/components/sections/BlurReveal";
 import Activities from "@/components/sections/Activities";
 
 export const metadata = {
@@ -14,24 +15,24 @@ export const metadata = {
 export default function AboutPage() {
   return (
     <main className="min-h-screen">
-      <ScrollReveal>
+      <ScrollReveal> {/**scroll reveal */} 
         <AboutHero />
       </ScrollReveal>
-      <ScrollReveal delay={100}>
+      <BlurReveal> {/**blur reveal */} 
         <AboutDetails />
-      </ScrollReveal>
-      <ScrollReveal delay={100}>
+      </BlurReveal>
+      <ScrollReveal delay={100}> {/**scroll reveal */} 
         <WhyChooseSection />
       </ScrollReveal>
-      <ScrollReveal delay={100}>
+      <ScrollReveal delay={100}> {/**scroll reveal */} 
         <Activities />
       </ScrollReveal>
-      <ScrollReveal delay={100}>
+      <ScrollReveal delay={100}> {/**scroll reveal */} 
         <Founders />
       </ScrollReveal>
-      <ScrollReveal delay={100}>
+      <BlurReveal> {/**blur reveal */} 
         <HowToWork />
-      </ScrollReveal>
+      </BlurReveal>
     </main>
   );
 }

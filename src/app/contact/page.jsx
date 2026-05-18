@@ -1,6 +1,7 @@
 import ContactHero from "./components/Hero";
 import ContactSection from "./components/ContactSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
+import BlurReveal from "@/components/sections/BlurReveal";
 
 export const metadata = {
     title: "Contact Us - PayNback",
@@ -10,12 +11,12 @@ export const metadata = {
 export default function ContactPage() {
     return (
         <main className="min-h-screen">
-            <ScrollReveal>
+            <ScrollReveal> {/**scroll reveal */} 
                 <ContactHero />
             </ScrollReveal>
-            <ScrollReveal delay={100}>
+            <BlurReveal> {/**blur reveal */} 
                 <ContactSection />
-            </ScrollReveal>
+            </BlurReveal>
         </main>
     );
 }

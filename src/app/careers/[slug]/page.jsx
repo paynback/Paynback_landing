@@ -1,7 +1,5 @@
 "use client";
 
-import Header from "@/components/layout/Header";
-import Footer from "@/components/layout/Footer";
 import Link from "next/link";
 import { Upload } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
@@ -24,7 +22,6 @@ export default function JobDetailPage() {
           but usually the Header has a default clear or white state. 
           Let's put the Header in a clear container. */}
       <div className="bg-white border-b border-gray-100 mb-24">
-        <Header theme="light" />
       </div>
 
       <div className="flex-1 py-12">

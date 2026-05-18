@@ -61,7 +61,7 @@ export default function Activities() {
   const orbitScale = useTransform(scrollYProgress, [0, 1], [0.7, 1.15]);
 
   return (
-    <section ref={sectionRef} className="activities-section">
+    <section ref={sectionRef} className="activities-section relative">
       {/* Container for the Orbital System */}
       <motion.div style={{ scale: orbitScale }} className="activities-orbit-container">
         

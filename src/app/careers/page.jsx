@@ -10,15 +10,12 @@ export const metadata = {
 export default function CareersPage() {
     return (
         <main className="min-h-screen">
-            <ScrollReveal>
+            <ScrollReveal> {/**scroll reveal */} 
                 <CareersHero />
             </ScrollReveal>
-
-            <ScrollReveal delay={100}>
+            <ScrollReveal delay={100}> {/**scroll reveal */} 
                 <Team />
             </ScrollReveal>
-
-
         </main>
     );
 }

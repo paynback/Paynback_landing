@@ -8,7 +8,7 @@ import { cn } from "@/lib/utils";
 const MERCHANT_LOGO = "/images/3c0116fa484f774824ac2f339552f593418ec815.png";
 const IMG_DISH_WITH_JAMMY = "/images/dish-with-jammy.png";
 /** Small header mark on card (white treatment on blue) */
-const PayNback_ICON = "/Icons/PayNback_logo.png";
+
 
 function pad2(n) {
   return String(n).padStart(2, "0");

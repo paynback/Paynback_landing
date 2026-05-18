@@ -76,7 +76,8 @@ export default function Header({
     setIsScrolled(latest > 30);
   });
 
-  const isLight = theme === "light";
+  const isCareersDetail = pathname.startsWith("/careers/") && pathname !== "/careers";
+  const isLight = theme === "light" || isCareersDetail;
   const useWhiteNavbar = isLight;
 
   return (

@@ -8,7 +8,7 @@ import {
   TrendingUp,
   ChartLine
 } from "lucide-react";
-import { motion } from "framer-motion";
+
 
 const FEATURES = [
   {
@@ -55,12 +55,8 @@ export default function   AmazingFeaturesSection() {
       className="w-full bg-white font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <motion.div
+      <div
         className="mx-auto max-w-7xl px-6 py-12 sm:px-6 sm:py-16 lg:px-20 lg:py-20"
-        initial={{ opacity: 0.6, filter: "blur(6px)", y: 30 }}
-        whileInView={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-        viewport={{ once: true, margin: "0px 0px -25% 0px" }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
       >
         {/* Section heading */}
         <h2 className="pb-10">
@@ -95,7 +91,7 @@ export default function   AmazingFeaturesSection() {
             </div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }
