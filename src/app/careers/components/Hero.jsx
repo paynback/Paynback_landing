@@ -13,10 +13,7 @@ export default function CareersHero() {
       description="Be part of a culture that values creativity, collaboration, and innovation."
       imageSrc="/images/career-hero-image.png"
       imageAlt="Careers Hero Image"
-      imageWidth={600}
-      imageHeight={600}
-      imageWrapperClassName="h-[400px] w-[400px] sm:h-[480px] sm:w-[480px] lg:h-[600px] lg:w-[600px]"
-      imageClassName="drop-shadow-[0_15px_35px_rgba(255,255,255,0.15)]"
+      imageWrapperClassName="h-[260px] w-[260px] sm:h-[340px] sm:w-[340px] lg:h-[380px] lg:w-[380px]"
     />
   );
 }
