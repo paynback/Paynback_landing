@@ -34,9 +34,9 @@ export default function HomePage() {
       <ScrollReveal delay={100}> {/**scroll reveal */}
         <WhyChooseSection />
       </ScrollReveal>
-      <ScrollReveal delay={100}> {/**scroll reveal */}
+      {/* <ScrollReveal delay={100}> 
         <TestimonialsSection />
-      </ScrollReveal>
+      </ScrollReveal> */}
       <ScrollReveal delay={100}> {/**scroll reveal */}
         <DownloadCTASection />
       </ScrollReveal>
