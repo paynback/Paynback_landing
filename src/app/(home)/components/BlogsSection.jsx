@@ -1,26 +1,30 @@
 "use client";
 
 import BlogCard from "@/components/ui/BlogCard";
-
+import Link from 'next/link';
 
 const BLOGS = [
 {
     id: 1,
     title: "How PayNback is Turning Everyday UPI Payments into Real Rewards",
     excerpt: "Discover how PayNback transforms simple offline purchases at your local kirana store, supermarket, or restaurant into cashback and loyalty points — making every UPI scan more rewarding than ever.",
-    image: "/images/blog-image.png"
+    image: "/images/blog-img-5.png",
+    date:" May 10, 2026",
+    isNew: true
   },
   {
     id: 2,
     title: "Why Local Merchants Love PayNback: Real Stories from Kochi",
     excerpt: "From increased footfall to higher repeat purchases — see how supermarket owners, clothing stores, and food outlets in Kerala are growing their business with PayNback’s loyalty tools and cashback offers.",
-    image: "/images/blog-image.png"
+    image: "/images/blog-img-4.png",
+    date:" April 15, 2026",
   },
   {
     id: 3,
     title: "Bridging Online Convenience with Offline Trust: The PayNback Edge",
     excerpt: "PayNback brings the best of both worlds — instant digital deals and rewards for your favourite brick-and-mortar stores. Shop locally, save smartly, and enjoy a seamless experience.",
-    image: "/images/blog-image.png"
+    image: "/images/blog-img-3.png",
+    date:" April 1, 2026"
   },
 ];
 
@@ -51,12 +55,13 @@ export default function BlogsSection() {
               PayNback is India&apos;s first in-store shopping support app that connects
               users with nearby merchants offering exclusive discounts
             </p>
-            <button
+            <Link
+              href="/blog"
               className="self-start text-sm font-medium transition-opacity hover:opacity-75"
               style={{ color: "var(--brand-primary)" }}
             >
               Load more
-            </button>
+            </Link>
           </div>
         </div>
 
