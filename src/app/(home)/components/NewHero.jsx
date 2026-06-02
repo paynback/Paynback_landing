@@ -179,8 +179,8 @@ export default function HomeHero() {
           <div className="relative mx-auto mt-auto h-[270px] sm:h-[350px] md:h-[450px] w-full max-w-2xl lg:hidden">
             <motion.div
               className="absolute left-[4%] top-[-10%] z-20 w-[41%] max-w-[152px] sm:max-w-[200px] md:max-w-[260px]"
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -220 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 35, damping: 20, duration: 1.8, delay: 0.2 }}
             >
               <motion.div
@@ -201,8 +201,8 @@ export default function HomeHero() {
 
             <motion.div
               className="absolute bottom-[14%] md:bottom-[10%] right-[0%] z-10 w-[66%] max-w-[258px] sm:max-w-[320px] md:max-w-[420px]"
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 240 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 35, damping: 20, duration: 1.8, delay: 0.3 }}
             >
               <motion.div

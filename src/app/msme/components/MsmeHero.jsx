@@ -8,7 +8,7 @@ export default function MsmeHero() {
       description="Leverage our fintech ecosystem to grow visibility, trust, and long-term customer loyalty."
       imageSrc="/images/msme-hero-image.png"
       imageAlt="MSME Hero Image"
-      imageWrapperClassName="h-[260px] w-[260px] sm:h-[340px] sm:w-[340px] lg:h-[380px] lg:w-[380px]"
+      imageWrapperClassName="h-[320px] w-[320px] sm:h-[380px] sm:w-[380px] lg:h-[480px] lg:w-[480px]"
     />
   );
 }

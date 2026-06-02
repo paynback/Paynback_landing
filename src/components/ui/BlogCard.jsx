@@ -9,62 +9,19 @@ export default function BlogCard({
   image,
   isFeatured = true,
   isNew = false,
-  author = 'payNback',
   date,
 }) {
   return (
     <Link
       href="/blog"
-      className="block relative bg-white mx-auto transition-transform hover:-translate-y-1 w-full max-w-[387px]"
+      className="flex flex-col relative bg-white mx-auto transition-transform hover:-translate-y-1 w-full max-w-[387px] overflow-hidden"
       style={{
-        height: '509px',
         borderRadius: '24px',
-        boxShadow: '2px 2px 11px 0px rgba(0, 0, 0, 0.25)'
+        boxShadow: '2px 2px 11px 0px rgba(0, 0, 0, 0.25)',
       }}
     >
-
-      {/* Header */}
-      <div className="flex items-center justify-between px-5" style={{ height: '73px' }}>
-        <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-full bg-blue-100 flex items-center justify-center overflow-hidden shrink-0 relative">
-            <Image
-              src="/images/cartoon-char.jpg"
-              alt={author}
-              width={36}
-              height={36}
-              className="w-full h-full object-cover relative z-10"
-              onError={(e) => e.target.style.display = 'none'}
-            />
-            <div className="absolute inset-0 flex items-center justify-center text-blue-600 font-bold text-sm z-0">
-              {author.charAt(0).toUpperCase()}
-            </div>
-          </div>
-          <div className="flex flex-col">
-            <span className="text-[15px] font-bold text-[#333] leading-none mb-1">{author}</span>
-            <span className="text-[13px] text-gray-500 leading-none">{date}</span>
-          </div>
-        </div>
-
-        {isNew ? (
-          <div className="flex items-center gap-1.5 rounded-full bg-[#CB7C91] px-3 py-1.5">
-            <Sparkles className="w-3.5 h-3.5 text-white" strokeWidth={1.5} />
-            <span className="text-[13px] font-medium text-white">New</span>
-          </div>
-        ) : isFeatured ? (
-          <div className="flex items-center gap-1.5 rounded-full bg-[#485E92] px-3 py-1.5">
-            <Star className="w-3.5 h-3.5 text-white" strokeWidth={1.5} />
-            <span className="text-[13px] font-medium text-white">Featured</span>
-          </div>
-        ) : null}
-      </div>
-
-      {/* Image */}
-      <div className="absolute" style={{
-        top: '73px',
-        left: '0',
-        width: '100%',
-        height: '221px'
-      }}>
+      {/* Image Container */}
+      <div className="relative w-full shrink-0" style={{ height: '221px' }}>
         <Image
           src={image}
           alt={title || "Blog post"}
@@ -74,41 +31,61 @@ export default function BlogCard({
         />
       </div>
 
-      {/* Content */}
-      <h3
-        className="absolute text-black line-clamp-2"
-        style={{
-          fontFamily: 'Poppins, sans-serif',
-          fontWeight: 500,
-          fontSize: '20px',
-          lineHeight: '27px',
-          letterSpacing: '-0.37px',
-          top: '314px',
-          left: '24px',
-          width: '246.72px',
-          height: '54px',
-          margin: 0
-        }}
-      >
-        {title}
-      </h3>
-      <p
-        className="absolute text-gray-600 line-clamp-4"
-        style={{
-          fontFamily: 'Poppins, sans-serif',
-          fontWeight: 400,
-          fontSize: '16px',
-          lineHeight: '19.68px',
-          letterSpacing: '-0.37px',
-          top: '388px',
-          left: '24px',
-          width: '327px',
-          height: '79px',
-          margin: 0
-        }}
-      >
-        {excerpt}
-      </p>
+      {/* Content Container */}
+      <div className="flex flex-col gap-5 p-6 bg-white grow">
+        {/* Badges */}
+        <div className="flex justify-start -mb-2">
+          {isNew ? (
+            <div className="flex items-center justify-center text-white bg-[#CB7C91] rounded-[32.8px]" style={{ padding: '5.25px 13.12px', gap: '3.94px' }}>
+              <Sparkles style={{ width: '14px', height: '14px' }} strokeWidth={1.5} />
+              <span style={{ fontSize: '13px', fontWeight: 500, lineHeight: 1 }}>New</span>
+            </div>
+          ) : isFeatured ? (
+            <div className="flex items-center justify-center text-white bg-[#485E92] rounded-[32.8px]" style={{ padding: '5.25px 13.12px', gap: '3.94px' }}>
+              <Star style={{ width: '14px', height: '14px' }} strokeWidth={1.5} />
+              <span style={{ fontSize: '13px', fontWeight: 500, lineHeight: 1 }}>Featured</span>
+            </div>
+          ) : null}
+        </div>
+        
+        <h3
+          className="text-black line-clamp-2"
+          style={{
+            fontFamily: 'Poppins, sans-serif',
+            fontWeight: 500,
+            fontSize: '20px',
+            lineHeight: '27px',
+            letterSpacing: '-0.37px',
+            margin: 0
+          }}
+        >
+          {title}
+        </h3>
+        <p
+          className="text-gray-600 line-clamp-4"
+          style={{
+            fontFamily: 'Poppins, sans-serif',
+            fontWeight: 400,
+            fontSize: '16px',
+            lineHeight: '19.68px',
+            letterSpacing: '-0.37px',
+            margin: 0
+          }}
+        >
+          {excerpt}
+        </p>
+        {date && (
+          <span
+            className="text-gray-500 mt-auto"
+            style={{
+              fontFamily: 'Poppins, sans-serif',
+              fontSize: '14px',
+            }}
+          >
+            {date}
+          </span>
+        )}
+      </div>
     </Link>
   );
 }

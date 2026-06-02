@@ -91,8 +91,8 @@ export default function HomeHero() {
           <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none">
             <motion.div
               className="absolute left-[0%] top-[0%] z-20 w-[46%] max-w-[170px] sm:left-[0%] sm:top-[0%] sm:w-[52%] sm:max-w-[260px] md:left-[2%] md:top-[6%] md:w-[44%] md:max-w-[280px] lg:left-[5%] lg:top-[18%] lg:w-[46%] lg:max-w-[240px]"
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 35, damping: 20, duration: 2.2, delay: 0.3 }}
             >
               <motion.div
@@ -113,8 +113,8 @@ export default function HomeHero() {
 
             <motion.div
               className="absolute bottom-[-10%] right-[-10%] z-10 w-[86%] max-w-[360px] sm:bottom-[-14%] sm:right-[-14%] sm:w-[92%] sm:max-w-[520px] md:bottom-[-12%] md:right-[-14%] md:w-[78%] md:max-w-[560px] lg:bottom-[-18%] lg:right-[-12%] lg:w-[64%] lg:max-w-[420px]"
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 400 }}
-              animate={{ opacity: 1, y: 0 }}
+              initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+              animate={{ opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 35, damping: 20, duration: 2.2, delay: 0.45 }}
             >
               <motion.div

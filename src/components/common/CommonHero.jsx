@@ -69,8 +69,8 @@ export default function CommonHero({
           <div className="relative mx-auto h-[320px] w-full max-w-xl sm:h-[380px] md:h-[520px] lg:mx-0 lg:h-[560px] lg:max-w-none flex items-center justify-center mt-8 lg:mt-20">
             <motion.div
               className={`relative z-10 flex justify-center items-center drop-shadow-2xl ${imageWrapperClassName}`}
-              initial={reduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: -400 }}
-              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              initial={reduceMotion ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.85 }}
+              animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.8, delay: 0.3 }}
             >
               <motion.div
@@ -81,10 +81,9 @@ export default function CommonHero({
                 <Image
                   src={imageSrc}
                   alt={imageAlt}
-                  width={imageWidth}
-                  height={imageHeight}
-                  style={{ width: "auto", height: "auto" }}
-                  className={`h-full w-full object-contain ${imageClassName}`}
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className={`object-contain ${imageClassName}`}
                   priority
                 />
               </motion.div>

@@ -7,6 +7,30 @@ import { cn } from "@/lib/utils";
 
 const MERCHANT_LOGO = "/images/3c0116fa484f774824ac2f339552f593418ec815.png";
 const IMG_DISH_WITH_JAMMY = "/images/dish-with-jammy.png";
+
+const DEALS_DATA = [
+  {
+    title: "Buy 1 Get 1",
+    subtitle: "on all fresh juices",
+    logoSrc: "/images/juice-shop-logo.png",
+    imageSrc: "/images/juice-with-jammy.png",
+    alt: "Juice Shop",
+  },
+  {
+    title: "Flat ₹100 Off",
+    subtitle: "on purchase above ₹699",
+    logoSrc: "/images/footwear-shop-logo.png",
+    imageSrc: "/images/footwear-with-jammy.png",
+    alt: "Juice Shop",
+  },
+  {
+    title: "Get 30% Off",
+    subtitle: "for every orders",
+    logoSrc: MERCHANT_LOGO,
+    imageSrc: IMG_DISH_WITH_JAMMY,
+    alt: "Pachu's Kitchen",
+  },
+];
 /** Small header mark on card (white treatment on blue) */
 
 
@@ -49,7 +73,7 @@ function TimeBlock({ value, label }) {
   );
 }
 
-function DealCard({ endMs }) {
+function DealCard({ endMs, data }) {
   const { days, hrs, mins, secs } = useCountdown(endMs);
 
   return (
@@ -86,10 +110,10 @@ function DealCard({ endMs }) {
           <div className="flex items-start justify-end gap-2 sm:gap-3">
             <div className="min-w-0 text-right text-white drop-shadow-sm">
               <p className="text-xl font-bold leading-tight sm:text-2xl md:text-3xl">
-                Get 50% Off
+                {data.title}
               </p>
               <p className="mt-0.5 text-xs font-medium text-white/90 sm:text-sm md:text-base">
-                for every order
+                {data.subtitle}
               </p>
             </div>
           </div>
@@ -98,8 +122,8 @@ function DealCard({ endMs }) {
           <div className="relative z-0 -mt-2 max-w-[30%] -translate-y-6 overflow-visible sm:-mt-3 sm:max-w-[96px] sm:-translate-y-7 md:-mt-4 md:max-w-[104px] md:-translate-y-8">
             <div className="relative aspect-4/3 w-full">
               <Image
-                src={MERCHANT_LOGO}
-                alt="Pachu's Kitchen"
+                src={data.logoSrc}
+                alt={data.alt}
                 fill
                 className="object-contain"
                 sizes="(max-width:640px) 80px, 104px"
@@ -113,7 +137,7 @@ function DealCard({ endMs }) {
             aria-hidden
           >
             <Image
-              src={IMG_DISH_WITH_JAMMY}
+              src={data.imageSrc}
               alt=""
               fill
               className="object-contain object-bottom drop-shadow-xl scale-[1.25] origin-bottom"
@@ -219,7 +243,7 @@ export default function DiscoverDealsSection() {
         >
           {ends.map((endMs, i) => (
             <div key={i} className="min-w-[85%] snap-center md:min-w-0">
-              <DealCard endMs={endMs} />
+              <DealCard endMs={endMs} data={DEALS_DATA[i]} />
             </div>
           ))}
         </div>
