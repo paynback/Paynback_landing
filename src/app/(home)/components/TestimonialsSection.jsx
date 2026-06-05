@@ -46,7 +46,7 @@ function Stars({ count = 5 }) {
       {Array.from({ length: count }).map((_, i) => (
         <Star
           key={i}
-          className="h-3.5 w-3.5 fill-[#0964BC] text-[#0964BC]"
+          className="h-3.5 w-3.5 fill-brand-primary text-brand-primary"
           strokeWidth={0}
         />
       ))}

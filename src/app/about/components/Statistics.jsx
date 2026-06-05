@@ -105,7 +105,7 @@ export default function Statistics() {
                 <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[134px] h-[134px] rounded-full bg-[#0964BC33]"></div>
 
                 {/* Main Inner Image Wrapper */}
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[101.12px] h-[101.12px] rounded-full bg-[#0964BC] overflow-hidden flex items-start justify-center shadow-lg">
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[101.12px] h-[101.12px] rounded-full bg-brand-primary overflow-hidden flex items-start justify-center shadow-lg">
                     <Image
                         src={IMG_CENTER_MANTIS}
                         alt="Mascot Mascot"
@@ -163,7 +163,7 @@ export default function Statistics() {
 
             {/* ── Bottom Text Area ── */}
             <div className="mt-8 flex flex-col items-center text-center gap-1 z-10">
-                <h3 className="text-[24px] sm:text-[28px] font-semibold text-[#0964BC]">
+                <h3 className="text-[24px] sm:text-[28px] font-semibold text-brand-primary">
                     Enhanced activity statistics
                 </h3>
                 <h2 className="text-[36px] sm:text-[42px] font-bold text-black leading-tight tracking-tight mt-1">

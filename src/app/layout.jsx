@@ -2,9 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/layout/Footer";
 import Header from "@/components/layout/Header";
-import ScrollReveal from "@/components/ui/ScrollReveal";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
-import GeolocationProvider from "@/components/providers/GeolocationProvider";
 const poppins = Poppins({
   variable: "--font-poppins",
   subsets: ["latin"],
@@ -27,9 +25,7 @@ export default function RootLayout({ children }) {
         <SmoothScroll delay={100}>
           <Header />
           {children}
-          <ScrollReveal delay={120}>
-            <Footer />
-          </ScrollReveal>
+          <Footer />
         </SmoothScroll>
       </body>
     </html>

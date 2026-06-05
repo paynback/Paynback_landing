@@ -1,4 +1,4 @@
-import CommonHero from "@/components/common/CommonHero";
+import CommonHero from "@/components/sections/CommonHero";
 
 export default function PartnerHero() {
   return (
