@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { PhoneCall, CircleQuestionMark, CheckCircle2, AlertCircle, Loader2 } from "lucide-react";
+import { PhoneCall, CircleQuestionMark, CheckCircle2, AlertCircle, Loader2, Mail } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import MapEmbed from "./MapEmbed";
 import { submitContactForm } from "../services/contactService";
@@ -265,11 +265,11 @@ export default function ContactSection() {
             <div className="mb-10">
               <h3 className="mb-3 text-lg font-medium text-slate-900">Call us</h3>
               <p className="mb-4 text-sm text-slate-500">
-                Call our team Monday - Friday 9:30 am to 6:30 pm.
+                Get in touch with our team, Monday - Friday 9:30 am to 6:30 pm.
               </p>
               <div className="flex items-center gap-2.5 text-slate-900 font-medium">
-                <PhoneCall size={20} className="text-slate-500" />
-                <span>8301005296</span>
+                <Mail size={20} className="text-slate-500" />
+                <span>info@paynback</span>
               </div>
             </div>
 

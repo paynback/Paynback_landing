@@ -40,6 +40,7 @@ export default function Team() {
               className="flex w-max"
               animate={{ x: direction === "left" ? ["0%", "-25%"] : ["-25%", "0%"] }}
               transition={{ repeat: Infinity, ease: "linear", duration: members.length * 4.5 }}
+              style={{ willChange: "transform" }}
             >
               {[...Array(4)].map((_, i) => (
                 <div key={i} className="flex gap-5 pr-5">

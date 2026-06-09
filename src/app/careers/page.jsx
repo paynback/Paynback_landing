@@ -13,9 +13,7 @@ export default function CareersPage() {
             <ScrollReveal> {/**scroll reveal */} 
                 <CareersHero />
             </ScrollReveal>
-            <ScrollReveal delay={100}> {/**scroll reveal */} 
-                <Team />
-            </ScrollReveal>
+            <Team />
         </main>
     );
 }
