@@ -8,12 +8,12 @@ export default function Founders() {
     const foundersData = [
         {
             name: "Bony Thomas",
-            role: "Founder & CEO",
+            role: "Founder",
             image: "/images/founders/Founder.png"
         },
         {
             name: "Shybi Varghese",
-            role: "Co-Founder & COO",
+            role: "Co-Founder",
             image: "/images/founders/CO Founder.png"
         }
     ];
