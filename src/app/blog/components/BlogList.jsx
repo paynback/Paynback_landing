@@ -2,8 +2,7 @@
 
 import BlogCard from "@/components/ui/BlogCard";
 import { fetchPublishedBlogs } from "@/lib/blogService";
-import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 
 // Blog list uses API only. Archived FALLBACK_BLOGS: see blogService.js
 
@@ -23,15 +22,6 @@ export default function BlogList() {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const carouselRef = useRef(null);
-
-  const scrollLeft = () => {
-    carouselRef.current?.scrollBy({ left: -420, behavior: "smooth" });
-  };
-
-  const scrollRight = () => {
-    carouselRef.current?.scrollBy({ left: 420, behavior: "smooth" });
-  };
 
   useEffect(() => {
     let active = true;
@@ -77,39 +67,11 @@ export default function BlogList() {
         ) : blogs.length === 0 ? (
           <p className="text-sm text-slate-500">No blog posts published yet. Check back soon.</p>
         ) : (
-          <>
-            <div
-              ref={carouselRef}
-              className="flex gap-8 overflow-x-auto snap-x snap-mandatory pb-4 pt-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-            >
-              {blogs.map((blog) => (
-                <div key={blog.slug} className="w-[min(387px,85vw)] shrink-0 snap-start">
-                  <BlogCard {...blog} />
-                </div>
-              ))}
-            </div>
-
-            {blogs.length > 1 ? (
-              <div className="mt-8 flex items-center justify-center gap-4">
-                <button
-                  type="button"
-                  onClick={scrollLeft}
-                  className="rounded-full border border-gray-200 bg-white p-3 text-gray-600 shadow-sm transition-all hover:bg-gray-50 hover:shadow focus:outline-none focus:ring-2 focus:ring-(--brand-primary)/80 focus:ring-offset-2"
-                  aria-label="Scroll blogs left"
-                >
-                  <ChevronLeft className="h-6 w-6" />
-                </button>
-                <button
-                  type="button"
-                  onClick={scrollRight}
-                  className="rounded-full border border-gray-200 bg-white p-3 text-gray-600 shadow-sm transition-all hover:bg-gray-50 hover:shadow focus:outline-none focus:ring-2 focus:ring-(--brand-primary)/80 focus:ring-offset-2"
-                  aria-label="Scroll blogs right"
-                >
-                  <ChevronRight className="h-6 w-6" />
-                </button>
-              </div>
-            ) : null}
-          </>
+          <div className="grid grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {blogs.map((blog) => (
+              <BlogCard key={blog.slug} {...blog} />
+            ))}
+          </div>
         )}
       </div>
     </section>
