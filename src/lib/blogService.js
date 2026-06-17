@@ -4,7 +4,7 @@ const WEB_BLOG_PREFIX = "/api/v1/web/blogs";
 
 /*
  * ARCHIVED — hardcoded blog cards (replaced by API: fetchPublishedBlogs).
- * Full copy also in docs/dummyblogs/blogs.json
+ * Full copy also in server/docs/blogs.json (npm run seed:website)
  *
  * const FALLBACK_BLOGS = [
  *   {

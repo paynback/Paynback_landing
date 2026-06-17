@@ -26,7 +26,7 @@ const GROUP_META = {
 
 /*
  * ARCHIVED — hardcoded careers data (replaced by API: fetchPublicCareers + fetchPublicEmployerGroups).
- * Kept for reference. See also docs/dummyblogs/ and npm run seed:website-content in @server.
+ * Kept for reference. See server/docs/blogs.json and npm run seed:website in @server.
  *
  * const STATIC_CAREER_OPENINGS = [
  *   { title: "React Native Developer", location: "Kochi", slug: "react-native-developer" },
