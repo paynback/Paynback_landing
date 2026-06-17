@@ -6,6 +6,10 @@ const nextConfig = {
                 protocol: "https",
                 hostname: "images.unsplash.com",
             },
+            {
+                protocol: "https",
+                hostname: "**.amazonaws.com",
+            },
         ],
         // Force re-optimization on new deploys
         minimumCacheTTL: 0,        // or 60 for short cache

@@ -77,7 +77,8 @@ export default function Header({
   });
 
   const isCareersDetail = pathname.startsWith("/careers/") && pathname !== "/careers";
-  const isLight = theme === "light" || isCareersDetail;
+  const isBlogDetail = pathname.startsWith("/blog/") && pathname !== "/blog";
+  const isLight = theme === "light" || isCareersDetail || isBlogDetail;
   const useWhiteNavbar = isLight;
 
   return (
