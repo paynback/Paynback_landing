@@ -9,46 +9,8 @@ import {
   submitCareerApplication,
 } from "@/lib/careerService";
 
-/*
- * ARCHIVED — static job detail pages used slug-based hardcoded content before CMS.
- * Replaced by API: fetchPublicCareerBySlug. Seed reference: server seedWebsiteCareersDummyData.cjs
- *
- * const STATIC_CAREER_JOBS = {
- *   "react-native-developer": {
- *     title: "React Native Developer",
- *     location: "Kochi",
- *     department: "Engineering",
- *     experience_required: "3-6 years of product development experience with React Native, TypeScript, and mobile app delivery.",
- *     description: `We are seeking an experienced React Native Developer...`,
- *   },
- *   "backend-developer": {
- *     title: "Backend Developer",
- *     location: "Kochi",
- *     department: "Engineering",
- *     experience_required: "2-5 years building scalable APIs with Node.js, PostgreSQL, and cloud deployments.",
- *     description: `Join PayNback's backend team to build reliable services...`,
- *   },
- *   "ui-ux-designer": {
- *     title: "UI/UX Designer",
- *     location: "Kochi",
- *     department: "Design",
- *     experience_required: "2-4 years designing consumer mobile and web experiences...",
- *     description: `We are looking for a UI/UX Designer to shape intuitive experiences...`,
- *   },
- * };
- */
-
-function renderDescription(content) {
+function renderParagraph(content) {
   if (!content) return null;
-  if (/<[a-z][\s\S]*>/i.test(content)) {
-    return (
-      <div
-        className="prose prose-slate max-w-none text-[15px] leading-[1.8] text-gray-600"
-        dangerouslySetInnerHTML={{ __html: content }}
-      />
-    );
-  }
-
   return content.split(/\n\s*\n/).map((block, index) => (
     <p
       key={index}
@@ -57,6 +19,29 @@ function renderDescription(content) {
       {block.trim()}
     </p>
   ));
+}
+
+function BulletSection({ title, items }) {
+  if (!items?.length) return null;
+  return (
+    <motion.div className="mb-10" {...fadeUpStatic()}>
+      <h2 className="text-xl font-bold mb-4">{title}</h2>
+      <ul className="list-disc pl-5 space-y-2 text-gray-600 text-[15px] sm:text-[16px] leading-[1.8]">
+        {items.map((item, index) => (
+          <li key={`${title}-${index}`}>{item}</li>
+        ))}
+      </ul>
+    </motion.div>
+  );
+}
+
+function fadeUpStatic(delay = 0.2) {
+  return {
+    initial: { opacity: 0, y: 28 },
+    whileInView: { opacity: 1, y: 0 },
+    viewport: { once: true, amount: 0.15 },
+    transition: { duration: 0.65, delay, ease: [0.22, 1, 0.36, 1] },
+  };
 }
 
 export default function JobDetailClient({ slug }) {
@@ -70,11 +55,15 @@ export default function JobDetailClient({ slug }) {
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
   const [form, setForm] = useState({
-    first_name: "",
-    last_name: "",
+    full_name: "",
     phone: "",
     email: "",
-    message: "",
+    date_of_birth: "",
+    address: "",
+    years_of_experience: "",
+    currently_working: "no",
+    current_company: "",
+    notice_period: "",
     consent: false,
   });
 
@@ -114,12 +103,24 @@ export default function JobDetailClient({ slug }) {
     event.preventDefault();
     setSubmitError("");
 
-    if (!form.first_name.trim() || !form.last_name.trim() || !form.phone.trim() || !form.email.trim()) {
+    const isWorking = form.currently_working === "yes";
+    if (
+      !form.full_name.trim() ||
+      !form.phone.trim() ||
+      !form.email.trim() ||
+      !form.date_of_birth ||
+      !form.address.trim() ||
+      form.years_of_experience === ""
+    ) {
       setSubmitError("Please fill all required fields.");
       return;
     }
+    if (isWorking && (!form.current_company.trim() || !form.notice_period.trim())) {
+      setSubmitError("Company name and notice period are required when currently working.");
+      return;
+    }
     if (!resumeFile) {
-      setSubmitError("Please upload your CV.");
+      setSubmitError("Please upload your resume.");
       return;
     }
     if (!form.consent) {
@@ -128,11 +129,17 @@ export default function JobDetailClient({ slug }) {
     }
 
     const payload = new FormData();
-    payload.append("first_name", form.first_name.trim());
-    payload.append("last_name", form.last_name.trim());
+    payload.append("full_name", form.full_name.trim());
     payload.append("phone", form.phone.trim());
     payload.append("email", form.email.trim());
-    if (form.message.trim()) payload.append("message", form.message.trim());
+    payload.append("date_of_birth", form.date_of_birth);
+    payload.append("address", form.address.trim());
+    payload.append("years_of_experience", form.years_of_experience);
+    payload.append("currently_working", isWorking ? "true" : "false");
+    if (isWorking) {
+      payload.append("current_company", form.current_company.trim());
+      payload.append("notice_period", form.notice_period.trim());
+    }
     payload.append("resume", resumeFile);
 
     try {
@@ -140,11 +147,15 @@ export default function JobDetailClient({ slug }) {
       await submitCareerApplication(slug, payload);
       setSubmitSuccess(true);
       setForm({
-        first_name: "",
-        last_name: "",
+        full_name: "",
         phone: "",
         email: "",
-        message: "",
+        date_of_birth: "",
+        address: "",
+        years_of_experience: "",
+        currently_working: "no",
+        current_company: "",
+        notice_period: "",
         consent: false,
       });
       setResumeFile(null);
@@ -181,6 +192,11 @@ export default function JobDetailClient({ slug }) {
     );
   }
 
+  const jobTypeLabel =
+    job.job_type === "INTERNSHIP"
+      ? `Internship${job.internship_duration ? ` · ${job.internship_duration}` : ""}`
+      : "Employment";
+
   return (
     <main className="min-h-screen bg-white flex flex-col">
       <div className="flex-1 pt-28 sm:pt-32 lg:pt-36 pb-12">
@@ -189,22 +205,24 @@ export default function JobDetailClient({ slug }) {
             {job.title}
           </motion.h1>
 
-          <motion.p className="text-sm font-semibold uppercase tracking-wide text-gray-500 mb-8" {...fadeUp(0.12)}>
-            {job.location}
-          </motion.p>
-
-          <motion.div className="mb-10 max-w-4xl" {...fadeUp(0.15)}>
-            {renderDescription(job.description)}
+          <motion.div className="flex flex-wrap items-center gap-3 mb-8" {...fadeUp(0.12)}>
+            <p className="text-sm font-semibold uppercase tracking-wide text-gray-500">{job.location}</p>
+            <span className="rounded-full bg-sky-50 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-sky-800">
+              {jobTypeLabel}
+            </span>
           </motion.div>
 
-          {job.experience_required ? (
-            <motion.div className="mb-12" {...fadeUp(0.2)}>
-              <h2 className="text-xl font-bold mb-4">Requirements</h2>
-              <div className="text-gray-600 text-[15px] sm:text-[16px] leading-[1.8]">
-                {renderDescription(job.experience_required)}
-              </div>
+          {job.about_the_role ? (
+            <motion.div className="mb-10 max-w-4xl" {...fadeUp(0.15)}>
+              <h2 className="text-xl font-bold mb-4">About the role</h2>
+              {renderParagraph(job.about_the_role)}
             </motion.div>
           ) : null}
+
+          <BulletSection title="Key responsibilities" items={job.key_responsibilities} />
+          <BulletSection title="Required skills" items={job.required_skills} />
+          <BulletSection title="What you'll gain" items={job.what_youll_gain} />
+          <BulletSection title="Performance expectations" items={job.performance_expectations} />
 
           <motion.div
             className="bg-white rounded-[24px] p-8 md:p-12 shadow-sm mb-20 border border-gray-100"
@@ -219,24 +237,15 @@ export default function JobDetailClient({ slug }) {
               </div>
             ) : (
               <form className="space-y-6" onSubmit={onSubmit}>
+                <h2 className="text-2xl font-semibold text-foreground">Apply for this role</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">First name*</label>
+                  <div className="space-y-2 md:col-span-2">
+                    <label className="block text-[#0964BC] font-medium text-[15px]">Full name*</label>
                     <input
                       type="text"
-                      value={form.first_name}
-                      onChange={(e) => setForm((f) => ({ ...f, first_name: e.target.value }))}
-                      placeholder="Enter your first name"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">Last name*</label>
-                    <input
-                      type="text"
-                      value={form.last_name}
-                      onChange={(e) => setForm((f) => ({ ...f, last_name: e.target.value }))}
-                      placeholder="Enter your last name"
+                      value={form.full_name}
+                      onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
+                      placeholder="Enter your full name"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
                     />
                   </div>
@@ -251,19 +260,95 @@ export default function JobDetailClient({ slug }) {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">E-mail id*</label>
+                    <label className="block text-[#0964BC] font-medium text-[15px]">Email*</label>
                     <input
                       type="email"
                       value={form.email}
                       onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                      placeholder="Enter your e-mail id"
+                      placeholder="Enter your email"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-[#0964BC] font-medium text-[15px]">Date of birth*</label>
+                    <input
+                      type="date"
+                      value={form.date_of_birth}
+                      onChange={(e) => setForm((f) => ({ ...f, date_of_birth: e.target.value }))}
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                    />
+                  </div>
+                  <div className="space-y-2">
+                    <label className="block text-[#0964BC] font-medium text-[15px]">Years of experience*</label>
+                    <input
+                      type="number"
+                      min="0"
+                      step="0.5"
+                      value={form.years_of_experience}
+                      onChange={(e) => setForm((f) => ({ ...f, years_of_experience: e.target.value }))}
+                      placeholder="e.g. 2"
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="block text-[#0964BC] font-medium text-[15px]">CV Upload*</label>
+                  <label className="block text-[#0964BC] font-medium text-[15px]">Address*</label>
+                  <textarea
+                    value={form.address}
+                    onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
+                    placeholder="Enter your full address"
+                    rows={3}
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
+                  />
+                </div>
+
+                <div className="space-y-2">
+                  <label className="block text-[#0964BC] font-medium text-[15px]">Currently working?*</label>
+                  <select
+                    value={form.currently_working}
+                    onChange={(e) =>
+                      setForm((f) => ({
+                        ...f,
+                        currently_working: e.target.value,
+                        current_company: e.target.value === "yes" ? f.current_company : "",
+                        notice_period: e.target.value === "yes" ? f.notice_period : "",
+                      }))
+                    }
+                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                  >
+                    <option value="no">No</option>
+                    <option value="yes">Yes</option>
+                  </select>
+                </div>
+
+                {form.currently_working === "yes" ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Company name*</label>
+                      <input
+                        type="text"
+                        value={form.current_company}
+                        onChange={(e) => setForm((f) => ({ ...f, current_company: e.target.value }))}
+                        placeholder="Current company"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Notice period*</label>
+                      <input
+                        type="text"
+                        value={form.notice_period}
+                        onChange={(e) => setForm((f) => ({ ...f, notice_period: e.target.value }))}
+                        placeholder="e.g. 30 days, Immediate"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      />
+                    </div>
+                  </div>
+                ) : null}
+
+                <div className="space-y-2">
+                  <label className="block text-[#0964BC] font-medium text-[15px]">Resume upload*</label>
                   <button
                     type="button"
                     onClick={() => fileInputRef.current?.click()}
@@ -288,17 +373,6 @@ export default function JobDetailClient({ slug }) {
                     accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     className="hidden"
                     onChange={(e) => setResumeFile(e.target.files?.[0] ?? null)}
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-[#0964BC] font-medium text-[15px]">Message</label>
-                  <textarea
-                    value={form.message}
-                    onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
-                    placeholder="Enter your message"
-                    rows={4}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
                   />
                 </div>
 

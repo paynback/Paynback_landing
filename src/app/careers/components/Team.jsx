@@ -343,13 +343,10 @@ export default function Team() {
 
 
   const openingsList = openings.map((job) => ({
-
     title: job.title,
-
     location: job.location,
-
     slug: job.slug,
-
+    jobType: job.job_type === "INTERNSHIP" ? "Internship" : "Employment",
   }));
 
 
@@ -502,7 +499,9 @@ export default function Team() {
 
                     </div>
 
-                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mt-6">{job.location}</p>
+                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mt-6">
+                      {job.location} · {job.jobType}
+                    </p>
 
                   </motion.div>
 
