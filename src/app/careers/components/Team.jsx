@@ -344,9 +344,9 @@ export default function Team() {
 
   const openingsList = openings.map((job) => ({
     title: job.title,
-    location: job.location,
     slug: job.slug,
     jobType: job.job_type === "INTERNSHIP" ? "Internship" : "Employment",
+    aboutPreview: job.about_preview || "",
   }));
 
 
@@ -485,13 +485,13 @@ export default function Team() {
 
                   <motion.div
 
-                    className="p-5 rounded-2xl border border-gray-100 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-lg transition-shadow cursor-pointer flex flex-col justify-between min-h-[140px]"
+                    className="p-5 rounded-2xl border border-gray-100 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-lg transition-shadow cursor-pointer flex flex-col justify-between min-h-[180px]"
 
                     {...cardMotion(index + 1)}
 
                   >
 
-                    <div className="flex justify-between items-start">
+                    <div className="flex justify-between items-start gap-3">
 
                       <h3 className="text-lg md:text-xl font-bold text-foreground">{job.title}</h3>
 
@@ -499,8 +499,14 @@ export default function Team() {
 
                     </div>
 
-                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mt-6">
-                      {job.location} · {job.jobType}
+                    {job.aboutPreview ? (
+                      <p className="text-gray-600 text-sm leading-relaxed mt-4 line-clamp-3">
+                        {job.aboutPreview}
+                      </p>
+                    ) : null}
+
+                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mt-4">
+                      {job.jobType}
                     </p>
 
                   </motion.div>

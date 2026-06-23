@@ -61,7 +61,7 @@ export default function JobDetailClient({ slug }) {
     date_of_birth: "",
     address: "",
     years_of_experience: "",
-    currently_working: "no",
+    currently_working: "",
     current_company: "",
     notice_period: "",
     consent: false,
@@ -110,13 +110,12 @@ export default function JobDetailClient({ slug }) {
       !form.email.trim() ||
       !form.date_of_birth ||
       !form.address.trim() ||
-      form.years_of_experience === ""
+      form.years_of_experience === "" ||
+      !form.currently_working ||
+      !form.current_company.trim() ||
+      !form.notice_period.trim()
     ) {
       setSubmitError("Please fill all required fields.");
-      return;
-    }
-    if (isWorking && (!form.current_company.trim() || !form.notice_period.trim())) {
-      setSubmitError("Company name and notice period are required when currently working.");
       return;
     }
     if (!resumeFile) {
@@ -128,18 +127,28 @@ export default function JobDetailClient({ slug }) {
       return;
     }
 
+    const phoneDigits = form.phone.trim().replace(/\D/g, "");
+    if (!/^[0-9]{10}$/.test(phoneDigits)) {
+      setSubmitError("Please enter a valid 10-digit mobile number.");
+      return;
+    }
+
+    const years = Number(form.years_of_experience);
+    if (!Number.isFinite(years) || years < 0) {
+      setSubmitError("Please enter valid years of experience.");
+      return;
+    }
+
     const payload = new FormData();
     payload.append("full_name", form.full_name.trim());
-    payload.append("phone", form.phone.trim());
+    payload.append("phone", phoneDigits);
     payload.append("email", form.email.trim());
     payload.append("date_of_birth", form.date_of_birth);
     payload.append("address", form.address.trim());
-    payload.append("years_of_experience", form.years_of_experience);
+    payload.append("years_of_experience", String(years));
     payload.append("currently_working", isWorking ? "true" : "false");
-    if (isWorking) {
-      payload.append("current_company", form.current_company.trim());
-      payload.append("notice_period", form.notice_period.trim());
-    }
+    payload.append("current_company", form.current_company.trim());
+    payload.append("notice_period", form.notice_period.trim());
     payload.append("resume", resumeFile);
 
     try {
@@ -153,7 +162,7 @@ export default function JobDetailClient({ slug }) {
         date_of_birth: "",
         address: "",
         years_of_experience: "",
-        currently_working: "no",
+        currently_working: "",
         current_company: "",
         notice_period: "",
         consent: false,
@@ -243,6 +252,7 @@ export default function JobDetailClient({ slug }) {
                     <label className="block text-[#0964BC] font-medium text-[15px]">Full name*</label>
                     <input
                       type="text"
+                      required
                       value={form.full_name}
                       onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
                       placeholder="Enter your full name"
@@ -253,6 +263,10 @@ export default function JobDetailClient({ slug }) {
                     <label className="block text-[#0964BC] font-medium text-[15px]">Mobile number*</label>
                     <input
                       type="tel"
+                      required
+                      inputMode="numeric"
+                      minLength={10}
+                      maxLength={10}
                       value={form.phone}
                       onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                       placeholder="Enter your mobile number"
@@ -263,6 +277,7 @@ export default function JobDetailClient({ slug }) {
                     <label className="block text-[#0964BC] font-medium text-[15px]">Email*</label>
                     <input
                       type="email"
+                      required
                       value={form.email}
                       onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                       placeholder="Enter your email"
@@ -273,6 +288,7 @@ export default function JobDetailClient({ slug }) {
                     <label className="block text-[#0964BC] font-medium text-[15px]">Date of birth*</label>
                     <input
                       type="date"
+                      required
                       value={form.date_of_birth}
                       onChange={(e) => setForm((f) => ({ ...f, date_of_birth: e.target.value }))}
                       className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
@@ -282,6 +298,7 @@ export default function JobDetailClient({ slug }) {
                     <label className="block text-[#0964BC] font-medium text-[15px]">Years of experience*</label>
                     <input
                       type="number"
+                      required
                       min="0"
                       step="0.5"
                       value={form.years_of_experience}
@@ -295,6 +312,7 @@ export default function JobDetailClient({ slug }) {
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">Address*</label>
                   <textarea
+                    required
                     value={form.address}
                     onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
                     placeholder="Enter your full address"
@@ -306,46 +324,58 @@ export default function JobDetailClient({ slug }) {
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">Currently working?*</label>
                   <select
+                    required
                     value={form.currently_working}
                     onChange={(e) =>
                       setForm((f) => ({
                         ...f,
                         currently_working: e.target.value,
-                        current_company: e.target.value === "yes" ? f.current_company : "",
-                        notice_period: e.target.value === "yes" ? f.notice_period : "",
                       }))
                     }
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
                   >
+                    <option value="" disabled>
+                      Select an option
+                    </option>
                     <option value="no">No</option>
                     <option value="yes">Yes</option>
                   </select>
                 </div>
 
-                {form.currently_working === "yes" ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="block text-[#0964BC] font-medium text-[15px]">Company name*</label>
-                      <input
-                        type="text"
-                        value={form.current_company}
-                        onChange={(e) => setForm((f) => ({ ...f, current_company: e.target.value }))}
-                        placeholder="Current company"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
-                      />
-                    </div>
-                    <div className="space-y-2">
-                      <label className="block text-[#0964BC] font-medium text-[15px]">Notice period*</label>
-                      <input
-                        type="text"
-                        value={form.notice_period}
-                        onChange={(e) => setForm((f) => ({ ...f, notice_period: e.target.value }))}
-                        placeholder="e.g. 30 days, Immediate"
-                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
-                      />
-                    </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-2">
+                    <label className="block text-[#0964BC] font-medium text-[15px]">
+                      {form.currently_working === "yes" ? "Company name*" : "Last company / employer*"}
+                    </label>
+                    <input
+                      type="text"
+                      required
+                      value={form.current_company}
+                      onChange={(e) => setForm((f) => ({ ...f, current_company: e.target.value }))}
+                      placeholder={
+                        form.currently_working === "yes"
+                          ? "Current company"
+                          : "Previous company or N/A if not applicable"
+                      }
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                    />
                   </div>
-                ) : null}
+                  <div className="space-y-2">
+                    <label className="block text-[#0964BC] font-medium text-[15px]">Notice period*</label>
+                    <input
+                      type="text"
+                      required
+                      value={form.notice_period}
+                      onChange={(e) => setForm((f) => ({ ...f, notice_period: e.target.value }))}
+                      placeholder={
+                        form.currently_working === "yes"
+                          ? "e.g. 30 days, Immediate"
+                          : "e.g. Immediate, Not applicable"
+                      }
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                    />
+                  </div>
+                </div>
 
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">Resume upload*</label>
@@ -370,6 +400,7 @@ export default function JobDetailClient({ slug }) {
                   <input
                     ref={fileInputRef}
                     type="file"
+                    required
                     accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
                     className="hidden"
                     onChange={(e) => setResumeFile(e.target.files?.[0] ?? null)}
@@ -379,6 +410,7 @@ export default function JobDetailClient({ slug }) {
                 <label className="flex items-start gap-3 text-gray-500 text-[14px]">
                   <input
                     type="checkbox"
+                    required
                     checked={form.consent}
                     onChange={(e) => setForm((f) => ({ ...f, consent: e.target.checked }))}
                     className="mt-1 h-4 w-4 rounded border-gray-300"
