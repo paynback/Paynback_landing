@@ -6,6 +6,7 @@ import AppShowcaseSection from "@/components/sections/AppShowcaseSection";
 import WhyChooseSection from "@/components/sections/WhyChooseSection";
 import TestimonialsSection from "./components/TestimonialsSection";
 import DownloadCTASection from "./components/DownloadCTASection";
+import EnrollSection from "./components/EnrollSection";
 import BlogsSection from "./components/BlogsSection";
 import FAQSection from "./components/FAQSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
@@ -45,6 +46,9 @@ export default function HomePage() {
       </ScrollReveal>
       <ScrollReveal delay={100}> {/**scroll reveal */}
         <FAQSection />
+      </ScrollReveal>
+      <ScrollReveal delay={100}> {/**scroll reveal */}
+        <EnrollSection />
       </ScrollReveal>
     </main>
   );
