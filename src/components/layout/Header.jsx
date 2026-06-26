@@ -17,7 +17,7 @@ const headerNavItems = [
   { href: "/about", label: "About Us" },
   { href: "/blog", label: "Blogs" },
   { href: "/careers", label: "Careers" },
-  { href: "/msme", label: "For MSME" }
+  { href: "/msme", label: "For MSME" },
 ];
 
 function navActive(pathname, href) {
@@ -78,7 +78,8 @@ export default function Header({
 
   const isCareersDetail = pathname.startsWith("/careers/") && pathname !== "/careers";
   const isBlogDetail = pathname.startsWith("/blog/") && pathname !== "/blog";
-  const isLight = theme === "light" || isCareersDetail || isBlogDetail;
+  const isJammyPage = pathname === "/jammy";
+  const isLight = theme === "light" || isCareersDetail || isBlogDetail || isJammyPage;
   const useWhiteNavbar = isLight;
 
   return (
@@ -113,7 +114,7 @@ export default function Header({
                   )
                   : cn(
                     "w-full max-w-7xl pt-5 pb-2 sm:pt-6 lg:pt-8 px-6 sm:px-6 lg:px-8 rounded-none",
-                    useWhiteNavbar ? "bg-white border-b border-black/10" : "bg-transparent border-transparent"
+                    useWhiteNavbar ? "bg-white border-transparent" : "bg-transparent border-transparent"
                   ),
                 className
               )}

@@ -32,6 +32,7 @@ const COL_PayNback = [
   // { label: "Refer & Earn", href: "/refer-and-earn" },
   { label: "Contact Us", href: "/contact" },
   { label: "Partners", href: "/partners" },
+  { label: "About Jammy", href: "/jammy" }
 ];
 
 const COL_GUIDELINES = [
