@@ -3,11 +3,12 @@
 import Link from "next/link";
 import { Upload } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   fetchPublicCareerBySlug,
   submitCareerApplication,
 } from "@/lib/careerService";
+import { useDebouncedSubmit } from "@/lib/useDebouncedSubmit";
 
 function renderParagraph(content) {
   if (!content) return null;
@@ -50,7 +51,6 @@ export default function JobDetailClient({ slug }) {
   const [job, setJob] = useState(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState("");
   const [submitSuccess, setSubmitSuccess] = useState(false);
   const [resumeFile, setResumeFile] = useState(null);
@@ -66,6 +66,59 @@ export default function JobDetailClient({ slug }) {
     notice_period: "",
     consent: false,
   });
+
+  const formRef = useRef(form);
+  const resumeFileRef = useRef(resumeFile);
+  const slugRef = useRef(slug);
+
+  formRef.current = form;
+  resumeFileRef.current = resumeFile;
+  slugRef.current = slug;
+
+  const submitApplication = useCallback(async () => {
+    const currentForm = formRef.current;
+    const currentResume = resumeFileRef.current;
+    const currentSlug = slugRef.current;
+    const isWorking = currentForm.currently_working === "yes";
+
+    const phoneDigits = currentForm.phone.trim().replace(/\D/g, "");
+    const years = Number(currentForm.years_of_experience);
+
+    const payload = new FormData();
+    payload.append("full_name", currentForm.full_name.trim());
+    payload.append("phone", phoneDigits);
+    payload.append("email", currentForm.email.trim());
+    payload.append("date_of_birth", currentForm.date_of_birth);
+    payload.append("address", currentForm.address.trim());
+    payload.append("years_of_experience", String(years));
+    payload.append("currently_working", isWorking ? "true" : "false");
+    payload.append("current_company", currentForm.current_company.trim());
+    payload.append("notice_period", currentForm.notice_period.trim());
+    payload.append("resume", currentResume);
+
+    await submitCareerApplication(currentSlug, payload);
+    setSubmitSuccess(true);
+    setForm({
+      full_name: "",
+      phone: "",
+      email: "",
+      date_of_birth: "",
+      address: "",
+      years_of_experience: "",
+      currently_working: "",
+      current_company: "",
+      notice_period: "",
+      consent: false,
+    });
+    setResumeFile(null);
+    if (fileInputRef.current) fileInputRef.current.value = "";
+  }, []);
+
+  const {
+    submit: runSubmitApplication,
+    isDisabled: submitDisabled,
+    isSubmitting: submitting,
+  } = useDebouncedSubmit(submitApplication);
 
   useEffect(() => {
     let active = true;
@@ -103,7 +156,6 @@ export default function JobDetailClient({ slug }) {
     event.preventDefault();
     setSubmitError("");
 
-    const isWorking = form.currently_working === "yes";
     if (
       !form.full_name.trim() ||
       !form.phone.trim() ||
@@ -139,44 +191,14 @@ export default function JobDetailClient({ slug }) {
       return;
     }
 
-    const payload = new FormData();
-    payload.append("full_name", form.full_name.trim());
-    payload.append("phone", phoneDigits);
-    payload.append("email", form.email.trim());
-    payload.append("date_of_birth", form.date_of_birth);
-    payload.append("address", form.address.trim());
-    payload.append("years_of_experience", String(years));
-    payload.append("currently_working", isWorking ? "true" : "false");
-    payload.append("current_company", form.current_company.trim());
-    payload.append("notice_period", form.notice_period.trim());
-    payload.append("resume", resumeFile);
-
     try {
-      setSubmitting(true);
-      await submitCareerApplication(slug, payload);
-      setSubmitSuccess(true);
-      setForm({
-        full_name: "",
-        phone: "",
-        email: "",
-        date_of_birth: "",
-        address: "",
-        years_of_experience: "",
-        currently_working: "",
-        current_company: "",
-        notice_period: "",
-        consent: false,
-      });
-      setResumeFile(null);
-      if (fileInputRef.current) fileInputRef.current.value = "";
+      await runSubmitApplication();
     } catch (error) {
       const message =
         error?.response?.data?.message ||
         error?.message ||
         "Unable to submit your application right now.";
       setSubmitError(message);
-    } finally {
-      setSubmitting(false);
     }
   };
 
@@ -425,7 +447,7 @@ export default function JobDetailClient({ slug }) {
                 <div>
                   <button
                     type="submit"
-                    disabled={submitting}
+                    disabled={submitDisabled}
                     className="bg-brand-primary hover:bg-[#0855A1] disabled:opacity-60 text-white px-8 py-3 rounded-full font-medium transition-colors"
                   >
                     {submitting ? "Submitting..." : "Submit"}
