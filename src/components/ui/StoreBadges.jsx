@@ -16,7 +16,7 @@ export function StoreBadges({ className }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Get it on Google Play"
-        className="flex w-7 sm:w-8 items-center justify-center transition-transform hover:scale-110 active:scale-95"
+        className="flex min-h-11 min-w-11 items-center justify-center transition-transform hover:scale-110 active:scale-95"
       >
         <Image
           src="/Icons/playstore-svgrepo-com.svg"
@@ -36,7 +36,7 @@ export function StoreBadges({ className }) {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Download on the App Store"
-        className="flex w-7 sm:w-8 items-center justify-center transition-transform hover:scale-110 active:scale-95"
+        className="flex min-h-11 min-w-11 items-center justify-center transition-transform hover:scale-110 active:scale-95"
       >
         <Image
           src="/Icons/app-store-rounded-icon.svg"

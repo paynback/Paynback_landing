@@ -140,11 +140,24 @@ export default function MsmeForm() {
 
     let lat = null
     let lng = null
-    const cached = localStorage.getItem('paynback_user_location')
-    if (cached) {
-      const parsed = JSON.parse(cached)
-      lat = parsed.lat
-      lng = parsed.lng
+    try {
+      const cached = localStorage.getItem('paynback_user_location')
+      if (cached) {
+        const parsed = JSON.parse(cached)
+        if (typeof parsed.lat === 'number' && typeof parsed.lng === 'number') {
+          lat = parsed.lat
+          lng = parsed.lng
+        }
+      }
+    } catch {
+      // ignore invalid cache
+    }
+
+    if (lat == null || lng == null) {
+      setIsSubmitting(false)
+      setErrorMessage('Please allow location access before submitting.')
+      setTimeout(() => setErrorMessage(''), 5000)
+      return
     }
 
     try {
@@ -171,22 +184,26 @@ export default function MsmeForm() {
     }
   }
 
-  const handleLocationConsentChange = (event) => {
+  const handleLocationConsentChange = async (event) => {
     const isChecked = event.target.checked
 
-    // Prevent unticking if location is already set
     if (!isChecked) {
       try {
         if (localStorage.getItem('paynback_user_location')) {
           return
         }
       } catch {}
+      setAllowLocationAccess(false)
+      return
     }
 
-    setAllowLocationAccess(isChecked)
-
-    if (isChecked) {
-      void enableLocation()
+    const coords = await enableLocation()
+    if (coords) {
+      setAllowLocationAccess(true)
+    } else {
+      setAllowLocationAccess(false)
+      setErrorMessage('Location access was denied. Please allow location in your device settings.')
+      setTimeout(() => setErrorMessage(''), 5000)
     }
   }
 
@@ -236,7 +253,7 @@ export default function MsmeForm() {
                   id="name"
                   placeholder="Enter your full name"
                   {...register("name")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.name
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-base md:text-sm ${errors.name
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -256,7 +273,7 @@ export default function MsmeForm() {
                   id="phone"
                   placeholder="Enter your mobile number"
                   {...register("phone")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.phone
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-base md:text-sm ${errors.phone
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -276,7 +293,7 @@ export default function MsmeForm() {
                   id="shopName"
                   placeholder="Enter your shop name"
                   {...register("shopName")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.shopName
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-base md:text-sm ${errors.shopName
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -295,7 +312,7 @@ export default function MsmeForm() {
                   <select
                     id="category"
                     {...register("category")}
-                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-sm text-gray-500 bg-white ${errors.category
+                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-base md:text-sm text-gray-500 bg-white ${errors.category
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                       }`}
@@ -332,7 +349,7 @@ export default function MsmeForm() {
                   <select
                     id="subCategory"
                     {...register("subCategory")}
-                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-sm text-gray-500 bg-white ${errors.subCategory
+                    className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors appearance-none text-base md:text-sm text-gray-500 bg-white ${errors.subCategory
                       ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                       : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                       } disabled:bg-gray-50 disabled:text-gray-400`}
@@ -375,7 +392,7 @@ export default function MsmeForm() {
                   id="address"
                   placeholder="Enter your address"
                   {...register("address")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm resize-none h-full min-h-[120px] ${errors.address
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-base md:text-sm resize-none h-full min-h-[120px] ${errors.address
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -395,7 +412,7 @@ export default function MsmeForm() {
                   id="pincode"
                   placeholder="Enter your location PIN"
                   {...register("pincode")}
-                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${errors.pincode
+                  className={`w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-base md:text-sm ${errors.pincode
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -454,12 +471,13 @@ export default function MsmeForm() {
                   )}
 
                   {/* Overlay for hover actions */}
-                  <div className="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center gap-3">
+                  <div className="absolute inset-0 flex items-center justify-center gap-3 bg-black/40 opacity-100 transition-opacity md:opacity-0 md:group-hover:opacity-100">
                     <button
                       type="button"
                       onClick={triggerFilePicker}
-                      className="text-white hover:bg-white/20 p-2 rounded-full transition-all cursor-pointer hover:scale-110"
+                      className="flex min-h-11 min-w-11 items-center justify-center rounded-full p-2 text-white transition-all hover:scale-110 hover:bg-white/20 cursor-pointer"
                       title="Change image"
+                      aria-label="Change image"
                     >
                       <LiaExchangeAltSolid className="w-6 h-6" />
                     </button>
@@ -472,8 +490,9 @@ export default function MsmeForm() {
                           fileInputRef.current.value = '';
                         }
                       }}
-                      className="text-white hover:bg-red-500/80 p-2 rounded-full transition-all cursor-pointer hover:scale-110"
+                      className="flex min-h-11 min-w-11 items-center justify-center rounded-full p-2 text-white transition-all hover:scale-110 hover:bg-red-500/80 cursor-pointer"
                       title="Remove image"
+                      aria-label="Remove image"
                     >
                       <IoCloseOutline className="w-6 h-6" />
                     </button>
@@ -496,12 +515,12 @@ export default function MsmeForm() {
               By clicking submit below, you consent to allow PayNback to store and process the personal information submitted above to provide you the content requested.
             </p>
 
-            <label className="flex items-start gap-3 text-sm text-gray-600">
+            <label className="flex min-h-11 items-start gap-3 text-sm text-gray-600">
               <input
                 type="checkbox"
                 checked={allowLocationAccess}
                 onChange={handleLocationConsentChange}
-                className="mt-0.5 h-4 w-4 rounded border-gray-300 text-(--brand-primary) focus:ring-(--brand-primary)"
+                className="mt-1 h-5 w-5 shrink-0 rounded border-gray-300 text-(--brand-primary) focus:ring-(--brand-primary)"
               />
               <span>Allow access to your location</span>
             </label>

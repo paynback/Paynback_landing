@@ -123,11 +123,13 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground font-sans;
-  }
   html {
     @apply font-sans;
+    -webkit-overflow-scrolling: touch;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+    overscroll-behavior-y: none;
   }
   h1 {
     @apply text-balance text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl;
@@ -155,13 +157,11 @@
   transition-property: opacity, transform;
   transition-duration: 650ms;
   transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
-  will-change: transform, opacity;
 }
 
 .scroll-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-  will-change: auto; /* release GPU memory after animation completes */
 }
 
 @media (prefers-reduced-motion: reduce) {

@@ -256,7 +256,7 @@ export default function JobDetailClient({ slug }) {
                       value={form.full_name}
                       onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
                       placeholder="Enter your full name"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                     />
                   </div>
                   <div className="space-y-2">
@@ -270,7 +270,7 @@ export default function JobDetailClient({ slug }) {
                       value={form.phone}
                       onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
                       placeholder="Enter your mobile number"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                     />
                   </div>
                   <div className="space-y-2">
@@ -281,7 +281,7 @@ export default function JobDetailClient({ slug }) {
                       value={form.email}
                       onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
                       placeholder="Enter your email"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                     />
                   </div>
                   <div className="space-y-2">
@@ -291,7 +291,7 @@ export default function JobDetailClient({ slug }) {
                       required
                       value={form.date_of_birth}
                       onChange={(e) => setForm((f) => ({ ...f, date_of_birth: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                     />
                   </div>
                   <div className="space-y-2">
@@ -304,7 +304,7 @@ export default function JobDetailClient({ slug }) {
                       value={form.years_of_experience}
                       onChange={(e) => setForm((f) => ({ ...f, years_of_experience: e.target.value }))}
                       placeholder="e.g. 2"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                     />
                   </div>
                 </div>
@@ -357,7 +357,7 @@ export default function JobDetailClient({ slug }) {
                           ? "Current company"
                           : "Previous company or N/A if not applicable"
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                     />
                   </div>
                   <div className="space-y-2">
@@ -372,7 +372,7 @@ export default function JobDetailClient({ slug }) {
                           ? "e.g. 30 days, Immediate"
                           : "e.g. Immediate, Not applicable"
                       }
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                     />
                   </div>
                 </div>

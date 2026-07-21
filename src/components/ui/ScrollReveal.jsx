@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from 'react'
 
+const FALLBACK_MS = 2000
+
 export default function ScrollReveal({ children, delay = 0, className = '' }) {
   const rootRef = useRef(null)
   const [visible, setVisible] = useState(false)
@@ -10,17 +12,26 @@ export default function ScrollReveal({ children, delay = 0, className = '' }) {
     const element = rootRef.current
     if (!element) return
 
+    const reveal = () => setVisible(true)
+
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
     if (prefersReducedMotion) {
-      setVisible(true)
+      reveal()
       return
     }
+
+    if (typeof IntersectionObserver === 'undefined') {
+      reveal()
+      return
+    }
+
+    const fallbackTimer = window.setTimeout(reveal, FALLBACK_MS)
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setVisible(true)
+            reveal()
             observer.unobserve(entry.target)
           }
         })
@@ -32,7 +43,11 @@ export default function ScrollReveal({ children, delay = 0, className = '' }) {
     )
 
     observer.observe(element)
-    return () => observer.disconnect()
+
+    return () => {
+      window.clearTimeout(fallbackTimer)
+      observer.disconnect()
+    }
   }, [])
 
   return (

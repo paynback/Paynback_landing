@@ -75,7 +75,11 @@ export function WhyChoose() {
     if (!carouselRef.current) return;
     const scrollLeft = carouselRef.current.scrollLeft;
     const width = carouselRef.current.clientWidth;
-    const index = Math.round(scrollLeft / width);
+    if (!width) return;
+    const index = Math.max(
+      0,
+      Math.min(FEATURES.length - 1, Math.round(scrollLeft / width))
+    );
     if (index !== active) {
       setActive(index);
     }
