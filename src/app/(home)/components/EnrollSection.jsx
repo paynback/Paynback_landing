@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { submitEnrollForm } from "@/lib/enrollService";
+import { useDebouncedSubmit } from "@/lib/useDebouncedSubmit";
 
 const enrollSchema = z.object({
   phone: z
@@ -18,7 +19,6 @@ const enrollSchema = z.object({
 });
 
 export default function EnrollSection() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
 
@@ -35,32 +35,36 @@ export default function EnrollSection() {
     },
   });
 
-  const onSubmit = async (data) => {
-    setErrorMessage("");
-    setSuccessMessage("");
-    setIsSubmitting(true);
+  const submitEnrollment = useCallback(
+    async (data) => {
+      setErrorMessage("");
+      setSuccessMessage("");
 
-    try {
-      const response = await submitEnrollForm({
-        phone: data.phone.trim(),
-        consent: true,
-      });
-      setSuccessMessage(response?.message || "You have been enrolled successfully.");
-      reset();
-    } catch (err) {
-      const msg =
-        err?.response?.data?.message ||
-        err?.message ||
-        "Something went wrong. Please try again.";
-      setErrorMessage(msg);
-    } finally {
-      setIsSubmitting(false);
-      setTimeout(() => {
-        setErrorMessage("");
-        setSuccessMessage("");
-      }, 5000);
-    }
-  };
+      try {
+        const response = await submitEnrollForm({
+          phone: data.phone.trim(),
+          consent: true,
+        });
+        setSuccessMessage(response?.message || "You have been enrolled successfully.");
+        reset();
+      } catch (err) {
+        const msg =
+          err?.response?.data?.message ||
+          err?.message ||
+          "Something went wrong. Please try again.";
+        setErrorMessage(msg);
+      } finally {
+        setTimeout(() => {
+          setErrorMessage("");
+          setSuccessMessage("");
+        }, 5000);
+      }
+    },
+    [reset],
+  );
+
+  const { submit: onSubmit, isDisabled, isSubmitting } =
+    useDebouncedSubmit(submitEnrollment);
 
   return (
     <section
@@ -77,7 +81,11 @@ export default function EnrollSection() {
             Enter your mobile number to receive updates about PayNback offers, product news, and account information.
           </p>
 
-          <form className="space-y-6" onSubmit={handleSubmit(onSubmit)} noValidate>
+          <form
+            className="space-y-6"
+            onSubmit={handleSubmit((data) => onSubmit(data))}
+            noValidate
+          >
             <div className="flex flex-col">
               <label htmlFor="enroll-phone" className="mb-2 text-sm font-medium text-(--brand-primary)">
                 Mobile number*
@@ -133,7 +141,7 @@ export default function EnrollSection() {
 
             <button
               type="submit"
-              disabled={isSubmitting}
+              disabled={isDisabled}
               className="inline-flex items-center justify-center gap-2 rounded-lg bg-(--brand-primary) px-6 py-3 text-sm font-medium text-white transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
             >
               {isSubmitting ? (
