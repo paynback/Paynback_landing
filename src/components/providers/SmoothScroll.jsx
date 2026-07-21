@@ -8,11 +8,13 @@ function shouldEnableLenis() {
 
   const isTouch = window.matchMedia("(pointer: coarse)").matches;
   const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const isIOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
   const isSafari =
     /Safari/i.test(navigator.userAgent) &&
     !/Chrome|Chromium|CriOS|Edg|OPR/i.test(navigator.userAgent);
 
-  return !isTouch && !reducedMotion && !isSafari;
+  // Lenis on desktop Chrome/Edge/Firefox only — native scroll on iOS & touch
+  return !isTouch && !reducedMotion && !isSafari && !isIOS;
 }
 
 export function SmoothScroll({ children }) {
