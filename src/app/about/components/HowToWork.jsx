@@ -5,29 +5,27 @@ export default function HowToWork() {
     const MERCHANT_JOIN = "/images/About-us_merch-join.png";
 
     return (
-        <section className="w-full bg-white pt-16 pb-42 lg:pb-50">
-            <div className="mx-auto max-w-7xl px-4 sm:px-8 lg:px-10 space-y-24 lg:space-y-32">
+        <section className="w-full bg-white">
+            <div className="mx-auto max-w-7xl px-6 py-16 sm:px-6 lg:px-20 lg:py-24 space-y-24 lg:space-y-32">
 
-                {/* ── Row 1: Top Text Columns ── */}
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16">
-                    <div className="flex flex-col gap-6">
-                        <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold text-slate-900 tracking-[-0.5px]">
-                            How does PayNback work?
-                        </h2>
+                {/* ── Row 1: Heading + two paragraphs on one baseline ── */}
+                <div className="flex flex-col gap-6">
+                    <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-semibold text-slate-900 tracking-[-0.5px]">
+                        How does <span className="text-brand-primary">PayNback</span> work ?
+                    </h2>
+                    <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-16 lg:items-start">
                         <p className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
-                            PayNback is a connected retail ecosystem that brings customers and partner merchants onto a single, 
+                            PayNback is a connected retail ecosystem that brings customers and partner merchants onto a single,
                             seamless platform—enhancing the way everyday shopping is experienced and rewarded. Every purchase made
-                             at an onboarded merchant earns you cashback and rewards, credited directly to your PayNback account. 
-                             These rewards are not limited to a single store—they can be redeemed instantly or used across other
-                              participating merchants within the ecosystem, creating continuous value with every transaction.
+                            at an onboarded merchant earns you cashback and rewards, credited directly to your PayNback account.
+                            These rewards are not limited to a single store—they can be redeemed instantly or used across other
+                            participating merchants within the ecosystem, creating continuous value with every transaction.
                         </p>
-                    </div>
-                    <div className="flex flex-col lg:pt-18">
                         <p className="text-[15px] sm:text-[16px] leading-[1.8] text-slate-600 font-normal">
                             The app also enables effortless discovery and engagement. Users can explore curated partner stores,
-                             view exclusive in-store offers, and connect directly with merchants for enquiries or assistance through
-                              chat or call. Payments are designed to be smooth and flexible. Bills can be settled instantly via UPI, 
-                              PayNback wallet, or redeemed rewards—ensuring a frictionless checkout experience at every step.
+                            view exclusive in-store offers, and connect directly with merchants for enquiries or assistance through
+                            chat or call. Payments are designed to be smooth and flexible. Bills can be settled instantly via UPI,
+                            PayNback wallet, or redeemed rewards—ensuring a frictionless checkout experience at every step.
                         </p>
                     </div>
                 </div>
@@ -52,7 +50,7 @@ export default function HowToWork() {
                     </div>
 
                     <div 
-                        className="relative w-full aspect-4/5 sm:aspect-571/439 max-w-[571px] rounded-[16px] flex items-center justify-center shadow-xl mx-auto lg:mx-0 overflow-hidden"
+                        className="relative w-full aspect-4/5 sm:aspect-571/439 max-w-142.75 rounded-[16px] flex items-center justify-center shadow-xl mx-auto lg:mx-0 overflow-hidden"
                         style={{ background: 'linear-gradient(237.6deg, #969696 11.12%, #C1C1C1 35.61%, #E2E2E2 63.38%, #646464 93.58%)' }}
                     >
                         <div className="relative z-10 w-[70%] sm:w-[50%] lg:w-[45%] h-[80%]">
@@ -64,7 +62,7 @@ export default function HowToWork() {
                 {/* ── Row 3: Merchant Section ── */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
                     <div 
-                        className="relative w-full aspect-4/5 sm:aspect-571/439 max-w-[571px] rounded-[16px] flex items-center justify-center shadow-xl mx-auto lg:mx-0 overflow-hidden order-last lg:order-first"
+                        className="relative w-full aspect-4/5 sm:aspect-571/439 max-w-142.75 rounded-[16px] flex items-center justify-center shadow-xl mx-auto lg:mx-0 overflow-hidden order-last lg:order-first"
                         style={{ background: 'linear-gradient(237.6deg, #969696 11.12%, #C1C1C1 35.61%, #E2E2E2 63.38%, #646464 93.58%)' }}
                     >
                         <div className="relative z-10 w-[90%] sm:w-[70%] lg:w-[65%] h-[95%]">

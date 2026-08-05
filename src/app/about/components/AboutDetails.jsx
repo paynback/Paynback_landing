@@ -6,7 +6,7 @@ export default function AboutDetails() {
 
     return (
         <section className="w-full bg-white">
-            <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24 flex flex-col gap-16 lg:gap-24">
+            <div className="mx-auto max-w-7xl px-6 py-16 sm:px-6 lg:px-20 lg:py-24 flex flex-col gap-16 lg:gap-24">
 
                 {/* ── Top Text Row ── */}
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">

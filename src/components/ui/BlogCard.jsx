@@ -27,7 +27,7 @@ export default function BlogCard({
   return (
     <Link
       href={href}
-      className="flex flex-col relative bg-white mx-auto transition-transform hover:-translate-y-1 w-full max-w-[387px] overflow-hidden"
+      className="flex flex-col relative bg-white transition-transform hover:-translate-y-1 w-full overflow-hidden"
       style={{
         borderRadius: "24px",
         boxShadow: "2px 2px 11px 0px rgba(0, 0, 0, 0.25)",

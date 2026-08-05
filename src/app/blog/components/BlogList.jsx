@@ -47,8 +47,8 @@ export default function BlogList() {
 
   return (
     <section className="w-full bg-white pb-32 lg:pb-48" style={{ "--brand-primary": "#0964BC" }}>
-      <div className="mx-auto max-w-7xl px-8 py-16 sm:px-10 lg:px-18 lg:py-20">
-        <div className="mb-14 flex flex-col items-start gap-3">
+      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-6 lg:px-20 lg:py-20">
+        <div className="mb-14 flex w-full flex-col items-start gap-3 text-left">
           <h2 className="text-[48px] font-medium leading-[100%] tracking-[-0.56px] text-slate-900">
             <span style={{ color: "var(--brand-primary)" }}>Meet </span>
             the fresh <span style={{ color: "var(--brand-primary)" }}> Blogs.</span>
@@ -67,7 +67,7 @@ export default function BlogList() {
         ) : blogs.length === 0 ? (
           <p className="text-sm text-slate-500">No blog posts published yet. Check back soon.</p>
         ) : (
-          <div className="grid grid-cols-1 justify-items-center gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid w-full grid-cols-1 justify-items-stretch gap-8 sm:grid-cols-2 lg:grid-cols-3">
             {blogs.map((blog) => (
               <BlogCard key={blog.slug} {...blog} />
             ))}

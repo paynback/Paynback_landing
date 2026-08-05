@@ -72,7 +72,7 @@ export default function HowIntoSection() {
   return (
     <section className="w-full bg-white">
       <div
-        className="mx-auto max-w-7xl px-6 py-14 sm:px-6 lg:px-30 lg:py-30"
+        className="mx-auto max-w-7xl px-6 py-14 sm:px-6 lg:px-20 lg:py-30"
       >
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-8 lg:grid-cols-2 lg:gap-26">
           {/* Left heading */}
@@ -110,7 +110,7 @@ export default function HowIntoSection() {
               className={cn(
                 "relative pt-2 text-center sm:text-left",
                 idx !== 0 &&
-                "sm:pl-16 sm:before:absolute sm:before:left-0 sm:before:top-1/2 sm:before:h-20 sm:before:w-[2px] sm:before:-translate-y-1/2 sm:before:bg-slate-400",
+                "sm:pl-16 sm:before:absolute sm:before:left-0 sm:before:top-1/2 sm:before:h-20 sm:before:w-0.5 sm:before:-translate-y-1/2 sm:before:bg-slate-400",
               )}
             >
               <div className="text-5xl font-semibold leading-none tracking-tight text-(--brand-primary) sm:text-6xl lg:text-7xl">
