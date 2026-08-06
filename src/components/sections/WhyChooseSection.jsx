@@ -91,7 +91,7 @@ export default function WhyChooseSection() {
       style={{ "--brand-primary": "#0964BC" }}
     >
       <div
-        className="mx-auto max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-20"
+        className="mx-auto max-w-7xl px-6 py-14 sm:px-6 lg:px-20 lg:py-30"
       >
         {/* ── Heading ── */}
         <h2 className="mb-8 text-2xl font-normal tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.5rem] text-left why-heading">

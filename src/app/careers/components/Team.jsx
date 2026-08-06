@@ -1,346 +1,201 @@
 "use client";
 
 import Link from "next/link";
-
 import Image from "next/image";
-
 import { Plus } from "lucide-react";
-
 import { motion, useReducedMotion } from "framer-motion";
-
 import { useEffect, useState } from "react";
-
 import { fetchPublicCareers } from "@/lib/careerService";
-
 import { fetchPublicEmployerGroups } from "@/lib/employeeService";
 
-
-
 const GROUP_META = {
-
   TECHNICAL: { title: "Technical Team", direction: "left" },
-
   CREATIVE_OPERATIONS: { title: "Creative & Operations Team", direction: "right" },
-
 };
 
 /*
  * ARCHIVED — hardcoded careers data (replaced by API: fetchPublicCareers + fetchPublicEmployerGroups).
  * Kept for reference. See server/docs/blogs.json and npm run seed:website in @server.
- *
- * const STATIC_CAREER_OPENINGS = [
- *   { title: "React Native Developer", location: "Kochi", slug: "react-native-developer" },
- *   { title: "Backend Developer", location: "Kochi", slug: "backend-developer" },
- *   { title: "UI/UX Designer", location: "Kochi", slug: "ui-ux-designer" },
- * ];
- *
- * const technicalTeam = [
- *   { name: "Mohammed Azharudheen", role: "Application Developer", image: "/images/employers/Azar.jpg" },
- *   { name: "Hijas Ahamed", role: "Application Developer", image: "/images/employers/Hijas.jpg" },
- *   { name: "Jyothis G Tency", role: "Backend Developer", image: "/images/employers/Jyothis.jpg" },
- *   { name: "Athul Krishna", role: "Backend Developer", image: "/images/employers/Athul.jpg" },
- *   { name: "Ashik T K", role: "Full Stack Developer", image: "/images/employers/Ashik.jpg" },
- *   { name: "Aswin E S", role: "DevOps Engineer", image: "/images/employers/Aswin.jpg" },
- *   { name: "Aiswarya", role: "Software Tester", image: "/images/employers/Aiswarya.jpg" },
- *   { name: "Anand T Devadas", role: "UI/UX Designer", image: "/images/employers/Anand.jpg" },
- * ];
- *
- * const creativeAndOpsTeam = [
- *   { name: "Adhith C P", role: "Creative Head", image: "/images/employers/Adhi.jpg" },
- *   { name: "Jisma N M", role: "HR Manager", image: "/images/employers/Jisma.jpg" },
- *   { name: "Athulya V S", role: "HR Executive", image: "/images/employers/Athulya.jpg" },
- *   { name: "Arya Sudhakaran", role: "Process Associate", image: "/images/employers/Arya.jpg" },
- *   { name: "Siyana Yasmin", role: "Subject Expert", image: "/images/employers/Siyana.jpg" },
- * ];
  */
 
-
-
 function isExternalImage(src) {
-
   return typeof src === "string" && /^https?:\/\//i.test(src);
-
 }
 
+function MemberCard({ member, className = "" }) {
+  return (
+    <div
+      className={`relative overflow-hidden group bg-black/5 rounded-2xl aspect-4/5 shrink-0 ${className}`}
+    >
+      {member.image ? (
+        isExternalImage(member.image) ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={member.image}
+            alt={member.name}
+            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+        ) : (
+          <Image
+            src={member.image}
+            alt={member.name}
+            fill
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+            sizes="(max-width: 768px) 75vw, 300px"
+          />
+        )
+      ) : (
+        <div className="flex h-full w-full items-center justify-center bg-slate-100 text-sm text-slate-400">
+          No photo
+        </div>
+      )}
+      <div className="absolute bottom-3 left-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-xl text-center shadow-lg transition-all duration-300">
+        <h3 className="text-white font-semibold text-[15px] leading-tight">{member.name}</h3>
+        <p className="text-gray-200 text-[12px] font-medium">{member.role}</p>
+      </div>
+    </div>
+  );
+}
 
+/** Soft fade on left/right — keep narrow so main cards stay fully visible */
+function EdgeFades() {
+  return (
+    <>
+      <div
+        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 sm:w-6 md:w-8 bg-linear-to-r from-background via-background/40 to-transparent"
+        aria-hidden
+      />
+      <div
+        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-5 sm:w-6 md:w-8 bg-linear-to-l from-background via-background/40 to-transparent"
+        aria-hidden
+      />
+    </>
+  );
+}
+
+/** Narrow edge zones (~3%) — fade before hide/spawn without a wide band */
+const EDGE_FADE_MASK = {
+  WebkitMaskImage:
+    "linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)",
+  maskImage:
+    "linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)",
+};
 
 export default function Team() {
-
   const reduceMotion = useReducedMotion();
-
   const [openings, setOpenings] = useState([]);
-
   const [openingsLoading, setOpeningsLoading] = useState(true);
-
   const [teamGroups, setTeamGroups] = useState([]);
-
   const [teamsLoading, setTeamsLoading] = useState(true);
 
-
-
   useEffect(() => {
-
     let active = true;
-
     (async () => {
-
       try {
-
         const rows = await fetchPublicCareers();
-
         if (!active) return;
-
         setOpenings(Array.isArray(rows) ? rows : []);
-
       } catch {
-
         if (active) setOpenings([]);
-
       } finally {
-
         if (active) setOpeningsLoading(false);
-
       }
-
     })();
-
     return () => {
-
       active = false;
-
     };
-
   }, []);
-
-
 
   useEffect(() => {
-
     let active = true;
-
     (async () => {
-
       try {
-
         const groups = await fetchPublicEmployerGroups();
-
         if (!active) return;
-
         setTeamGroups(Array.isArray(groups) ? groups : []);
-
       } catch {
-
         if (active) setTeamGroups([]);
-
       } finally {
-
         if (active) setTeamsLoading(false);
-
       }
-
     })();
-
     return () => {
-
       active = false;
-
     };
-
   }, []);
-
-
 
   const renderTeamGroup = (group) => {
     const { team_group, title, members, direction } = group;
     const isMarquee = members.length > 4;
+
     return (
-      <div key={team_group || title} className="w-full flex flex-col mb-0 overflow-hidden">
-
-        <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
-
-          <h3 className="text-xl md:text-2xl font-semibold mb-6 text-foreground tracking-tight px-1">
-
+      <div key={team_group || title} className="w-full flex flex-col mb-0">
+        {/* Title + marquee both constrained to page content width (not full-bleed) */}
+        <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
+          <h3 className="mb-6 text-xl font-semibold tracking-tight text-foreground md:text-2xl">
             {title}
-
           </h3>
 
-        </div>
-
-        {isMarquee ? (
-
-          <div className="flex w-full overflow-hidden relative group/marquee">
-
-            <motion.div
-
-              className="flex w-max"
-
-              animate={{ x: direction === "left" ? ["0%", "-25%"] : ["-25%", "0%"] }}
-
-              transition={{ repeat: Infinity, ease: "linear", duration: members.length * 4.5 }}
-
-              style={{ willChange: "transform" }}
-
+          {isMarquee ? (
+            <div
+              className="relative w-full overflow-hidden rounded-xl"
+              style={EDGE_FADE_MASK}
             >
-
-              {[...Array(4)].map((_, i) => (
-
-                <div key={i} className="flex gap-5 pr-5">
-
-                  {members.map((member) => (
-                    <div
-                      key={`${member.employee_id || member.name}-${i}`}
-
-                      className="relative overflow-hidden group bg-black/5 rounded-2xl w-[75vw] sm:w-[260px] lg:w-[280px] aspect-4/5 shrink-0"
-
-                    >
-
-                      {member.image ? (
-
-                        isExternalImage(member.image) ? (
-
-                          // eslint-disable-next-line @next/next/no-img-element
-
-                          <img
-
-                            src={member.image}
-
-                            alt={member.name}
-
-                            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-
-                          />
-
-                        ) : (
-
-                          <Image
-
-                            src={member.image}
-
-                            alt={member.name}
-
-                            fill
-
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
-
-                            sizes="(max-width: 768px) 75vw, 300px"
-
-                          />
-
-                        )
-
-                      ) : (
-
-                        <div className="flex h-full w-full items-center justify-center bg-slate-100 text-sm text-slate-400">
-
-                          No photo
-
-                        </div>
-
-                      )}
-
-                      <div className="absolute bottom-3 left-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-xl text-center shadow-lg transition-all duration-300">
-
-                        <h3 className="text-white font-semibold text-[15px] leading-tight">{member.name}</h3>
-
-                        <p className="text-gray-200 text-[12px] font-medium">{member.role}</p>
-
-                      </div>
-
-                    </div>
-
-                  ))}
-
-                </div>
-
-              ))}
-
-            </motion.div>
-
-          </div>
-
-        ) : (
-
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
-
-            <div className="flex sm:grid flex-nowrap overflow-x-auto sm:overflow-x-visible pb-6 sm:pb-0 sm:grid-cols-2 lg:grid-cols-4 gap-5 snap-x snap-mandatory [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden px-1">
-
-              {members.map((member) => (
-                <div
-                  key={member.employee_id || member.name}
-
-                  className="relative overflow-hidden group bg-black/5 rounded-2xl aspect-4/5 min-w-[75vw] sm:min-w-0 shrink-0 snap-center"
-
-                >
-
-                  {member.image ? (
-
-                    isExternalImage(member.image) ? (
-
-                      // eslint-disable-next-line @next/next/no-img-element
-
-                      <img
-
-                        src={member.image}
-
-                        alt={member.name}
-
-                        className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-
+              <EdgeFades />
+              <motion.div
+                className="flex w-max"
+                animate={
+                  reduceMotion
+                    ? undefined
+                    : { x: direction === "left" ? ["0%", "-25%"] : ["-25%", "0%"] }
+                }
+                transition={
+                  reduceMotion
+                    ? undefined
+                    : {
+                        repeat: Infinity,
+                        ease: "linear",
+                        duration: members.length * 4.5,
+                      }
+                }
+                style={{ willChange: reduceMotion ? undefined : "transform" }}
+              >
+                {[...Array(4)].map((_, i) => (
+                  <div key={i} className="flex gap-5 pr-5">
+                    {members.map((member) => (
+                      <MemberCard
+                        key={`${member.employee_id || member.name}-${i}`}
+                        member={member}
+                        className="w-[75vw] sm:w-[260px] lg:w-[280px]"
                       />
-
-                    ) : (
-
-                      <Image
-
-                        src={member.image}
-
-                        alt={member.name}
-
-                        fill
-
-                        className="object-cover transition-transform duration-500 group-hover:scale-105"
-
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-
-                      />
-
-                    )
-
-                  ) : (
-
-                    <div className="flex h-full w-full items-center justify-center bg-slate-100 text-sm text-slate-400">
-
-                      No photo
-
-                    </div>
-
-                  )}
-
-                  <div className="absolute bottom-3 left-3 right-3 bg-white/10 backdrop-blur-md border border-white/20 p-3 rounded-xl text-center shadow-lg transition-all duration-300">
-
-                    <h3 className="text-white font-semibold text-[15px] leading-tight">{member.name}</h3>
-
-                    <p className="text-gray-200 text-[12px] font-medium">{member.role}</p>
-
+                    ))}
                   </div>
-
-                </div>
-
-              ))}
-
+                ))}
+              </motion.div>
             </div>
+          ) : (
+            <div
+              className="relative overflow-hidden rounded-xl sm:[mask-image:none] sm:[-webkit-mask-image:none]"
+              style={EDGE_FADE_MASK}
+            >
+              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 bg-gradient-to-r from-background via-background/40 to-transparent sm:hidden" aria-hidden />
+              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-5 bg-gradient-to-l from-background via-background/40 to-transparent sm:hidden" aria-hidden />
 
-          </div>
-
-        )}
-
+              <div className="flex snap-x snap-mandatory flex-nowrap gap-5 overflow-x-auto pb-6 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0 lg:grid-cols-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                {members.map((member) => (
+                  <MemberCard
+                    key={member.employee_id || member.name}
+                    member={member}
+                    className="min-w-[75vw] snap-center sm:min-w-0"
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
       </div>
-
     );
-
   };
-
-
 
   const openingsList = openings.map((job) => ({
     title: job.title,
@@ -349,16 +204,13 @@ export default function Team() {
     aboutPreview: job.about_preview || "",
   }));
 
-
-
   const normalizedGroups =
-
     teamGroups.length > 0
-
       ? teamGroups.map((group) => ({
           team_group: group.team_group,
           title: group.title || GROUP_META[group.team_group]?.title || group.team_group,
-          direction: group.slide_direction || GROUP_META[group.team_group]?.direction || "left",
+          direction:
+            group.slide_direction || GROUP_META[group.team_group]?.direction || "left",
           members: (group.members || []).map((member) => ({
             employee_id: member.employee_id,
             name: member.name,
@@ -366,166 +218,94 @@ export default function Team() {
             image: member.image,
           })),
         }))
-
       : [];
 
-
-
   const sectionMotion = reduceMotion
-
     ? {}
-
     : {
-
-      initial: { opacity: 0, y: 36 },
-
-      whileInView: { opacity: 1, y: 0 },
-
-      viewport: { once: true, amount: 0.2 },
-
-      transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-
-    };
-
-
-
-  const cardMotion = (index) =>
-
-    reduceMotion
-
-      ? {}
-
-      : {
-
-        initial: { opacity: 0, y: 40 },
-
+        initial: { opacity: 0, y: 36 },
         whileInView: { opacity: 1, y: 0 },
-
         viewport: { once: true, amount: 0.2 },
-
-        transition: {
-
-          duration: 0.65,
-
-          delay: index * 0.08,
-
-          ease: [0.22, 1, 0.36, 1],
-
-        },
-
+        transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
       };
 
-
+  const cardMotion = (index) =>
+    reduceMotion
+      ? {}
+      : {
+          initial: { opacity: 0, y: 40 },
+          whileInView: { opacity: 1, y: 0 },
+          viewport: { once: true, amount: 0.2 },
+          transition: {
+            duration: 0.65,
+            delay: index * 0.08,
+            ease: [0.22, 1, 0.36, 1],
+          },
+        };
 
   return (
-
-    <section className="py-10 bg-background min-h-[calc(100vh-70px)] flex flex-col justify-center overflow-hidden">
-
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
-
-        <motion.div className="mt-12 mb-10 md:mt-20" {...sectionMotion}>
-
-          <h2 className="text-2xl md:text-5xl font-medium mb-4 text-foreground">
-
-            <span className="text-brand-primary">Meet</span> our <span className="text-brand-primary">Team</span>
-
+    <section className="flex min-h-[calc(100vh-70px)] flex-col justify-center overflow-x-hidden bg-background py-10">
+      <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
+        <motion.div className="mb-10 mt-12 md:mt-20" {...sectionMotion}>
+          <h2 className="mb-4 text-2xl font-medium text-foreground md:text-5xl">
+            <span className="text-brand-primary">Meet</span> our{" "}
+            <span className="text-brand-primary">Team</span>
           </h2>
-
-          <p className="text-muted-foreground max-w-md text-[15px] sm:text-[16px] leading-[1.8] font-normal mb-12">
-
+          <p className="mb-12 max-w-md text-[15px] font-normal leading-[1.8] text-muted-foreground sm:text-[16px]">
             Be part of a culture that values creativity, collaboration, and innovation.
-
           </p>
-
         </motion.div>
-
       </div>
 
-
-
-      <motion.div className="w-full flex flex-col gap-16 md:gap-24 mb-34" {...sectionMotion}>
-
+      <motion.div className="mb-34 flex w-full flex-col gap-16 md:gap-24" {...sectionMotion}>
         {teamsLoading ? (
-
-          <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
-
+          <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
             <p className="text-sm text-muted-foreground">Loading team...</p>
-
           </div>
-
         ) : normalizedGroups.length === 0 ? null : (
           normalizedGroups.map((group) => renderTeamGroup(group))
         )}
-
       </motion.div>
 
-
-
-      <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
-
+      <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
         <motion.div className="pb-10" {...sectionMotion}>
-
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-foreground">Our current openings</h2>
+          <h2 className="mb-8 text-3xl font-bold text-foreground md:text-4xl">
+            Our current openings
+          </h2>
 
           {openingsLoading ? (
-
             <p className="text-sm text-muted-foreground">Loading openings...</p>
-
           ) : openingsList.length === 0 ? (
-
-            <p className="text-sm text-muted-foreground">No open positions right now. Check back soon.</p>
-
+            <p className="text-sm text-muted-foreground">
+              No open positions right now. Check back soon.
+            </p>
           ) : (
-
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-7">
-
+            <div className="grid grid-cols-1 gap-7 md:grid-cols-2">
               {openingsList.map((job, index) => (
-
                 <Link href={`/careers/${job.slug}`} key={`${job.slug}-${index}`}>
-
                   <motion.div
-
-                    className="p-5 rounded-2xl border border-gray-100 bg-white shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] hover:shadow-lg transition-shadow cursor-pointer flex flex-col justify-between min-h-[180px]"
-
+                    className="flex min-h-[180px] cursor-pointer flex-col justify-between rounded-2xl border border-gray-100 bg-white p-5 shadow-[0_2px_15px_-3px_rgba(0,0,0,0.07),0_10px_20px_-2px_rgba(0,0,0,0.04)] transition-shadow hover:shadow-lg"
                     {...cardMotion(index + 1)}
-
                   >
-
-                    <div className="flex justify-between items-start gap-3">
-
-                      <h3 className="text-lg md:text-xl font-bold text-foreground">{job.title}</h3>
-
-                      <Plus className="w-5 h-5 text-foreground shrink-0" strokeWidth={2} />
-
+                    <div className="flex items-start justify-between gap-3">
+                      <h3 className="text-lg font-bold text-foreground md:text-xl">{job.title}</h3>
+                      <Plus className="h-5 w-5 shrink-0 text-foreground" strokeWidth={2} />
                     </div>
-
                     {job.aboutPreview ? (
-                      <p className="text-gray-600 text-sm leading-relaxed mt-4 line-clamp-3">
+                      <p className="mt-4 line-clamp-3 text-sm leading-relaxed text-gray-600">
                         {job.aboutPreview}
                       </p>
                     ) : null}
-
-                    <p className="text-gray-500 text-xs font-semibold uppercase tracking-wide mt-4">
+                    <p className="mt-4 text-xs font-semibold uppercase tracking-wide text-gray-500">
                       {job.jobType}
                     </p>
-
                   </motion.div>
-
                 </Link>
-
               ))}
-
             </div>
-
           )}
-
         </motion.div>
-
       </div>
-
     </section>
-
   );
-
 }
-

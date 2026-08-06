@@ -22,7 +22,7 @@ export default function DownloadCTASection() {
     >
 
       {/* ── Content ── */}
-      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-14">
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-14 sm:px-6 lg:px-20 lg:py-30">
         <div className="flex flex-col items-center gap-10 lg:flex-row lg:items-center lg:justify-between">
 
           {/* ── Left: copy ── */}

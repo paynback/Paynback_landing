@@ -72,7 +72,7 @@ export default function EnrollSection() {
       className="w-full bg-white font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-6 py-16 sm:px-6 lg:px-20 lg:py-20">
+      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-6 lg:px-20 lg:py-30">
         <div className="mx-auto max-w-xl">
           <h2 className="mb-3 text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl">
             <span className="text-(--brand-primary)">Enroll</span>
