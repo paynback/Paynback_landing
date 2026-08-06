@@ -92,8 +92,14 @@ export default function JobDetailClient({ slug }) {
     payload.append("address", currentForm.address.trim());
     payload.append("years_of_experience", String(years));
     payload.append("currently_working", isWorking ? "true" : "false");
-    payload.append("current_company", currentForm.current_company.trim());
-    payload.append("notice_period", currentForm.notice_period.trim());
+    payload.append(
+      "current_company",
+      isWorking ? currentForm.current_company.trim() : "",
+    );
+    payload.append(
+      "notice_period",
+      isWorking ? currentForm.notice_period.trim() : "",
+    );
     payload.append("resume", currentResume);
 
     await submitCareerApplication(currentSlug, payload);
@@ -164,8 +170,8 @@ export default function JobDetailClient({ slug }) {
       !form.address.trim() ||
       form.years_of_experience === "" ||
       !form.currently_working ||
-      !form.current_company.trim() ||
-      !form.notice_period.trim()
+      (form.currently_working === "yes" &&
+        (!form.current_company.trim() || !form.notice_period.trim()))
     ) {
       setSubmitError("Please fill all required fields.");
       return;
@@ -352,6 +358,9 @@ export default function JobDetailClient({ slug }) {
                       setForm((f) => ({
                         ...f,
                         currently_working: e.target.value,
+                        ...(e.target.value !== "yes"
+                          ? { current_company: "", notice_period: "" }
+                          : null),
                       }))
                     }
                     className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
@@ -364,40 +373,40 @@ export default function JobDetailClient({ slug }) {
                   </select>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">
-                      {form.currently_working === "yes" ? "Company name*" : "Last company / employer*"}
-                    </label>
-                    <input
-                      type="text"
-                      required
-                      value={form.current_company}
-                      onChange={(e) => setForm((f) => ({ ...f, current_company: e.target.value }))}
-                      placeholder={
-                        form.currently_working === "yes"
-                          ? "Current company"
-                          : "Previous company or N/A if not applicable"
-                      }
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
-                    />
+                {form.currently_working === "yes" ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">
+                        Last company*
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={form.current_company}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, current_company: e.target.value }))
+                        }
+                        placeholder="Current / last company name"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">
+                        Notice period*
+                      </label>
+                      <input
+                        type="text"
+                        required
+                        value={form.notice_period}
+                        onChange={(e) =>
+                          setForm((f) => ({ ...f, notice_period: e.target.value }))
+                        }
+                        placeholder="e.g. 30 days, Immediate"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
                   </div>
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">Notice period*</label>
-                    <input
-                      type="text"
-                      required
-                      value={form.notice_period}
-                      onChange={(e) => setForm((f) => ({ ...f, notice_period: e.target.value }))}
-                      placeholder={
-                        form.currently_working === "yes"
-                          ? "e.g. 30 days, Immediate"
-                          : "e.g. Immediate, Not applicable"
-                      }
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
-                    />
-                  </div>
-                </div>
+                ) : null}
 
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">Resume upload*</label>
