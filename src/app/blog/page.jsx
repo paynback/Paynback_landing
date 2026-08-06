@@ -12,7 +12,7 @@ export default function BlogPage() {
       <ScrollReveal> {/**scroll reveal */} 
         <BlogHero />
       </ScrollReveal>
-      <ScrollReveal delay={100}> {/**scroll reveal */} 
+      <ScrollReveal delay={100}> {/**scroll reveal */}
         <BlogList />
       </ScrollReveal>
     </main>

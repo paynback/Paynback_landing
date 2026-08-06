@@ -14,15 +14,21 @@ export const metadata = {
   description: "PayNback connects users with nearby merchants offering exclusive discounts, cashback and rewards.",
 };
 
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
+
 export default function RootLayout({ children }) {
   return (
     <html
       lang="en"
       className={`${poppins.variable} antialiased`}
     >
-      <body className='flex min-h-screen flex-col'>
+      <body className='flex min-h-screen min-h-dvh flex-col'>
    
-        <SmoothScroll delay={100}>
+        <SmoothScroll>
           <Header />
           {children}
           <Footer />

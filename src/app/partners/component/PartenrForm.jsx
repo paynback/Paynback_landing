@@ -54,7 +54,7 @@ const CustomSelect = ({ options, value, onChange, placeholder, disabled, error }
             </select>
 
             <div
-                className={`w-full px-4 py-3 rounded-lg border text-sm bg-white flex justify-between items-center transition-colors ${disabled
+                className={`w-full px-4 py-3 rounded-lg border text-base md:text-sm bg-white flex justify-between items-center transition-colors ${disabled
                         ? 'opacity-50 cursor-not-allowed bg-gray-50 border-gray-200'
                         : error
                             ? 'border-red-500 focus:border-red-500 focus:ring-red-500 cursor-pointer'
@@ -270,7 +270,7 @@ export default function PartenrForm() {
 
     // Helper for input classes
     const getInputCls = (error) =>
-        `w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-sm ${error
+        `w-full px-4 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors placeholder-gray-400 text-base md:text-sm ${error
             ? "border-red-500 focus:border-red-500 focus:ring-red-500"
             : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
         }`;

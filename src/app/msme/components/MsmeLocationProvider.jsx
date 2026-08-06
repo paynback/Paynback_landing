@@ -100,7 +100,7 @@ export default function MsmeLocationProvider({ children }) {
   }, [refreshShops])
 
   const enableLocation = useCallback(async () => {
-    if (typeof window === 'undefined' || inFlightRef.current) return
+    if (typeof window === 'undefined' || inFlightRef.current) return null
     inFlightRef.current = true
     ++loadSeqRef.current
     setIsEnablingLocation(true)
@@ -109,12 +109,13 @@ export default function MsmeLocationProvider({ children }) {
       const coords = await getCurrentUserCoordinates()
       if (!coords) {
         setShopsLoading(false)
-        return
+        return null
       }
 
       setSessionCoords(coords)
       await refreshShops(coords)
       persistUserLocation(coords)
+      return coords
     } finally {
       setIsEnablingLocation(false)
       inFlightRef.current = false

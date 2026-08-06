@@ -64,7 +64,11 @@ export default function WhyChooseSection() {
     if (!carouselRef.current) return;
     const scrollLeft = carouselRef.current.scrollLeft;
     const width = carouselRef.current.clientWidth;
-    const index = Math.round(scrollLeft / width);
+    if (!width) return;
+    const index = Math.max(
+      0,
+      Math.min(REASONS.length - 1, Math.round(scrollLeft / width))
+    );
     if (index !== active) {
       setActive(index);
     }
@@ -386,14 +390,27 @@ export default function WhyChooseSection() {
         .why-dot {
           width: 8px;
           height: 8px;
-          border-radius: 50%;
-          background: #cbd5e1;
+          min-width: 44px;
+          min-height: 44px;
+          border-radius: 999px;
+          background: transparent;
           border: none;
           padding: 0;
           cursor: pointer;
           transition: background 0.3s;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
         }
-        .why-dot--active {
+        .why-dot::after {
+          content: '';
+          width: 8px;
+          height: 8px;
+          border-radius: 50%;
+          background: #cbd5e1;
+          transition: background 0.3s;
+        }
+        .why-dot--active::after {
           background: #0964BC;
         }
 

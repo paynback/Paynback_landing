@@ -72,6 +72,30 @@ export default function Header({
     setMounted(true);
   }, []);
 
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const scrollY = window.scrollY;
+    const { style } = document.body;
+    const previousOverflow = style.overflow;
+    const previousPosition = style.position;
+    const previousTop = style.top;
+    const previousWidth = style.width;
+
+    style.overflow = "hidden";
+    style.position = "fixed";
+    style.top = `-${scrollY}px`;
+    style.width = "100%";
+
+    return () => {
+      style.overflow = previousOverflow;
+      style.position = previousPosition;
+      style.top = previousTop;
+      style.width = previousWidth;
+      window.scrollTo(0, scrollY);
+    };
+  }, [mobileMenuOpen]);
+
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 30);
   });
@@ -90,7 +114,7 @@ export default function Header({
         <>
           <div
             className={cn(
-              "fixed left-0 right-0 top-0 z-990 flex justify-center w-full transition-all duration-500 ease-in-out pointer-events-none",
+              "fixed left-0 right-0 top-0 z-990 flex justify-center w-full transition-all duration-500 ease-in-out pointer-events-none pt-[env(safe-area-inset-top)]",
               isScrolled ? "pt-4 sm:pt-6" : "pt-0"
             )}
           >
@@ -107,7 +131,7 @@ export default function Header({
                 "flex flex-col gap-3 transition-all duration-500 pointer-events-auto",
                 isScrolled
                   ? cn(
-                    "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl backdrop-blur-xl py-2 sm:py-2.5 px-6 sm:px-6 rounded-full",
+                    "w-[92%] sm:w-[85%] lg:w-[70%] max-w-4xl md:backdrop-blur-xl py-2 sm:py-2.5 px-6 sm:px-6 rounded-full",
                     useWhiteNavbar
                       ? "bg-white/95 border border-black/10 shadow-[0_10px_30px_rgba(15,23,42,0.16)]"
                       : "bg-black/60 shadow-[0_8px_32px_rgba(0,0,0,0.5)] border border-white/10"
@@ -176,11 +200,11 @@ export default function Header({
                   {/* Mobile hamburger */}
                   <button
                     className={cn(
-                      "flex items-center justify-center backdrop-blur-sm lg:hidden transition-all duration-500",
+                      "flex min-h-11 min-w-11 items-center justify-center backdrop-blur-sm lg:hidden transition-all duration-500",
                       useWhiteNavbar
                         ? "bg-black/5 text-black hover:bg-black/10 border border-black/10"
                         : "bg-white/10 text-white hover:bg-white/20",
-                      isScrolled ? "h-8 w-8 rounded-lg" : "h-10 w-10 rounded-lg"
+                      isScrolled ? "h-11 w-11 rounded-lg" : "h-11 w-11 rounded-lg"
                     )}
                     onClick={() => setMobileMenuOpen(true)}
                     aria-label="Toggle navigation menu"
@@ -200,13 +224,13 @@ export default function Header({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="fixed inset-0 z-1000 bg-white flex flex-col pointer-events-auto min-h-screen w-full lg:hidden"
+                className="fixed inset-0 z-1000 bg-white flex flex-col pointer-events-auto min-h-dvh w-full lg:hidden overscroll-contain pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
               >
                 <div className="flex justify-between items-center p-6 sm:p-8">
                   <div className="w-8" /> {/* spacer for flex balance if needed, or leave empty */}
                   <button
                     onClick={() => setMobileMenuOpen(false)}
-                    className="p-2 transition-opacity hover:opacity-70"
+                    className="flex min-h-11 min-w-11 items-center justify-center p-2 transition-opacity hover:opacity-70"
                     aria-label="Close menu"
                   >
                     <X className="h-8 w-8 text-black" strokeWidth={2.5} />

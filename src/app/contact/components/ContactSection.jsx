@@ -99,7 +99,7 @@ export default function ContactSection() {
                   id="firstName"
                   placeholder="Enter your first name"
                   {...register("firstName")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.firstName
+                  className={`w-full rounded-lg border px-4 py-3.5 text-base md:text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.firstName
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -121,7 +121,7 @@ export default function ContactSection() {
                   id="lastName"
                   placeholder="Enter your last name"
                   {...register("lastName")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.lastName
+                  className={`w-full rounded-lg border px-4 py-3.5 text-base md:text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.lastName
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -143,7 +143,7 @@ export default function ContactSection() {
                   id="email"
                   placeholder="Enter your e-mail id"
                   {...register("email")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.email
+                  className={`w-full rounded-lg border px-4 py-3.5 text-base md:text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.email
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -165,7 +165,7 @@ export default function ContactSection() {
                   id="phone"
                   placeholder="Enter your mobile number"
                   {...register("phone")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.phone
+                  className={`w-full rounded-lg border px-4 py-3.5 text-base md:text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors ${errors.phone
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}
@@ -190,7 +190,7 @@ export default function ContactSection() {
                   rows={4}
                   placeholder="Enter your message"
                   {...register("message")}
-                  className={`w-full rounded-lg border px-4 py-3.5 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors resize-none ${errors.message
+                  className={`w-full rounded-lg border px-4 py-3.5 text-base md:text-sm placeholder:text-gray-400 focus:outline-none focus:ring-1 transition-colors resize-none ${errors.message
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)"
                     }`}

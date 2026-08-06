@@ -46,7 +46,7 @@ export default function Founders() {
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_90%_70%_at_50%_50%,transparent_42%,rgba(0,0,0,0.42)_100%)]" />
             </div>
 
-            <div className="relative z-10 mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8 lg:py-32">
+            <div className="relative z-10 mx-auto w-full max-w-7xl px-6 py-20 sm:px-6 lg:px-20 lg:py-32">
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
 
                     {/* ── Left Content ── */}
@@ -69,7 +69,7 @@ export default function Founders() {
                     <div className="relative w-full flex justify-center lg:justify-end lg:col-span-5 mt-10 lg:mt-0">
 
                         {/* Main Image Box */}
-                        <div className="relative w-full max-w-[405px] h-auto aspect-405/514 bg-black rounded-[16px] shadow-2xl z-20 overflow-hidden">
+                        <div className="relative w-full max-w-101.25 h-auto aspect-405/514 bg-black rounded-[16px] shadow-2xl z-20 overflow-hidden">
                             {foundersData.map((founder, index) => (
                                 <div
                                     key={index}
@@ -99,7 +99,7 @@ export default function Founders() {
                         </div>
 
                         {/* Rotating SVG Curved Text placed behind bottom-right corner */}
-                        <div className="absolute -bottom-[60px] lg:-right-[40px] -right-[20px] w-[140px] h-[140px] lg:w-[160px] lg:h-[160px] animate-[spin_14s_linear_infinite] pointer-events-none z-10 opacity-90 drop-shadow-md">
+                        <div className="absolute -bottom-15 lg:-right-10 -right-5 w-35 h-35 lg:w-40 lg:h-40 animate-[spin_14s_linear_infinite] pointer-events-none z-10 opacity-90 drop-shadow-md">
                             <svg viewBox="0 0 100 100" className="w-full h-full text-white fill-current">
                                 {/* Internal circle path (m = move, a = arc) */}
                                 <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="transparent" />

@@ -97,7 +97,7 @@ export default function EnrollSection() {
                 autoComplete="tel"
                 placeholder="Enter your 10-digit mobile number"
                 maxLength={10}
-                className={`w-full rounded-lg border px-4 py-3 text-sm text-slate-900 outline-none transition-colors placeholder:text-gray-400 focus:ring-2 ${
+                className={`w-full rounded-lg border px-4 py-3 text-base md:text-sm text-slate-900 outline-none transition-colors placeholder:text-gray-400 focus:ring-2 ${
                   errors.phone
                     ? "border-red-500 focus:border-red-500 focus:ring-red-500/20"
                     : "border-gray-200 focus:border-(--brand-primary) focus:ring-(--brand-primary)/20"
@@ -110,10 +110,10 @@ export default function EnrollSection() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <label className="flex items-start gap-3 text-sm leading-relaxed text-slate-600">
+              <label className="flex min-h-11 items-start gap-3 text-sm leading-relaxed text-slate-600">
                 <input
                   type="checkbox"
-                  className="mt-1 h-4 w-4 shrink-0 rounded border-gray-300"
+                  className="mt-1 h-5 w-5 shrink-0 rounded border-gray-300"
                   {...register("consent")}
                 />
                 <span>

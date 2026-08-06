@@ -31,7 +31,7 @@ export default function NotFound() {
   }, []);
 
   return (
-    <main className="fixed inset-0 z-[9999] isolate overflow-hidden font-sans text-white flex h-screen w-screen flex-col items-center justify-center bg-black px-6 py-20 lg:flex-row lg:justify-between lg:px-24 xl:px-32">
+    <main className="fixed inset-0 z-[9999] isolate overflow-y-auto font-sans text-white flex min-h-screen min-h-dvh w-full flex-col items-center justify-center bg-black px-6 py-20 lg:flex-row lg:justify-between lg:px-24 xl:px-32">
       
       {/* Atmospheric gradient base (blob lights) */}
       <div
