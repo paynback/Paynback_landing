@@ -6,16 +6,24 @@ All environment variables use the `NEXT_PUBLIC_` prefix, making them available i
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | Production | `https://paynback.com` | Canonical site origin (no trailing slash); used for metadataBase, sitemap, robots, OG |
 | `NEXT_PUBLIC_SERVER_BASE_URL` | No | `http://localhost:3001` | PayNback backend API base URL |
+| `NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION` | No | — | Google Search Console content verification meta |
+| `NEXT_PUBLIC_BING_SITE_VERIFICATION` | No | — | Bing Webmaster `msvalidate.01` value |
+| `NEXT_PUBLIC_GA_MEASUREMENT_ID` | No | — | Optional Google Analytics 4 ID (`G-…`) |
 | `NEXT_PUBLIC_GOOGLE_MAPS_API_KEY` | For map | — | Google Maps JavaScript API key |
 | `NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID` | No | `DEMO_MAP_ID` | Google Maps custom map style ID |
 
 ### Example `.env` file
 
 ```env
+NEXT_PUBLIC_SITE_URL=https://paynback.com
 NEXT_PUBLIC_SERVER_BASE_URL=https://api.paynback.com
 NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=your_google_maps_key
 NEXT_PUBLIC_GOOGLE_MAPS_MAP_ID=your_map_id
+# NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION=
+# NEXT_PUBLIC_BING_SITE_VERIFICATION=
+# NEXT_PUBLIC_GA_MEASUREMENT_ID=
 ```
 
 > **Security note:** Only `NEXT_PUBLIC_*` variables are embedded in the client bundle. Never put secrets (API secrets, database URLs) in `NEXT_PUBLIC_` variables.
@@ -33,7 +41,10 @@ const nextConfig = {
       { protocol: "https", hostname: "images.unsplash.com" },
       { protocol: "https", hostname: "**.amazonaws.com" },
     ],
-    minimumCacheTTL: 0,
+    minimumCacheTTL: 60 * 60 * 24,
+  },
+  async redirects() {
+    return [{ source: "/home2", destination: "/", permanent: true }];
   },
   devIndicators: {
     appIsrStatus: false,

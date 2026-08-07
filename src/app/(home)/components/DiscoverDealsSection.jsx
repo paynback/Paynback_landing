@@ -6,6 +6,7 @@ import { Clock, Sparkles } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { fetchPublicOffers } from "@/lib/offerService";
+import EdgeFade from "@/components/ui/EdgeFade";
 
 /*
  * ARCHIVED — hardcoded homepage deals (replaced by API: fetchPublicOffers).
@@ -335,7 +336,10 @@ export default function DiscoverDealsSection() {
           ) : offers.length === 0 ? (
             <p className="text-center text-sm text-slate-500">No offers available right now.</p>
           ) : useMarquee ? (
-            <div className="flex w-full overflow-hidden relative group/marquee">
+            <EdgeFade
+              className="group/marquee w-full"
+              fadeColor="#F2F2F2"
+            >
               <motion.div
                 className="flex w-max gap-6 sm:gap-7 md:gap-8 lg:gap-10"
                 animate={{ x: ["0%", "-25%"] }}
@@ -354,20 +358,22 @@ export default function DiscoverDealsSection() {
                   </div>
                 ))}
               </motion.div>
-            </div>
+            </EdgeFade>
           ) : (
-            <div
-              className="
-                flex gap-6 overflow-x-auto snap-x snap-mandatory
-                sm:gap-7 md:grid md:grid-cols-2 md:justify-items-stretch md:gap-8 md:overflow-visible
-                lg:grid-cols-3 lg:gap-10
-                [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-              "
-            >
-              {offers.map((offer) => (
-                <DealCardSlide key={offer.offer_id} offer={offer} />
-              ))}
-            </div>
+            <EdgeFade fadeColor="#F2F2F2" mode="scroll-until-md">
+              <div
+                className="
+                  flex gap-6 overflow-x-auto snap-x snap-mandatory
+                  sm:gap-7 md:grid md:grid-cols-2 md:justify-items-stretch md:gap-8 md:overflow-visible
+                  lg:grid-cols-3 lg:gap-10
+                  [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+                "
+              >
+                {offers.map((offer) => (
+                  <DealCardSlide key={offer.offer_id} offer={offer} />
+                ))}
+              </div>
+            </EdgeFade>
           )}
         </div>
       </div>

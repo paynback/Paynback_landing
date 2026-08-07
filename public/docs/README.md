@@ -14,6 +14,7 @@ Official technical documentation for the **PayNback Landing** website (`Paynback
 | [Configuration](./08-configuration.md) | Environment variables, Next.js, ESLint, and tooling |
 | [Development & Deployment](./09-development-and-deployment.md) | Local setup, scripts, build, and release |
 | [Performance & iOS Notes](./10-performance-and-ios.md) | Known Safari/iOS issues and improvement areas |
+| [SEO release checklist](./12-seo-release-checklist.md) | Pre/post release SEO verification |
 
 ---
 

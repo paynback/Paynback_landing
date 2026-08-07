@@ -4,12 +4,12 @@
 
 | URL | Page file | Type | Description |
 |-----|-----------|------|-------------|
-| `/` | `(home)/page.jsx` | Static + client sections | Main homepage |
+| `/` | `(home)/page.jsx` | Static + client sections | Main homepage (+ FAQPage JSON-LD) |
 | `/about` | `about/page.jsx` | Static + client sections | About Us, founders, activities |
 | `/blog` | `blog/page.jsx` | SSR (API fetch) | Blog listing |
-| `/blog/[slug]` | `blog/[slug]/page.jsx` | SSR (API fetch) | Individual blog post |
+| `/blog/[slug]` | `blog/[slug]/page.jsx` | SSR metadata + client body | Article + BlogPosting JSON-LD |
 | `/careers` | `careers/page.jsx` | SSR (API fetch) | Job listings + team |
-| `/careers/[slug]` | `careers/[slug]/page.jsx` | SSR + client form | Job detail + application |
+| `/careers/[slug]` | `careers/[slug]/page.jsx` | SSR metadata + client form | Job detail + JobPosting JSON-LD |
 | `/contact` | `contact/page.jsx` | Static + client form | Contact form + map |
 | `/partners` | `partners/page.jsx` | Static + client form | Partner lead form |
 | `/msme` | `msme/page.jsx` | Client wrapper | MSME merchant onboarding |
@@ -17,8 +17,15 @@
 | `/terms` | `(guidelines)/terms/page.jsx` | Static content | Terms & Conditions |
 | `/privacy` | `(guidelines)/privacy/page.jsx` | Static content | Privacy Policy |
 | `/merchant-terms` | `(guidelines)/merchant-terms/page.jsx` | Static content | Merchant Terms |
-| `/home2` | `home2/page.jsx` | Legacy alternate | Old landing page design |
+| `/home2` | — | Removed | Permanent redirect → `/` |
 | `*` (404) | `not-found.jsx` | Client | Custom 404 with animation |
+
+## SEO endpoints
+
+| URL | Generator |
+|-----|-----------|
+| `/robots.txt` | `app/robots.js` |
+| `/sitemap.xml` | `app/sitemap.js` (static routes + blogs + careers from API) |
 
 ## Navigation links
 
@@ -31,10 +38,11 @@ const headerNavItems = [
   { href: "/blog", label: "Blogs" },
   { href: "/careers", label: "Careers" },
   { href: "/msme", label: "For MSME" },
+  { href: "/partners", label: "Partners" },
 ];
 ```
 
-Footer adds: Contact, Partners, Jammy, legal links, social media.
+Footer (`Footer.jsx`) includes: About, Blogs, Careers, MSME, Partners, Jammy, Contact, legal links, social media.
 
 ---
 
@@ -54,10 +62,10 @@ Footer adds: Contact, Partners, Jammy, legal links, social media.
 | 6 | `WhyChooseSection` | ScrollReveal | Static |
 | 7 | `DownloadCTASection` | ScrollReveal | Static |
 | 8 | `BlogsSection` | ScrollReveal | API: blogs |
-| 9 | `FAQSection` | ScrollReveal | Static (accordion) |
+| 9 | `FAQSection` | ScrollReveal | Static (`src/data/homeFaqs.js`) |
 | 10 | `EnrollSection` | ScrollReveal | Form → API |
 
-`TestimonialsSection` is commented out.
+`TestimonialsSection` is commented out when disabled.
 
 ### About (`/about`)
 
@@ -72,14 +80,15 @@ Footer adds: Contact, Partners, Jammy, legal links, social media.
 
 ### Blog (`/blog`, `/blog/[slug]`)
 
-- **Listing:** Server-fetches published blogs via `fetchPublishedBlogs()`
-- **Detail:** Server-fetches by slug via `fetchPublishedBlogBySlug(slug)`
-- Client component `BlogDetailClient.jsx` renders rich content
+- **Listing:** Client/API via `fetchPublishedBlogs()`
+- **Detail:** Server `generateMetadata` + client `BlogDetailClient.jsx`
+- Structured data: BlogPosting + BreadcrumbList
 
 ### Careers (`/careers`, `/careers/[slug]`)
 
-- **Listing:** Fetches jobs via `fetchPublicCareers()` and team via `fetchPublicEmployerGroups()`
-- **Detail:** `JobDetailClient.jsx` — application form with file upload (multipart)
+- **Listing:** Jobs via `fetchPublicCareers()` and team via `fetchPublicEmployerGroups()`
+- **Detail:** Server `generateMetadata` + `JobDetailClient.jsx` application form
+- Structured data: JobPosting + BreadcrumbList
 
 ### Contact (`/contact`)
 
@@ -90,30 +99,24 @@ Footer adds: Contact, Partners, Jammy, legal links, social media.
 
 - Hero + partner lead form (`PartenrForm.jsx`)
 - Custom dropdowns for State / District / Block Panchayat
-- Location data from `public/assets/*.csv` and `location_data.json`
 
 ### MSME (`/msme`)
 
 - Client-only page (`MsmePageClient.jsx`)
 - Hero, merchant form, nearby shops carousel
-- Geolocation via `MsmeLocationProvider` + `GeolocationProvider`
-- Categories/shops from merchant API
 
 ### Jammy (`/jammy`)
 
-- Brand mascot story page
-- `JammyHero` + `JammyStory` components
+- Brand mascot story page (`JammyHero` + `JammyStory`)
 
 ### Legal pages (`/terms`, `/privacy`, `/merchant-terms`)
 
 - Shared dark layout with sticky sidebar (`GuidelinesSidebar`)
-- Static legal content in page files
 - Footer is hidden on guideline routes
 
 ### 404 (`not-found.jsx`)
 
 - Full-screen animated space theme
-- Fixed `h-screen` layout with stars animation
 
 ---
 
@@ -121,42 +124,24 @@ Footer adds: Contact, Partners, Jammy, legal links, social media.
 
 ### Root layout (`src/app/layout.jsx`)
 
-Applies to all routes:
-
-```jsx
-<html>
-  <body>
-    <SmoothScroll>
-      <Header />
-      {children}
-      <Footer />
-    </SmoothScroll>
-  </body>
-</html>
-```
+- Global metadataBase, title template, OG defaults
+- Organization + WebSite JSON-LD
+- Optional GA4 via `Analytics`
+- Header / Footer / SmoothScroll
 
 ### Guidelines layout (`src/app/(guidelines)/layout.jsx`)
 
-- Dark background with blurred gradient orbs
-- Two-column grid: sidebar + content
-- Client component
+- Dark background with sidebar + content grid
 
 ---
 
 ## Metadata
 
-Pages export Next.js `metadata` objects for SEO:
+Shared helper: `src/lib/seo.js` → `buildMetadata({ title, description, path, image, … })`
 
-```javascript
-export const metadata = {
-  title: "About Us - PayNback",
-  description: "Vision & Mission of PayNback",
-};
-```
+Includes canonical, Open Graph, Twitter, and robots. Title template on root: `%s | PayNback`.
 
-Root default title: *"PayNback — India's first in-store shopping reward app"*
-
-Dynamic metadata is set in `[slug]` pages based on fetched content.
+Dynamic metadata on blog/job slug pages from API content.
 
 ## Dynamic routes
 
@@ -164,5 +149,3 @@ Dynamic metadata is set in `[slug]` pages based on fetched content.
 |---------|-------|---------|
 | `/blog/[slug]` | `slug` | `/blog/paynback-upi-rewards` |
 | `/careers/[slug]` | `slug` | `/careers/frontend-developer` |
-
-Slug pages use `generateStaticParams` or dynamic rendering depending on build configuration.

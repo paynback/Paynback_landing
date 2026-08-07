@@ -7,11 +7,42 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { fetchPublicCareers } from "@/lib/careerService";
 import { fetchPublicEmployerGroups } from "@/lib/employeeService";
+import EdgeFade from "@/components/ui/EdgeFade";
 
-const GROUP_META = {
-  TECHNICAL: { title: "Technical Team", direction: "left" },
-  CREATIVE_OPERATIONS: { title: "Creative & Operations Team", direction: "right" },
-};
+function mapMember(member) {
+  return {
+    employee_id: member.employee_id,
+    name: member.name,
+    role: member.role,
+    image: member.image,
+  };
+}
+
+/** Flatten all API groups into one member list (no technical / creative split). */
+function flattenTeamMembers(groups) {
+  if (!Array.isArray(groups) || groups.length === 0) return [];
+
+  const order = ["TECHNICAL", "CREATIVE_OPERATIONS"];
+  const byKey = Object.fromEntries(groups.map((g) => [g.team_group, g]));
+  const ordered = [
+    ...order.map((key) => byKey[key]).filter(Boolean),
+    ...groups.filter((g) => !order.includes(g.team_group)),
+  ];
+
+  const seen = new Set();
+  const members = [];
+
+  for (const group of ordered) {
+    for (const member of group.members || []) {
+      const key = String(member.employee_id || member.name || "");
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
+      members.push(mapMember(member));
+    }
+  }
+
+  return members;
+}
 
 /*
  * ARCHIVED — hardcoded careers data (replaced by API: fetchPublicCareers + fetchPublicEmployerGroups).
@@ -57,30 +88,6 @@ function MemberCard({ member, className = "" }) {
   );
 }
 
-/** Soft fade on left/right — keep narrow so main cards stay fully visible */
-function EdgeFades() {
-  return (
-    <>
-      <div
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 sm:w-6 md:w-8 bg-linear-to-r from-background via-background/40 to-transparent"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-5 sm:w-6 md:w-8 bg-linear-to-l from-background via-background/40 to-transparent"
-        aria-hidden
-      />
-    </>
-  );
-}
-
-/** Narrow edge zones (~3%) — fade before hide/spawn without a wide band */
-const EDGE_FADE_MASK = {
-  WebkitMaskImage:
-    "linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)",
-  maskImage:
-    "linear-gradient(to right, transparent 0%, black 3%, black 97%, transparent 100%)",
-};
-
 export default function Team() {
   const reduceMotion = useReducedMotion();
   const [openings, setOpenings] = useState([]);
@@ -124,30 +131,20 @@ export default function Team() {
     };
   }, []);
 
-  const renderTeamGroup = (group) => {
-    const { team_group, title, members, direction } = group;
+  const renderTeam = (members) => {
     const isMarquee = members.length > 4;
 
     return (
-      <div key={team_group || title} className="w-full flex flex-col mb-0">
-        {/* Title + marquee both constrained to page content width (not full-bleed) */}
+      <div className="w-full flex flex-col mb-0">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
-          <h3 className="mb-6 text-xl font-semibold tracking-tight text-foreground md:text-2xl">
-            {title}
-          </h3>
-
           {isMarquee ? (
-            <div
-              className="relative w-full overflow-hidden rounded-xl"
-              style={EDGE_FADE_MASK}
-            >
-              <EdgeFades />
+            <EdgeFade className="w-full rounded-xl">
               <motion.div
                 className="flex w-max"
                 animate={
                   reduceMotion
                     ? undefined
-                    : { x: direction === "left" ? ["0%", "-25%"] : ["-25%", "0%"] }
+                    : { x: ["0%", "-25%"] }
                 }
                 transition={
                   reduceMotion
@@ -172,15 +169,9 @@ export default function Team() {
                   </div>
                 ))}
               </motion.div>
-            </div>
+            </EdgeFade>
           ) : (
-            <div
-              className="relative overflow-hidden rounded-xl sm:[mask-image:none] sm:[-webkit-mask-image:none]"
-              style={EDGE_FADE_MASK}
-            >
-              <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-5 bg-gradient-to-r from-background via-background/40 to-transparent sm:hidden" aria-hidden />
-              <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-5 bg-gradient-to-l from-background via-background/40 to-transparent sm:hidden" aria-hidden />
-
+            <EdgeFade className="rounded-xl" mode="scroll-until-sm">
               <div className="flex snap-x snap-mandatory flex-nowrap gap-5 overflow-x-auto pb-6 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0 lg:grid-cols-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {members.map((member) => (
                   <MemberCard
@@ -190,7 +181,7 @@ export default function Team() {
                   />
                 ))}
               </div>
-            </div>
+            </EdgeFade>
           )}
         </div>
       </div>
@@ -204,21 +195,8 @@ export default function Team() {
     aboutPreview: job.about_preview || "",
   }));
 
-  const normalizedGroups =
-    teamGroups.length > 0
-      ? teamGroups.map((group) => ({
-          team_group: group.team_group,
-          title: group.title || GROUP_META[group.team_group]?.title || group.team_group,
-          direction:
-            group.slide_direction || GROUP_META[group.team_group]?.direction || "left",
-          members: (group.members || []).map((member) => ({
-            employee_id: member.employee_id,
-            name: member.name,
-            role: member.role,
-            image: member.image,
-          })),
-        }))
-      : [];
+  // Single combined team list (API groups flattened; no technical/ops split heading)
+  const teamMembers = flattenTeamMembers(teamGroups);
 
   const sectionMotion = reduceMotion
     ? {}
@@ -262,8 +240,8 @@ export default function Team() {
           <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
             <p className="text-sm text-muted-foreground">Loading team...</p>
           </div>
-        ) : normalizedGroups.length === 0 ? null : (
-          normalizedGroups.map((group) => renderTeamGroup(group))
+        ) : teamMembers.length === 0 ? null : (
+          renderTeam(teamMembers)
         )}
       </motion.div>
 

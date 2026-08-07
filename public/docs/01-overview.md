@@ -67,7 +67,7 @@ Every page is wrapped by the root layout (`src/app/layout.jsx`):
 
 ## Alternate / legacy pages
 
-- **`/home2`** — Alternate landing page using older section components (`Hero`, `ChoseUs`, `DownloadAppFinal`, etc.). Not linked from main navigation.
+- **`/home2`** — Removed. `next.config.mjs` permanently redirects `/home2` → `/`.
 
 ## Browser support
 
