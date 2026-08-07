@@ -1,5 +1,5 @@
 import Image from "next/image";
-import LiquidChrome from "@/components/ui/LiquidChrome";
+import LazyLiquidChrome from "@/components/ui/LazyLiquidChrome";
 
 export default function AboutDetails() {
     const IMG_2PHONES = "/images/About-us_2phone.png";
@@ -45,8 +45,8 @@ export default function AboutDetails() {
                     <div className="relative w-full aspect-4/5 sm:aspect-4/3 lg:aspect-4/3 rounded-[24px] overflow-hidden bg-black flex items-end justify-center pt-16 pb-8">
                         {/* Customized Gradient Glows replaced by Liquid Chrome */}
                         <div className="absolute inset-0 z-0 opacity-50">
-                            <LiquidChrome
-                                baseColor={[0.635, 0.31, 0.576]} // #A24F93
+                            <LazyLiquidChrome
+                                baseColor={[0.635, 0.31, 0.576]}
                                 speed={0.5}
                                 amplitude={0.6}
                                 interactive={true}

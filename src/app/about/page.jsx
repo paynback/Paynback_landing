@@ -1,12 +1,30 @@
+import dynamic from "next/dynamic";
 import AboutHero from "@/app/about/components/Hero";
 import AboutDetails from "@/app/about/components/AboutDetails";
-import WhyChooseSection from "@/components/sections/WhyChooseSection";
-import Founders from "@/app/about/components/Founders";
-import HowToWork from "@/app/about/components/HowToWork";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import BlurReveal from "@/components/sections/BlurReveal";
-import Activities from "@/components/sections/Activities";
+import SectionSkeleton from "@/components/ui/SectionSkeleton";
 import { buildMetadata } from "@/lib/seo";
+
+const WhyChooseSection = dynamic(
+  () => import("@/components/sections/WhyChooseSection"),
+  { loading: () => <SectionSkeleton className="min-h-[400px]" ariaLabel="Loading why choose" /> },
+);
+
+const Activities = dynamic(
+  () => import("@/components/sections/Activities"),
+  { loading: () => <SectionSkeleton className="min-h-[360px]" ariaLabel="Loading activities" /> },
+);
+
+const Founders = dynamic(
+  () => import("@/app/about/components/Founders"),
+  { loading: () => <SectionSkeleton className="min-h-[480px]" ariaLabel="Loading founders" /> },
+);
+
+const HowToWork = dynamic(
+  () => import("@/app/about/components/HowToWork"),
+  { loading: () => <SectionSkeleton className="min-h-[360px]" ariaLabel="Loading how it works" /> },
+);
 
 export const metadata = buildMetadata({
   title: "About Us",

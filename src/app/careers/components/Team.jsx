@@ -64,6 +64,8 @@ function MemberCard({ member, className = "" }) {
           <img
             src={member.image}
             alt={member.name}
+            loading="lazy"
+            decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
         ) : (

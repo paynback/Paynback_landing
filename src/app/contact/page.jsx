@@ -1,8 +1,15 @@
+import dynamic from "next/dynamic";
 import ContactHero from "./components/Hero";
-import ContactSection from "./components/ContactSection";
 import ScrollReveal from "@/components/ui/ScrollReveal";
 import BlurReveal from "@/components/sections/BlurReveal";
+import SectionSkeleton from "@/components/ui/SectionSkeleton";
 import { buildMetadata } from "@/lib/seo";
+
+const ContactSection = dynamic(() => import("./components/ContactSection"), {
+  loading: () => (
+    <SectionSkeleton className="min-h-[560px]" ariaLabel="Loading contact form" />
+  ),
+});
 
 export const metadata = buildMetadata({
   title: "Contact Us",

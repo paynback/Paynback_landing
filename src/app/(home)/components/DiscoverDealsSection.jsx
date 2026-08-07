@@ -92,12 +92,18 @@ function OfferImage({ src, alt, className, sizes, fill = false, priority = false
     if (fill) {
       return (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={alt} className={cn("absolute inset-0 h-full w-full", className)} />
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          className={cn("absolute inset-0 h-full w-full", className)}
+        />
       );
     }
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={alt} className={className} />
+      <img src={src} alt={alt} loading="lazy" decoding="async" className={className} />
     );
   }
   if (fill) {

@@ -114,7 +114,6 @@ export default function AppShowcaseSection() {
               alt="App flow steps background"
               fill
               className="object-contain object-bottom scale-[1.30] origin-bottom"
-              priority
             />
           </div>
 
@@ -140,7 +139,6 @@ export default function AppShowcaseSection() {
               fill
               className="object-contain"
               sizes="(max-width:640px) 320px, (max-width:1024px) 440px, 580px"
-              priority
             />
           </motion.div>
         </div>

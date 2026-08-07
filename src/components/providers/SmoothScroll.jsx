@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ReactLenis } from "lenis/react";
 
 function shouldEnableLenis() {
   if (typeof window === "undefined") return false;
@@ -18,16 +17,30 @@ function shouldEnableLenis() {
 }
 
 export function SmoothScroll({ children }) {
-  const [enableLenis, setEnableLenis] = useState(false);
+  const [LenisRoot, setLenisRoot] = useState(null);
 
   useEffect(() => {
-    setEnableLenis(shouldEnableLenis());
+    if (!shouldEnableLenis()) return;
+
+    let cancelled = false;
+    import("lenis/react")
+      .then((mod) => {
+        if (!cancelled) setLenisRoot(() => mod.ReactLenis);
+      })
+      .catch(() => {
+        // Keep native scroll if Lenis fails to load
+      });
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
-  if (!enableLenis) {
+  if (!LenisRoot) {
     return <>{children}</>;
   }
 
+  const ReactLenis = LenisRoot;
   return (
     <ReactLenis
       root
