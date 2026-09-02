@@ -99,55 +99,70 @@ function MemberCard({ member, className = "" }) {
 function TeamMarquee({ members }) {
   const reduceMotion = useReducedMotion();
   const controls = useAnimation();
-  const containerRef = useRef(null);
+  const viewportRef = useRef(null);
+  const isAnimatingRef = useRef(false);
 
   useEffect(() => {
     if (reduceMotion) return;
-    const node = containerRef.current;
+    const node = viewportRef.current;
     if (!node) return;
 
     const duration = members.length * 4.5;
 
+    const startMarquee = () => {
+      if (isAnimatingRef.current) return;
+      isAnimatingRef.current = true;
+      controls.start({
+        x: ["0%", "-25%"],
+        transition: { repeat: Infinity, ease: "linear", duration },
+      });
+    };
+
+    const stopMarquee = () => {
+      isAnimatingRef.current = false;
+      controls.stop();
+    };
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            controls.start({
-              x: ["0%", "-25%"],
-              transition: { repeat: Infinity, ease: "linear", duration },
-            });
-          } else {
-            controls.stop();
-          }
+          if (entry.isIntersecting) startMarquee();
+          else stopMarquee();
         });
       },
-      { threshold: 0.05 },
+      // Observe a viewport-width wrapper — not the w-max track (wide tracks report
+      // a tiny intersection ratio on mobile and falsely trigger stop).
+      { threshold: 0, rootMargin: "80px 0px" },
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      stopMarquee();
+    };
   }, [controls, members.length, reduceMotion]);
 
   return (
     <EdgeFade className="w-full rounded-xl" overlayWidth="w-6 sm:w-8 md:w-10">
-      <motion.div
-        ref={containerRef}
-        className="flex w-max"
-        animate={reduceMotion ? undefined : controls}
-        style={{ willChange: reduceMotion ? undefined : "transform" }}
-      >
-        {[...Array(4)].map((_, i) => (
-          <div key={i} className="flex gap-5 pr-5">
-            {members.map((member) => (
-              <MemberCard
-                key={`${member.employee_id || member.name}-${i}`}
-                member={member}
-                className="w-[75vw] sm:w-[260px] lg:w-[280px]"
-              />
-            ))}
-          </div>
-        ))}
-      </motion.div>
+      <div ref={viewportRef} className="w-full">
+        <motion.div
+          className="flex w-max"
+          animate={reduceMotion ? undefined : controls}
+          style={{ willChange: reduceMotion ? undefined : "transform" }}
+        >
+          {[...Array(4)].map((_, i) => (
+            <div key={i} className="flex gap-5 pr-5">
+              {members.map((member) => (
+                <MemberCard
+                  key={`${member.employee_id || member.name}-${i}`}
+                  member={member}
+                  className="w-[75vw] sm:w-[260px] lg:w-[280px]"
+                />
+              ))}
+            </div>
+          ))}
+        </motion.div>
+      </div>
     </EdgeFade>
   );
 }
