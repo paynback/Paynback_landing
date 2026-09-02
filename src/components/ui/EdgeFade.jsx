@@ -23,12 +23,14 @@ function edgeGradient(direction, fadeColor) {
 export function EdgeFadeOverlays({
   fadeColor = "var(--background)",
   className = "",
+  overlayWidth = "w-12 sm:w-14 md:w-16",
 }) {
   return (
     <>
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 left-0 z-10 w-12 sm:w-14 md:w-16",
+          "pointer-events-none absolute inset-y-0 left-0 z-10",
+          overlayWidth,
           className,
         )}
         style={{ background: edgeGradient("to right", fadeColor) }}
@@ -36,7 +38,8 @@ export function EdgeFadeOverlays({
       />
       <div
         className={cn(
-          "pointer-events-none absolute inset-y-0 right-0 z-10 w-12 sm:w-14 md:w-16",
+          "pointer-events-none absolute inset-y-0 right-0 z-10",
+          overlayWidth,
           className,
         )}
         style={{ background: edgeGradient("to left", fadeColor) }}
@@ -74,6 +77,7 @@ export default function EdgeFade({
   className = "",
   fadeColor = "var(--background)",
   mode = "continuous",
+  overlayWidth,
   style,
   ...props
 }) {
@@ -85,7 +89,11 @@ export default function EdgeFade({
       style={{ ...EDGE_FADE_MASK, ...style }}
       {...props}
     >
-      <EdgeFadeOverlays fadeColor={fadeColor} className={modeClasses.overlay} />
+      <EdgeFadeOverlays
+        fadeColor={fadeColor}
+        className={modeClasses.overlay}
+        overlayWidth={overlayWidth}
+      />
       {children}
     </div>
   );

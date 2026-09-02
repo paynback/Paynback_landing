@@ -5,9 +5,10 @@
 | Category | Location | Count | Purpose |
 |----------|----------|-------|---------|
 | Layout | `components/layout/` | 2 | Header, Footer |
+| SEO | `components/seo/` | 2 | JSON-LD, GA4 analytics |
 | Providers | `components/providers/` | 2 | Scroll, geolocation |
 | Sections | `components/sections/` | 14 | Reusable page sections |
-| UI primitives | `components/ui/` | 6 | Buttons, dialogs, effects |
+| UI primitives | `components/ui/` | 9 | Buttons, dialogs, effects, skeletons |
 | Legal | `components/legal/` | 3 | Guidelines layout |
 | Page-specific | `app/*/components/` | ~30 | Route-scoped sections |
 
@@ -28,13 +29,27 @@
 
 ### Footer (`components/layout/Footer.jsx`)
 
-- **Type:** Server component
+- **Type:** Client component (`usePathname` to hide on legal routes)
 - **Features:**
   - Multi-column link grid (PayNback, Guidelines, Support)
   - Social media links (Facebook, Instagram, LinkedIn, YouTube)
   - App store badges via `StoreBadges`
   - Certification logos (Startup India, KSUM)
-  - Hidden on legal/guideline routes
+  - Hidden on `/terms`, `/privacy`, `/merchant-terms`
+
+---
+
+## SEO components
+
+### JsonLd (`components/seo/JsonLd.jsx`)
+
+- Renders one or more `<script type="application/ld+json">` tags
+- Used on homepage (FAQ), blog detail, career detail, root layout (Organization)
+
+### Analytics (`components/seo/Analytics.jsx`)
+
+- Loads Google Analytics 4 when `NEXT_PUBLIC_GA_MEASUREMENT_ID` is set
+- Rendered in root layout after main content
 
 ---
 
@@ -105,6 +120,19 @@
 
 - Card component for blog listing
 - Uses raw `<img>` for remote cover images
+
+### SectionSkeleton (`components/ui/SectionSkeleton.jsx`)
+
+- Loading placeholder for `next/dynamic` homepage sections
+- Accessible `aria-label` for loading state
+
+### EdgeFade (`components/ui/EdgeFade.jsx`)
+
+- Gradient overlay for horizontal scroll edges
+
+### LazyLiquidChrome (`components/ui/LazyLiquidChrome.jsx`)
+
+- `next/dynamic` wrapper around `LiquidChrome` to defer WebGL bundle
 
 ---
 

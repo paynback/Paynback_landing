@@ -54,7 +54,7 @@ Footer (`Footer.jsx`) includes: About, Blogs, Careers, MSME, Partners, Jammy, Co
 
 | # | Section component | Animation wrapper | Data source |
 |---|-------------------|-------------------|-------------|
-| 1 | `Hero` (HomeHero) | ScrollReveal | Static |
+| 1 | `Hero` (`HomeHero` in `components/Hero.jsx`) | ScrollReveal | Static |
 | 2 | `HowIntoSection` | BlurReveal | Static |
 | 3 | `DiscoverDealsSection` | ScrollReveal | API: offers |
 | 4 | `AmazingFeaturesSection` | BlurReveal | Static |
@@ -65,7 +65,9 @@ Footer (`Footer.jsx`) includes: About, Blogs, Careers, MSME, Partners, Jammy, Co
 | 9 | `FAQSection` | ScrollReveal | Static (`src/data/homeFaqs.js`) |
 | 10 | `EnrollSection` | ScrollReveal | Form → API |
 
-`TestimonialsSection` is commented out when disabled.
+`TestimonialsSection` exists but is not included on the current homepage.
+
+Below-the-fold sections (deals through enroll) use `next/dynamic` with `SectionSkeleton` loading states for smaller initial bundles.
 
 ### About (`/about`)
 

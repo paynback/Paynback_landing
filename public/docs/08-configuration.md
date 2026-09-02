@@ -171,29 +171,31 @@ This prevents out-of-memory errors during large builds.
 
 ## Metadata & SEO
 
-Root metadata in `src/app/layout.jsx`:
+Central helper: `src/lib/seo.js` — `buildMetadata()`, `absoluteUrl()`, `getSiteUrl()`, and JSON-LD builders (`organizationJsonLd`, `websiteJsonLd`, `faqPageJsonLd`, etc.).
 
-```javascript
-export const metadata = {
-  title: "PayNback — India's first in-store shopping reward app",
-  description: "PayNback connects users with nearby merchants offering exclusive discounts, cashback and rewards.",
-};
-```
+Root layout (`src/app/layout.jsx`) sets:
 
-Individual pages override with their own `metadata` exports.
+- `metadataBase`, title template (`%s | PayNback`), default OG/Twitter via `buildMetadata()`
+- `viewport` with `viewportFit: "cover"`
+- Site icon: `/Icons/pnb-blue-logo.svg`
+- Optional Google/Bing verification env vars
+- Global Organization + WebSite JSON-LD
+
+| Feature | Implementation |
+|---------|----------------|
+| `robots.txt` | `src/app/robots.js` — allow all, disallow `/api/`, sitemap URL |
+| `sitemap.xml` | `src/app/sitemap.js` — static routes + blogs/careers from API |
+| Open Graph / Twitter | `buildMetadata()` on each page |
+| Per-page JSON-LD | `JsonLd` component — FAQ (home), BlogPosting, JobPosting, Breadcrumbs |
+| Analytics | `Analytics.jsx` — optional GA4 via `NEXT_PUBLIC_GA_MEASUREMENT_ID` |
 
 ### Not configured
 
 | Feature | Status |
 |---------|--------|
-| `robots.txt` | Not present |
-| `sitemap.xml` | Not present |
-| Open Graph tags | Not configured |
-| Twitter cards | Not configured |
 | PWA manifest | Not present |
-| Apple touch icon | Not present (only `icon.svg`) |
-| `viewport-fit=cover` | Not set |
-| Theme color | Not set |
+| Apple touch icon PNG | Not present (SVG favicon via `icon.svg`) |
+| Theme color meta | Not set |
 
 ---
 

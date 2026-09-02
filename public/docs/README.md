@@ -15,6 +15,7 @@ Official technical documentation for the **PayNback Landing** website (`Paynback
 | [Development & Deployment](./09-development-and-deployment.md) | Local setup, scripts, build, and release |
 | [Performance & iOS Notes](./10-performance-and-ios.md) | Known Safari/iOS issues and improvement areas |
 | [SEO release checklist](./12-seo-release-checklist.md) | Pre/post release SEO verification |
+| [Scroll Lag Diagnosis Report](./13-scroll-lag-diagnosis-report.md) | Root-cause confirmation and fixes for site-wide scroll stutter |
 
 ---
 
@@ -44,13 +45,22 @@ npm run lint     # Run ESLint
 ```
 server-with-web/
 └── Paynback_landing/     # This project
-    ├── public/           # Static assets
+    ├── public/           # Static assets + this docs folder
     ├── src/              # Application source
     ├── next.config.mjs
     ├── package.json
-    └── ...
+    └── README.md         # Project entry point (summary + links here)
 ```
+
+## `src/` vs `public/`
+
+| Directory | Role |
+|-----------|------|
+| **`src/`** | React/Next.js application — routes, components, API services, SEO helpers. Compiled by Next.js; not served as raw files. |
+| **`public/`** | Static files copied to the site root at build time. Referenced by path (`/images/...`, `/Icons/...`). Includes marketing images, icons, location CSVs, and this documentation. |
+
+See [Project Structure](./03-project-structure.md) for the full folder tree.
 
 ---
 
-*Last updated: July 2026*
+*Last updated: September 2026*

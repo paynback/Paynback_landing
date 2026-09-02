@@ -3,11 +3,13 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Plus } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { fetchPublicCareers } from "@/lib/careerService";
 import { fetchPublicEmployerGroups } from "@/lib/employeeService";
 import EdgeFade from "@/components/ui/EdgeFade";
+import { ShimmerCardGrid } from "@/components/ui/shimmer";
+import { usePreloadImages } from "@/hooks/usePreloadImages";
 
 function mapMember(member) {
   return {
@@ -64,7 +66,7 @@ function MemberCard({ member, className = "" }) {
           <img
             src={member.image}
             alt={member.name}
-            loading="lazy"
+            loading="eager"
             decoding="async"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
           />
@@ -87,6 +89,66 @@ function MemberCard({ member, className = "" }) {
         <p className="text-gray-200 text-[12px] font-medium">{member.role}</p>
       </div>
     </div>
+  );
+}
+
+/**
+ * Infinite marquee that pauses its rAF-driven animation while scrolled
+ * off-screen, so it doesn't keep running alongside Lenis/other sections.
+ */
+function TeamMarquee({ members }) {
+  const reduceMotion = useReducedMotion();
+  const controls = useAnimation();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    if (reduceMotion) return;
+    const node = containerRef.current;
+    if (!node) return;
+
+    const duration = members.length * 4.5;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            controls.start({
+              x: ["0%", "-25%"],
+              transition: { repeat: Infinity, ease: "linear", duration },
+            });
+          } else {
+            controls.stop();
+          }
+        });
+      },
+      { threshold: 0.05 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [controls, members.length, reduceMotion]);
+
+  return (
+    <EdgeFade className="w-full rounded-xl" overlayWidth="w-6 sm:w-8 md:w-10">
+      <motion.div
+        ref={containerRef}
+        className="flex w-max"
+        animate={reduceMotion ? undefined : controls}
+        style={{ willChange: reduceMotion ? undefined : "transform" }}
+      >
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="flex gap-5 pr-5">
+            {members.map((member) => (
+              <MemberCard
+                key={`${member.employee_id || member.name}-${i}`}
+                member={member}
+                className="w-[75vw] sm:w-[260px] lg:w-[280px]"
+              />
+            ))}
+          </div>
+        ))}
+      </motion.div>
+    </EdgeFade>
   );
 }
 
@@ -140,40 +202,9 @@ export default function Team() {
       <div className="w-full flex flex-col mb-0">
         <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
           {isMarquee ? (
-            <EdgeFade className="w-full rounded-xl">
-              <motion.div
-                className="flex w-max"
-                animate={
-                  reduceMotion
-                    ? undefined
-                    : { x: ["0%", "-25%"] }
-                }
-                transition={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        repeat: Infinity,
-                        ease: "linear",
-                        duration: members.length * 4.5,
-                      }
-                }
-                style={{ willChange: reduceMotion ? undefined : "transform" }}
-              >
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="flex gap-5 pr-5">
-                    {members.map((member) => (
-                      <MemberCard
-                        key={`${member.employee_id || member.name}-${i}`}
-                        member={member}
-                        className="w-[75vw] sm:w-[260px] lg:w-[280px]"
-                      />
-                    ))}
-                  </div>
-                ))}
-              </motion.div>
-            </EdgeFade>
+            <TeamMarquee members={members} />
           ) : (
-            <EdgeFade className="rounded-xl" mode="scroll-until-sm">
+            <EdgeFade className="rounded-xl" mode="scroll-until-sm" overlayWidth="w-6 sm:w-8 md:w-10">
               <div className="flex snap-x snap-mandatory flex-nowrap gap-5 overflow-x-auto pb-6 sm:grid sm:grid-cols-2 sm:overflow-x-visible sm:pb-0 lg:grid-cols-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {members.map((member) => (
                   <MemberCard
@@ -199,6 +230,37 @@ export default function Team() {
 
   // Single combined team list (API groups flattened; no technical/ops split heading)
   const teamMembers = flattenTeamMembers(teamGroups);
+  const teamImageUrls = useMemo(
+    () => teamMembers.map((m) => m.image).filter(Boolean),
+    [teamMembers],
+  );
+  const teamImagesReady = usePreloadImages(
+    teamImageUrls,
+    !teamsLoading && teamMembers.length > 0,
+  );
+  const showTeamShimmer =
+    teamsLoading || (teamMembers.length > 0 && !teamImagesReady);
+
+  const renderTeamShimmer = (marquee = false) => (
+    <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
+      {marquee ? (
+        <div className="flex gap-5 overflow-hidden pb-2">
+          <ShimmerCardGrid
+            variant="team"
+            count={4}
+            className="flex gap-5"
+            itemClassName="w-[75vw] sm:w-[260px] lg:w-[280px]"
+          />
+        </div>
+      ) : (
+        <ShimmerCardGrid
+          variant="team"
+          count={4}
+          className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4"
+        />
+      )}
+    </div>
+  );
 
   const sectionMotion = reduceMotion
     ? {}
@@ -238,10 +300,8 @@ export default function Team() {
       </div>
 
       <motion.div className="mb-34 flex w-full flex-col gap-16 md:gap-24" {...sectionMotion}>
-        {teamsLoading ? (
-          <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
-            <p className="text-sm text-muted-foreground">Loading team...</p>
-          </div>
+        {showTeamShimmer ? (
+          renderTeamShimmer(teamMembers.length > 4)
         ) : teamMembers.length === 0 ? null : (
           renderTeam(teamMembers)
         )}

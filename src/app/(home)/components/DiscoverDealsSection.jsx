@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { Clock, Sparkles } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { fetchPublicOffers } from "@/lib/offerService";
 import EdgeFade from "@/components/ui/EdgeFade";
@@ -285,6 +285,60 @@ function DealCardSlide({ offer }) {
   );
 }
 
+/**
+ * Infinite marquee that pauses its rAF-driven animation while scrolled
+ * off-screen, so it doesn't keep running alongside Lenis/other sections.
+ */
+function DealsMarquee({ offers }) {
+  const controls = useAnimation();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+
+    const duration = offers.length * 5;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            controls.start({
+              x: ["0%", "-25%"],
+              transition: { repeat: Infinity, ease: "linear", duration },
+            });
+          } else {
+            controls.stop();
+          }
+        });
+      },
+      { threshold: 0.05 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [controls, offers.length]);
+
+  return (
+    <EdgeFade className="group/marquee w-full" fadeColor="#F2F2F2">
+      <motion.div
+        ref={containerRef}
+        className="flex w-max gap-6 sm:gap-7 md:gap-8 lg:gap-10"
+        animate={controls}
+        style={{ willChange: "transform" }}
+      >
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="flex gap-6 sm:gap-7 md:gap-8 lg:gap-10 pr-6 sm:pr-7 md:pr-8 lg:pr-10">
+            {offers.map((offer) => (
+              <DealCardSlide key={`${offer.offer_id}-${i}`} offer={offer} />
+            ))}
+          </div>
+        ))}
+      </motion.div>
+    </EdgeFade>
+  );
+}
+
 export default function DiscoverDealsSection() {
   const reduceMotion = useReducedMotion();
   const [offers, setOffers] = useState([]);
@@ -342,29 +396,7 @@ export default function DiscoverDealsSection() {
           ) : offers.length === 0 ? (
             <p className="text-center text-sm text-slate-500">No offers available right now.</p>
           ) : useMarquee ? (
-            <EdgeFade
-              className="group/marquee w-full"
-              fadeColor="#F2F2F2"
-            >
-              <motion.div
-                className="flex w-max gap-6 sm:gap-7 md:gap-8 lg:gap-10"
-                animate={{ x: ["0%", "-25%"] }}
-                transition={{
-                  repeat: Infinity,
-                  ease: "linear",
-                  duration: offers.length * 5,
-                }}
-                style={{ willChange: "transform" }}
-              >
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="flex gap-6 sm:gap-7 md:gap-8 lg:gap-10 pr-6 sm:pr-7 md:pr-8 lg:pr-10">
-                    {offers.map((offer) => (
-                      <DealCardSlide key={`${offer.offer_id}-${i}`} offer={offer} />
-                    ))}
-                  </div>
-                ))}
-              </motion.div>
-            </EdgeFade>
+            <DealsMarquee offers={offers} />
           ) : (
             <EdgeFade fadeColor="#F2F2F2" mode="scroll-until-md">
               <div

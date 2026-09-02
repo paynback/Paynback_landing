@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Phone, Menu, X, ChevronDown } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 import { motion, useScroll, useMotionValueEvent, AnimatePresence } from "framer-motion";
 import { cn } from "@/lib/utils";
 
@@ -63,13 +63,23 @@ export default function Header({
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(true);
 
   const { scrollY } = useScroll();
 
-
-
   useEffect(() => {
     setMounted(true);
+
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const syncViewport = () => {
+      const desktop = mq.matches;
+      setIsDesktop(desktop);
+      if (desktop) setMobileMenuOpen(false);
+    };
+
+    syncViewport();
+    mq.addEventListener("change", syncViewport);
+    return () => mq.removeEventListener("change", syncViewport);
   }, []);
 
   useEffect(() => {
@@ -197,20 +207,23 @@ export default function Header({
                     <span className="mt-[2px] block">Contact</span>
                   </Link>
 
-                  {/* Mobile hamburger */}
-                  <button
-                    className={cn(
-                      "flex min-h-11 min-w-11 items-center justify-center backdrop-blur-sm lg:hidden transition-all duration-500",
-                      useWhiteNavbar
-                        ? "bg-black/5 text-black hover:bg-black/10 border border-black/10"
-                        : "bg-white/10 text-white hover:bg-white/20",
-                      isScrolled ? "h-11 w-11 rounded-lg" : "h-11 w-11 rounded-lg"
-                    )}
-                    onClick={() => setMobileMenuOpen(true)}
-                    aria-label="Toggle navigation menu"
-                  >
-                    <Menu className={isScrolled ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2} />
-                  </button>
+                  {/* Mobile hamburger — hidden on lg+ via CSS and viewport check */}
+                  {!isDesktop && (
+                    <button
+                      type="button"
+                      className={cn(
+                        "inline-flex min-h-11 min-w-11 items-center justify-center backdrop-blur-sm transition-all duration-500",
+                        useWhiteNavbar
+                          ? "bg-black/5 text-black hover:bg-black/10 border border-black/10"
+                          : "bg-white/10 text-white hover:bg-white/20",
+                        isScrolled ? "h-11 w-11 rounded-lg" : "h-11 w-11 rounded-lg"
+                      )}
+                      onClick={() => setMobileMenuOpen(true)}
+                      aria-label="Toggle navigation menu"
+                    >
+                      <Menu className={isScrolled ? "h-4 w-4" : "h-5 w-5"} strokeWidth={2} />
+                    </button>
+                  )}
                 </div>
               </div>
             </motion.header>
@@ -218,13 +231,13 @@ export default function Header({
 
           {/* Mobile Full Screen Menu */}
           <AnimatePresence>
-            {mobileMenuOpen && (
+            {mobileMenuOpen && !isDesktop && (
               <motion.div
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.98 }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="fixed inset-0 z-1000 bg-white flex flex-col pointer-events-auto min-h-dvh w-full lg:hidden overscroll-contain pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
+                className="fixed inset-0 z-1000 flex flex-col bg-white pointer-events-auto min-h-dvh w-full overscroll-contain pt-[env(safe-area-inset-top)] pb-[env(safe-area-inset-bottom)]"
               >
                 <div className="flex justify-between items-center p-6 sm:p-8">
                   <div className="w-8" /> {/* spacer for flex balance if needed, or leave empty */}

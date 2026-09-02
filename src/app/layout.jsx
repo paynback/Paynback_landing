@@ -2,7 +2,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import Footer from "../components/layout/Footer";
 import Header from "@/components/layout/Header";
-import { SmoothScroll } from "@/components/providers/SmoothScroll";
+// import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import JsonLd from "@/components/seo/JsonLd";
 import Analytics from "@/components/seo/Analytics";
 import {
@@ -68,11 +68,15 @@ export default function RootLayout({ children }) {
     <html lang="en" className={`${poppins.variable} antialiased`}>
       <body className="flex min-h-screen min-h-dvh flex-col">
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
-        <SmoothScroll>
+        {/* SmoothScroll disabled — native browser scroll */}
+        <Header />
+        {children}
+        <Footer />
+        {/* <SmoothScroll>
           <Header />
           {children}
           <Footer />
-        </SmoothScroll>
+        </SmoothScroll> */}
         <Analytics />
       </body>
     </html>

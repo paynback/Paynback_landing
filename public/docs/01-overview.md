@@ -72,3 +72,12 @@ Every page is wrapped by the root layout (`src/app/layout.jsx`):
 ## Browser support
 
 The project targets modern browsers (Chrome, Firefox, Safari, Edge). No explicit Browserslist is configured. See [Performance & iOS Notes](./10-performance-and-ios.md) for Safari-specific considerations.
+
+## Source vs static assets
+
+| Directory | Purpose |
+|-----------|---------|
+| **`src/`** | All application logic — App Router pages, React components, Axios services, SEO helpers, static FAQ data. Built and bundled by Next.js. |
+| **`public/`** | Files served as-is at the URL root — logos (`/Icons/`), marketing images (`/images/`), Kerala location CSVs (`/assets/`), and this documentation (`/docs/` when deployed). |
+
+See [Project Structure](./03-project-structure.md) for the full tree.

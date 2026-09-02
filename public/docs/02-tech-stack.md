@@ -31,7 +31,7 @@
 | Package | Version | Purpose |
 |---------|---------|---------|
 | **framer-motion** | ^12.38.0 | Page transitions, scroll animations, mobile menu, marquees |
-| **lenis** | ^1.3.21 | Smooth scroll (global `ReactLenis` wrapper) |
+| **lenis** | ^1.3.25 | Smooth scroll (global `ReactLenis` wrapper) |
 | **ogl** | ^1.0.11 | WebGL library — powers `LiquidChrome` background effect on About page |
 
 ## Forms & validation
