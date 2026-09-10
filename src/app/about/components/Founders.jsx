@@ -82,7 +82,7 @@ export default function Founders() {
                                         fill
                                         className="object-cover"
                                         sizes="(max-width: 1024px) 100vw, 405px"
-                                        priority
+                                        priority={index === 0}
                                     />
 
                                     {/* Glassmorphic Name Card at Bottom */}

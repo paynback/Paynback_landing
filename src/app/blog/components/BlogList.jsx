@@ -1,10 +1,10 @@
 "use client";
 
 import BlogCard from "@/components/ui/BlogCard";
+import { ShimmerCardGrid } from "@/components/ui/shimmer";
+import { usePreloadImages } from "@/hooks/usePreloadImages";
 import { fetchPublishedBlogs } from "@/lib/blogService";
-import { useEffect, useState } from "react";
-
-// Blog list uses API only. Archived FALLBACK_BLOGS: see blogService.js
+import { useEffect, useMemo, useState } from "react";
 
 function mapBlogRow(row) {
   return {
@@ -45,6 +45,13 @@ export default function BlogList() {
     };
   }, []);
 
+  const coverUrls = useMemo(
+    () => blogs.map((b) => b.cover_image).filter(Boolean),
+    [blogs],
+  );
+  const imagesReady = usePreloadImages(coverUrls, !loading && blogs.length > 0);
+  const showShimmer = loading || (blogs.length > 0 && !imagesReady);
+
   return (
     <section className="w-full bg-white pb-32 lg:pb-48" style={{ "--brand-primary": "#0964BC" }}>
       <div className="mx-auto max-w-7xl px-6 py-16 sm:px-6 lg:px-20 lg:py-20">
@@ -58,8 +65,12 @@ export default function BlogList() {
           </p>
         </div>
 
-        {loading ? (
-          <p className="text-sm text-slate-500">Loading blogs...</p>
+        {showShimmer ? (
+          <ShimmerCardGrid
+            variant="blog"
+            count={6}
+            className="grid w-full grid-cols-1 justify-items-stretch gap-8 sm:grid-cols-2 lg:grid-cols-3"
+          />
         ) : error ? (
           <p className="text-sm text-slate-500">
             Unable to load blogs right now. Please try again later.

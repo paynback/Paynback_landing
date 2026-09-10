@@ -56,7 +56,7 @@ export default function   AmazingFeaturesSection() {
       style={{ "--brand-primary": "#0964BC" }}
     >
       <div
-        className="mx-auto max-w-7xl px-6 py-12 sm:px-6 sm:py-16 lg:px-20 lg:py-20"
+        className="mx-auto max-w-7xl px-6 py-14 sm:px-6 lg:px-20 lg:py-30"
       >
         {/* Section heading */}
         <h2 className="pb-10">

@@ -1,12 +1,14 @@
 import Link from "next/link";
 import LegalGuidelinesLayout from "@/components/legal/LegalGuidelinesLayout";
 import { Section, SubSection } from "@/components/legal/LegalSection";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Privacy Policy - PayNback",
+export const metadata = buildMetadata({
+  title: "Privacy Policy",
   description:
     "Privacy policy describing our policies and procedures on the collection, use and disclosure of your information.",
-};
+  path: "/privacy",
+});
 
 const TOC_ITEMS = [
   { id: "introduction", label: "Introduction" },

@@ -1,11 +1,13 @@
 import Link from "next/link";
 import LegalGuidelinesLayout from "@/components/legal/LegalGuidelinesLayout";
 import { Section, SubSection } from "@/components/legal/LegalSection";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Merchant Terms - PayNback",
+export const metadata = buildMetadata({
+  title: "Merchant Terms",
   description: "Terms and conditions for merchants using the PayNback platform.",
-};
+  path: "/merchant-terms",
+});
 
 const TOC_ITEMS = [
   { id: "introduction", label: "Introduction" },

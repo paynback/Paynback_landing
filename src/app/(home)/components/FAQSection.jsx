@@ -2,39 +2,9 @@
 
 import { useState } from "react";
 import { Plus, Minus } from "lucide-react";
+import { HOME_FAQS } from "@/data/homeFaqs";
 
-const FAQS = [
-  {
-    id: 1,
-    question: "Is my money and personal data secure?",
-    answer:
-      "Yes. We use advanced encryption, secure authentication, and strict privacy protocols to protect your transactions and personal information at all times.",
-  },
-  {
-    id: 2,
-    question: "Are there any hidden charges?",
-    answer:
-      "No. PayNback is completely transparent with zero hidden charges. You pay only what is shown — no surprises, no fine print.",
-  },
-  {
-    id: 3,
-    question: "Can I track my spending and transaction history?",
-    answer:
-      "Absolutely. The app provides a detailed transaction history and spending tracker so you always know where your money is going.",
-  },
-  {
-    id: 4,
-    question: "How do I earn and redeem reward points?",
-    answer:
-      "You earn points automatically on every qualifying purchase. Points can be redeemed against future purchases or converted to cashback directly within the app.",
-  },
-  {
-    id: 5,
-    question: "Is PayNback available across India?",
-    answer:
-      "Yes. PayNback is available nationwide and is rapidly expanding its network of partnered merchants across every major city in India.",
-  },
-];
+const FAQS = HOME_FAQS;
 
 /* ── Single accordion item ────────────────────────────────── */
 function FaqItem({ question, answer, isOpen, onToggle }) {
@@ -84,7 +54,7 @@ export default function FAQSection() {
       className="w-full bg-[#F2F2F2] font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-6 pb-32 pt-12 sm:px-6 sm:pb-20 lg:px-20 lg:pb-32 lg:pt-20">
+      <div className="mx-auto max-w-7xl px-6 pb-32 pt-14 sm:px-6 sm:pb-20 lg:px-20 lg:pb-32 lg:pt-30">
 
         {/* Heading */}
         <h2 className="mb-8 text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:mb-10 lg:text-[2.4rem]">

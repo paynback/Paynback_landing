@@ -1,12 +1,14 @@
 import Link from "next/link";
 import LegalGuidelinesLayout from "@/components/legal/LegalGuidelinesLayout";
 import { Section, SubSection } from "@/components/legal/LegalSection";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata = {
-  title: "Terms & Conditions - PayNback",
+export const metadata = buildMetadata({
+  title: "Terms & Conditions",
   description:
     "Terms and conditions, shipment policy, refund policy, and return policy for PayNback.",
-};
+  path: "/terms",
+});
 
 const TOC_ITEMS = [
   { id: "introduction", label: "Introduction" },

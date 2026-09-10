@@ -27,12 +27,12 @@ const STORE_BADGES = "/Icons/app%26play_store_icons_hero.png";
 /* ── Nav columns ─────────────────────────────────────────── */
 const COL_PayNback = [
   { label: "About Us", href: "/about" },
+  { label: "Blogs", href: "/blog" },
   { label: "Careers", href: "/careers" },
-  // { label: "Internships", href: "/internships" },
-  // { label: "Refer & Earn", href: "/refer-and-earn" },
-  { label: "Contact Us", href: "/contact" },
+  { label: "For MSME", href: "/msme" },
   { label: "Partners", href: "/partners" },
-  { label: "About Jammy", href: "/jammy" }
+  { label: "About Jammy", href: "/jammy" },
+  { label: "Contact Us", href: "/contact" },
 ];
 
 const COL_GUIDELINES = [

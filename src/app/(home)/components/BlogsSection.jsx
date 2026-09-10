@@ -46,7 +46,7 @@ export default function BlogsSection() {
 
   return (
     <section className="w-full bg-white font-sans" style={{ "--brand-primary": "#0964BC" }}>
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-6 lg:px-20 lg:py-20">
+      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-6 lg:px-20 lg:py-30">
         <div className="mb-10">
           <h2 className="text-2xl font-normal leading-tight tracking-tight text-slate-900 sm:text-3xl md:text-4xl lg:text-[2.4rem]">
             <span className="text-(--brand-primary)">Meet</span> the fresh{" "}

@@ -1,7 +1,16 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { ReactLenis } from "lenis/react";
+
+// Module-level dynamic import: the Lenis chunk starts fetching as soon as this
+// module is evaluated on the client (in parallel with hydration), instead of
+// only kicking off inside a useEffect after mount. This shrinks the window
+// where native scroll is active before Lenis takes over.
+const ReactLenis = dynamic(
+  () => import("lenis/react").then((mod) => mod.ReactLenis),
+  { ssr: false }
+);
 
 function shouldEnableLenis() {
   if (typeof window === "undefined") return false;
@@ -18,13 +27,13 @@ function shouldEnableLenis() {
 }
 
 export function SmoothScroll({ children }) {
-  const [enableLenis, setEnableLenis] = useState(false);
+  const [lenisEnabled, setLenisEnabled] = useState(false);
 
   useEffect(() => {
-    setEnableLenis(shouldEnableLenis());
+    setLenisEnabled(shouldEnableLenis());
   }, []);
 
-  if (!enableLenis) {
+  if (!lenisEnabled) {
     return <>{children}</>;
   }
 
@@ -33,7 +42,7 @@ export function SmoothScroll({ children }) {
       root
       options={{
         lerp: 0.1,
-        duration: 1.2,
+        duration: 0.9,
         smoothWheel: true,
         wheelMultiplier: 1.0,
       }}

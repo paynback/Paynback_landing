@@ -1,11 +1,12 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import { Clock, Sparkles } from "lucide-react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useAnimation, useReducedMotion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { fetchPublicOffers } from "@/lib/offerService";
+import EdgeFade from "@/components/ui/EdgeFade";
 
 /*
  * ARCHIVED — hardcoded homepage deals (replaced by API: fetchPublicOffers).
@@ -91,12 +92,18 @@ function OfferImage({ src, alt, className, sizes, fill = false, priority = false
     if (fill) {
       return (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={src} alt={alt} className={cn("absolute inset-0 h-full w-full", className)} />
+        <img
+          src={src}
+          alt={alt}
+          loading="lazy"
+          decoding="async"
+          className={cn("absolute inset-0 h-full w-full", className)}
+        />
       );
     }
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={src} alt={alt} className={className} />
+      <img src={src} alt={alt} loading="lazy" decoding="async" className={className} />
     );
   }
   if (fill) {
@@ -278,6 +285,60 @@ function DealCardSlide({ offer }) {
   );
 }
 
+/**
+ * Infinite marquee that pauses its rAF-driven animation while scrolled
+ * off-screen, so it doesn't keep running alongside Lenis/other sections.
+ */
+function DealsMarquee({ offers }) {
+  const controls = useAnimation();
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    const node = containerRef.current;
+    if (!node) return;
+
+    const duration = offers.length * 5;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            controls.start({
+              x: ["0%", "-25%"],
+              transition: { repeat: Infinity, ease: "linear", duration },
+            });
+          } else {
+            controls.stop();
+          }
+        });
+      },
+      { threshold: 0.05 },
+    );
+
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [controls, offers.length]);
+
+  return (
+    <EdgeFade className="group/marquee w-full" fadeColor="#F2F2F2">
+      <motion.div
+        ref={containerRef}
+        className="flex w-max gap-6 sm:gap-7 md:gap-8 lg:gap-10"
+        animate={controls}
+        style={{ willChange: "transform" }}
+      >
+        {[...Array(4)].map((_, i) => (
+          <div key={i} className="flex gap-6 sm:gap-7 md:gap-8 lg:gap-10 pr-6 sm:pr-7 md:pr-8 lg:pr-10">
+            {offers.map((offer) => (
+              <DealCardSlide key={`${offer.offer_id}-${i}`} offer={offer} />
+            ))}
+          </div>
+        ))}
+      </motion.div>
+    </EdgeFade>
+  );
+}
+
 export default function DiscoverDealsSection() {
   const reduceMotion = useReducedMotion();
   const [offers, setOffers] = useState([]);
@@ -308,7 +369,7 @@ export default function DiscoverDealsSection() {
       className="w-full bg-[#F2F2F2] font-sans"
       style={{ "--brand-primary": "#0964BC" }}
     >
-      <div className="mx-auto max-w-7xl px-6 py-12 sm:px-6 sm:py-14 md:px-10 md:py-16 lg:px-20 lg:py-24 xl:py-28">
+      <div className="mx-auto max-w-7xl px-6 py-14 sm:px-6 md:px-10 lg:px-20 lg:py-30">
         <div className="mx-auto grid w-full max-w-6xl grid-cols-1 items-start gap-8 sm:gap-10 md:grid-cols-2 md:gap-x-10 md:gap-y-6 lg:gap-x-16 lg:gap-y-8">
           <div className="max-w-xl leading-tight md:max-w-none">
             <h2 className="text-[1.65rem] font-normal tracking-tight sm:text-3xl md:text-[clamp(1.75rem,2.2vw,2.25rem)] lg:text-4xl xl:text-5xl">
@@ -335,39 +396,22 @@ export default function DiscoverDealsSection() {
           ) : offers.length === 0 ? (
             <p className="text-center text-sm text-slate-500">No offers available right now.</p>
           ) : useMarquee ? (
-            <div className="flex w-full overflow-hidden relative group/marquee">
-              <motion.div
-                className="flex w-max gap-6 sm:gap-7 md:gap-8 lg:gap-10"
-                animate={{ x: ["0%", "-25%"] }}
-                transition={{
-                  repeat: Infinity,
-                  ease: "linear",
-                  duration: offers.length * 5,
-                }}
-                style={{ willChange: "transform" }}
-              >
-                {[...Array(4)].map((_, i) => (
-                  <div key={i} className="flex gap-6 sm:gap-7 md:gap-8 lg:gap-10 pr-6 sm:pr-7 md:pr-8 lg:pr-10">
-                    {offers.map((offer) => (
-                      <DealCardSlide key={`${offer.offer_id}-${i}`} offer={offer} />
-                    ))}
-                  </div>
-                ))}
-              </motion.div>
-            </div>
+            <DealsMarquee offers={offers} />
           ) : (
-            <div
-              className="
-                flex gap-6 overflow-x-auto snap-x snap-mandatory
-                sm:gap-7 md:grid md:grid-cols-2 md:justify-items-stretch md:gap-8 md:overflow-visible
-                lg:grid-cols-3 lg:gap-10
-                [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
-              "
-            >
-              {offers.map((offer) => (
-                <DealCardSlide key={offer.offer_id} offer={offer} />
-              ))}
-            </div>
+            <EdgeFade fadeColor="#F2F2F2" mode="scroll-until-md">
+              <div
+                className="
+                  flex gap-6 overflow-x-auto snap-x snap-mandatory
+                  sm:gap-7 md:grid md:grid-cols-2 md:justify-items-stretch md:gap-8 md:overflow-visible
+                  lg:grid-cols-3 lg:gap-10
+                  [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden
+                "
+              >
+                {offers.map((offer) => (
+                  <DealCardSlide key={offer.offer_id} offer={offer} />
+                ))}
+              </div>
+            </EdgeFade>
           )}
         </div>
       </div>

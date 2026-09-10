@@ -73,8 +73,8 @@ src/app/
 ├── jammy/
 │   ├── page.jsx
 │   └── components/
-└── home2/
-    └── page.jsx             # Alternate landing (legacy)
+├── robots.js                # Generates /robots.txt
+└── sitemap.js               # Generates /sitemap.xml (static + API routes)
 ```
 
 ### Route groups
@@ -87,7 +87,11 @@ Parentheses in folder names `(home)` and `(guidelines)` are **route groups** —
 src/components/
 ├── layout/
 │   ├── Header.jsx           # Fixed nav, mobile menu (portal)
-│   └── Footer.jsx           # Site footer
+│   └── Footer.jsx           # Site footer (client — pathname-aware hide on legal routes)
+│
+├── seo/
+│   ├── JsonLd.jsx           # Renders schema.org JSON-LD script tags
+│   └── Analytics.jsx        # Optional GA4 (NEXT_PUBLIC_GA_MEASUREMENT_ID)
 │
 ├── providers/
 │   ├── SmoothScroll.jsx     # Lenis smooth scroll wrapper
@@ -117,9 +121,12 @@ src/components/
     ├── button.jsx
     ├── dialog.jsx
     ├── BlogCard.jsx
+    ├── EdgeFade.jsx         # Gradient edge fade overlay
+    ├── LazyLiquidChrome.jsx # Dynamic import wrapper for LiquidChrome
+    ├── LiquidChrome.jsx     # WebGL background effect (OGL)
     ├── ScrollReveal.jsx     # IntersectionObserver reveal
-    ├── StoreBadges.jsx      # App Store / Play Store links
-    └── LiquidChrome.jsx     # WebGL background effect
+    ├── SectionSkeleton.jsx  # Loading placeholder for dynamic sections
+    └── StoreBadges.jsx      # App Store / Play Store links
 ```
 
 ## `src/lib/` — Utilities & services
@@ -128,11 +135,16 @@ src/components/
 src/lib/
 ├── axiosInstance.js         # Configured Axios client
 ├── utils.js                 # cn() — class name merge helper
+├── seo.js                   # Metadata, absolute URLs, JSON-LD builders
+├── useDebouncedSubmit.js    # Debounced form submit hook
 ├── blogService.js           # Blog API
 ├── careerService.js         # Careers API
 ├── employeeService.js       # Team/employer API
 ├── enrollService.js         # Enrollment API
 └── offerService.js          # Offers/deals API
+
+src/data/
+└── homeFaqs.js              # Homepage FAQ content (FAQPage JSON-LD)
 ```
 
 Page-specific services live next to their routes:
@@ -145,14 +157,18 @@ src/app/msme/services/merchantService.js
 
 ## `public/` — Static assets
 
-| Path | Contents |
-|------|----------|
-| `public/Icons/` | PayNback logos, app store icons, certification badges |
-| `public/assets/` | Kerala location data (CSV + JSON) for partner form |
-| `public/images/` | Marketing images, blog placeholders, hero assets |
-| `public/docs/` | Technical documentation |
+Files in `public/` are served at the URL root (no `/public` prefix).
 
-Static files are served from the site root. Example: `/Icons/pnb-white-logo.svg`.
+| Path | Contents | Examples |
+|------|----------|----------|
+| `public/Icons/` | Brand logos, app store badges, UI icons, certification marks | `pnb-white-logo.svg`, `Startup india.svg`, `ksum_logo_white.svg` |
+| `public/images/` | Page heroes, marketing art, founder photos, Jammy story images, 404 art | `aboutus-hero-image.png`, `msme-hero-image.png`, `404.png` |
+| `public/assets/` | Kerala location hierarchy for partner form dropdowns | `districts.01May2026.csv`, `blocks.01May2026.csv`, `location_data.json` |
+| `public/docs/` | Technical documentation (this folder) | `01-overview.md`, `04-routes-and-pages.md` |
+
+**Usage in code:** Next.js `<Image src="/images/..." />` or string paths in components.
+
+**Not in `public/`:** Favicon is `src/app/icon.svg` (App Router convention). Remote images (blog covers, S3) use `next/image` with hosts in `next.config.mjs`.
 
 ## Naming conventions
 
@@ -169,9 +185,11 @@ Static files are served from the site root. Example: `/Icons/pnb-white-logo.svg`
 
 | Area | Approx. files |
 |------|---------------|
-| App pages & route components | ~55 |
-| Shared components | ~26 |
-| Lib services | 7 |
+| App pages & route components | ~60 |
+| Shared components (`src/components/`) | ~31 |
+| Lib (`src/lib/`) | 9 |
+| Static data (`src/data/`) | 1 |
+| Public static assets (`public/`) | ~90+ (images, icons, CSVs) |
 | Config files | 6 |
 
 ## Import patterns
