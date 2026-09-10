@@ -421,6 +421,7 @@ export default function Team() {
 
     <section className="py-10 bg-background min-h-[calc(100vh-70px)] flex flex-col justify-center overflow-hidden">
 
+      {/* Meet our Team — temporarily hidden
       <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
 
         <motion.div className="mt-12 mb-10 md:mt-20" {...sectionMotion}>
@@ -441,8 +442,6 @@ export default function Team() {
 
       </div>
 
-
-
       <motion.div className="w-full flex flex-col gap-16 md:gap-24 mb-34" {...sectionMotion}>
 
         {teamsLoading ? (
@@ -458,8 +457,7 @@ export default function Team() {
         )}
 
       </motion.div>
-
-
+      */}
 
       <div className="container mx-auto px-4 md:px-8 max-w-7xl w-full">
 
