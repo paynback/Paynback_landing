@@ -21,6 +21,7 @@
 | **tailwind-merge** | ^3.5.0 | Merge Tailwind classes without conflicts |
 | **lucide-react** | ^0.577.0 | Icon library (primary) |
 | **react-icons** | ^5.6.0 | Additional icon sets |
+| **react-shimmer-effects** | ^1.0.4 | Shimmer/skeleton loading placeholders |
 | **@radix-ui/react-dialog** | ^1.1.15 | Accessible dialog primitive |
 | **@radix-ui/react-slot** | ^1.2.4 | Slot composition for components |
 | **@radix-ui/react-icons** | ^1.3.2 | Radix icon set |

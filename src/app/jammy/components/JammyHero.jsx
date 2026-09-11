@@ -7,80 +7,117 @@ export default function JammyHero() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section className="relative w-full bg-white pt-24 pb-12 sm:pt-32 sm:pb-16 lg:pt-40 lg:pb-24 overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 lg:px-8">
-        <div className="mx-auto flex max-w-2xl flex-col-reverse gap-y-12 lg:max-w-none lg:flex-row lg:items-center lg:justify-between">
-          
-          <div className="lg:w-1/2 flex flex-col gap-y-6 lg:pr-8 xl:pr-16 z-10 text-center lg:text-left">
-            <motion.div
-              initial={reduceMotion ? undefined : { opacity: 0, y: 15 }}
+    <section 
+      className="relative w-full overflow-hidden flex items-center justify-center lg:min-h-[837px] pt-24 lg:pt-32 pb-16 lg:pb-16"
+      style={{
+        background: 'radial-gradient(76.18% 60.67% at 84.97% 45.9%, #0B3571 0%, #060B18 100%)',
+      }}
+    >
+      <div className="relative z-10 mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
+        <div className="mx-auto flex w-full flex-col-reverse gap-y-12 lg:flex-row lg:items-center lg:justify-between">
+
+          {/* Left Content */}
+          <div className="flex w-full min-w-0 flex-col gap-y-5 text-left z-10 lg:w-1/2">
+            <motion.span
+              className="text-xl font-normal leading-[124%] tracking-[-0.56px] text-[#4EA8E9] sm:text-[24px]"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 12 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut" }}
+              transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
             >
-              <span className="inline-block rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold leading-6 text-blue-600 ring-1 ring-inset ring-blue-500/20 mb-4">
-                Meet Jammy
-              </span>
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900 sm:text-5xl lg:text-6xl text-pretty">
-                Bringing Effortless Rewards
-              </h1>
-            </motion.div>
-            
+              Jammy
+            </motion.span>
+
+            <motion.h1
+              className="text-4xl font-medium leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-6xl"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Meet Jammy
+            </motion.h1>
+
             <motion.p
-              className="text-lg leading-8 text-gray-600 max-w-xl mx-auto lg:mx-0"
+              className="max-w-lg text-pretty text-base leading-relaxed text-white/75 sm:text-sm lg:text-sm"
+              initial={reduceMotion ? undefined : { opacity: 0, y: 18 }}
+              animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            >
+              Jammy represents our spirit, our values and our mission to make every transaction rewarding and meaningful.
+            </motion.p>
+
+            {/* Capsules */}
+            <motion.div 
+              className="flex flex-row flex-wrap gap-4 justify-start max-w-lg"
               initial={reduceMotion ? undefined : { opacity: 0, y: 15 }}
               animate={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
             >
-              The name &quot;Jammy&quot; for our mascot is inspired by the British World War II slang for money - &quot;jam.&quot; This playful term perfectly reflects the effortless way you earn rewards with PayNback.
-            </motion.p>
+              {[
+                "Rewarding Companion",
+                "Local Store Supporter",
+                "Shopping Companion"
+              ].map((text, i) => (
+                <div 
+                  key={i}
+                  className="flex items-center justify-center backdrop-blur-md shadow-[inset_0_0_0_1px_rgba(255,255,255,0.15)]"
+                  style={{
+                    background: '#11223033',
+                    borderRadius: '16px',
+                    padding: '10px 16px',
+                    gap: '10px',
+                    height: '40px',
+                    width: 'fit-content'
+                  }}
+                >
+                  <svg width="14" height="10" viewBox="0 0 14 10" fill="none" xmlns="http://www.w3.org/2000/svg" className="flex-shrink-0">
+                    <path d="M1 5L4.5 8.5L13 1" stroke="#4EA8E9" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                  <span className="text-gray-200 text-sm font-medium whitespace-nowrap">{text}</span>
+                </div>
+              ))}
+            </motion.div>
           </div>
 
-          <div className="lg:w-1/2 flex justify-center lg:justify-end z-10 mt-10 lg:mt-0">
+          {/* Right Content - Hero Image */}
+          <div className="lg:w-1/2 flex justify-center lg:justify-end z-10 relative">
             <motion.div
-              className="relative w-full max-w-[320px] sm:max-w-105 lg:max-w-125 aspect-square"
+              className="relative w-full max-w-[400px] lg:max-w-[500px] xl:max-w-[600px] aspect-square flex items-center justify-center"
               initial={reduceMotion ? undefined : { opacity: 0, scale: 0.9 }}
               animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
               transition={{ type: "spring", stiffness: 45, damping: 20, duration: 1.2, delay: 0.2 }}
             >
-              {/* Brand glow behind hero image */}
+              {/* Radial background behind the image */}
               <div
-                className="pointer-events-none absolute inset-0 z-0 flex items-center justify-center"
-                aria-hidden
-              >
-                <div className="absolute h-[85%] w-[85%] rounded-full bg-brand-primary blur-[48px] opacity-25 md:blur-[72px] md:opacity-30" />
-                <div className="absolute h-[65%] w-[65%] rounded-full bg-[#4EA8E9] blur-[36px] opacity-35 md:blur-[56px] md:opacity-40" />
-                <div className="absolute h-[45%] w-[45%] rounded-full bg-[#87B3E0] blur-[28px] opacity-45 md:blur-2xl" />
-              </div>
+                className="absolute pointer-events-none"
+                style={{
+                  width: '391px',
+                  height: '391px',
+                  background: 'radial-gradient(70.08% 70.08% at 49.87% 36.96%, #1B7FE4 0%, #08162C 100%)',
+                  filter: 'blur(100px)',
+                  WebkitFilter: 'blur(100px)',
+                  borderRadius: '50%',
+                  zIndex: 0,
+                  top: '50%',
+                  left: '50%',
+                  transform: 'translate(-50%, -50%)',
+                  opacity: 0.8
+                }}
+              />
 
-              <motion.div
-                className="relative z-10 w-full h-full drop-shadow-[0_25px_55px_rgba(9,100,188,0.25)]"
-                animate={reduceMotion ? undefined : { y: [0, -20, 0] }}
-                transition={{ duration: 4, ease: "easeInOut", repeat: Infinity }}
-              >
+              <div className="relative z-10 w-full h-full flex items-center justify-center">
                 <Image
-                  src="/images/jammy-hero-image.png"
+                  src="/images/Jammy-hero-img.png"
                   alt="Jammy Hero Image"
                   fill
-                  className="object-contain"
-                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-contain relative z-10"
                   priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
                 />
-              </motion.div>
+              </div>
             </motion.div>
           </div>
-          
+
         </div>
-      </div>
-      
-      {/* Decorative brand gradient */}
-      <div className="absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl sm:-top-80" aria-hidden="true">
-        <div
-          className="relative left-[calc(50%-11rem)] aspect-1155/678 w-144.5 -translate-x-1/2 rotate-30 bg-linear-to-tr from-[#0964BC] to-[#4EA8E9] opacity-15 sm:left-[calc(50%-30rem)] sm:w-288.75"
-          style={{
-            clipPath:
-              'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
-          }}
-        />
       </div>
     </section>
   );

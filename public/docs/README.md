@@ -63,4 +63,4 @@ See [Project Structure](./03-project-structure.md) for the full folder tree.
 
 ---
 
-*Last updated: September 2026*
+*Last updated: September 8, 2026*

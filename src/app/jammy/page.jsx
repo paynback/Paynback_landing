@@ -13,7 +13,12 @@ export const metadata = buildMetadata({
 
 export default function JammyPage() {
   return (
-    <main className="min-h-screen flex flex-col bg-white">
+    <main 
+      className="min-h-screen flex flex-col"
+      style={{
+        background: 'linear-gradient(179.95deg, #060D1D 22.89%, #08172D 99.95%)'
+      }}
+    >
       <ScrollReveal>
         <JammyHero />
       </ScrollReveal>

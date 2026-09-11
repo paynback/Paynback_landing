@@ -59,7 +59,23 @@ Dark mode tokens are defined but not actively toggled in the current UI.
 | CSS variable | `--font-poppins` |
 | Tailwind class | `font-sans` maps to Poppins |
 | Weights loaded | 300, 400, 500, 600, 700, 800 |
-| Rendering | `antialiased` on `<html>` |
+| Rendering | `font-sans` on `<html>` and `<body>` via `@layer base` |
+
+### Global heading defaults (`@layer base` in `globals.css`)
+
+| Element | Tailwind classes | Notes |
+|---------|-----------------|-------|
+| `h1` | `text-balance text-4xl font-normal leading-[1.08] tracking-tight sm:text-5xl lg:text-7xl` | Responsive: 36px → 48px → 72px |
+| `h2` | `text-balance text-2xl font-normal tracking-tight sm:text-3xl lg:text-5xl` | Responsive: 24px → 30px → 48px |
+| `h3` | `text-xl font-normal leading-snug text-(--brand-primary) sm:text-2xl` | Blue brand color |
+| `h4` | `text-base font-semibold` | 16px |
+| `h5` | `text-sm font-semibold` | 14px |
+| `h6` | `text-xs font-semibold` | 12px |
+
+### Body
+
+- `overscroll-behavior-y: none` — prevents pull-to-refresh bounce on mobile
+- `-webkit-overflow-scrolling: touch` on `<html>` — smooth native scroll on iOS
 
 ### Common text sizes
 
@@ -89,13 +105,21 @@ Dark mode tokens are defined but not actively toggled in the current UI.
 .scroll-reveal {
   opacity: 0;
   transform: translateY(32px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition-property: opacity, transform;
+  transition-duration: 650ms;
+  transition-timing-function: cubic-bezier(0.2, 0.7, 0.2, 1);
 }
-.scroll-reveal.visible {
+.scroll-reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-reveal { opacity: 1; transform: none; transition: none; }
+}
 ```
+
+> **Note:** The active class is `.is-visible`, not `.visible`.
 
 ### Blur reveal
 
