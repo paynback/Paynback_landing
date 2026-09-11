@@ -302,6 +302,7 @@ export default function Team() {
 
   return (
     <section className="flex min-h-[calc(100vh-70px)] flex-col justify-center overflow-x-hidden bg-background py-10">
+      {/* Meet our Team — temporarily hidden
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
         <motion.div className="mb-10 mt-12 md:mt-20" {...sectionMotion}>
           <h2 className="mb-4 text-2xl font-medium text-foreground md:text-5xl">
@@ -321,6 +322,7 @@ export default function Team() {
           renderTeam(teamMembers)
         )}
       </motion.div>
+      */}
 
       <div className="mx-auto w-full max-w-7xl px-6 sm:px-6 lg:px-20">
         <motion.div className="pb-10" {...sectionMotion}>
