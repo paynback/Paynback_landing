@@ -53,7 +53,7 @@ export const metadata = {
       : {}),
   },
   icons: {
-    icon: "/Icons/pnb-blue-logo.svg",
+    icon: "/icon.svg",
   },
 };
 
