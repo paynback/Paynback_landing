@@ -49,7 +49,7 @@ const EnrollSection = dynamic(
 );
 
 export const metadata = buildMetadata({
-  title: "PayNback — India's first in-store shopping reward app",
+  title: "PayNback - India's first in-store shopping reward app",
   description:
     "PayNback connects users with nearby merchants offering exclusive discounts, cashback and rewards for in-store shopping across India.",
   path: "/",

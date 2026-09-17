@@ -60,10 +60,22 @@ export default function JobDetailClient({ slug }) {
     email: "",
     date_of_birth: "",
     address: "",
+    highest_qualification: "",
     years_of_experience: "",
     currently_working: "",
     current_company: "",
+    last_job_designation: "",
+    last_job_responsibilities: "",
+    last_drawn_salary: "",
+    expected_salary: "",
     notice_period: "",
+    key_skills: "",
+    linkedin_profile: "",
+    instagram_profile: "",
+    facebook_profile: "",
+    languages_known: "",
+    preferred_location: "",
+    why_join_us: "",
     consent: false,
   });
 
@@ -90,16 +102,22 @@ export default function JobDetailClient({ slug }) {
     payload.append("email", currentForm.email.trim());
     payload.append("date_of_birth", currentForm.date_of_birth);
     payload.append("address", currentForm.address.trim());
+    payload.append("highest_qualification", currentForm.highest_qualification.trim());
     payload.append("years_of_experience", String(years));
     payload.append("currently_working", isWorking ? "true" : "false");
-    payload.append(
-      "current_company",
-      isWorking ? currentForm.current_company.trim() : "",
-    );
-    payload.append(
-      "notice_period",
-      isWorking ? currentForm.notice_period.trim() : "",
-    );
+    payload.append("current_company", isWorking ? currentForm.current_company.trim() : "");
+    payload.append("last_job_designation", isWorking ? currentForm.last_job_designation.trim() : "");
+    payload.append("last_job_responsibilities", isWorking ? currentForm.last_job_responsibilities.trim() : "");
+    payload.append("last_drawn_salary", isWorking ? currentForm.last_drawn_salary.trim() : "");
+    payload.append("expected_salary", currentForm.expected_salary.trim());
+    payload.append("notice_period", currentForm.notice_period.trim());
+    payload.append("key_skills", currentForm.key_skills.trim());
+    payload.append("linkedin_profile", currentForm.linkedin_profile.trim());
+    payload.append("instagram_profile", currentForm.instagram_profile.trim());
+    payload.append("facebook_profile", currentForm.facebook_profile.trim());
+    payload.append("languages_known", currentForm.languages_known.trim());
+    payload.append("preferred_location", currentForm.preferred_location.trim());
+    payload.append("why_join_us", currentForm.why_join_us.trim());
     payload.append("resume", currentResume);
 
     await submitCareerApplication(currentSlug, payload);
@@ -110,10 +128,22 @@ export default function JobDetailClient({ slug }) {
       email: "",
       date_of_birth: "",
       address: "",
+      highest_qualification: "",
       years_of_experience: "",
       currently_working: "",
       current_company: "",
+      last_job_designation: "",
+      last_job_responsibilities: "",
+      last_drawn_salary: "",
+      expected_salary: "",
       notice_period: "",
+      key_skills: "",
+      linkedin_profile: "",
+      instagram_profile: "",
+      facebook_profile: "",
+      languages_known: "",
+      preferred_location: "",
+      why_join_us: "",
       consent: false,
     });
     setResumeFile(null);
@@ -168,10 +198,17 @@ export default function JobDetailClient({ slug }) {
       !form.email.trim() ||
       !form.date_of_birth ||
       !form.address.trim() ||
+      !form.highest_qualification.trim() ||
       form.years_of_experience === "" ||
+      !form.expected_salary.trim() ||
+      !form.notice_period.trim() ||
+      !form.key_skills.trim() ||
+      !form.languages_known.trim() ||
+      !form.preferred_location.trim() ||
+      !form.why_join_us.trim() ||
       !form.currently_working ||
       (form.currently_working === "yes" &&
-        (!form.current_company.trim() || !form.notice_period.trim()))
+        (!form.current_company.trim() || !form.last_job_designation.trim() || !form.last_drawn_salary.trim()))
     ) {
       setSubmitError("Please fill all required fields.");
       return;
@@ -273,140 +310,275 @@ export default function JobDetailClient({ slug }) {
                 </p>
               </div>
             ) : (
-              <form className="space-y-6" onSubmit={onSubmit}>
-                <h2 className="text-2xl font-semibold text-foreground">Apply for this role</h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2 md:col-span-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">Full name*</label>
-                    <input
-                      type="text"
-                      required
-                      value={form.full_name}
-                      onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
-                      placeholder="Enter your full name"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">Mobile number*</label>
-                    <input
-                      type="tel"
-                      required
-                      inputMode="numeric"
-                      minLength={10}
-                      maxLength={10}
-                      value={form.phone}
-                      onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                      placeholder="Enter your mobile number"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">Email*</label>
-                    <input
-                      type="email"
-                      required
-                      value={form.email}
-                      onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                      placeholder="Enter your email"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">Date of birth*</label>
-                    <input
-                      type="date"
-                      required
-                      value={form.date_of_birth}
-                      onChange={(e) => setForm((f) => ({ ...f, date_of_birth: e.target.value }))}
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
-                    />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="block text-[#0964BC] font-medium text-[15px]">Years of experience*</label>
-                    <input
-                      type="number"
-                      required
-                      min="0"
-                      step="0.5"
-                      value={form.years_of_experience}
-                      onChange={(e) => setForm((f) => ({ ...f, years_of_experience: e.target.value }))}
-                      placeholder="e.g. 2"
-                      className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
-                    />
-                  </div>
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-[#0964BC] font-medium text-[15px]">Address*</label>
-                  <textarea
-                    required
-                    value={form.address}
-                    onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
-                    placeholder="Enter your full address"
-                    rows={3}
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="block text-[#0964BC] font-medium text-[15px]">Currently working?*</label>
-                  <select
-                    required
-                    value={form.currently_working}
-                    onChange={(e) =>
-                      setForm((f) => ({
-                        ...f,
-                        currently_working: e.target.value,
-                        ...(e.target.value !== "yes"
-                          ? { current_company: "", notice_period: "" }
-                          : null),
-                      }))
-                    }
-                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
-                  >
-                    <option value="" disabled>
-                      Select an option
-                    </option>
-                    <option value="no">No</option>
-                    <option value="yes">Yes</option>
-                  </select>
-                </div>
-
-                {form.currently_working === "yes" ? (
+              <form className="space-y-8" onSubmit={onSubmit}>
+                <h2 className="text-2xl font-semibold text-foreground border-b pb-4">Apply for this role</h2>
+                
+                {/* Basic Details */}
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold text-gray-800">Basic Details</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-2">
-                      <label className="block text-[#0964BC] font-medium text-[15px]">
-                        Last company*
-                      </label>
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Full name*</label>
                       <input
                         type="text"
                         required
-                        value={form.current_company}
-                        onChange={(e) =>
-                          setForm((f) => ({ ...f, current_company: e.target.value }))
-                        }
-                        placeholder="Current / last company name"
+                        value={form.full_name}
+                        onChange={(e) => setForm((f) => ({ ...f, full_name: e.target.value }))}
+                        placeholder="Enter your full name"
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                       />
                     </div>
                     <div className="space-y-2">
-                      <label className="block text-[#0964BC] font-medium text-[15px]">
-                        Notice period*
-                      </label>
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Mobile number*</label>
+                      <input
+                        type="tel"
+                        required
+                        inputMode="numeric"
+                        minLength={10}
+                        maxLength={10}
+                        value={form.phone}
+                        onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                        placeholder="Enter your mobile number"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Email*</label>
+                      <input
+                        type="email"
+                        required
+                        value={form.email}
+                        onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                        placeholder="Enter your email"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Date of birth*</label>
+                      <input
+                        type="date"
+                        required
+                        value={form.date_of_birth}
+                        onChange={(e) => setForm((f) => ({ ...f, date_of_birth: e.target.value }))}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Highest Qualification*</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.highest_qualification}
+                        onChange={(e) => setForm((f) => ({ ...f, highest_qualification: e.target.value }))}
+                        placeholder="e.g. B.Tech, MBA"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Address*</label>
+                      <textarea
+                        required
+                        value={form.address}
+                        onChange={(e) => setForm((f) => ({ ...f, address: e.target.value }))}
+                        placeholder="Enter your full address"
+                        rows={2}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Languages Known*</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.languages_known}
+                        onChange={(e) => setForm((f) => ({ ...f, languages_known: e.target.value }))}
+                        placeholder="e.g. English, Hindi"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Preferred Job Location*</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.preferred_location}
+                        onChange={(e) => setForm((f) => ({ ...f, preferred_location: e.target.value }))}
+                        placeholder="e.g. Mumbai, Remote"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Professional Details */}
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold text-gray-800">Professional Details</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Years of experience*</label>
+                      <input
+                        type="number"
+                        required
+                        min="0"
+                        step="0.5"
+                        value={form.years_of_experience}
+                        onChange={(e) => setForm((f) => ({ ...f, years_of_experience: e.target.value }))}
+                        placeholder="e.g. 2"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Expected Salary*</label>
+                      <input
+                        type="text"
+                        required
+                        value={form.expected_salary}
+                        onChange={(e) => setForm((f) => ({ ...f, expected_salary: e.target.value }))}
+                        placeholder="e.g. 8 LPA"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Notice Period / Joining Availability*</label>
                       <input
                         type="text"
                         required
                         value={form.notice_period}
-                        onChange={(e) =>
-                          setForm((f) => ({ ...f, notice_period: e.target.value }))
-                        }
+                        onChange={(e) => setForm((f) => ({ ...f, notice_period: e.target.value }))}
                         placeholder="e.g. 30 days, Immediate"
                         className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
                       />
                     </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Currently working?*</label>
+                      <select
+                        required
+                        value={form.currently_working}
+                        onChange={(e) =>
+                          setForm((f) => ({
+                            ...f,
+                            currently_working: e.target.value,
+                            ...(e.target.value !== "yes"
+                              ? { current_company: "", last_job_designation: "", last_job_responsibilities: "", last_drawn_salary: "" }
+                              : null),
+                          }))
+                        }
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px]"
+                      >
+                        <option value="" disabled>Select an option</option>
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Key Skills*</label>
+                      <textarea
+                        required
+                        value={form.key_skills}
+                        onChange={(e) => setForm((f) => ({ ...f, key_skills: e.target.value }))}
+                        placeholder="e.g. React, Node.js, Marketing, Sales"
+                        rows={2}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
+                      />
+                    </div>
                   </div>
-                ) : null}
+
+                  {form.currently_working === "yes" ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-gray-50 p-6 rounded-2xl border border-gray-100">
+                      <div className="space-y-2">
+                        <label className="block text-[#0964BC] font-medium text-[15px]">Previous / Last Company*</label>
+                        <input
+                          type="text"
+                          required
+                          value={form.current_company}
+                          onChange={(e) => setForm((f) => ({ ...f, current_company: e.target.value }))}
+                          placeholder="Company name"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="block text-[#0964BC] font-medium text-[15px]">Last Job Designation*</label>
+                        <input
+                          type="text"
+                          required
+                          value={form.last_job_designation}
+                          onChange={(e) => setForm((f) => ({ ...f, last_job_designation: e.target.value }))}
+                          placeholder="e.g. Software Engineer"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                        />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="block text-[#0964BC] font-medium text-[15px]">Last Drawn Salary*</label>
+                        <input
+                          type="text"
+                          required
+                          value={form.last_drawn_salary}
+                          onChange={(e) => setForm((f) => ({ ...f, last_drawn_salary: e.target.value }))}
+                          placeholder="e.g. 6 LPA"
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                        />
+                      </div>
+                      <div className="space-y-2 md:col-span-2">
+                        <label className="block text-[#0964BC] font-medium text-[15px]">Last Job Responsibilities</label>
+                        <textarea
+                          value={form.last_job_responsibilities}
+                          onChange={(e) => setForm((f) => ({ ...f, last_job_responsibilities: e.target.value }))}
+                          placeholder="Briefly describe your responsibilities"
+                          rows={3}
+                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
+                        />
+                      </div>
+                    </div>
+                  ) : null}
+                </div>
+
+                {/* Social & Motivation */}
+                <div className="space-y-6">
+                  <h3 className="text-lg font-semibold text-gray-800">Social Profiles & Motivation</h3>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">LinkedIn Profile</label>
+                      <input
+                        type="url"
+                        value={form.linkedin_profile}
+                        onChange={(e) => setForm((f) => ({ ...f, linkedin_profile: e.target.value }))}
+                        placeholder="https://linkedin.com/in/..."
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Instagram Profile</label>
+                      <input
+                        type="text"
+                        value={form.instagram_profile}
+                        onChange={(e) => setForm((f) => ({ ...f, instagram_profile: e.target.value }))}
+                        placeholder="Instagram handle or URL"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Facebook Profile</label>
+                      <input
+                        type="text"
+                        value={form.facebook_profile}
+                        onChange={(e) => setForm((f) => ({ ...f, facebook_profile: e.target.value }))}
+                        placeholder="Facebook profile URL"
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-base"
+                      />
+                    </div>
+                    <div className="space-y-2 md:col-span-2">
+                      <label className="block text-[#0964BC] font-medium text-[15px]">Why do you want to join PayNback?*</label>
+                      <textarea
+                        required
+                        value={form.why_join_us}
+                        onChange={(e) => setForm((f) => ({ ...f, why_join_us: e.target.value }))}
+                        placeholder="Tell us why you're a great fit..."
+                        rows={3}
+                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-[#0964BC]/20 transition-all text-[15px] resize-none"
+                      />
+                    </div>
+                  </div>
+                </div>
 
                 <div className="space-y-2">
                   <label className="block text-[#0964BC] font-medium text-[15px]">Resume upload*</label>

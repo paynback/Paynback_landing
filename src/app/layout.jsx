@@ -18,7 +18,7 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
-const defaultTitle = "PayNback — India's first in-store shopping reward app";
+const defaultTitle = "PayNback - India's first in-store shopping reward app";
 const defaultDescription =
   "PayNback connects users with nearby merchants offering exclusive discounts, cashback and rewards for in-store shopping across India.";
 
@@ -32,7 +32,7 @@ export const metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
     default: defaultTitle,
-    template: "%s | PayNback",
+    template: "%s - PayNback",
   },
   description: defaultDescription,
   applicationName: "PayNback",
@@ -54,19 +54,14 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className={`${poppins.variable} antialiased`}>
-      <body className="flex min-h-screen min-h-dvh flex-col">
+      <body className="flex min-h-screen flex-col">
         <JsonLd data={[organizationJsonLd(), websiteJsonLd()]} />
-        {/* SmoothScroll disabled — native browser scroll */}
         <Header />
         {children}
         <Footer />
-        {/* <SmoothScroll>
-          <Header />
-          {children}
-          <Footer />
-        </SmoothScroll> */}
         <Analytics />
       </body>
     </html>
+
   );
 }
